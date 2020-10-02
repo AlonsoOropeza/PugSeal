@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '+-hec*o=z7mxyfpv_0i8q=2u@b7wi9eclu4j#e=uggac&xou1b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'cannis.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mysql',
+        'NAME': 'cannismajoris',
         'USER': 'irvingpercam',
         'PASSWORD': '@novadepto321',
         'HOST': 'db4free.net',
@@ -85,7 +85,7 @@ DATABASES = {
     }
 }
 
-
+#LOS ODIO A TODOS ALV
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 

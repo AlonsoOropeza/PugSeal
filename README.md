@@ -1,1 +1,1 @@
-# PugSeal
+# Cannis Majoris

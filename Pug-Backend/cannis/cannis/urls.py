@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url, include 
+from django.conf.urls import include 
 from pugsealapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^crearCategoria/', views.crearCategoria),
+    path('crear_categoria/', views.crear_categoria, name='crear_categoria'),
+    path('listar_categorias/', views.listar_categorias, name='lista_categorias')
 
 ]

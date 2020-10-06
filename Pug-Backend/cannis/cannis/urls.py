@@ -21,6 +21,7 @@ from pugsealapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('crear_categoria/', views.crear_categoria, name='crear_categoria'),
+    path('listar_categorias2/', views.CategoriasViewSet.as_view({'get':'list'})),
     path('listar_categorias/', views.listar_categorias, name='lista_categorias')
 
 ]

@@ -1,4 +1,9 @@
 from django import forms
+from pugsealapp import models
 
-class CrearCategoria(forms.Form):
-    nombre = forms.CharField(label='Nombre Categoría', max_length=255)
+class CrearCategoria(forms.ModelForm):
+    class Meta:
+        model = models.Categoria
+        fields = [
+            'nombre',
+        ]

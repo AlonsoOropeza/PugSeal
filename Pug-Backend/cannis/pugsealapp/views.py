@@ -11,24 +11,23 @@ from pugsealapp.serializer import AreaSerializer, CategoriaSerializer, EmpleadoS
 '''def index(request):
     return HttpResponse("simon")'''
 
-def crearCategoria(request):
-    if request.method == 'POST':
-        form = forms.CrearCategoria(request.POST)
-        if form.is_valid():
-            nombre = form.cleaned_data['nombre']
-            try:
-                nuevaCategoria = Categoria(nombre=nombre)
-                nuevaCategoria.save()
-                return HttpResponse("se creo el objeto")
-            except:
-                return HttpResponse("No se creo el objeto")
+def crear_categoria(request):
+    context = {
+        'title' : 'Crear Categoría'
+    }
+    form = forms.CrearCategoria(request.POST or None)
+    if form.is_valid():
+        form.save()
+    context['form'] = form 
+    return render(request, 'categoria/crear_categoria.html', context)
+ 
+def listar_categorias(request):
+    context = {
+        'title' : 'Lista Categorias'
+    }
+    context['dataset'] = Categoria.objects.all()
+    return render(request, 'categoria/listar_categorias.html', context)
 
-    else:
-        context = {
-            'title' : 'Crear Categoría',
-            'form' : forms.CrearCategoria()
-        }
-        return render(request, 'categoria/crearCategoria.html', context)
 
 
 

@@ -31,12 +31,6 @@ class Hotel(models.Model):
     def __str__(self):
         return self.nombre
 
-class Ubicacion(models.Model):
-    id_ubicacion = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=255)
-    def __str__(self):
-        return self.nombre
-
 class Proveedor(models.Model):
     id_proveedor = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=255)
@@ -44,3 +38,27 @@ class Proveedor(models.Model):
     telefono = models.BigIntegerField(unique=True, default=0)
     def __str__(self):
         return self.nombre
+
+class Ubicacion(models.Model):
+    id_ubicacion = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=255)
+    def __str__(self):
+        return self.nombre
+
+#Las siguientes son dependencias, por eso no están en orden alfabetico
+
+class Mantenimiento_Preventivo(models.Model):
+    id_mantprev = models.AutoField(primary_key=True)
+    id_proveedor = models.ForeignKey(Proveedor, on_delete=models.SET_NULL, null=True)
+    id_categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True)
+    actividad = models.CharField(max_length=255)
+    referencia = models.CharField(max_length=255)
+    frecuencia = models.IntegerField(unique=True, default=0)
+    timestamp = models.DateTimeField()
+    duracion_horas = models.DecimalField( default=0)
+    id_empleado = models.ForeignKey(Empleado, on_delete=models.SET_NULL, null=True )
+    id_supervisor = models.ForeignKey(Empleado, on_delete=models.SET_NULL, null=True)
+    monto_total = models.DecimalField(default=0)
+    comentarios_supervisor = models.TextField(max_length=1000)
+    def __str__(self):
+        return self.actividad

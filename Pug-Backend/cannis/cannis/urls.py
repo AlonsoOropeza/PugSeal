@@ -20,9 +20,11 @@ from pugsealapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('crear_categoria/', views.crear_categoria, name='crear_categoria'),
-    path('listar_categorias2/', views.CategoriasViewSet.as_view({'get':'list'})),
-    path('listar_categorias/', views.listar_categorias, name='lista_categorias'),
-    path('crear_proveedor/', views.ProveedoresViewSet.as_view({'post' :'create'}))
+    # path('crear_categoria/', views.crear_categoria, name='crear_categoria'),
+    # path('listar_categorias/', views.listar_categorias, name='lista_categorias'),
+    path('api/categorias/', views.CategoriasViewSet.as_view({'post':'create', 'get':'list'})),
+    path('api/proveedores/', views.ProveedoresViewSet.as_view({'post' :'create', 'get':'list'})),
+    path('api/empleados/', views.EmpleadosViewSet.as_view({'post' :'create', 'get':'list'})),
+    path('api/solicitudes/mantenimiento/', views.MantenimientoPreventivoViewSet.as_view({'get':'list', 'post':'create'}))
 
 ]

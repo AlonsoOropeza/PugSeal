@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoriasService } from 'app/services/categorias.service';
 
 declare interface TableData {
     headerRow: string[];
@@ -14,9 +15,10 @@ export class TablesComponent implements OnInit {
     public tableData1: TableData;
     public tableData2: TableData;
 
-  constructor() { }
+  constructor(private categoriasService:CategoriasService) { }
 
   ngOnInit() {
+    this.categoriasService.getCategories();
       this.tableData1 = {
           headerRow: [ 'ID', 'Name', 'Country', 'City', 'Salary'],
           dataRows: [
@@ -39,6 +41,7 @@ export class TablesComponent implements OnInit {
               ['6', 'Mason Porter', '$78,615', 'Chile', 'Gloucester' ]
           ]
       };
+      
   }
 
 }

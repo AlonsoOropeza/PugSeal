@@ -34,6 +34,10 @@ class CategoriasViewSet(viewsets.ModelViewSet):
 	serializer_class = CategoriaSerializer
 	queryset = Categoria.objects.all()
 
+class ProveedoresViewSet(viewsets.ModelViewSet):
+	serializer_class = ProveedorSerializer
+	queryset = Proveedor.objects.all()
+
 
 
 

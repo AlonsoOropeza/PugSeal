@@ -40,5 +40,7 @@ class Ubicacion(models.Model):
 class Proveedor(models.Model):
     id_proveedor = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=255)
+    contacto = models.CharField(max_length=255, default='')
+    telefono = models.BigIntegerField(unique=True, default=0)
     def __str__(self):
         return self.nombre

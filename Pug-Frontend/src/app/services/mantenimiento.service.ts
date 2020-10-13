@@ -14,17 +14,13 @@ export class MantenimientoService {
 
   constructor(private http: HttpClient) { }
 
-  public async getSolicitudesMantenimientoPreventivo(){
+  public async getSolicitudesMantenimientoPreventivo() {
+    let response;
     try {
-      this.http.get(environment.url + 'api/solicitudes/mantenimiento/').subscribe(data => {
-        console.log(data);
-        
-        return data;
-      });
+      response = this.http.request('GET', environment.url + 'api/solicitudes/mantenimiento/').toPromise();
     } catch (error) {
       console.log('no se encontro la info ' + error);
-      
     }
-    
+    return response;
   }
 }

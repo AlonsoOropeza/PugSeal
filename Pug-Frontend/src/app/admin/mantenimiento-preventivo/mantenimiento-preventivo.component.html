@@ -15,10 +15,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let row of tableData1.dataRows">
-                                        <td *ngFor="let cell of row">{{cell}}</td>
+                                    <tr *ngFor="let solicitud of solicitudes">
+                                        <td *ngFor="let cell of row">{{solicitud.actividad}}</td>
+                                        <td *ngFor="let cell of row">{{solicitud.referencia}}</td>
+                                        <td *ngFor="let cell of row">{{solicitud.frecuencia}}</td>
+                                        <td *ngFor="let cell of row">{{solicitud.monto_total}}</td>
+                                        <td *ngFor="let cell of row">{{solicitud.duracion_horas}}</td>
                                     </tr>
-                                    <p>{{this.solicitudes}}</p>
                                 </tbody>
                           </table>
 

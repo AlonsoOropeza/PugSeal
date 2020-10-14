@@ -1,0 +1,31 @@
+<form #createForm="ngForm">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="name">Actividad <span class="text-danger">*</span></label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="name" required
+                    [(ngModel)]="solicitud.actividad"
+                    name="name"
+                    #name="ngModel"
+                >
+            </div>
+    
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                <div *ngIf="name.errors.required">
+                    El título de la actividad es obligatorio.
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <button class="btn btn-primary" type="submit" (click)="continue(createForm)">
+        Guardar
+    </button>
+  
+    <button class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="modaladd.hide()">
+        Cerrar
+    </button>
+</form>

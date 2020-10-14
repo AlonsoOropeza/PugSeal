@@ -60,12 +60,12 @@ class Mantenimiento_Preventivo(models.Model):
     id_categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True)
     actividad = models.CharField(max_length=255)
     referencia = models.CharField(max_length=255)
-    frecuencia = models.IntegerField(unique=True, default=0)
+    frecuencia = models.IntegerField(default=0)
     fecha_creacion = models.DateTimeField(default=timezone.now)
-    duracion_horas = models.DecimalField(default=0, decimal_places=10, max_digits=10)
+    duracion_horas = models.IntegerField(default=0)
     id_empleado = models.ForeignKey(Empleado, on_delete=models.SET_NULL, null=True, related_name="solicitante" )
     id_supervisor = models.ForeignKey(Empleado, on_delete=models.SET_NULL, null=True, related_name="supervisor")
-    monto_total = models.DecimalField(default=0, decimal_places=10, max_digits=10)
+    monto_total = models.IntegerField(default=0)
     comentarios_supervisor = models.TextField(max_length=1000)
     class Meta:
         verbose_name_plural = "Solicitudes de Mantenimiento Preventivo"

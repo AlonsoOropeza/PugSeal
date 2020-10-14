@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
@@ -7,20 +8,30 @@
                         <h4 class="title">Solicitudes de Mantenimiento Preventivo</h4>
                         <p class="category">Aquí se encuentran las solicitudes de mantenimiento preventivo</p>
                     </div>
+                    <div class="row">
+                        <div class="col-md-9">
+
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-default btn-block" (click)="addRequest(modaladd)">
+                                <p>Crear Solicitud</p>
+                            </button>
+                        </div>
+                    </div>
                     <div class="content table-responsive table-full-width">
                           <table class="table table-hover table-striped">
                                 <thead>
                                     <tr>
-                                        <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
+                                        <th *ngFor="let titulo of titulos">{{ titulo }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let solicitud of solicitudes">
-                                        <td *ngFor="let cell of row">{{solicitud.actividad}}</td>
-                                        <td *ngFor="let cell of row">{{solicitud.referencia}}</td>
-                                        <td *ngFor="let cell of row">{{solicitud.frecuencia}}</td>
-                                        <td *ngFor="let cell of row">{{solicitud.monto_total}}</td>
-                                        <td *ngFor="let cell of row">{{solicitud.duracion_horas}}</td>
+                                        <td>{{solicitud.actividad}}</td>
+                                        <td>{{solicitud.referencia}}</td>
+                                        <td>{{solicitud.frecuencia}}</td>
+                                        <td>{{solicitud.monto_total}}</td>
+                                        <td>{{solicitud.duracion_horas}}</td>
                                     </tr>
                                 </tbody>
                           </table>
@@ -31,4 +42,24 @@
         </div>
     </div>
 </div>
+
+<ng-template #modaladd>
+    <div class="modal-header">
+        <h6 class="modal-title" id="modal-title-default">
+          Agregar solicitud de Mantenimiento Preventivo
+        </h6>
+    
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="modalAdd.hide()">
+          <span aria-hidden="true"> × </span>
+        </button>
+      </div>
+    
+      <div class="modal-body">
+        <app-mantenimiento-preventivo-form
+            [solicitud]="solicitud"
+            (continueparent)="create($event)"
+            [modaladd]="modalAdd">    
+        </app-mantenimiento-preventivo-form>
+      </div>
+</ng-template>
 

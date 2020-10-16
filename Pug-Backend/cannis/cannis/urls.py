@@ -25,6 +25,8 @@ urlpatterns = [
     path('api/categorias/', views.CategoriasViewSet.as_view({'post':'create', 'get':'list'})),
     path('api/proveedores/', views.ProveedoresViewSet.as_view({'post' :'create', 'get':'list'})),
     path('api/empleados/', views.EmpleadosViewSet.as_view({'post' :'create', 'get':'list'})),
+    path('api/solicitantes/', views.SolicitantesViewSet.as_view({'get':'list'})),
+    path('api/supervisores/', views.SupervisoresViewSet.as_view({'get':'list'})),
     path('api/solicitudes/mantenimiento/', views.MantenimientoPreventivoViewSet.as_view({'get':'list', 'post':'create'}))
 
 ]

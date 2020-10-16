@@ -18,7 +18,7 @@ export class TablesComponent implements OnInit {
   constructor(private categoriasService:CategoriasService) { }
 
   ngOnInit() {
-    this.categoriasService.getCategories();
+    this.categoriasService.getCategorias();
       this.tableData1 = {
           headerRow: [ 'ID', 'Name', 'Country', 'City', 'Salary'],
           dataRows: [

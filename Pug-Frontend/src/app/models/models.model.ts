@@ -25,3 +25,49 @@ export class MantenimientoPreventivo {
         this.id_supervisor = json.id_supervisor;
     }
 }
+
+export class Empleado {
+    public id_empleado?: number;
+    public nombre?: string;
+    public a_paterno?: string;
+    public a_materno?: string;
+    public correo_electronico?: string;
+    public telefono?: string;
+    public rol?: string;
+
+    constructor(json?: Empleado) {
+        this.id_empleado = json.id_empleado;
+        this.nombre = json.nombre;
+        this.a_paterno = json.a_paterno;
+        this.a_materno = json.a_materno;
+        this.telefono = json.telefono;
+        this.correo_electronico = json.correo_electronico;
+        this.rol = json.rol;
+    }
+}
+
+export class Proveedor {
+    public id_proveedor?: number;
+    public nombre?: string;
+    public contacto?: string;
+    public telefono?: string;
+
+    constructor(json?: Proveedor) {
+        this.id_proveedor = json.id_proveedor;
+        this.nombre = json.nombre;
+        this.telefono = json.telefono;
+        this.contacto = json.contacto;
+    }
+}
+
+export class Categoria {
+    public nombre?: string;
+    public descripcion?: string;
+    public id_categoria?: number;
+
+    constructor(json?: Categoria) {
+        this.nombre = json.nombre;
+        this.descripcion = json.descripcion;
+        this.id_categoria = json.id_categoria;
+    }
+}

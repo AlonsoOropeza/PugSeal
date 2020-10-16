@@ -1,7 +1,10 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MantenimientoPreventivo } from 'app/models/models.model';
+import { Categoria, Empleado, MantenimientoPreventivo, Proveedor } from 'app/models/models.model';
+import { CategoriasService } from 'app/services/categorias.service';
+import { EmpleadosService } from 'app/services/empleados.service';
 import { MantenimientoService } from 'app/services/mantenimiento.service';
+import { ProveedoresService } from 'app/services/proveedores.service';
 import { SpinnerService } from 'app/services/spinner.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -18,11 +21,18 @@ export class MantenimientoPreventivoComponent implements OnInit {
   public tableData1: TableData;
   public titulos: string[];
   public solicitudes: MantenimientoPreventivo[];
+  public proveedores: Proveedor[];
+  public solicitantes: Empleado[];
+  public supervisores: Empleado[];
+  public categorias: Categoria[];
   public solicitud: MantenimientoPreventivo;
   public modalAdd: BsModalRef;
 
   constructor(
     private mantenimientoService: MantenimientoService,
+    private categoriaService: CategoriasService,
+    private empleadoService: EmpleadosService,
+    private proveedorService: ProveedoresService,
     private modalService: BsModalService,
     private spinner: SpinnerService
     ) { }
@@ -39,8 +49,18 @@ export class MantenimientoPreventivoComponent implements OnInit {
   }
 
   private async loadInfo() {
+    try {
+      this.spinner.showSpinner();
       this.solicitudes = await this.mantenimientoService.getSolicitudesMantenimientoPreventivo();
-      console.log(this.solicitudes);
+      this.categorias = await this.categoriaService.getCategorias();
+      await this.fillEmpleados();
+      this.proveedores = await this.proveedorService.getProveedores();
+
+    } catch (error) {
+      console.log('no se jalo la info');
+    } finally {
+      this.spinner.hideSpinner();
+    }
   }
 
   public viewRequest(modal: TemplateRef<any>, solicitud: any, edit: boolean) {
@@ -53,7 +73,6 @@ export class MantenimientoPreventivoComponent implements OnInit {
    */
   public addRequest(modal: TemplateRef<any>) {
     const s1 = {
-      actividad: '',
       comentarios_supervisor: '5mentarios',
       duracion_horas: 0,
       fecha_creacion: new Date(),
@@ -61,7 +80,7 @@ export class MantenimientoPreventivoComponent implements OnInit {
       id_categoria: 1,
       id_empleado: 1,
       id_mantprev: 1,
-      id_proveedor: 1,
+      id_proveedor: 2,
       id_supervisor: 1,
       monto_total: 0,
       referencia: 'lel'
@@ -81,6 +100,18 @@ export class MantenimientoPreventivoComponent implements OnInit {
       this.spinner.hideSpinner();
       window.location.reload();
     }
+  }
+
+  public async fillEmpleados() {
+    try {
+      this.solicitantes = await this.empleadoService.getSolicitantes();
+      this.supervisores = await this.empleadoService.getSupervisores();
+    } catch (error) {
+      console.log(error);
+    }
+
+    console.log(this.solicitantes);
+    console.log(this.supervisores);
   }
 
 

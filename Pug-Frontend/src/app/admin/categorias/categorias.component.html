@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Categorías</h4>
+                        <p class="category">Aquí se encuentran las categorías</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-default btn-block" (click)="addRequest(modaladd)">
+                                <p>Crear Categorías</p>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                          <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th *ngFor="let titulo of titulos">{{ titulo }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let categoria of categorias">
+                                        <td>{{categoria.nombre}}</td>
+                                        <td>{{categoria.descripcion}}</td>
+                                    </tr>
+                                </tbody>
+                          </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #modaladd>
+    <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="modalAdd.hide()">
+            <span aria-hidden="true"> × </span>
+          </button>
+        <h6 class="modal-title" id="modal-title-default">
+          Agregar categoría
+        </h6>
+    
+      </div>
+    
+      <div class="modal-body">
+        
+      </div>
+</ng-template>

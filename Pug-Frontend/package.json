@@ -4,8 +4,8 @@
     "license": "MIT",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve",
-        "start-bueno": "npm install && ng serve",
+        "start pro max ultra": "ng serve",
+        "start+install": "npm install && ng serve",
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",

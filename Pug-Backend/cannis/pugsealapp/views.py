@@ -42,6 +42,14 @@ class EmpleadosViewSet(viewsets.ModelViewSet):
 	serializer_class = EmpleadoSerializer
 	queryset = Empleado.objects.all()
 
+class SupervisoresViewSet(viewsets.ModelViewSet):
+	serializer_class = EmpleadoSerializer
+	queryset = Empleado.objects.filter(rol='admin')
+
+class SolicitantesViewSet(viewsets.ModelViewSet):
+    serializer_class = EmpleadoSerializer
+    queryset = Empleado.objects.exclude(rol='admin')
+
 class MantenimientoPreventivoViewSet(viewsets.ModelViewSet):
 	serializer_class = MantenimientoPreventivoSerializer
 	queryset = Mantenimiento_Preventivo.objects.all()

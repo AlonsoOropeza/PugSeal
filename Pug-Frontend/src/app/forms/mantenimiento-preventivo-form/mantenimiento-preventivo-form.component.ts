@@ -1,7 +1,7 @@
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Component, Input, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MantenimientoPreventivo } from 'app/models/models.model';
+import { Categoria, Empleado, MantenimientoPreventivo, Proveedor } from 'app/models/models.model';
 import { EventEmitter } from '@angular/core';
 
 @Component({
@@ -11,9 +11,12 @@ import { EventEmitter } from '@angular/core';
 })
 export class MantenimientoPreventivoFormComponent {
   @Input() solicitud: MantenimientoPreventivo;
+  @Input() categorias: Categoria[];
+  @Input() solicitantes: Empleado[];
+  @Input() supervisores: Empleado[];
+  @Input() proveedores: Proveedor[];
   @Input() modaladd: BsModalRef;
   @Output() continueparent = new EventEmitter();
-
 
   public continue(form: NgForm) {
     this.continueparent.emit(form);

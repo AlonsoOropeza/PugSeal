@@ -45,18 +45,22 @@
 
 <ng-template #modaladd>
     <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="modalAdd.hide()">
+            <span aria-hidden="true"> × </span>
+          </button>
         <h6 class="modal-title" id="modal-title-default">
           Agregar solicitud de Mantenimiento Preventivo
         </h6>
     
-        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="modalAdd.hide()">
-          <span aria-hidden="true"> × </span>
-        </button>
       </div>
     
       <div class="modal-body">
         <app-mantenimiento-preventivo-form
             [solicitud]="solicitud"
+            [solicitantes]="solicitantes"
+            [supervisores]="supervisores"
+            [proveedores]="proveedores"
+            [categorias]="categorias"
             (continueparent)="create($event)"
             [modaladd]="modalAdd">    
         </app-mantenimiento-preventivo-form>

@@ -84,14 +84,8 @@ WSGI_APPLICATION = 'cannis.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cannismajoris',
-        'USER': 'irvingpercam',
-        'PASSWORD': '@novadepto321',
-        'HOST': 'db4free.net',
-        'PORT': '3306',
-        # connect options
-        'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",},
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

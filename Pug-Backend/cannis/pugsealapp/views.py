@@ -4,9 +4,9 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from rest_framework import status, viewsets, filters
 from rest_framework.response import Response
-from pugsealapp.models import Area, Categoria, Empleado, Hotel, Ubicacion, Proveedor
+from pugsealapp.models import Area, Categoria, Empleado, Hotel, Ubicacion, Proveedor, Mantenimiento_Preventivo
 from pugsealapp import forms
-from pugsealapp.serializer import AreaSerializer, CategoriaSerializer, EmpleadoSerializer, HotelSerializer, UbicacionSerializer, ProveedorSerializer
+from pugsealapp.serializer import AreaSerializer, CategoriaSerializer, EmpleadoSerializer, HotelSerializer, UbicacionSerializer, ProveedorSerializer, MantenimientoPreventivoSerializer
 
 # Create your views here.
 
@@ -33,6 +33,18 @@ def listar_categorias(request):
 class CategoriasViewSet(viewsets.ModelViewSet):
 	serializer_class = CategoriaSerializer
 	queryset = Categoria.objects.all()
+
+class ProveedoresViewSet(viewsets.ModelViewSet):
+	serializer_class = ProveedorSerializer
+	queryset = Proveedor.objects.all()
+
+class EmpleadosViewSet(viewsets.ModelViewSet):
+	serializer_class = EmpleadoSerializer
+	queryset = Empleado.objects.all()
+
+class MantenimientoPreventivoViewSet(viewsets.ModelViewSet):
+	serializer_class = MantenimientoPreventivoSerializer
+	queryset = Mantenimiento_Preventivo.objects.all()
 
 
 

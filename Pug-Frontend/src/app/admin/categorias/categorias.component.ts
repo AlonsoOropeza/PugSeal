@@ -1,3 +1,4 @@
+import { NgForm } from '@angular/forms';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Categoria } from 'app/models/models.model';
 import { CategoriasService } from 'app/services/categorias.service';
@@ -42,13 +43,21 @@ export class CategoriasComponent implements OnInit {
    * Funcion para desplegar un modal para crear una categoría
    * @param modal
    */
-  public addRequest(modal: TemplateRef<any>) {
-    this.categoria = new Categoria({nombre:'aa', descripcion:'aa'});
-    this.modalAdd = this.modalService.show(modal, {keyboard: true, class: 'modal-dialog-centered'});
+  public addRequest(modaladd: TemplateRef<any>) {
+    this.categoria = new Categoria();
+    this.modalAdd = this.modalService.show(modaladd, {keyboard: true, class: 'modal-dialog-centered'});
   }
 
-  public async createCategoria(){
-
+  public async create(form:NgForm){
+    try {
+      this.spinner.showSpinner();
+      await this.categoriaService.createCategoria(this.categoria);
+    } catch (error) {
+      console.log('no se creó');
+    } finally {
+      this.spinner.hideSpinner();
+      window.location.reload();
+    }
   }
 
 }

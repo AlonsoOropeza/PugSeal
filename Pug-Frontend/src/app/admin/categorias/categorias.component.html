@@ -52,6 +52,10 @@
       </div>
     
       <div class="modal-body">
-        
+        <app-categoria-form
+        [categoria]="categoria"
+        [modaladd]="modalAdd"
+        (continueparent)="create($event)"
+        ></app-categoria-form>
       </div>
 </ng-template>

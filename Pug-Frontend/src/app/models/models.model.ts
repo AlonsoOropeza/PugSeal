@@ -66,8 +66,8 @@ export class Categoria {
     public id_categoria?: number;
 
     constructor(json?: Categoria) {
-        this.nombre = json.nombre ? json.nombre : '';
-        this.descripcion = json.descripcion ? json.descripcion : '';
-        this.id_categoria = json.id_categoria ? json.id_categoria : undefined;
+        this.nombre = json?.nombre ? json.nombre : '';
+        this.descripcion = json?.descripcion ? json.descripcion : '';
+        this.id_categoria = json?.id_categoria ? json.id_categoria : undefined;
     }
 }

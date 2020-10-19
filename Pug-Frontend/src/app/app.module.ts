@@ -18,6 +18,7 @@ import { MantenimientoPreventivoComponent } from './admin/mantenimiento-preventi
 import { MantenimientoPreventivoFormComponent } from './forms/mantenimiento-preventivo-form/mantenimiento-preventivo-form.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CategoriasComponent } from './admin/categorias/categorias.component';
+import { CategoriaFormComponent } from './forms/categoria-form/categoria-form.component';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { CategoriasComponent } from './admin/categorias/categorias.component';
     AdminLayoutComponent,
     MantenimientoPreventivoComponent,
     MantenimientoPreventivoFormComponent,
-    CategoriasComponent
+    CategoriasComponent,
+    CategoriaFormComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

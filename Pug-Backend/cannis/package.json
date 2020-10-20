@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "makemigrations": "py manage.py makemigrations",
+        "makemigrations": "py manage.py makemigrations pugsealapp",
         "migrate": "py manage.py migrate",
         "runserver": "py manage.py runserver",
         "pipinstall": "cd ../ & pip install -r requirements.txt"

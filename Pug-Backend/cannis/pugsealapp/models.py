@@ -7,14 +7,16 @@ from django.utils import timezone
 class Area(models.Model):
     id_area = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=255)
-    descripcion = models.TextField(max_length=500, null=True)
+    descripcion = models.TextField(max_length=500, null=True, blank=True)
+    activo = models.BooleanField(default=True)
     def __str__(self):
 	    return self.nombre
 
 class Categoria(models.Model):
     id_categoria = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=255, unique=True)
-    descripcion = models.TextField(max_length=500, null=True)
+    descripcion = models.TextField(max_length=500, null=True, blank=True)
+    activo = models.BooleanField(default=True)
     def __str__(self):
 	    return self.nombre
 
@@ -26,6 +28,7 @@ class Empleado(models.Model):
     correo_electronico = models.CharField(max_length=255)
     telefono = models.CharField(max_length=255)
     rol = models.CharField(max_length=255, default='')
+    activo = models.BooleanField(default=True)
     def __str__(self):
 
         return self.nombre
@@ -33,14 +36,19 @@ class Empleado(models.Model):
 class Hotel(models.Model):
     id_hotel = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=255)
+    direccion = models.CharField(max_length=255, default='')
+    latitud = models.CharField(max_length=255, null=True, blank=True)
+    longitud = models.CharField(max_length=255, null=True, blank=True)
+    activo = models.BooleanField(default=True)
     def __str__(self):
         return self.nombre
 
 class Proveedor(models.Model):
     id_proveedor = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=255)
-    contacto = models.CharField(max_length=255, default='')
+    correo_electronico = models.CharField(max_length=255, default='')
     telefono = models.BigIntegerField(unique=True, default=0)
+    activo = models.BooleanField(default=True)
     class Meta:
         verbose_name_plural = "Proveedores"
     def __str__(self):
@@ -49,6 +57,7 @@ class Proveedor(models.Model):
 class Ubicacion(models.Model):
     id_ubicacion = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=255)
+    activo = models.BooleanField(default=True)
     def __str__(self):
         return self.nombre
 
@@ -56,17 +65,18 @@ class Ubicacion(models.Model):
 
 class Mantenimiento_Preventivo(models.Model):
     id_mantprev = models.AutoField(primary_key=True)
-    id_proveedor = models.ForeignKey(Proveedor, on_delete=models.SET_NULL, null=True)
-    id_categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True)
+    id_proveedor = models.ForeignKey(Proveedor, on_delete=models.SET_NULL, null=True, blank=True)
+    id_categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True, blank=True)
     actividad = models.CharField(max_length=255)
     referencia = models.CharField(max_length=255)
     frecuencia = models.IntegerField(default=0)
     fecha_creacion = models.DateTimeField(default=timezone.now)
     duracion_horas = models.IntegerField(default=0)
-    id_empleado = models.ForeignKey(Empleado, on_delete=models.SET_NULL, null=True, related_name="solicitante" )
-    id_supervisor = models.ForeignKey(Empleado, on_delete=models.SET_NULL, null=True, related_name="supervisor")
+    id_empleado = models.ForeignKey(Empleado, on_delete=models.SET_NULL, null=True, related_name="solicitante", blank=True)
+    id_supervisor = models.ForeignKey(Empleado, on_delete=models.SET_NULL, null=True, related_name="supervisor", blank=True)
     monto_total = models.IntegerField(default=0)
-    comentarios_supervisor = models.TextField(max_length=1000)
+    comentarios_supervisor = models.TextField(max_length=1000, null=True, blank=True)
+    activo = models.BooleanField(default=True)
     class Meta:
         verbose_name_plural = "Solicitudes de Mantenimiento Preventivo"
     def __str__(self):

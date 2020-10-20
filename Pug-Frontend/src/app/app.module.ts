@@ -20,6 +20,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { CategoriasComponent } from './admin/categorias/categorias.component';
 import { CategoriaFormComponent } from './forms/categoria-form/categoria-form.component';
 
+import { DataTablesModule } from 'angular-datatables';
+import { DatatableComponent } from './admin/datatable/datatable.component';
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -32,7 +35,8 @@ import { CategoriaFormComponent } from './forms/categoria-form/categoria-form.co
     AppRoutingModule,
     ModalModule.forRoot(),
     CommonModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    DataTablesModule
   ],
   declarations: [
     AppComponent,
@@ -40,7 +44,8 @@ import { CategoriaFormComponent } from './forms/categoria-form/categoria-form.co
     MantenimientoPreventivoComponent,
     MantenimientoPreventivoFormComponent,
     CategoriasComponent,
-    CategoriaFormComponent
+    CategoriaFormComponent,
+    DatatableComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

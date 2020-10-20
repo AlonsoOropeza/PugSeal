@@ -44,7 +44,7 @@
     <button 
     class="btn btn-primary" 
     type="submit" 
-    [disabled] = "!createForm.form.valid"
+    [disabled] = "createForm.invalid"
     (click)="continue(createForm)">
         Guardar
     </button>

@@ -1,0 +1,19 @@
+.btn:hover
+{
+    background-color: #888888;
+    color: #F8F8F8;
+}
+
+.btn .btn-block.p
+{
+    font-size: 40px;
+}
+
+.card{
+    padding: 15px;
+}
+
+.modal-dialog-centered{
+    display: flex;
+    align-items: center;
+}

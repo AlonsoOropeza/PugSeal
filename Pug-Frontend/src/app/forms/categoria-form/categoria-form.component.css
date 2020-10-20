@@ -1,4 +1,47 @@
+.modal-content
+{
+    background-color: #88888888;
+}
+
+.modal-title
+{
+    font-size: 16px;
+}
+.close
+{
+    font-size: 32px;
+}
 .row{
     margin-right: 5px;
     margin-left: 5px;
+}
+
+.form-control
+{
+    padding: 8px 10px;
+}
+
+
+.btn
+{
+    width: 47%;
+    border-radius: 15px;
+    margin-right: 8px;
+    margin-left: 8px;
+}
+.btn:hover
+{
+    background-color: #888888;
+    color: #F8F8F8;
+}
+
+.btn-primary:hover
+{
+    background-color: #3472F7;
+    color: #F8F8F8;
+}
+
+.alert.alert-danger.ng-star-inserted
+{
+    border-radius: 5px;
 }

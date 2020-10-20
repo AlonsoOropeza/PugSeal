@@ -10,7 +10,7 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { MantenimientoPreventivoComponent } from '../../admin/mantenimiento-preventivo/mantenimiento-preventivo.component'
 import { CategoriasComponent } from 'app/admin/categorias/categorias.component';
-import { DatatableComponent } from 'app/admin/datatable/datatable.component';
+import { AreasComponent } from 'app/admin/areas/areas.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',                component: HomeComponent },
@@ -23,5 +23,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'upgrade',                  component: UpgradeComponent },
     { path: 'mantenimiento-preventivo', component: MantenimientoPreventivoComponent},
     { path: 'categorias',               component: CategoriasComponent},
-    { path: 'datatable',                component: DatatableComponent}
+    { path: 'areas',                    component: AreasComponent}
 ];

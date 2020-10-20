@@ -20,6 +20,7 @@ from pugsealapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/areas/', views.AreasViewSet.as_view({'post':'create', 'get':'list'})),
     path('api/categorias/', views.CategoriasViewSet.as_view({'post':'create', 'get':'list'})),
     path('api/proveedores/', views.ProveedoresViewSet.as_view({'post' :'create', 'get':'list'})),
     path('api/empleados/', views.EmpleadosViewSet.as_view({'post' :'create', 'get':'list'})),

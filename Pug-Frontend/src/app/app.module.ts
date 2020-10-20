@@ -19,6 +19,8 @@ import { MantenimientoPreventivoFormComponent } from './forms/mantenimiento-prev
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CategoriasComponent } from './admin/categorias/categorias.component';
 import { CategoriaFormComponent } from './forms/categoria-form/categoria-form.component';
+import { AreaFormComponent } from './forms/area-form/area-form.component';
+import { AreasComponent } from './admin/areas/areas.component';
 
 import { DataTablesModule } from 'angular-datatables';
 import { DatatableComponent } from './admin/datatable/datatable.component';
@@ -45,6 +47,8 @@ import { DatatableComponent } from './admin/datatable/datatable.component';
     MantenimientoPreventivoFormComponent,
     CategoriasComponent,
     CategoriaFormComponent,
+    AreaFormComponent,
+    AreasComponent,
     DatatableComponent
   ],
   providers: [],

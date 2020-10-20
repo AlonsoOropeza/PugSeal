@@ -1,17 +1,23 @@
-declare var $: any;
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
 export class NotificationsService {
+
+  public $:any;
 
   constructor() { }
 
   public showNotification(message?: string, success?: boolean, from?, align?) {
-    const type = ['', 'info', 'success', 'warning', 'danger'];
+    const types = ['', 'info', 'success', 'warning', 'danger'];
     const icon = success ? 'pe-7s-bell' : 'pe-7s-close-circle';
     const color = success ? 'success' : 'danger';
-    $.notify({
+    this.$.notify({
         icon: icon,
         message: message
     }, {
-        type: type[color],
+        type: types[color],
         timer: 1000,
         placement: {
             from: from,

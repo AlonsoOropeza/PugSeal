@@ -1,0 +1,51 @@
+<form #createForm="ngForm" class="modals">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="nombre">Nombre<span class="text-danger">*</span></label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="nombre" required
+                    [(ngModel)]="area.nombre"
+                    name="nombre"
+                    #nombre="ngModel"
+                >
+            </div>
+    
+            <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger">
+                <div *ngIf="nombre.errors.required">
+                    El nombre del área es obligatorio.
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="descripcion">Descripción</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="descripcion"
+                    [(ngModel)]="area.descripcion"
+                    name="descripcion"
+                    #descripcion="ngModel"
+                    maxlength="500"
+                >
+            </div>
+    
+            <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="alert alert-danger">
+                <div *ngIf="descripcion.errors.required">
+                    La descripción debe contener menos de 500 caracteres. 
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <button class="btn btn-primary" type="submit" (click)="continue(createForm)">
+        Guardar
+    </button>
+  
+    <button class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="modaladd.hide()">
+        Cerrar
+    </button>
+</form>

@@ -7,7 +7,9 @@ from rest_framework.response import Response
 from pugsealapp.models import Area, Categoria, Empleado, Hotel, Ubicacion, Proveedor, Mantenimiento_Preventivo
 from pugsealapp.serializer import AreaSerializer, CategoriaSerializer, EmpleadoSerializer, HotelSerializer, UbicacionSerializer, ProveedorSerializer, MantenimientoPreventivoSerializer
 
-# Create your views here.
+class AreasViewSet(viewsets.ModelViewSet):
+	serializer_class = AreaSerializer
+	queryset = Area.objects.all()
 
 class CategoriasViewSet(viewsets.ModelViewSet):
 	serializer_class = CategoriaSerializer

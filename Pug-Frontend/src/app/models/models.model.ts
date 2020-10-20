@@ -67,7 +67,7 @@ export class Categoria {
 
     constructor(json?: Categoria) {
         this.nombre = json?.nombre ? json.nombre : '';
-        this.descripcion = json?.descripcion ? json.descripcion : '';
+        this.descripcion = json?.descripcion ? json.descripcion : null; 
         this.id_categoria = json?.id_categoria ? json.id_categoria : undefined;
     }
 }
@@ -81,5 +81,21 @@ export class Area {
         this.nombre = json?.nombre ? json.nombre : '';
         this.descripcion = json?.descripcion ? json.descripcion : '';
         this.id_area = json?.id_area ? json.id_area : undefined;
+    }
+}
+
+export class Hotel {
+    public nombre?: string;
+    public direccion?: string;
+    public latitud?: string;
+    public longitud?: string;
+    public id_hotel?: number;
+
+    constructor(json?: Hotel) {
+        this.nombre = json?.nombre ? json.nombre : '';
+        this.direccion = json?.direccion ? json.direccion : '';
+        this.latitud = json?.latitud ? json.latitud : '';
+        this.longitud = json?.longitud ? json.longitud : '';
+        this.id_hotel = json?.id_hotel ? json.id_hotel : undefined;
     }
 }

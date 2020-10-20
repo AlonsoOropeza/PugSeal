@@ -22,6 +22,9 @@ import { CategoriaFormComponent } from './forms/categoria-form/categoria-form.co
 import { AreaFormComponent } from './forms/area-form/area-form.component';
 import { AreasComponent } from './admin/areas/areas.component';
 
+import { DataTablesModule } from 'angular-datatables';
+import { DatatableComponent } from './admin/datatable/datatable.component';
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -34,7 +37,8 @@ import { AreasComponent } from './admin/areas/areas.component';
     AppRoutingModule,
     ModalModule.forRoot(),
     CommonModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    DataTablesModule
   ],
   declarations: [
     AppComponent,
@@ -44,7 +48,8 @@ import { AreasComponent } from './admin/areas/areas.component';
     CategoriasComponent,
     CategoriaFormComponent,
     AreaFormComponent,
-    AreasComponent
+    AreasComponent,
+    DatatableComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,6 +4,7 @@ import { Categoria } from 'app/models/models.model';
 import { CategoriasService } from 'app/services/categorias.service';
 import { SpinnerService } from 'app/services/spinner.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-categorias',
@@ -15,6 +16,8 @@ export class CategoriasComponent implements OnInit {
   public categoria:Categoria;
   public titulos:string[];
   public modalAdd: BsModalRef;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger = new Subject();
 
   constructor(
     private categoriaService: CategoriasService, 
@@ -23,6 +26,13 @@ export class CategoriasComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
+      }
+    };
     this.loadInfo();
     this.titulos = ['Nombre', 'Descripcion'];
   }
@@ -31,12 +41,12 @@ export class CategoriasComponent implements OnInit {
     try {
       this.spinner.showSpinner();
       this.categorias = await this.categoriaService.getCategorias(); 
+      this.dtTrigger.next();
     } catch (error) {
       throw new Error(error);
     } finally {
       this.spinner.hideSpinner();
     }
-    	
   }
 
   /**
@@ -58,6 +68,10 @@ export class CategoriasComponent implements OnInit {
       this.spinner.hideSpinner();
       window.location.reload();
     }
+  }
+
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
   }
 
 }

@@ -15,7 +15,7 @@ export class CategoriasComponent implements OnInit {
   public categorias:Categoria[];
   public categoria:Categoria;
   public titulos:string[];
-  public modalAdd: BsModalRef;
+  public modalComponent: BsModalRef;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
 
@@ -34,7 +34,7 @@ export class CategoriasComponent implements OnInit {
       }
     };
     this.loadInfo();
-    this.titulos = ['Nombre', 'Descripcion'];
+    this.titulos = ['Nombre', 'Descripcion', 'Estado', 'Editar'];
   }
 
   public async loadInfo(){
@@ -53,9 +53,9 @@ export class CategoriasComponent implements OnInit {
    * Funcion para desplegar un modal para crear una categoría
    * @param modal
    */
-  public addRequest(modaladd: TemplateRef<any>) {
-    this.categoria = new Categoria();
-    this.modalAdd = this.modalService.show(modaladd, {keyboard: true, class: 'modal-dialog-centered'});
+  public addRequest(modal: TemplateRef<any>, categoria?:Categoria) {
+    this.categoria = categoria ? categoria : new Categoria();
+    this.modalComponent = this.modalService.show(modal, {keyboard: true, class: 'modal-dialog-centered'});
   }
 
   public async create(form:NgForm){
@@ -72,6 +72,18 @@ export class CategoriasComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
+  }
+
+  public async update(form:NgForm){
+    try {
+      this.spinner.showSpinner();
+      await this.categoriaService.updateCategoria(this.categoria);
+    } catch (error) {
+      console.log('no se modificó'+error);
+    } finally {
+      this.spinner.hideSpinner();
+      window.location.reload();
+    }
   }
 
 }

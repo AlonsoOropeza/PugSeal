@@ -17,15 +17,18 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include 
 from pugsealapp import views
+from rest_framework import routers
+
+router = routers.SimpleRouter()
+router.register('api/categorias', views.CategoriasViewSet, basename='api/categorias')
+router.register('api/areas', views.AreasViewSet, basename='api/areas')
+router.register('api/proveedores', views.ProveedoresViewSet, basename='api/proveedores')
+router.register('api/empleados', views.EmpleadosViewSet, basename='api/empleados')
+router.register('api/solicitantes', views.SolicitantesViewSet, basename='api/solicitantes')
+router.register('api/supervisores', views.SupervisoresViewSet, basename='api/supervisores')
+router.register('api/solicitudes/mantenimiento', views.MantenimientoPreventivoViewSet, basename='api/solicitudes/mantenimiento')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/areas/', views.AreasViewSet.as_view({'post':'create', 'get':'list'})),
-    path('api/categorias/', views.CategoriasViewSet.as_view({'post':'create', 'get':'list'})),
-    path('api/proveedores/', views.ProveedoresViewSet.as_view({'post' :'create', 'get':'list'})),
-    path('api/empleados/', views.EmpleadosViewSet.as_view({'post' :'create', 'get':'list'})),
-    path('api/solicitantes/', views.SolicitantesViewSet.as_view({'get':'list'})),
-    path('api/supervisores/', views.SupervisoresViewSet.as_view({'get':'list'})),
-    path('api/solicitudes/mantenimiento/', views.MantenimientoPreventivoViewSet.as_view({'get':'list', 'post':'create'}))
-
 ]
+urlpatterns += router.urls

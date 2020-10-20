@@ -71,3 +71,15 @@ export class Categoria {
         this.id_categoria = json?.id_categoria ? json.id_categoria : undefined;
     }
 }
+
+export class Area {
+    public nombre?: string;
+    public descripcion?: string;
+    public id_area?: number;
+
+    constructor(json?: Area) {
+        this.nombre = json?.nombre ? json.nombre : '';
+        this.descripcion = json?.descripcion ? json.descripcion : '';
+        this.id_area = json?.id_area ? json.id_area : undefined;
+    }
+}

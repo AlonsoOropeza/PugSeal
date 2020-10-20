@@ -30,6 +30,10 @@ def listar_categorias(request):
     context['dataset'] = Categoria.objects.all()
     return render(request, 'categoria/listar_categorias.html', context)
 
+class AreasViewSet(viewsets.ModelViewSet):
+	serializer_class = AreaSerializer
+	queryset = Area.objects.all()
+
 class CategoriasViewSet(viewsets.ModelViewSet):
 	serializer_class = CategoriaSerializer
 	queryset = Categoria.objects.all()

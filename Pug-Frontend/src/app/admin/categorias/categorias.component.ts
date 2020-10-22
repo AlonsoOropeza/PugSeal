@@ -86,4 +86,9 @@ export class CategoriasComponent implements OnInit {
     }
   }
 
+  public cancel() {
+    this.modalComponent.hide();
+    window.location.reload();
+  }
+
 }

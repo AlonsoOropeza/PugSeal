@@ -39,6 +39,20 @@
                 </div>
             </div>
         </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="estado">Estado</label>
+                <input
+                    type="checkbox"
+                    class="form-control"
+                    id="estado"
+                    [(ngModel)]="categoria.activo"
+                    name="estado"
+                    #estado="ngModel"
+                    maxlength="500"
+                >
+            </div>
+        </div>
     </div>
   
     <button 
@@ -49,7 +63,7 @@
         Guardar
     </button>
   
-    <button class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="modaladd.hide()">
-        Cerrar
+    <button class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+        Cancelar
     </button>
 </form>

@@ -34,7 +34,7 @@
                                         <td *ngIf="!categoria.activo">Inactivo</td>
                                         <td>
                                             <button class="btn btn-default btn-block" (click)="addRequest(modalupdate, categoria)">
-                                                <i class="pe-7s-magic-wand"></i>
+                                                Modificar
                                             </button>
                                         </td>
                                     </tr>
@@ -49,9 +49,9 @@
 
 <ng-template #modaladd>
     <div class="modal-header">
-        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="modalComponent.hide()">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
             <span aria-hidden="true"> × </span>
-          </button>
+        </button>
         <h6 class="modal-title" id="modal-title-default">
           Agregar categoría
         </h6>
@@ -67,9 +67,9 @@
 
 <ng-template #modalupdate>
     <div class="modal-header">
-        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="modalComponent.hide()">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
             <span aria-hidden="true"> × </span>
-          </button>
+        </button>
         <h6 class="modal-title" id="modal-title-default">
           Editar categoría
         </h6>

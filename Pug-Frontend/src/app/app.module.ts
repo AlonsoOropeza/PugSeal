@@ -23,6 +23,8 @@ import { AreaFormComponent } from './forms/area-form/area-form.component';
 import { AreasComponent } from './admin/areas/areas.component';
 
 import { DataTablesModule } from 'angular-datatables';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   imports: [
@@ -37,7 +39,8 @@ import { DataTablesModule } from 'angular-datatables';
     ModalModule.forRoot(),
     CommonModule,
     NgxSpinnerModule,
-    DataTablesModule
+    DataTablesModule,
+    ToastrModule.forRoot()
   ],
   declarations: [
     AppComponent,

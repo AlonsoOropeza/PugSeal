@@ -8,9 +8,9 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
   templateUrl: './area-form.component.html',
   styleUrls: ['./area-form.component.css']
 })
-export class AreaFormComponent{
-  @Input() area:Area;
-  @Input() modaladd:BsModalRef;
+export class AreaFormComponent {
+  @Input() area: Area;
+  @Input() modaladd: BsModalRef;
   @Output() continueparent = new EventEmitter();
 
   public continue(form: NgForm) {

@@ -13,6 +13,7 @@ export enum ChartType {
 }
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'lbd-chart',
   templateUrl: './lbd-chart.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -66,12 +67,15 @@ export class LbdChartComponent implements OnInit, AfterViewInit {
 
     switch (this.chartType) {
       case ChartType.Pie:
+        // tslint:disable-next-line: no-unused-expression
         new Chartist.Pie(`#${this.chartId}`, this.chartData, this.chartOptions, this.chartResponsive);
         break;
       case ChartType.Line:
+        // tslint:disable-next-line: no-unused-expression
         new Chartist.Line(`#${this.chartId}`, this.chartData, this.chartOptions, this.chartResponsive);
         break;
       case ChartType.Bar:
+        // tslint:disable-next-line: no-unused-expression
         new Chartist.Bar(`#${this.chartId}`, this.chartData, this.chartOptions, this.chartResponsive);
         break;
     }

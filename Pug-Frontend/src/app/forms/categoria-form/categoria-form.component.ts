@@ -9,12 +9,17 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
   styleUrls: ['./categoria-form.component.css']
 })
 export class CategoriaFormComponent {
-  @Input() categoria:Categoria;
-  @Input() modaladd:BsModalRef;
+  @Input() categoria: Categoria;
+  @Input() modaladd: BsModalRef;
   @Output() continueparent = new EventEmitter();
 
   public continue(form: NgForm) {
     this.continueparent.emit(form);
+  }
+
+  public cancel() {
+    this.modaladd.hide();
+    window.location.reload();
   }
 
 }

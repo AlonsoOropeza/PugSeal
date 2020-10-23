@@ -27,7 +27,18 @@ export class CategoriasService {
       console.log(response);
     } catch (error) {
       console.log('no se pudo crear la categoria ' + error);
-      throw new Error('no se pudo crear la solicitud');
+      throw new Error('no se pudo crear la categoria');
+    }
+  }
+
+  public async updateCategoria(categoria: Categoria) {
+    try {
+      console.log('se envio');
+      const response = this.http.patch(environment.url + 'api/categorias/' + categoria.id_categoria + '/', categoria).subscribe();
+      console.log(response);
+    } catch (error) {
+      console.log('no se pudo modificar la categoria ' + error);
+      throw new Error('no se pudo modificar la categoria');
     }
   }
 }

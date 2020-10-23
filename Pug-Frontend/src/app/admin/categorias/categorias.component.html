@@ -30,6 +30,13 @@
                                     <tr *ngFor="let categoria of categorias">
                                         <td>{{categoria.nombre}}</td>
                                         <td>{{categoria.descripcion}}</td>
+                                        <td *ngIf="categoria.activo">Activo</td>
+                                        <td *ngIf="!categoria.activo">Inactivo</td>
+                                        <td>
+                                            <button class="btn btn-default btn-block" (click)="addRequest(modalupdate, categoria)">
+                                                Modificar
+                                            </button>
+                                        </td>
                                     </tr>
                                 </tbody>
                           </table>
@@ -42,24 +49,38 @@
 
 <ng-template #modaladd>
     <div class="modal-header">
-        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="modalAdd.hide()">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
             <span aria-hidden="true"> × </span>
-          </button>
+        </button>
         <h6 class="modal-title" id="modal-title-default">
           Agregar categoría
         </h6>
-    
       </div>
-    
       <div class="modal-body">
         <app-categoria-form
         [categoria]="categoria"
-        [modaladd]="modalAdd"
+        [modaladd]="modalComponent"
         (continueparent)="create($event)"
         ></app-categoria-form>
       </div>
 </ng-template>
 
-<ng-template #datatable>
-
+<ng-template #modalupdate>
+    <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+            <span aria-hidden="true"> × </span>
+        </button>
+        <h6 class="modal-title" id="modal-title-default">
+          Editar categoría
+        </h6>
+      </div>
+      <div class="modal-body">
+        <app-categoria-form
+        [categoria]="categoria"
+        [modaladd]="modalComponent"
+        (continueparent)="update($event)"
+        ></app-categoria-form>
+      </div>
 </ng-template>
+
+<ng-template #datatable></ng-template>

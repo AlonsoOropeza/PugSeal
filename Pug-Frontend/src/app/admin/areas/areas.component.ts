@@ -11,15 +11,15 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
   styleUrls: ['./areas.component.css']
 })
 export class AreasComponent implements OnInit {
-  public areas:Area[];
-  public area:Area;
-  public titulos:string[];
+  public areas: Area[];
+  public area: Area;
+  public titulos: string[];
   public modalAdd: BsModalRef;
 
   constructor(
-    private areasService: AreasService, 
-    private spinner:SpinnerService,
-    private modalService:BsModalService
+    private areasService: AreasService,
+    private spinner: SpinnerService,
+    private modalService: BsModalService
     ) { }
 
   ngOnInit(): void {
@@ -27,16 +27,15 @@ export class AreasComponent implements OnInit {
     this.titulos = ['Nombre', 'Descripcion'];
   }
 
-  public async loadInfo(){
+  public async loadInfo() {
     try {
       this.spinner.showSpinner();
-      this.areas = await this.areasService.getAreas(); 
+      this.areas = await this.areasService.getAreas();
     } catch (error) {
       throw new Error(error);
     } finally {
       this.spinner.hideSpinner();
     }
-    	
   }
 
   /**
@@ -48,7 +47,7 @@ export class AreasComponent implements OnInit {
     this.modalAdd = this.modalService.show(modaladd, {keyboard: true, class: 'modal-dialog-centered'});
   }
 
-  public async create(form:NgForm){
+  public async create(form: NgForm) {
     try {
       this.spinner.showSpinner();
       await this.areasService.createArea(this.area);

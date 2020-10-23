@@ -1,3 +1,4 @@
+import { NotificationsService } from './../../services/notifications.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Categoria } from 'app/models/models.model';
@@ -12,17 +13,18 @@ import { Subject } from 'rxjs';
   styleUrls: ['./categorias.component.css']
 })
 export class CategoriasComponent implements OnInit {
-  public categorias:Categoria[];
-  public categoria:Categoria;
-  public titulos:string[];
+  public categorias: Categoria[];
+  public categoria: Categoria;
+  public titulos: string[];
   public modalComponent: BsModalRef;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
 
   constructor(
-    private categoriaService: CategoriasService, 
-    private spinner:SpinnerService,
-    private modalService:BsModalService
+    private categoriaService: CategoriasService,
+    private spinner: SpinnerService,
+    private modalService: BsModalService,
+    private notificationsService: NotificationsService
     ) { }
 
   ngOnInit(): void {
@@ -37,10 +39,10 @@ export class CategoriasComponent implements OnInit {
     this.titulos = ['Nombre', 'Descripcion', 'Estado', 'Editar'];
   }
 
-  public async loadInfo(){
+  public async loadInfo() {
     try {
       this.spinner.showSpinner();
-      this.categorias = await this.categoriaService.getCategorias(); 
+      this.categorias = await this.categoriaService.getCategorias();
       this.dtTrigger.next();
     } catch (error) {
       throw new Error(error);
@@ -53,36 +55,37 @@ export class CategoriasComponent implements OnInit {
    * Funcion para desplegar un modal para crear una categoría
    * @param modal
    */
-  public addRequest(modal: TemplateRef<any>, categoria?:Categoria) {
+  public addRequest(modal: TemplateRef<any>, categoria?: Categoria) {
     this.categoria = categoria ? categoria : new Categoria();
     this.modalComponent = this.modalService.show(modal, {keyboard: true, class: 'modal-dialog-centered'});
   }
 
-  public async create(form:NgForm){
+  public async create(form: NgForm) {
     try {
       this.spinner.showSpinner();
       await this.categoriaService.createCategoria(this.categoria);
+      this.notificationsService.showNotification('Se ha creado correctamente la categoría.', true);
+      this.categorias = await this.categoriaService.getCategorias();
     } catch (error) {
       console.log('no se creó');
+      this.notificationsService.showNotification('No se ha podido crear la categoría.', false);
+
     } finally {
       this.spinner.hideSpinner();
-      window.location.reload();
+      this.modalComponent.hide();
     }
   }
 
-  ngOnDestroy(): void {
-    this.dtTrigger.unsubscribe();
-  }
-
-  public async update(form:NgForm){
+  public async update(form: NgForm) {
     try {
       this.spinner.showSpinner();
       await this.categoriaService.updateCategoria(this.categoria);
+      this.categorias = await this.categoriaService.getCategorias();
     } catch (error) {
-      console.log('no se modificó'+error);
+      console.log('no se modificó' + error);
     } finally {
       this.spinner.hideSpinner();
-      window.location.reload();
+      this.modalComponent.hide();
     }
   }
 

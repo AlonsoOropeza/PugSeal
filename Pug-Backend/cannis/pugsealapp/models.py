@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from datetime import date
 
 
 # Models in alphabetical order
@@ -46,8 +47,10 @@ class Hotel(models.Model):
 class Proveedor(models.Model):
     id_proveedor = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=255)
-    correo_electronico = models.CharField(max_length=255, default='')
+    contacto = models.CharField(max_length=255)
+    email = models.CharField(max_length=255, default='')
     telefono = models.BigIntegerField(unique=True, default=0)
+    fechaAlianza = models.DateField(default=date.today)
     activo = models.BooleanField(default=True)
     class Meta:
         verbose_name_plural = "Proveedores"

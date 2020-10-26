@@ -12,9 +12,14 @@ export class AreaFormComponent {
   @Input() area: Area;
   @Input() modaladd: BsModalRef;
   @Output() continueparent = new EventEmitter();
+  @Output() cancelparent = new EventEmitter();
 
   public continue(form: NgForm) {
     this.continueparent.emit(form);
+  }
+
+  public cancel() {
+    this.cancelparent.emit();
   }
 
 }

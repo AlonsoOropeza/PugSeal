@@ -39,13 +39,27 @@
                 </div>
             </div>
         </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="estado">Estado</label>
+                <input
+                    type="checkbox"
+                    class="form-control"
+                    id="estado"
+                    [(ngModel)]="area.activo"
+                    name="estado"
+                    #estado="ngModel"
+                    maxlength="500"
+                >
+            </div>
+        </div>
     </div>
   
-    <button class="btn btn-primary" type="submit" (click)="continue(createForm)">
+    <button class="btn btn-primary" type="submit" [disabled] = "createForm.invalid" (click)="continue(createForm)">
         Guardar
     </button>
   
-    <button class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="modaladd.hide()">
-        Cerrar
+    <button class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+        Cancelar
     </button>
 </form>

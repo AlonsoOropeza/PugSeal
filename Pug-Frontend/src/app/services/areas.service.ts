@@ -30,4 +30,15 @@ export class AreasService {
       throw new Error('no se pudo crear la solicitud');
     }
   }
+
+  public async updateArea(area: Area) {
+    try {
+      console.log('se envio');
+      const response = this.http.patch(environment.url + 'api/areas/' + area.id_area + '/', area).subscribe();
+      console.log(response);
+    } catch (error) {
+      console.log('no se pudo modificar la area ' + error);
+      throw new Error('no se pudo modificar el area');
+    }
+  }
 }

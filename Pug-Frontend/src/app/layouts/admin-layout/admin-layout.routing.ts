@@ -1,3 +1,4 @@
+import { ProveedoresComponent } from './../../admin/proveedores/proveedores.component';
 import { Routes } from '@angular/router';
 
 import { HomeComponent } from '../../home/home.component';
@@ -23,5 +24,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'upgrade',                  component: UpgradeComponent },
     { path: 'mantenimiento-preventivo', component: MantenimientoPreventivoComponent},
     { path: 'categorias',               component: CategoriasComponent},
-    { path: 'areas',                    component: AreasComponent}
+    { path: 'areas',                    component: AreasComponent},
+    { path: 'proveedores',              component: ProveedoresComponent}
 ];

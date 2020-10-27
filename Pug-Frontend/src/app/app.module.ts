@@ -24,6 +24,7 @@ import { AreasComponent } from './admin/areas/areas.component';
 
 import { DataTablesModule } from 'angular-datatables';
 import { ToastrModule } from 'ngx-toastr';
+import { ProveedoresComponent } from './admin/proveedores/proveedores.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { ToastrModule } from 'ngx-toastr';
     CategoriasComponent,
     CategoriaFormComponent,
     AreaFormComponent,
-    AreasComponent
+    AreasComponent,
+    ProveedoresComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

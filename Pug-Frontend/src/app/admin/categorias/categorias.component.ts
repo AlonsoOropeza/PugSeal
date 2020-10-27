@@ -61,32 +61,29 @@ export class CategoriasComponent implements OnInit {
   }
 
   public async create(form: NgForm) {
-    try {
-      this.spinner.showSpinner();
-      await this.categoriaService.createCategoria(this.categoria);
-      this.notificationsService.showNotification('Se ha creado correctamente la categoría.', true);
-      this.categorias = await this.categoriaService.getCategorias();
-    } catch (error) {
-      console.log('no se creó');
-      this.notificationsService.showNotification('No se ha podido crear la categoría.', false);
-
-    } finally {
-      this.spinner.hideSpinner();
-      this.modalComponent.hide();
-    }
+    this.spinner.showSpinner();
+    const response = (await this.categoriaService.createCategoria(this.categoria)).subscribe(
+      () => this.notificationsService.showNotification('Se ha creado correctamente la categoría.', true),
+      error => {
+        this.notificationsService.showNotification(error.message, false);
+      }
+    );
+    this.categorias = await this.categoriaService.getCategorias();
+    this.spinner.hideSpinner();
+    this.modalComponent.hide();
   }
 
   public async update(form: NgForm) {
-    try {
-      this.spinner.showSpinner();
-      await this.categoriaService.updateCategoria(this.categoria);
-      this.categorias = await this.categoriaService.getCategorias();
-    } catch (error) {
-      console.log('no se modificó' + error);
-    } finally {
-      this.spinner.hideSpinner();
-      this.modalComponent.hide();
-    }
+    this.spinner.showSpinner();
+    const response = (await this.categoriaService.updateCategoria(this.categoria)).subscribe(
+      () => this.notificationsService.showNotification('Se ha actualizado correctamente la categoría.', true),
+      error => {
+        this.notificationsService.showNotification(error.message, false);
+      }
+    );
+    this.categorias = await this.categoriaService.getCategorias();
+    this.spinner.hideSpinner();
+    this.modalComponent.hide();
   }
 
   public cancel() {

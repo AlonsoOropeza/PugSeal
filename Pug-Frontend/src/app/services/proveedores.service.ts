@@ -1,6 +1,6 @@
+import { Proveedor } from './../models/models.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Proveedor } from 'app/models/models.model';
 import { environment } from 'environments/environment';
 
 @Injectable({
@@ -12,11 +12,7 @@ export class ProveedoresService {
 
   public async getProveedores() {
     let response: any;
-    try {
-      response = this.http.request('GET', environment.url + 'api/proveedores/').toPromise();
-    } catch (error) {
-      console.log('no se encontro la info ' + error);
-    }
+    response = this.http.request('GET', environment.url + 'api/proveedores/').toPromise();
     return response;
   }
 

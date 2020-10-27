@@ -48,15 +48,21 @@ export class Empleado {
 
 export class Proveedor {
     public id_proveedor?: number;
-    public nombre?: string;
-    public contacto?: string;
+    public nombre_empresa?: string;
+    public nombre_proveedor?: string;
+    public email?: string;
     public telefono?: string;
+    public activo?: boolean;
+    public fechaAlianza: Date;
 
     constructor(json?: Proveedor) {
-        this.id_proveedor = json.id_proveedor;
-        this.nombre = json.nombre;
-        this.telefono = json.telefono;
-        this.contacto = json.contacto;
+        this.id_proveedor = json?.id_proveedor ? json.id_proveedor : null;
+        this.nombre_empresa = json?.nombre_empresa ? json.nombre_empresa : null;
+        this.nombre_proveedor = json?.nombre_proveedor ? json.nombre_proveedor : null;
+        this.email = json?.email ? json.email : null;
+        this.telefono = json?.telefono ? json.telefono : null;
+        this.activo = json?.activo ? json.activo : true;
+        this.fechaAlianza = json?.fechaAlianza ? json.fechaAlianza : new Date();
     }
 }
 

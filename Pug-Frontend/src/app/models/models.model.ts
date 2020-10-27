@@ -84,11 +84,13 @@ export class Area {
     public nombre?: string;
     public descripcion?: string;
     public id_area?: number;
+    public activo?: boolean;
 
     constructor(json?: Area) {
         this.nombre = json?.nombre ? json.nombre : '';
         this.descripcion = json?.descripcion ? json.descripcion : '';
         this.id_area = json?.id_area ? json.id_area : undefined;
+        this.activo = json?.activo ? json.activo : true;
     }
 }
 

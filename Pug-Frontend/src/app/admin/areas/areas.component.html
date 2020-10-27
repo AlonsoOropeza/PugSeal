@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     <div class="content table-responsive table-full-width">
-                          <table class="table table-hover table-striped">
+                          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="table table-hover table-striped">
                                 <thead>
                                     <tr>
                                         <th *ngFor="let titulo of titulos">{{ titulo }}</th>
@@ -29,6 +29,13 @@
                                     <tr *ngFor="let area of areas">
                                         <td>{{area.nombre}}</td>
                                         <td>{{area.descripcion}}</td>
+                                        <td *ngIf="area.activo">Activo</td>
+                                        <td *ngIf="!area.activo">Inactivo</td>
+                                        <td>
+                                            <button class="btn btn-default btn-block" (click)="addRequest(modalupdate, area)">
+                                                Modificar
+                                            </button>
+                                        </td>
                                     </tr>
                                 </tbody>
                           </table>
@@ -42,7 +49,7 @@
 
 <ng-template #modaladd>
     <div class="modal-header">
-        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="modalAdd.hide()">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
             <span aria-hidden="true"> × </span>
           </button>
         <h6 class="modal-title" id="modal-title-default">
@@ -56,6 +63,28 @@
         [area]="area"
         [modaladd]="modalAdd"
         (continueparent)="create($event)"
+        (cancelparent)="cancel()"
         ></app-area-form>
       </div>
 </ng-template>
+
+<ng-template #modalupdate>
+    <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+            <span aria-hidden="true"> × </span>
+        </button>
+        <h6 class="modal-title" id="modal-title-default">
+          Editar área
+        </h6>
+      </div>
+      <div class="modal-body">
+        <app-area-form
+        [area]="area"
+        [modaladd]="modalComponent"
+        (continueparent)="update($event)"
+        (cancelparent)="cancel()"
+        ></app-area-form>
+      </div>
+</ng-template>
+
+<ng-template #datatable></ng-template>

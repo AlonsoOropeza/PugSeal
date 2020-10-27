@@ -7,7 +7,7 @@ from datetime import date
 
 class Area(models.Model):
     id_area = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=255)
+    nombre = models.CharField(max_length=255, unique=True)
     descripcion = models.TextField(max_length=500, null=True, blank=True)
     activo = models.BooleanField(default=True)
     def __str__(self):

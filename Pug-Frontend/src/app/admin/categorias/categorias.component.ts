@@ -57,38 +57,44 @@ export class CategoriasComponent implements OnInit {
    */
   public addRequest(modal: TemplateRef<any>, categoria?: Categoria) {
     this.categoria = categoria ? categoria : new Categoria();
-    this.modalComponent = this.modalService.show(modal, {keyboard: true, class: 'modal-dialog-centered'});
+    this.modalComponent = this.modalService.show(modal, {backdrop : 'static', keyboard: false, class: 'modal-dialog-centered'});
   }
 
   public async create(form: NgForm) {
     this.spinner.showSpinner();
-    const response = (await this.categoriaService.createCategoria(this.categoria)).subscribe(
-      () => this.notificationsService.showNotification('Se ha creado correctamente la categoría.', true),
-      error => {
-        this.notificationsService.showNotification(error.message, false);
+    (await this.categoriaService.createCategoria(this.categoria)).subscribe(
+      async () => {
+        this.notificationsService.showNotification('Se ha creado correctamente la categoría.', true),
+        this.categorias = await this.categoriaService.getCategorias()
+      },
+      async error => {
+        this.notificationsService.showNotification(error.message, false),
+        this.categorias = await this.categoriaService.getCategorias()
       }
     );
-    this.categorias = await this.categoriaService.getCategorias();
     this.spinner.hideSpinner();
     this.modalComponent.hide();
   }
 
   public async update(form: NgForm) {
     this.spinner.showSpinner();
-    const response = (await this.categoriaService.updateCategoria(this.categoria)).subscribe(
-      () => this.notificationsService.showNotification('Se ha actualizado correctamente la categoría.', true),
-      error => {
-        this.notificationsService.showNotification(error.message, false);
+    (await this.categoriaService.updateCategoria(this.categoria)).subscribe(
+      async () => {
+        this.notificationsService.showNotification('Se ha actualizado correctamente la categoría.', true),
+        this.categorias = await this.categoriaService.getCategorias()
+      },
+      async error => {
+        this.notificationsService.showNotification(error.message, false),
+        this.categorias = await this.categoriaService.getCategorias()
       }
     );
-    this.categorias = await this.categoriaService.getCategorias();
     this.spinner.hideSpinner();
     this.modalComponent.hide();
   }
 
-  public cancel() {
+  public async cancel() {
+    this.categorias = await this.categoriaService.getCategorias();
     this.modalComponent.hide();
-    window.location.reload();
   }
 
 }

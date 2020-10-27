@@ -57,37 +57,40 @@ export class AreasComponent implements OnInit {
    */
   public addRequest(modal: TemplateRef<any>, area?: Area) {
     this.area = area ? area : new Area();
-    this.modalComponent = this.modalService.show(modal, {keyboard: true, class: 'modal-dialog-centered'});
+    this.modalComponent = this.modalService.show(modal, {backdrop : 'static', keyboard: false, class: 'modal-dialog-centered'});
   }
 
   public async create(form: NgForm) {
-    try {
       this.spinner.showSpinner();
-      await this.areasService.createArea(this.area);
-      this.notificationsService.showNotification('Se ha creado correctamente la área.', true);
-      this.areas = await this.areasService.getAreas();
-    } catch (error) {
-      console.log('no se creó');
-      this.notificationsService.showNotification('No se ha podido crear la área.', false);
-
-    } finally {
+        (await this.areasService.createArea(this.area)).subscribe(
+          async () => {
+            this.notificationsService.showNotification('Se ha creado correctamente el área.', true)
+            this.areas = await this.areasService.getAreas()
+        },
+        async error => {
+          this.notificationsService.showNotification(error.message, false);
+          this.areas = await this.areasService.getAreas()
+        }
+      );
       this.spinner.hideSpinner();
       this.modalComponent.hide();
     }
-  }
 
-  public async update(form: NgForm) {
-    try {
+    public async update(form: NgForm) {
       this.spinner.showSpinner();
-      await this.areasService.updateArea(this.area);
-      this.areas = await this.areasService.getAreas();
-    } catch (error) {
-      console.log('no se modificó' + error);
-    } finally {
+      (await this.areasService.updateArea(this.area)).subscribe(
+        async () => {
+          this.notificationsService.showNotification('Se ha actualizado correctamente el área.', true)
+          this.areas = await this.areasService.getAreas()
+      },
+        async error => {
+          this.notificationsService.showNotification(error.message, false);
+          this.areas = await this.areasService.getAreas()
+        }
+      );
       this.spinner.hideSpinner();
       this.modalComponent.hide();
     }
-  }
 
   public async cancel() {
     this.areas = await this.areasService.getAreas();

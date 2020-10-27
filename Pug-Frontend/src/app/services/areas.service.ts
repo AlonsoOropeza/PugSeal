@@ -21,24 +21,10 @@ export class AreasService {
   }
 
   public async createArea(area: Area) {
-    try {
-      console.log('se envio');
-      const response = this.http.post(environment.url + 'api/areas/', area).subscribe();
-      console.log(response);
-    } catch (error) {
-      console.log('no se pudo crear el área ' + error);
-      throw new Error('no se pudo crear la solicitud');
-    }
+    return this.http.post(environment.url + 'api/areas/', area);
   }
 
   public async updateArea(area: Area) {
-    try {
-      console.log('se envio');
-      const response = this.http.patch(environment.url + 'api/areas/' + area.id_area + '/', area).subscribe();
-      console.log(response);
-    } catch (error) {
-      console.log('no se pudo modificar la area ' + error);
-      throw new Error('no se pudo modificar el area');
-    }
+    return this.http.patch(environment.url + 'api/areas/' + area.id_area + '/', area);
   }
 }

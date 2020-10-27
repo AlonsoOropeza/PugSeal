@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Proveedores</h4>
+                        <p class="category">Aquí se encuentra la información sobre los proveedores</p>
+                    </div>
+
+                    <div class="content table-responsive table-full-width">
+                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" 
+                        class="table table-hover table-striped row-border hover">
+                                <thead>
+                                    <tr>
+                                        <th *ngFor="let titulo of titulos">{{ titulo }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let proveedor of proveedores">
+                                        <td>{{proveedor.nombre_empresa}}</td>
+                                        <td>{{proveedor.nombre_proveedor}}</td>
+                                        <td>{{proveedor.telefono}}</td>
+                                        <td *ngIf="proveedor.activo">Activo</td>
+                                        <td *ngIf="!proveedor.activo">Inactivo</td>
+                                        <td>
+                                            <button class="btn btn-default btn-block">
+                                                Modificar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

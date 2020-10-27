@@ -29,7 +29,7 @@ class UbicacionSerializer(serializers.ModelSerializer):
 class ProveedorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Proveedor
-        fields = ('id_proveedor','nombre', 'contacto', 'telefono', 'activo')
+        fields = ('id_proveedor','nombre_empresa','nombre_proveedor','email', 'telefono', 'activo','fechaAlianza')
 
 class MantenimientoPreventivoSerializer(serializers.ModelSerializer):
     class Meta:

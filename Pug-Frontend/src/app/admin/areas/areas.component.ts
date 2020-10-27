@@ -61,39 +61,40 @@ export class AreasComponent implements OnInit {
   }
 
   public async create(form: NgForm) {
-      this.spinner.showSpinner();
-        (await this.areasService.createArea(this.area)).subscribe(
-          async () => {
-            this.notificationsService.showNotification('Se ha creado correctamente el área.', true)
-            this.areas = await this.areasService.getAreas()
-        },
-        async error => {
-          this.notificationsService.showNotification(error.message, false);
-          this.areas = await this.areasService.getAreas()
-        }
-      );
-      this.spinner.hideSpinner();
-      this.modalComponent.hide();
-    }
-
-    public async update(form: NgForm) {
-      this.spinner.showSpinner();
-      (await this.areasService.updateArea(this.area)).subscribe(
+    this.spinner.showSpinner();
+      (await this.areasService.createArea(this.area)).subscribe(
         async () => {
-          this.notificationsService.showNotification('Se ha actualizado correctamente el área.', true)
+          this.notificationsService.showNotification('Se ha creado correctamente el área.', true)
           this.areas = await this.areasService.getAreas()
       },
-        async error => {
-          this.notificationsService.showNotification(error.message, false);
-          this.areas = await this.areasService.getAreas()
-        }
-      );
-      this.spinner.hideSpinner();
-      this.modalComponent.hide();
-    }
+      async error => {
+        this.notificationsService.showNotification(error.message, false);
+        this.areas = await this.areasService.getAreas()
+      }
+    );
+    this.spinner.hideSpinner();
+    this.modalComponent.hide();
+  }
+
+  public async update(form: NgForm) {
+    this.spinner.showSpinner();
+    (await this.areasService.updateArea(this.area)).subscribe(
+      async () => {
+        this.notificationsService.showNotification('Se ha actualizado correctamente el área.', true)
+        this.areas = await this.areasService.getAreas()
+    },
+      async error => {
+        this.notificationsService.showNotification(error.message, false);
+        this.areas = await this.areasService.getAreas()
+      }
+    );
+    this.spinner.hideSpinner();
+    this.modalComponent.hide();
+  }
 
   public async cancel() {
     this.areas = await this.areasService.getAreas();
     this.modalComponent.hide();
   }
+
 }

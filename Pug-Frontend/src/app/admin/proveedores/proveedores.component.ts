@@ -48,4 +48,34 @@ export class ProveedoresComponent implements OnInit {
     this.spinner.hideSpinner();
   }
 
+  public async create(form: NgForm) {
+    this.spinner.showSpinner();
+      (await this.proveedoresService.createProveedor(this.proveedor)).subscribe(
+        async () => {
+          this.notificationsService.showNotification('Se ha creado correctamente el proveedor.', true)
+          this.proveedores = await this.proveedoresService.getProveedores()
+        },
+        async error => {
+          this.notificationsService.showNotification(error.message, false);
+          this.proveedores = await this.proveedoresService.getProveedores()
+        }
+    );
+    this.spinner.hideSpinner();
+    this.modalComponent.hide();
+  }
+
+  public async cancel() {
+    this.proveedores = await this.proveedoresService.getProveedores();
+    this.modalComponent.hide();
+  }
+
+   /**
+   * Funcion para desplegar un modal para crear un proveedor
+   * @param modal
+   */
+  public addRequest(modal: TemplateRef<any>, proveedor?: Proveedor) {
+    this.proveedor = proveedor ? proveedor : new Proveedor();
+    this.modalComponent = this.modalService.show(modal, {backdrop : 'static', keyboard: false, class: 'modal-dialog-centered'});
+  }
+
 }

@@ -1,0 +1,121 @@
+<form #createForm="ngForm" class="modals">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="nombre_empresa">Nombre De La Empresa<span class="text-danger">*</span></label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="nombre_empresa" required
+                    [(ngModel)]="proveedor.nombre_empresa"
+                    name="nombre_empresa"
+                    #nombre_empresa="ngModel"
+                >
+            </div>
+            <div *ngIf="nombre_empresa.invalid && (nombre_empresa.dirty || nombre_empresa.touched)" class="alert alert-danger">
+                <div *ngIf="nombre_empresa.errors.required">
+                    El nombre de la empresa es obligatorio.
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="nombre_proveedor">Nombre Del Proveedor<span class="text-danger">*</span></label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="nombre_proveedor" required
+                    [(ngModel)]="proveedor.nombre_proveedor"
+                    name="nombre_proveedor"
+                    #nombre_proveedor="ngModel"
+                >
+            </div>
+            <div *ngIf="nombre_proveedor.invalid && (nombre_proveedor.dirty || nombre_proveedor.touched)" class="alert alert-danger">
+                <div *ngIf="nombre_proveedor.errors.required">
+                    El nombre del proveedor es obligatorio.
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="email">Correo Electróncio</label>
+                <input
+                    type="email"
+                    class="form-control"
+                    id="email" 
+                    [(ngModel)]="proveedor.email"
+                    name="email"
+                    #email="ngModel"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$"
+                >
+            </div>
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+                <div *ngIf="email.errors.pattern">
+                    Ingresa un correo electrónico válido. 
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="telefono">Teléfono<span class="text-danger">*</span></label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="telefono" 
+                    [(ngModel)]="proveedor.telefono"
+                    name="telefono"
+                    #telefono="ngModel"
+                    pattern="^\d{10}$"
+                    maxlength=10
+                >
+            </div>
+            <div *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)" class="alert alert-danger">
+                <div *ngIf="telefono.errors.pattern">
+                    Ingresa un número de teléfono de 10 dígitos. 
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="form-group">
+                <label class="form-control-label" for="fechaAlianza">Fecha De Alianza</label>
+                <input
+                    type="date"
+                    class="form-control"
+                    id="fechaAlianza"
+                    [(ngModel)]="proveedor.fechaAlianza"
+                    name="fechaAlianza"
+                    #fechaAlianza="ngModel"
+                    maxlength="500"
+                >
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="form-group">
+                <label class="form-control-label" for="estado">Estado</label>
+                <input
+                    type="checkbox"
+                    class="form-control"
+                    id="estado"
+                    [(ngModel)]="proveedor.activo"
+                    name="estado"
+                    #estado="ngModel"
+                    maxlength="500"
+                >
+            </div>
+        </div>
+        
+    </div>
+  
+    <button class="btn btn-primary" type="submit" [disabled] = "createForm.invalid" (click)="continue(createForm)">
+        Guardar
+    </button>
+  
+    <button class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+        Cancelar
+    </button>
+</form>

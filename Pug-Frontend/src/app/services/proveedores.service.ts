@@ -17,13 +17,6 @@ export class ProveedoresService {
   }
 
   public async createProveedor(proveedor: Proveedor) {
-    try {
-      console.log('se envio');
-      const response = this.http.post(environment.url + 'api/proveedores/', proveedor).subscribe();
-      console.log(response);
-    } catch (error) {
-      console.log('no se pudo crear la solicitud ' + error);
-      throw new Error('no se pudo crear la solicitud');
-    }
+    return this.http.post(environment.url + 'api/proveedores/', proveedor);
   }
 }

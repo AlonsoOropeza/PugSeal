@@ -19,6 +19,7 @@ export class ProveedoresComponent implements OnInit {
   public proveedor: Proveedor;
   public titulos: string[];
   public modalComponent: BsModalRef;
+  public edit = true;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
 
@@ -38,7 +39,7 @@ export class ProveedoresComponent implements OnInit {
       }
     };
     this.loadInfo();
-    this.titulos = ['Empresa', 'Contacto', 'Teléfono', 'Estado', 'Acciones'];
+    this.titulos = ['Empresa', 'Contacto', 'Teléfono', 'Estado'];
   }
 
   public async loadInfo() {
@@ -69,11 +70,28 @@ export class ProveedoresComponent implements OnInit {
     this.modalComponent.hide();
   }
 
+  public async update(form: NgForm) {
+    this.spinner.showSpinner();
+    (await this.proveedoresService.updateProveedor(this.proveedor)).subscribe(
+      async () => {
+        this.notificationsService.showNotification('Se ha actualizado correctamente el proveedor.', true),
+        this.proveedores = await this.proveedoresService.getProveedores()
+      },
+      async error => {
+        this.notificationsService.showNotification(error.message, false),
+        this.proveedores = await this.proveedoresService.getProveedores()
+      }
+    );
+    this.spinner.hideSpinner();
+    this.modalComponent.hide();
+  }
+
    /**
    * Funcion para desplegar un modal para crear un proveedor
    * @param modal
    */
-  public addRequest(modal: TemplateRef<any>, proveedor?: Proveedor) {
+  public addRequest(modal: TemplateRef<any>, proveedor?: Proveedor, edit?: boolean) {
+    this.edit = edit ? edit : false;
     this.proveedor = proveedor ? proveedor : new Proveedor();
     this.modalComponent = this.modalService.show(modal, {backdrop : 'static', keyboard: false, class: 'modal-dialog-centered'});
   }

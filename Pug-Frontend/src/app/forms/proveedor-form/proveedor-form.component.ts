@@ -11,6 +11,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 export class ProveedorFormComponent {
   @Input() proveedor: Proveedor;
   @Input() modaladd: BsModalRef;
+  @Input() edit: boolean;
   @Output() continueparent = new EventEmitter();
   @Output() cancelparent = new EventEmitter();
 

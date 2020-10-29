@@ -39,7 +39,7 @@ export class ProveedoresComponent implements OnInit {
       }
     };
     this.loadInfo();
-    this.titulos = ['Empresa', 'Contacto', 'Teléfono', 'Estado'];
+    this.titulos = ['Empresa', 'Contacto', 'Teléfono', 'Estado', 'Editar', 'Ver'];
   }
 
   public async loadInfo() {

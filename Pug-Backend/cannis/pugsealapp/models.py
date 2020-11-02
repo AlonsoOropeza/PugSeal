@@ -49,6 +49,7 @@ class Proveedor(models.Model):
     nombre_empresa = models.CharField(max_length=255, unique=True, default='')
     nombre_proveedor = models.CharField(max_length=255, default='')
     email = models.CharField(max_length=255, default='')
+    telefono = models.CharField(max_length=10)
     fechaAlianza = models.DateField(default=date.today)
     activo = models.BooleanField(default=True)
     class Meta:

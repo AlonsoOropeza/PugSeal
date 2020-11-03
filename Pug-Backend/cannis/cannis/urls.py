@@ -26,7 +26,7 @@ router.register('api/proveedores', views.ProveedoresViewSet, basename='api/prove
 router.register('api/empleados', views.EmpleadosViewSet, basename='api/empleados')
 router.register('api/solicitantes', views.SolicitantesViewSet, basename='api/solicitantes')
 router.register('api/supervisores', views.SupervisoresViewSet, basename='api/supervisores')
-router.register('api/solicitudes/mantenimiento', views.MantenimientoPreventivoViewSet, basename='api/solicitudes/mantenimiento')
+router.register('api/mantenimiento/preventivo', views.MantenimientoPreventivoViewSet, basename='api/mantenimiento/preventivo')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

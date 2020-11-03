@@ -9,6 +9,7 @@
                     id="nombre_empresa" required
                     [(ngModel)]="proveedor.nombre_empresa"
                     name="nombre_empresa"
+                    disabled={{!edit}}
                     #nombre_empresa="ngModel"
                 >
             </div>
@@ -28,6 +29,7 @@
                     id="nombre_proveedor" required
                     [(ngModel)]="proveedor.nombre_proveedor"
                     name="nombre_proveedor"
+                    disabled={{!edit}}
                     #nombre_proveedor="ngModel"
                 >
             </div>
@@ -44,9 +46,10 @@
                 <input
                     type="email"
                     class="form-control"
-                    id="email" 
+                    id="email"
                     [(ngModel)]="proveedor.email"
                     name="email"
+                    disabled={{!edit}}
                     #email="ngModel"
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$"
                 >
@@ -64,9 +67,10 @@
                 <input
                     type="text"
                     class="form-control"
-                    id="telefono" 
+                    id="telefono"
                     [(ngModel)]="proveedor.telefono"
                     name="telefono"
+                    disabled={{!edit}}
                     #telefono="ngModel"
                     pattern="^\d{10}$"
                     maxlength=10
@@ -88,6 +92,7 @@
                     id="fechaAlianza"
                     [(ngModel)]="proveedor.fechaAlianza"
                     name="fechaAlianza"
+                    disabled={{!edit}}
                     #fechaAlianza="ngModel"
                     maxlength="500"
                 >
@@ -103,6 +108,7 @@
                     id="estado"
                     [(ngModel)]="proveedor.activo"
                     name="estado"
+                    disabled={{!edit}}
                     #estado="ngModel"
                     maxlength="500"
                 >
@@ -111,11 +117,15 @@
         
     </div>
   
-    <button class="btn btn-primary" type="submit" [disabled] = "createForm.invalid" (click)="continue(createForm)">
+    <button *ngIf="edit" class="btn btn-primary" type="submit" [disabled] = "createForm.invalid" (click)="continue(createForm)">
         Guardar
     </button>
   
-    <button class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+    <button *ngIf="edit" class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
         Cancelar
+    </button>
+
+    <button *ngIf="!edit" class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+        Cerrar
     </button>
 </form>

@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from rest_framework import status
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
+from rest_framework.exceptions import ValidationError
+from rest_framework.permissions import IsAuthenticated 
 from rest_framework import status, viewsets, filters
 from rest_framework.response import Response
 from pugsealapp.models import Area, Categoria, Empleado, Hotel, Ubicacion, Proveedor, Mantenimiento_Preventivo
@@ -12,8 +15,15 @@ class AreasViewSet(viewsets.ModelViewSet):
 	queryset = Area.objects.all()
 
 class CategoriasViewSet(viewsets.ModelViewSet):
+	permission_classes = (IsAuthenticated,) 
 	serializer_class = CategoriaSerializer
 	queryset = Categoria.objects.all()
+	def get_queryset(self):
+		auth = self.request.auth
+		if auth:
+			return Categoria.objects.all()
+		else:
+			raise ValidationError({"error": ["You don't have enough permission."]})
 
 class ProveedoresViewSet(viewsets.ModelViewSet):
 	serializer_class = ProveedorSerializer

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'pugsealapp',
     'rest_framework',
+    'rest_framework.authtoken'
 ]
 
 # Specify the domains that can access the APIs

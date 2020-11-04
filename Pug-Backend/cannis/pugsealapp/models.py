@@ -84,3 +84,20 @@ class Mantenimiento_Preventivo(models.Model):
         verbose_name_plural = "Solicitudes de Mantenimiento Preventivo"
     def __str__(self):
         return "%s" % self.actividad
+
+class Bitacora_Mediciones(models.Model):
+    id_medicion = models.AutoField(primary_key=True)
+    fecha = models.DateField(default=date.today)
+    cloro = models.DecimalField(decimal_places=2, max_digits = 10)
+    porcentaje_nivel_agua = models.DecimalField(decimal_places=2, max_digits = 10)
+    porcentaje_gas = models.DecimalField(decimal_places=2, max_digits = 10)
+    luz = models.DecimalField(decimal_places=2, max_digits = 10)
+    lectura = models.DecimalField(decimal_places=2, max_digits = 10)
+    presion = models.DecimalField(decimal_places=2, max_digits = 10)
+    temperatura_alberca_jacuzzi = models.DecimalField(decimal_places=2, max_digits = 10)
+    temperatura_caldera = models.DecimalField(decimal_places=2, max_digits = 10)
+    responsable = models.CharField(max_length=255, unique=True, default='')
+    auditor = models.CharField(max_length=255, unique=True, default='')
+    observaciones = models.CharField(max_length=255, unique=True, default='')
+    class Meta:
+        verbose_name_plural = "Bitácora Mediciones"

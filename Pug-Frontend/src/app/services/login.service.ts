@@ -18,9 +18,10 @@ export class LoginService {
 
   public async login(username: string, password: string) {
     this.http.post(environment.url + 'auth/login/', { username, password }).subscribe(
-          async (token) => {
-              console.log(token);
-              this.setToken(token);
+          async (response) => {
+            console.log(typeof(response));
+            await this.setToken(response);
+            console.log(this.getToken());
           },
           async (error) => {
               this.notificationsService.showNotification('Las credenciales son incorrectas', true);
@@ -28,7 +29,7 @@ export class LoginService {
       );
   }
 
-  private setToken(token: any) {
+  private async setToken(token: any) {
     this.cookies.set('token', token);
   }
   getToken() {

@@ -1,8 +1,9 @@
+@import url("https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.cs");
+@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css");
 
-
-body {
+main {
     font-family: "Karla", sans-serif;
-    background-color: #333;
+    background-image: url('assets/img/backgrounds/suite.jpg');
     min-height: 100vh; }
   
   .brand-wrapper {
@@ -24,7 +25,7 @@ body {
       -o-object-fit: cover;
          object-fit: cover; }
     .login-card .card-body {
-      padding: 85px 60px 60px; }
+      padding: 150px 120px 120px; }
       @media (max-width: 422px) {
         .login-card .card-body {
           padding: 35px 24px; } }

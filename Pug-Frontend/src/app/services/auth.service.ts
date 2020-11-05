@@ -23,6 +23,8 @@ export class AuthService implements CanActivate{
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot
     ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+
+
       
     throw new Error('Method not implemented.');
   }

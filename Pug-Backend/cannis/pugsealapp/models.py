@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from datetime import date
-
+from django.contrib.auth.models import User, AbstractUser
 
 # Models in alphabetical order
 
@@ -21,18 +21,13 @@ class Categoria(models.Model):
     def __str__(self):
 	    return self.nombre
 
-class Empleado(models.Model):
-    id_empleado = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=255)
-    a_paterno = models.CharField(max_length=255)
-    a_materno = models.CharField(max_length=255)
-    correo_electronico = models.CharField(max_length=255)
+class Usuario(AbstractUser):
+    # id_empleado = models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True, related_name='info')
     telefono = models.CharField(max_length=255)
-    rol = models.CharField(max_length=255, default='')
-    activo = models.BooleanField(default=True)
+    class Meta:
+        abstract = False
     def __str__(self):
-
-        return self.nombre
+        return self.first_name
 
 class Hotel(models.Model):
     id_hotel = models.AutoField(primary_key=True)
@@ -75,8 +70,8 @@ class Mantenimiento_Preventivo(models.Model):
     frecuencia = models.IntegerField(default=0)
     fecha_creacion = models.DateTimeField(default=timezone.now)
     duracion_horas = models.IntegerField(default=0)
-    id_empleado = models.ForeignKey(Empleado, on_delete=models.SET_NULL, null=True, related_name="solicitante", blank=True)
-    id_supervisor = models.ForeignKey(Empleado, on_delete=models.SET_NULL, null=True, related_name="supervisor", blank=True)
+    id_empleado = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="solicitante", blank=True)
+    id_supervisor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="supervisor", blank=True)
     monto_total = models.IntegerField(default=0)
     comentarios_supervisor = models.TextField(max_length=1000, null=True, blank=True)
     activo = models.BooleanField(default=True)

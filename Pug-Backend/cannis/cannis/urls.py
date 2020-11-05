@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.auth import views as auth_views
+
 from django.conf.urls import include 
 from pugsealapp import views
 from pugsealapp.views import *
@@ -27,11 +29,22 @@ router.register('api/categorias', CategoriasViewSet)
 router.register('api/areas', AreasViewSet)
 router.register('api/proveedores', ProveedoresViewSet)
 router.register('api/empleados', EmpleadosViewSet)
-router.register('api/solicitantes', SolicitantesViewSet)
-router.register('api/supervisores', SupervisoresViewSet)
 router.register('api/solicitudes/mantenimiento', MantenimientoPreventivoViewSet)
 
 urlpatterns = [
+    path('users/', UserViewSet.as_view({
+    'get': 'list',
+    'post': 'create',
+    'delete': 'destroy',
+    'put': 'update',
+    'patch': 'partial_update'
+    })),
+    path('users/me/', UserViewSet.as_view({
+    'get': 'me',
+    'delete': 'me',
+    'put': 'me',
+    'patch': 'me'
+    })),
     path('auth/login/', TokenCreateView.as_view()),
 	path('auth/logout/', TokenDestroyView.as_view()),
     path('admin/', admin.site.urls),

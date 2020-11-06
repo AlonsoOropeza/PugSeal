@@ -1,3 +1,4 @@
+import { AuthService } from './services/auth.service';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
@@ -11,21 +12,25 @@ const routes: Routes = [
     path: '',
     redirectTo: 'login',
     pathMatch: 'full',
-  }, {
-    path: 'login',
-    component: LoginComponent,
-   }, {
+  },
+  {
     path: '',
     component: AdminLayoutComponent,
+    canActivate: [AuthService],
     children: [
         {
-      path: '',
-      loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
-  }]},
+            path: '',
+            loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+        }]
+  },
   {
     path: '**',
-    redirectTo: 'dashboard'
-  }
+    redirectTo: 'areas'
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+   }
 ];
 
 @NgModule({

@@ -1,6 +1,8 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../../sidebar/sidebar.component';
-import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import {Location } from '@angular/common';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Component({
     // moduleId: module.id,
@@ -15,7 +17,7 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(location: Location,  private element: ElementRef) {
+    constructor(location: Location,  private element: ElementRef, private cookies: CookieService) {
       this.location = location;
           this.sidebarVisible = false;
     }
@@ -25,6 +27,12 @@ export class NavbarComponent implements OnInit {
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
     }
+
+    public logOut() {
+        this.cookies.delete('user');
+        window.location.reload();
+    }
+
     sidebarOpen() {
         const toggleButton = this.toggleButton;
         const body = document.getElementsByTagName('body')[0];

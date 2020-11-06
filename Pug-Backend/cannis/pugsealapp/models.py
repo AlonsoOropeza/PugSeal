@@ -24,6 +24,7 @@ class Categoria(models.Model):
 class Usuario(AbstractUser):
     # id_empleado = models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True, related_name='info')
     telefono = models.CharField(max_length=255)
+    rol = models.CharField(max_length=255, default=' ', null=False)
     class Meta:
         abstract = False
     def __str__(self):

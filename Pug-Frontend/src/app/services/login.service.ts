@@ -25,7 +25,6 @@ export class LoginService {
           async (response) => {
             await this.setCookie('token', 'Token' + response.auth_token);
             await this.setUser('Token ' + response.auth_token);
-            window.location.reload();
           },
           async (error) => {
               this.notificationsService.showNotification('Las credenciales son incorrectas', true);
@@ -43,7 +42,7 @@ export class LoginService {
     this.http.get<Usuario>(environment.url + 'users/me', httpOptions).subscribe(
           async (response) => {
             await this.setCookie('user', JSON.stringify(response));
-            console.log(JSON.parse(this.getCookie('user')));
+            window.location.reload();
           },
           async (error) => {
               this.notificationsService.showNotification('Las credenciales son incorrectas', true);

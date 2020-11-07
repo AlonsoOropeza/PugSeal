@@ -1,3 +1,4 @@
+import { OnInit } from '@angular/core';
 import { ProveedoresComponent } from './../../admin/proveedores/proveedores.component';
 import { Routes } from '@angular/router';
 
@@ -27,3 +28,4 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'areas',                    component: AreasComponent},
     { path: 'proveedores',              component: ProveedoresComponent}
 ];
+

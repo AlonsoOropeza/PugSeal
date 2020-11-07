@@ -1,11 +1,12 @@
 import { NotificationsService } from './../../services/notifications.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { Area } from 'app/models/models.model';
+import { Area, Usuario } from 'app/models/models.model';
 import { AreasService } from 'app/services/areas.service';
 import { SpinnerService } from 'app/services/spinner.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-areas',
@@ -19,8 +20,10 @@ export class AreasComponent implements OnInit {
   public modalComponent: BsModalRef;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
+  public user: Usuario;
 
   constructor(
+    private cookies: CookieService,
     private areasService: AreasService,
     private spinner: SpinnerService,
     private modalService: BsModalService,
@@ -28,6 +31,7 @@ export class AreasComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.user = JSON.parse(this.cookies.get('user'));
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,

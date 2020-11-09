@@ -1,6 +1,9 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../../sidebar/sidebar.component';
-import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import {Location } from '@angular/common';
+import { CookieService } from 'ngx-cookie-service';
+import { Usuario } from 'app/models/models.model';
+
 
 @Component({
     // moduleId: module.id,
@@ -14,17 +17,30 @@ export class NavbarComponent implements OnInit {
     location: Location;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    public user: Usuario;
 
-    constructor(location: Location,  private element: ElementRef) {
+    constructor(location: Location,  private element: ElementRef, private cookies: CookieService) {
       this.location = location;
           this.sidebarVisible = false;
     }
 
     ngOnInit() {
-      this.listTitles = ROUTES.filter(listTitle => listTitle);
-      const navbar: HTMLElement = this.element.nativeElement;
-      this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
+        this.user = JSON.parse(this.getCookie('user'))
+        this.listTitles = ROUTES.filter(listTitle => listTitle);
+        const navbar: HTMLElement = this.element.nativeElement;
+        this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
+        console.log(this.user);
     }
+
+    getCookie(name: string) {
+        return this.cookies.get(name);
+    }
+
+    public logOut() {
+        this.cookies.delete('user');
+        window.location.reload();
+    }
+
     sidebarOpen() {
         const toggleButton = this.toggleButton;
         const body = document.getElementsByTagName('body')[0];

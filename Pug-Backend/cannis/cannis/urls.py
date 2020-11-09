@@ -15,20 +15,38 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.auth import views as auth_views
+
 from django.conf.urls import include 
 from pugsealapp import views
+from pugsealapp.views import *
 from rest_framework import routers
+from djoser.views import *
+
 
 router = routers.SimpleRouter()
-router.register('api/categorias', views.CategoriasViewSet, basename='api/categorias')
-router.register('api/areas', views.AreasViewSet, basename='api/areas')
-router.register('api/proveedores', views.ProveedoresViewSet, basename='api/proveedores')
-router.register('api/empleados', views.EmpleadosViewSet, basename='api/empleados')
-router.register('api/solicitantes', views.SolicitantesViewSet, basename='api/solicitantes')
-router.register('api/supervisores', views.SupervisoresViewSet, basename='api/supervisores')
-router.register('api/solicitudes/mantenimiento', views.MantenimientoPreventivoViewSet, basename='api/solicitudes/mantenimiento')
+router.register('api/categorias', CategoriasViewSet)
+router.register('api/areas', AreasViewSet)
+router.register('api/proveedores', ProveedoresViewSet)
+router.register('api/empleados', EmpleadosViewSet)
+router.register('api/solicitudes/mantenimiento', MantenimientoPreventivoViewSet)
 
 urlpatterns = [
+    path('users/', UserViewSet.as_view({
+    'get': 'list',
+    'post': 'create',
+    'delete': 'destroy',
+    'put': 'update',
+    'patch': 'partial_update'
+    })),
+    path('users/me/', UserViewSet.as_view({
+    'get': 'me',
+    'delete': 'me',
+    'put': 'me',
+    'patch': 'me'
+    })),
+    path('auth/login/', TokenCreateView.as_view()),
+	path('auth/logout/', TokenDestroyView.as_view()),
     path('admin/', admin.site.urls),
 ]
 urlpatterns += router.urls

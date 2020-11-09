@@ -61,6 +61,7 @@
       <div class="modal-body">
         <app-area-form
         [area]="area"
+        [user]="user"
         [modaladd]="modalComponent"
         (continueparent)="create($event)"
         (cancelparent)="cancel()"
@@ -80,6 +81,7 @@
       <div class="modal-body">
         <app-area-form
         [area]="area"
+        [user]="user"
         [modaladd]="modalComponent"
         (continueparent)="update($event)"
         (cancelparent)="cancel()"

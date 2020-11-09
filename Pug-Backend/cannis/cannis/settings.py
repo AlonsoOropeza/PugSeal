@@ -28,6 +28,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
 
 # Application definition
 
@@ -39,8 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-    'pugsealapp',
+    'djoser',
     'rest_framework',
+    'rest_framework.authtoken',
+    'pugsealapp'
 ]
 
 # Specify the domains that can access the APIs
@@ -57,6 +64,16 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+#DJOSER 
+#https://djoser.readthedocs.io/en/latest/settings.html
+DJOSER = {
+    'SERIALIZERS': {
+       'current_user': 'pugsealapp.serializer.UserSerializer',
+        },
+}
+
+AUTH_USER_MODEL = 'pugsealapp.Usuario'
 
 ROOT_URLCONF = 'cannis.urls'
 
@@ -156,7 +173,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-mx'
 
 TIME_ZONE = 'UTC'
 

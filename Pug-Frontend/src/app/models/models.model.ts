@@ -46,6 +46,24 @@ export class Empleado {
     }
 }
 
+export class Usuario {
+    public id?: number;
+    public first_name?: string;
+    public last_name?: string;
+    public email?: string;
+    public telefono?: string;
+    public rol?: string;
+
+    constructor(json?: Usuario) {
+        this.id = json.id;
+        this.first_name = json.first_name;
+        this.last_name = json.last_name;
+        this.telefono = json.telefono;
+        this.email = json.email;
+        this.rol = json?.rol ? json.rol : undefined;
+    }
+}
+
 export class Proveedor {
     public id_proveedor?: number;
     public nombre_empresa?: string;

@@ -1,28 +1,42 @@
 export class MantenimientoPreventivo {
+    public id_mantprev?: number;
     public actividad?: string;
-    public referencia?: string;
-    public frecuencia?: number;
+    public frecuencia_anual?: number;
+    public mes_inicio?: string;
     public fecha_creacion?: Date;
+    public fecha_planeada?: Date;
+    public fecha_real?: Date;
     public duracion_horas?: number;
-    public monto_total?: number;
+    public presupuesto_plan?: number;
+    public cotizacion?: number;
     public comentarios_supervisor?: string;
-    public id_proveedor?: number;
+    public comentarios_auditor?: string;
+    public activo?: boolean;
     public id_categoria?: number;
-    public id_empleado?: number;
+    public id_proveedor?: number;
     public id_supervisor?: number;
+    public id_auditor?: number;
+    public id_empleado?: number;
 
     constructor(json?: MantenimientoPreventivo) {
+        this.id_mantprev = json.id_mantprev;
         this.actividad = json.actividad;
-        this.referencia = json.referencia;
-        this.frecuencia = json.frecuencia;
+        this.frecuencia_anual = json.frecuencia_anual;
+        this.mes_inicio = json.mes_inicio;
         this.fecha_creacion = json.fecha_creacion;
+        this.fecha_planeada = json.fecha_planeada;
+        this.fecha_real = json.fecha_real;
         this.duracion_horas = json.duracion_horas;
-        this.monto_total = json.monto_total;
+        this.presupuesto_plan = json.presupuesto_plan;
+        this.cotizacion = json.cotizacion;
         this.comentarios_supervisor = json.comentarios_supervisor;
+        this.comentarios_auditor = json.comentarios_auditor;
+        this.activo = json.activo;
         this.id_proveedor = json.id_proveedor;
         this.id_categoria = json.id_categoria;
-        this.id_empleado = json.id_empleado;
+        this.id_auditor = json.id_auditor;
         this.id_supervisor = json.id_supervisor;
+        this.id_empleado = json.id_empleado;
     }
 }
 

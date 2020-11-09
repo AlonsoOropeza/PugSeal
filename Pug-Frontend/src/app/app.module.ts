@@ -21,11 +21,12 @@ import { CategoriasComponent } from './admin/categorias/categorias.component';
 import { CategoriaFormComponent } from './forms/categoria-form/categoria-form.component';
 import { AreaFormComponent } from './forms/area-form/area-form.component';
 import { AreasComponent } from './admin/areas/areas.component';
-
+import { CookieService } from 'ngx-cookie-service';
 import { DataTablesModule } from 'angular-datatables';
 import { ToastrModule } from 'ngx-toastr';
 import { ProveedoresComponent } from './admin/proveedores/proveedores.component';
 import { ProveedorFormComponent } from './forms/proveedor-form/proveedor-form.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -54,9 +55,10 @@ import { ProveedorFormComponent } from './forms/proveedor-form/proveedor-form.co
     AreaFormComponent,
     AreasComponent,
     ProveedoresComponent,
-    ProveedorFormComponent
+    ProveedorFormComponent,
+    LoginComponent
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

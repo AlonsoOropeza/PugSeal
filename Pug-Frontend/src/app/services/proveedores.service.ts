@@ -19,4 +19,8 @@ export class ProveedoresService {
   public async createProveedor(proveedor: Proveedor) {
     return this.http.post(environment.url + 'api/proveedores/', proveedor);
   }
+
+  public async updateProveedor(proveedor: Proveedor) {
+    return this.http.patch(environment.url + 'api/proveedores/' + proveedor.id_proveedor + '/', proveedor);
+  }
 }

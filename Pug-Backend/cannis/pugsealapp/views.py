@@ -16,15 +16,15 @@ class AreasViewSet(viewsets.ModelViewSet):
 	queryset = Area.objects.all()
 
 class CategoriasViewSet(viewsets.ModelViewSet):
-	permission_classes = (IsAuthenticated,) 
+	#permission_classes = (IsAuthenticated,) 
 	serializer_class = CategoriaSerializer
 	queryset = Categoria.objects.all()
-	def get_queryset(self):
+	'''def get_queryset(self):
 		auth = self.request.auth
 		if auth:
 			return Categoria.objects.all()
 		else:
-			raise ValidationError({"error": ["You don't have enough permission."]})
+			raise ValidationError({"error": ["You don't have enough permission."]})'''
 
 class ProveedoresViewSet(viewsets.ModelViewSet):
 	serializer_class = ProveedorSerializer

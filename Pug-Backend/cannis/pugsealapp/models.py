@@ -64,23 +64,25 @@ class Ubicacion(models.Model):
 
 class Mantenimiento_Preventivo(models.Model):
     id_mantprev = models.AutoField(primary_key=True)
-    id_categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True, blank=True)
-    id_proveedor = models.ForeignKey(Proveedor, on_delete=models.SET_NULL, null=True, blank=True)
+    id_categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True)
+    id_proveedor = models.ForeignKey(Proveedor, on_delete=models.SET_NULL, null=True)
     id_supervisor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="supervisor", blank=True)
     id_auditor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="auditor", blank=True)    
-    id_empleado = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="empleado", blank=True)
+    id_empleado = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="empleado")
     actividad = models.CharField(max_length=255)
     frecuencia_anual = models.IntegerField(default=0)
-    mes_inicio = models.CharField(max_length=255)
     fecha_creacion = models.DateTimeField(default=timezone.now)
     fecha_planeada = models.DateField(null=True)
-    fecha_real = models.DateField(null=True)
-    duracion_horas = models.FloatField(default=0)
-    presupuesto_plan = models.FloatField(default=0)
-    cotizacion = models.FloatField(default=0)
+    fecha_real = models.DateField(null=True, blank=True)
+    duracion_horas = models.FloatField(default=0, blank=True, null=True)
+    presupuesto = models.FloatField(default=0)
+    cotizacion = models.FloatField(default=0, blank=True, null=True)
     comentarios_supervisor = models.CharField(max_length=1000, null=True, blank=True)
     comentarios_auditor = models.CharField(max_length=1000, null=True, blank=True)
-    activo = models.BooleanField(default=True)
+    terminado = models.BooleanField(default=False)
+    supervisado = models.BooleanField(default=False)
+    auditado = models.BooleanField(default=False)
+
     class Meta:
         verbose_name_plural = "Solicitudes de Mantenimiento Preventivo"
     def __str__(self):

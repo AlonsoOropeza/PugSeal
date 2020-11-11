@@ -14,7 +14,7 @@
                         </div>
                         <div class="col-md-3">
                             <button class="btn btn-default btn-block" (click)="addRequest(modaladd)">
-                                <p>Crear Proveedor</p>
+                                <p>Crear Solicitud</p>
                             </button>
                         </div>
                     </div>
@@ -29,15 +29,18 @@
                                 <tbody>
                                     <tr *ngFor="let mantenimiento of mantenimientos">
                                         <td>{{mantenimiento.actividad}}</td>
-                                        <td>{{mantenimiento.fecha_planeada}}</td>
                                         <td>{{mantenimiento.id_categoria}}</td>
-                                        <td>{{mantenimiento.presupuesto_plan}}</td>
-                                        <td>{{mantenimiento.frecuencia_anual}}</td>
-                                        <td *ngIf="mantenimiento.activo">Activo</td>
-                                        <td *ngIf="!mantenimiento.activo">Inactivo</td>
+                                        <td>{{mantenimiento.fecha_planeada}}</td>
+                                        <td *ngIf="mantenimiento.finalizado">Sí</td>
+                                        <td *ngIf="!mantenimiento.finalizado">No</td>
                                         <td>
-                                            <button class="btn btn-default btn-block">
+                                            <button class="btn btn-default btn-block" >
                                                 Modificar
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-default btn-block" >
+                                                Visualizar
                                             </button>
                                         </td>
                                     </tr>
@@ -49,5 +52,30 @@
         </div>
     </div>
 </div>
+
+<ng-template #modaladd>
+    <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+            <span aria-hidden="true"> × </span>
+          </button>
+        <h6 class="modal-title" id="modal-title-default">
+          Agregar solicitud
+        </h6>
+    
+      </div>
+    
+      <div class="modal-body">
+        <app-mantenimiento-preventivo-form
+        [mantenimiento]="mantenimiento"
+        [edit]="edit"
+        [modaladd]="modalComponent"
+        [proveedores]="proveedores"
+        [categorias]="categorias"
+        [encargados]="encargados"
+        (continueparent)="create($event)"
+        (cancelparent)="cancel()"
+        ></app-mantenimiento-preventivo-form>
+      </div>
+</ng-template>
 
 <ng-template #datatable></ng-template>

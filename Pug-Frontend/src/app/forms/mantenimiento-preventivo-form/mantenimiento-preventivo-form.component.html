@@ -7,7 +7,7 @@
                     type="text"
                     class="form-control"
                     id="actividad" required
-                    [(ngModel)]="solicitud.actividad"
+                    [(ngModel)]="mantenimiento.actividad"
                     name="actividad"
                     #actividad="ngModel"
                 >
@@ -22,15 +22,36 @@
 
         <div class="col-12">
             <div class="form-group">
+                <label class="form-control-label" for="proveedor">Categoría <span class="text-danger">*</span></label>
+                <select
+                    class="form-control"
+                    id="categoria" required
+                    [(ngModel)]="mantenimiento.id_categoria"
+                    name="categoria"
+                    #categoria="ngModel"
+                >
+                <option *ngFor="let categoria of categorias" value="{{categoria.id_categoria}}">{{categoria.nombre}}</option>
+                </select>
+            </div>
+        </div>
+        
+        <div *ngIf="categoria.invalid && (categoria.dirty || categoria.touched)" class="alert alert-danger">
+            <div *ngIf="categoria.errors.required">
+                La categoría es obligatoria.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
                 <label class="form-control-label" for="proveedor">Proveedor <span class="text-danger">*</span></label>
                 <select
                     class="form-control"
                     id="proveedor" required
-                    [(ngModel)]="solicitud.id_proveedor"
+                    [(ngModel)]="mantenimiento.id_proveedor"
                     name="proveedor"
                     #proveedor="ngModel"
                 >
-                <option *ngFor="let proveedor of proveedores" value="{{proveedor.id_proveedor}}">{{proveedor.nombre}}</option>
+                <option *ngFor="let proveedor of proveedores" value="{{proveedor.id_proveedor}}">{{proveedor.nombre_empresa}}</option>
                 </select>
             </div>
         </div>
@@ -43,67 +64,104 @@
 
         <div class="col-12">
             <div class="form-group">
-                <label class="form-control-label" for="descripcion">Descripcion <span class="text-danger">*</span></label>
-                <input
-                    type="text"
+                <label class="form-control-label" for="proveedor">Encargado <span class="text-danger">*</span></label>
+                <select
                     class="form-control"
-                    id="descripcion" required
-                    [(ngModel)]="solicitud.referencia"
-                    name="descripcion"
-                    #descripcion="ngModel"
+                    id="encargado" required
+                    [(ngModel)]="mantenimiento.id_empleado"
+                    name="encargado"
+                    #encargado="ngModel"
+                >
+                <option *ngFor="let encargado of encargados" value="{{encargado.id}}">
+                    {{encargado.first_name }} {{encargado.last_name}}
+                </option>
+                </select>
+            </div>
+        </div>
+
+        <div *ngIf="encargado.invalid && (encargado.dirty || encargado.touched)" class="alert alert-danger">
+            <div *ngIf="encargado.errors.required">
+                El encargado es obligatorio.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="presupuesto">Presupuesto <span class="text-danger">*</span></label>
+                <input
+                    type="number"
+                    class="form-control"
+                    id="presupuesto" required
+                    [(ngModel)]="mantenimiento.presupuesto"
+                    name="presupuesto"
+                    #presupuesto="ngModel"
                 >
             </div>
     
-            <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="alert alert-danger">
-                <div *ngIf="descripcion.errors.required">
-                    La Descripción es obligatoria.
+            <div *ngIf="presupuesto.invalid && (presupuesto.dirty || presupuesto.touched)" class="alert alert-danger">
+                <div *ngIf="presupuesto.errors.required">
+                    El presupuesto es obligatorio.
                 </div>
             </div>
         </div>
 
         <div class="col-12">
             <div class="form-group">
-                <label class="form-control-label" for="proveedor">Solicitante <span class="text-danger">*</span></label>
-                <select
+                <label class="form-control-label" for="frecuencia_anual">Frecuencia Anual <span class="text-danger">*</span></label>
+                <input
+                    type="number"
                     class="form-control"
-                    id="solicitante" required
-                    [(ngModel)]="solicitud.id_empleado"
-                    name="solicitante"
-                    #solicitante="ngModel"
+                    id="frecuencia_anual" required
+                    [(ngModel)]="mantenimiento.frecuencia_anual"
+                    name="frecuencia_anual"
+                    #frecuencia_anual="ngModel"
                 >
-                <option *ngFor="let solicitante of solicitantes" value="{{solicitante.id_empleado}}">
-                    {{solicitante.nombre}}
-                </option>
-                </select>
             </div>
-        </div>
-
-        <div *ngIf="solicitante.invalid && (solicitante.dirty || solicitante.touched)" class="alert alert-danger">
-            <div *ngIf="solicitante.errors.required">
-                El solicitante es obligatorio.
+    
+            <div *ngIf="frecuencia_anual.invalid && (frecuencia_anual.dirty || frecuencia_anual.touched)" class="alert alert-danger">
+                <div *ngIf="frecuencia_anual.errors.required">
+                    La frecuencia anual es obligatoria.
+                </div>
             </div>
         </div>
 
         <div class="col-12">
             <div class="form-group">
-                <label class="form-control-label" for="proveedor">Supervisor <span class="text-danger">*</span></label>
-                <select
+                <label class="form-control-label" for="fecha_planeada">Fecha Planeada<span class="text-danger">*</span></label>
+                <input
+                    type="date"
                     class="form-control"
-                    id="supervisor" required
-                    [(ngModel)]="solicitud.id_supervisor"
-                    name="supervisor"
-                    #supervisor="ngModel"
+                    id="fecha_planeada" required
+                    [(ngModel)]="mantenimiento.fecha_planeada"
+                    name="fecha_planeada"
+                    #fecha_planeada="ngModel"
                 >
-                <option *ngFor="let supervisor of supervisores" value="{{supervisor.id_empleado}}">
-                    {{supervisor.nombre}}
-                </option>
-                </select>
+            </div>
+    
+            <div *ngIf="fecha_planeada.invalid && (fecha_planeada.dirty || fecha_planeada.touched)" class="alert alert-danger">
+                <div *ngIf="fecha_planeada.errors.required">
+                    La fecha planeada es obligatoria.
+                </div>
             </div>
         </div>
 
-        <div *ngIf="supervisor.invalid && (supervisor.dirty || supervisor.touched)" class="alert alert-danger">
-            <div *ngIf="supervisor.errors.required">
-                El supervisor es obligatorio.
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="fecha_real">Fecha Inicio<span class="text-danger">*</span></label>
+                <input
+                    type="date"
+                    class="form-control"
+                    id="fecha_real" required
+                    [(ngModel)]="mantenimiento.fecha_real"
+                    name="fecha_real"
+                    #fecha_real="ngModel"
+                >
+            </div>
+    
+            <div *ngIf="fecha_real.invalid && (fecha_real.dirty || fecha_real.touched)" class="alert alert-danger">
+                <div *ngIf="fecha_real.errors.required">
+                    La fecha real es obligatoria.
+                </div>
             </div>
         </div>
 

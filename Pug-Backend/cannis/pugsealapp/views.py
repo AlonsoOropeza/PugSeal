@@ -1,11 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from rest_framework import status
 from djoser import views
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from rest_framework.exceptions import ValidationError
-from rest_framework.permissions import IsAuthenticated 
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status, viewsets, filters
 from rest_framework.response import Response
 from pugsealapp.models import Area, Categoria, Usuario, Hotel, Ubicacion, Proveedor, Mantenimiento_Preventivo

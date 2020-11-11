@@ -9,14 +9,18 @@ declare interface RouteInfo {
     icon: string;
     class: string;
 }
+export const ROUTES: RouteInfo[] = [
+  { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
+  { path: '/bitacora-mediciones', title: 'Bitacora Mediciones', icon: 'pe-7s-note2', class: ''},
+];
 export const LIMPIEZAROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
-  { path: '/bitacora-mantenimiento', title: 'Bitacora-Mantenimiento', icon: 'pe-7s-note2', class: ''},
+  { path: '/bitacora-mediciones', title: 'Bitacora Mediciones', icon: 'pe-7s-note2', class: ''},
 ];
 export const ADMINROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
   { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'pe-7s-note2', class: '' },
-  { path: '/bitacora-mantenimiento', title: 'Bitacora-Mantenimiento', icon: 'pe-7s-note2', class: ''},
+  { path: '/bitacora-mediciones', title: 'Bitacora Mediciones', icon: 'pe-7s-note2', class: ''},
   { path: '/areas', title: 'Areas',  icon: 'pe-7s-note2', class: '' },
   { path: '/categorias', title: 'Categorias',  icon: 'pe-7s-note2', class: '' },
   { path: '/proveedores', title: 'Proveedores',  icon: 'pe-7s-portfolio', class: '' },

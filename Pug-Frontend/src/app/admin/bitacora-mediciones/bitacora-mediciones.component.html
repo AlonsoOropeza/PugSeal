@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Áreas</h4>
+                        <p class="category">Aquí se encuentran las áreas</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-default btn-block" (click)="addRequest(modaladd)">
+                                <p>Crear Áreas</p>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- [START] ACCORDION -->                  
+                    <accordion>
+                        <accordion-group *ngFor="let bitacora of bitacoras">
+                            <p>{{ bitacora.fecha }}</p>
+                            <p>{{ bitacora.cloro }}</p>
+                            <p>{{ bitacora.porcentaje_nivel_agua }}</p>
+                            <p>{{ bitacora.porcentaje_gas }}</p>
+                            <p>{{ bitacora.luz }}</p>
+                            <p>{{ bitacora.lectura }}</p>
+                            <p>{{ bitacora.presion }}</p>
+                            <p>{{ bitacora.temperatura_alberca_jacuzzi }}</p>
+                            <p>{{ bitacora.temperatura_caldero }}</p>
+                            <p>{{ bitacora.responsable }}</p>
+                            <p>{{ bitacora.auditor }}</p>
+                            <p>{{ bitacora.observaciones }}</p>
+                        </accordion-group>
+                    </accordion>
+                    <!-- [END] ACCORDION -->    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #modaladd>
+    <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+            <span aria-hidden="true"> × </span>
+          </button>
+        <h6 class="modal-title" id="modal-title-default">
+          Agregar área
+        </h6>
+    
+      </div>
+    
+      <div class="modal-body">
+        <app-area-form
+        [area]="area"
+        [user]="user"
+        [modaladd]="modalComponent"
+        (continueparent)="create($event)"
+        (cancelparent)="cancel()"
+        ></app-area-form>
+      </div>
+</ng-template>
+
+<ng-template #modalupdate>
+    <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+            <span aria-hidden="true"> × </span>
+        </button>
+        <h6 class="modal-title" id="modal-title-default">
+          Editar área
+        </h6>
+      </div>
+      <div class="modal-body">
+        <app-area-form
+        [area]="area"
+        [user]="user"
+        [modaladd]="modalComponent"
+        (continueparent)="update($event)"
+        (cancelparent)="cancel()"
+        ></app-area-form>
+      </div>
+</ng-template>
+
+<ng-template #datatable></ng-template>

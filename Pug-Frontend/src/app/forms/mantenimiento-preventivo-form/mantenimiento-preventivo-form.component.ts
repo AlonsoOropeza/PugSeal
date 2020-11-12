@@ -21,6 +21,7 @@ export class MantenimientoPreventivoFormComponent implements OnInit {
   @Output() continueparent = new EventEmitter();
   @Output() cancelparent = new EventEmitter();
   public auditor: any;
+  @Input() user: Usuario;
 
   // Para precargar el auditor en la forma
   ngOnInit(): void {

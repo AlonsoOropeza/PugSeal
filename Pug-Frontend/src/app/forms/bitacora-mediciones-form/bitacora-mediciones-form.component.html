@@ -1,1 +1,200 @@
-<p>bitacora-mediciones-form works!</p>
+<form #createForm="ngForm" class="modals">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="fecha">Fecha<span class="text-danger">*</span></label>
+                <input
+                    type="date"
+                    class="form-control"
+                    id="fecha" required
+                    [(ngModel)]="bitacora.fecha"
+                    name="fecha"
+                    #fecha="ngModel"
+                >
+            </div>
+    
+            <div *ngIf="fecha.invalid && (fecha.dirty || fecha.touched)" class="alert alert-danger">
+                <div *ngIf="fecha.errors.required">
+                    La fecha del registro es un campo obligatorio.
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="cloro">Cloro</label>
+                <input
+                    type="number"
+                    class="form-control"
+                    id="cloro"
+                    [(ngModel)]="bitacora.cloro"
+                    name="cloro"
+                    #cloro="ngModel"
+                    maxlength="10"
+                >
+            </div>
+    
+            <div *ngIf="cloro.invalid && (cloro.dirty || cloro.touched)" class="alert alert-danger">
+                <div *ngIf="cloro.errors.required">
+                    El campo debe de contener menos de  10 caracteres. 
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="porcentaje_nivel_agua">Porcentaje de nivel de agua</label>
+                <input
+                    type="number"
+                    class="form-control"
+                    id="porcentaje_nivel_agua"
+                    [(ngModel)]="bitacora.porcentaje_nivel_agua"
+                    name="porcentaje_nivel_agua"
+                    #porcentaje_nivel_agua="ngModel"
+                    maxlength="10"
+                >
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="porcentaje_gas">Porcentaje de nivel de gas</label>
+                <input
+                    type="number"
+                    class="form-control"
+                    id="porcentaje_gas"
+                    [(ngModel)]="bitacora.porcentaje_gas"
+                    name="porcentaje_gas"
+                    #porcentaje_gas="ngModel"
+                    maxlength="10"
+                >
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="luz">Gasto de luz en KW/H</label>
+                <input
+                    type="number"
+                    class="form-control"
+                    id="luz"
+                    [(ngModel)]="bitacora.luz"
+                    name="luz"
+                    #luz="ngModel"
+                    maxlength="10"
+                >
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="lectura">Lectura de PH</label>
+                <input
+                    type="number"
+                    class="form-control"
+                    id="lectura"
+                    [(ngModel)]="bitacora.lectura"
+                    name="lectura"
+                    #lectura="ngModel"
+                    maxlength="10"
+                >
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="presion">Presión del agua</label>
+                <input
+                    type="number"
+                    class="form-control"
+                    id="presion"
+                    [(ngModel)]="bitacora.presion"
+                    name="presion"
+                    #presion="ngModel"
+                    maxlength="10"
+                >
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="temperatura_alberca_jacuzzi">Temperatura Alberca Jacuzzi</label>
+                <input
+                    type="number"
+                    class="form-control"
+                    id="temperatura_alberca_jacuzzi"
+                    [(ngModel)]="bitacora.temperatura_alberca_jacuzzi"
+                    name="temperatura_alberca_jacuzzi"
+                    #temperatura_alberca_jacuzzi="ngModel"
+                    maxlength="10"
+                >
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="temperatura_caldera">Temperatura Caldera</label>
+                <input
+                    type="number"
+                    class="form-control"
+                    id="temperatura_caldera"
+                    [(ngModel)]="bitacora.temperatura_caldera"
+                    name="temperatura_caldera"
+                    #temperatura_caldera="ngModel"
+                    maxlength="10"
+                >
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="responsable">Responsable</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="responsable"
+                    [(ngModel)]="bitacora.responsable"
+                    name="responsable"
+                    #responsable="ngModel"
+                    maxlength="500"
+                >
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="auditor">Auditor</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="auditor"
+                    [(ngModel)]="bitacora.auditor"
+                    name="auditor"
+                    #auditor="ngModel"
+                    maxlength="500"
+                >
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="observaciones">Observaciones</label>
+                <textarea 
+                id="observaciones" 
+                class="form-control" 
+                name="observaciones" 
+                rows="4" 
+                cols="50" 
+                [(ngModel)]="bitacora.observaciones" 
+                #observaciones="ngModel"
+                >
+                </textarea>
+            </div>
+        </div>
+
+    </div>
+  
+    <button class="btn btn-primary" type="submit" [disabled] = "createForm.invalid" (click)="continue(createForm)">
+        Guardar
+    </button>
+  
+    <button class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+        Cancelar
+    </button>
+</form>

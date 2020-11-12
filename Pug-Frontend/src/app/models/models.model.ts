@@ -161,17 +161,17 @@ export class BitacoraMediciones {
 
         constructor(json?: BitacoraMediciones) {
             this.id_medicion = json?.id_medicion ? json.id_medicion : undefined;
-            this.fecha = json.fecha ? json.fecha : new Date();
-            this.cloro = json.cloro ? json.cloro : undefined;
-            this.porcentaje_nivel_agua = json.porcentaje_nivel_agua ? json.porcentaje_nivel_agua : undefined;
-            this.porcentaje_gas = json.porcentaje_gas ? json.porcentaje_gas : undefined;
-            this.luz = json.luz ? json.luz : undefined;
-            this.lectura = json.lectura ? json.lectura : undefined;
-            this.presion = json.presion ? json.presion : undefined;
-            this.temperatura_alberca_jacuzzi = json.temperatura_alberca_jacuzzi ? json.temperatura_alberca_jacuzzi : undefined;
-            this.temperatura_calder = json.temperatura_calder ? json.temperatura_calder : undefined;
-            this.responsable = json.responsable ? json.responsable : '';
-            this.auditor = json.auditor ? json.auditor : '';
-            this.observaciones = json.observaciones ? json.observaciones : '';
+            this.fecha = json?.fecha ? json.fecha : new Date();
+            this.cloro = json?.cloro ? json.cloro : undefined;
+            this.porcentaje_nivel_agua = json?.porcentaje_nivel_agua ? json.porcentaje_nivel_agua : undefined;
+            this.porcentaje_gas = json?.porcentaje_gas ? json.porcentaje_gas : undefined;
+            this.luz = json?.luz ? json.luz : undefined;
+            this.lectura = json?.lectura ? json.lectura : undefined;
+            this.presion = json?.presion ? json.presion : undefined;
+            this.temperatura_alberca_jacuzzi = json?.temperatura_alberca_jacuzzi ? json.temperatura_alberca_jacuzzi : undefined;
+            this.temperatura_calder = json?.temperatura_calder ? json.temperatura_calder : undefined;
+            this.responsable = json?.responsable ? json.responsable : '';
+            this.auditor = json?.auditor ? json.auditor : '';
+            this.observaciones = json?.observaciones ? json.observaciones : '';
         }
 }

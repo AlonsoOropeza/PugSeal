@@ -44,4 +44,53 @@ export class BitacoraMedicionesComponent implements OnInit {
       this.spinner.hideSpinner();
     }
   }
+
+  /**
+   * addRequest
+   */
+  public addRequest(modal: TemplateRef<any>, bitacora?: BitacoraMediciones) {
+    this.bitacora = bitacora ? bitacora : new BitacoraMediciones();
+    this.modalComponent = this.modalService.show(modal, {backdrop : 'static', keyboard: false, class: 'modal-dialog-centered'});
+  }
+
+  public async create (form: NgForm) {
+    this.spinner.showSpinner();
+      (await this.bitacoraMedicionesService.createBitacora(this.bitacora)).subscribe(
+        async () => {
+          this.notificationsService.showNotification('Se ha creado correctamente la bitácora.', true)
+          this.bitacoras = await this.bitacoraMedicionesService.getBitacoras()
+      },
+      async error => {
+        this.notificationsService.showNotification(error.message, false);
+        this.bitacoras = await this.bitacoraMedicionesService.getBitacoras()
+      }
+    );
+    this.spinner.hideSpinner();
+    this.modalComponent.hide();
+  }
+
+  /**
+   * async update
+form: NgForm   */
+  public async update(form: NgForm) {
+    this.spinner.showSpinner();
+    (await this.bitacoraMedicionesService.updateArea(this.bitacora)).subscribe(
+      async () => {
+        this.notificationsService.showNotification('Se ha actualizado correctamente el área.', true)
+        this.bitacoras = await this.bitacoraMedicionesService.getBitacoras()
+    },
+      async error => {
+        this.notificationsService.showNotification(error.message, false);
+        this.bitacoras = await this.bitacoraMedicionesService.getBitacoras()
+      }
+    );
+    this.spinner.hideSpinner();
+    this.modalComponent.hide();
+  }
+
+  public async cancel() {
+    this.bitacoras = await this.bitacoraMedicionesService.getBitacoras();
+    this.modalComponent.hide();
+  }
+
 }

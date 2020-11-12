@@ -5,16 +5,15 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Áreas</h4>
-                        <p class="category">Aquí se encuentran las áreas</p>
+                        <h4 class="title">Botácora de mediciones</h4>
+                        <p class="category">Aquí se encuentra la bitácora de limpieza</p>
                     </div>
                     <div class="row">
                         <div class="col-md-9">
-
                         </div>
                         <div class="col-md-3">
                             <button class="btn btn-default btn-block" (click)="addRequest(modaladd)">
-                                <p>Crear Áreas</p>
+                                <p>Crear Registro</p>
                             </button>
                         </div>
                     </div>
@@ -42,25 +41,31 @@
     </div>
 </div>
 
+
+
+
+
+
+
 <ng-template #modaladd>
     <div class="modal-header">
         <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
             <span aria-hidden="true"> × </span>
           </button>
         <h6 class="modal-title" id="modal-title-default">
-          Agregar área
+          Agregar registro
         </h6>
     
       </div>
     
       <div class="modal-body">
-        <app-area-form
-        [area]="area"
+        <app-bitacora-mediciones-form
+        [bitacora]="bitacora"
         [user]="user"
         [modaladd]="modalComponent"
         (continueparent)="create($event)"
         (cancelparent)="cancel()"
-        ></app-area-form>
+        ></app-bitacora-mediciones-form>
       </div>
 </ng-template>
 
@@ -70,18 +75,16 @@
             <span aria-hidden="true"> × </span>
         </button>
         <h6 class="modal-title" id="modal-title-default">
-          Editar área
+          Editar registro
         </h6>
       </div>
       <div class="modal-body">
-        <app-area-form
-        [area]="area"
+        <app-bitacora-form
+        [bitacora]="bitacora"
         [user]="user"
         [modaladd]="modalComponent"
         (continueparent)="update($event)"
         (cancelparent)="cancel()"
-        ></app-area-form>
+        ></app-bitacora-form>
       </div>
 </ng-template>
-
-<ng-template #datatable></ng-template>

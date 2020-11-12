@@ -34,13 +34,13 @@
                                         <td *ngIf="proveedor.activo">Activo</td>
                                         <td *ngIf="!proveedor.activo">Inactivo</td>
                                         <td>
-                                            <button class="btn btn-default btn-block" (click)="addRequest(modalupdate, proveedor, true)">
-                                                Modificar
+                                            <button class="btn btn-default btn-block" (click)="addRequest(modalupdate, proveedor, false)">
+                                                Visualizar
                                             </button>
                                         </td>
                                         <td>
-                                            <button class="btn btn-default btn-block" (click)="addRequest(modalupdate, proveedor, false)">
-                                                Visualizar
+                                            <button class="btn btn-default btn-block" (click)="addRequest(modalupdate, proveedor, true)">
+                                                Modificar
                                             </button>
                                         </td>
                                     </tr>

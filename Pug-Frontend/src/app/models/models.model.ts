@@ -1,23 +1,24 @@
 export class MantenimientoPreventivo {
+    // Creacion de solicitud
     public id_mantprev?: number;
+    public id_categoria?: number;
     public actividad?: string;
-    public frecuencia_anual?: number;
-    public fecha_creacion?: Date;
-    public fecha_planeada?: Date;
-    public fecha_real?: Date;
-    public duracion_horas?: number;
-    public presupuesto?: number;
+    public id_proveedor?: number;
     public cotizacion?: number;
+    public frecuencia_anual?: number;
+    public fecha_inicio?: Date;
+    public id_empleado?: number;
+    public auditado?: boolean;
+    public fecha_creacion?: Date;
+
+    // Por definir
+    public fecha_planeada?: Date;
+    public duracion_horas?: number;
     public comentarios_supervisor?: string;
     public comentarios_auditor?: string;
-    public id_categoria?: number;
-    public id_proveedor?: number;
     public id_supervisor?: number;
     public id_auditor?: number;
-    public id_empleado?: number;
-    public finalizado?: boolean;
     public supervisado?: boolean;
-    public auditado?: boolean;
 
     constructor(json?: MantenimientoPreventivo) {
         this.id_mantprev = json?.id_mantprev ? json.id_mantprev : null;
@@ -25,13 +26,11 @@ export class MantenimientoPreventivo {
         this.frecuencia_anual = json?.frecuencia_anual ? json.frecuencia_anual : null;
         this.fecha_creacion = json?.fecha_creacion ? json.fecha_creacion : new Date();
         this.fecha_planeada = json?.fecha_planeada ? json.fecha_planeada : new Date();
-        this.fecha_real = json?.fecha_real ? json.fecha_real : new Date();
+        this.fecha_inicio = json?.fecha_inicio ? json.fecha_inicio : new Date();
         this.duracion_horas = json?.duracion_horas ? json.duracion_horas : null;
-        this.presupuesto = json?.presupuesto ? json.presupuesto : null;
         this.cotizacion = json?.cotizacion ? json.cotizacion : null;
         this.comentarios_supervisor = json?.comentarios_supervisor ? json.comentarios_supervisor : null;
         this.comentarios_auditor = json?.comentarios_auditor ? json.comentarios_auditor : null;
-        this.finalizado = json?.finalizado ? json.finalizado : false;
         this.supervisado = json?.supervisado ? json.supervisado : false;
         this.auditado = json?.auditado ? json.auditado : false;
         this.id_proveedor = json?.id_proveedor ? json.id_proveedor : null;

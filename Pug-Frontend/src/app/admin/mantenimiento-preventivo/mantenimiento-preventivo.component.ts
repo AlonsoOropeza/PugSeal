@@ -9,6 +9,8 @@ import { NotificationsService } from 'app/services/notifications.service';
 import { SpinnerService } from 'app/services/spinner.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Component({
   selector: 'app-mantenimiento-preventivo',
@@ -25,8 +27,9 @@ export class MantenimientoPreventivoComponent implements OnInit {
   dtTrigger = new Subject();
   public edit = true;
   public proveedores: Proveedor[];
-  public encargados: Usuario[];
+  public empleados: Usuario[];
   public categorias: Categoria[];
+  public user: Usuario;
 
   constructor(
     private mantenimientoService: MantenimientoPreventivoService,
@@ -35,10 +38,12 @@ export class MantenimientoPreventivoComponent implements OnInit {
     private notificationsService: NotificationsService,
     private proveedoresService: ProveedoresService,
     private categoriasService: CategoriasService,
-    private encargadosService: EmpleadosService
+    private empleadosService: EmpleadosService,
+    private cookies: CookieService,
     ) { }
 
   ngOnInit(): void {
+    this.user = JSON.parse(this.cookies.get('user'));
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
@@ -47,14 +52,14 @@ export class MantenimientoPreventivoComponent implements OnInit {
       }
     };
     this.loadInfo();
-    this.titulos = ['Actividad', 'Categoria', 'Fecha Planeada', 'Finalizado', 'Editar', 'Ver'];
+    this.titulos = ['Actividad', 'Categoria', 'Fecha De Inicio', 'Auditado', 'Ver', 'Editar'];
   }
 
   public async loadInfo() {
     this.spinner.showSpinner();
     this.mantenimientos = await this.mantenimientoService.getMantenimientosPreventivos();
     this.categorias = await this.categoriasService.getCategorias();
-    this.encargados = await this.encargadosService.getEmpleados();
+    this.empleados = await this.empleadosService.getEmpleados();
     this.proveedores = await this.proveedoresService.getProveedores();
     this.dtTrigger.next();
     this.spinner.hideSpinner();
@@ -65,13 +70,8 @@ export class MantenimientoPreventivoComponent implements OnInit {
       this.notificationsService.showNotification('La frecuencia anual debe realizarse entre 1 a 12 veces al año', false);
       throw new Error('Error');
     }
-    if (form.value.presupuesto < 0) {
-      this.notificationsService.showNotification('El presupuesto no puede ser menor a 0', false);
-      throw new Error('Error');
-    }
 
     this.spinner.showSpinner();
-    do {
       (await this.mantenimientoService.createMantenimientoPreventivo(this.mantenimiento)).subscribe(
         async () => {
           this.notificationsService.showNotification('Se ha creado correctamente la solicitud.', true)
@@ -82,9 +82,6 @@ export class MantenimientoPreventivoComponent implements OnInit {
           this.mantenimientos = await this.mantenimientoService.getMantenimientosPreventivos()
         }
     );
-      this.mantenimiento.fecha_real.setMonth( this.mantenimiento.fecha_real.getMonth() + this.mantenimiento.frecuencia_anual );
-    } while (this.mantenimiento.fecha_real < this.mantenimiento.fecha_planeada);
-
     this.spinner.hideSpinner();
     this.modalComponent.hide();
   }
@@ -101,8 +98,49 @@ export class MantenimientoPreventivoComponent implements OnInit {
    * @param edit: boolean
    */
   public addRequest(modal: TemplateRef<any>, mantenimiento?: MantenimientoPreventivo, edit?: boolean) {
-    this.edit = edit ? edit : false;
+    this.edit = edit !== undefined ? edit : true;
+    if (this.edit) {
+      if (mantenimiento && mantenimiento.auditado && this.user.rol === 'Encargado_Mantenimiento' ) {
+        this.edit = false;
+        this.notificationsService.showWarning('La solicitud ya ha sido auditada, por lo que no puede modificarse.');
+      } else {
+        this.edit = true;
+      }
+    }
     this.mantenimiento = mantenimiento ? mantenimiento : new MantenimientoPreventivo();
     this.modalComponent = this.modalService.show(modal, {backdrop : 'static', keyboard: false, class: 'modal-dialog-centered'});
   }
+
+  public async update(form: NgForm) {
+    this.spinner.showSpinner();
+    (await this.mantenimientoService.updateMantenimiento(this.mantenimiento)).subscribe(
+      async () => {
+        this.notificationsService.showNotification('Se ha actualizado correctamente la solicitud.', true),
+        this.mantenimientos = await this.mantenimientoService.getMantenimientosPreventivos()
+      },
+      async error => {
+        this.notificationsService.showNotification(error.message, false),
+        this.mantenimientos = await this.mantenimientoService.getMantenimientosPreventivos()
+      }
+    );
+    this.spinner.hideSpinner();
+    this.modalComponent.hide();
+  }
+
+  public async delete(mantenimiento: MantenimientoPreventivo) {
+    this.spinner.showSpinner();
+    (await this.mantenimientoService.deleteMantenimiento(this.mantenimiento)).subscribe(
+      async () => {
+        this.notificationsService.showNotification('Se ha eliminado correctamente la solicitud.', true),
+        this.mantenimientos = await this.mantenimientoService.getMantenimientosPreventivos()
+      },
+      async error => {
+        this.notificationsService.showNotification(error.message, false),
+        this.mantenimientos = await this.mantenimientoService.getMantenimientosPreventivos()
+      }
+    );
+    this.spinner.hideSpinner();
+    this.modalComponent.hide();
+  }
+
 }

@@ -2,26 +2,6 @@
     <div class="row">
         <div class="col-12">
             <div class="form-group">
-                <label class="form-control-label" for="actividad">Actividad <span class="text-danger">*</span></label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="actividad" required
-                    [(ngModel)]="mantenimiento.actividad"
-                    name="actividad"
-                    #actividad="ngModel"
-                >
-            </div>
-    
-            <div *ngIf="actividad.invalid && (actividad.dirty || actividad.touched)" class="alert alert-danger">
-                <div *ngIf="actividad.errors.required">
-                    El título de la actividad es obligatorio.
-                </div>
-            </div>
-        </div>
-
-        <div class="col-12">
-            <div class="form-group">
                 <label class="form-control-label" for="proveedor">Categoría <span class="text-danger">*</span></label>
                 <select
                     class="form-control"
@@ -29,6 +9,7 @@
                     [(ngModel)]="mantenimiento.id_categoria"
                     name="categoria"
                     #categoria="ngModel"
+                    disabled={{!edit}}
                 >
                 <option *ngFor="let categoria of categorias" value="{{categoria.id_categoria}}">{{categoria.nombre}}</option>
                 </select>
@@ -43,6 +24,28 @@
 
         <div class="col-12">
             <div class="form-group">
+                <label class="form-control-label" for="actividad">Actividad <span class="text-danger">*</span></label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="actividad" required
+                    [(ngModel)]="mantenimiento.actividad"
+                    name="actividad"
+                    #actividad="ngModel"
+                    disabled={{!edit}}
+
+                >
+            </div>
+    
+            <div *ngIf="actividad.invalid && (actividad.dirty || actividad.touched)" class="alert alert-danger">
+                <div *ngIf="actividad.errors.required">
+                    El título de la actividad es obligatorio.
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
                 <label class="form-control-label" for="proveedor">Proveedor <span class="text-danger">*</span></label>
                 <select
                     class="form-control"
@@ -50,6 +53,7 @@
                     [(ngModel)]="mantenimiento.id_proveedor"
                     name="proveedor"
                     #proveedor="ngModel"
+                    disabled={{!edit}}
                 >
                 <option *ngFor="let proveedor of proveedores" value="{{proveedor.id_proveedor}}">{{proveedor.nombre_empresa}}</option>
                 </select>
@@ -71,9 +75,10 @@
                     [(ngModel)]="mantenimiento.id_empleado"
                     name="encargado"
                     #encargado="ngModel"
+                    disabled={{!edit}}
                 >
-                <option *ngFor="let encargado of encargados" value="{{encargado.id}}">
-                    {{encargado.first_name }} {{encargado.last_name}}
+                <option *ngFor="let empleado of empleados" value="{{empleado.id}}">
+                    {{empleado.first_name }} {{empleado.last_name}}
                 </option>
                 </select>
             </div>
@@ -87,20 +92,21 @@
 
         <div class="col-12">
             <div class="form-group">
-                <label class="form-control-label" for="presupuesto">Presupuesto <span class="text-danger">*</span></label>
+                <label class="form-control-label" for="cotizacion">Cotización <span class="text-danger">*</span></label>
                 <input
                     type="number"
                     class="form-control"
-                    id="presupuesto" required
-                    [(ngModel)]="mantenimiento.presupuesto"
-                    name="presupuesto"
-                    #presupuesto="ngModel"
+                    id="cotizacion" required
+                    [(ngModel)]="mantenimiento.cotizacion"
+                    name="cotizacion"
+                    #cotizacion="ngModel"
+                    disabled={{!edit}}
                 >
             </div>
     
-            <div *ngIf="presupuesto.invalid && (presupuesto.dirty || presupuesto.touched)" class="alert alert-danger">
-                <div *ngIf="presupuesto.errors.required">
-                    El presupuesto es obligatorio.
+            <div *ngIf="cotizacion.invalid && (cotizacion.dirty || cotizacion.touched)" class="alert alert-danger">
+                <div *ngIf="cotizacion.errors.required">
+                    La cotización es obligatoria.
                 </div>
             </div>
         </div>
@@ -115,6 +121,7 @@
                     [(ngModel)]="mantenimiento.frecuencia_anual"
                     name="frecuencia_anual"
                     #frecuencia_anual="ngModel"
+                    disabled={{!edit}}
                 >
             </div>
     
@@ -127,51 +134,71 @@
 
         <div class="col-12">
             <div class="form-group">
-                <label class="form-control-label" for="fecha_planeada">Fecha Planeada<span class="text-danger">*</span></label>
+                <label class="form-control-label" for="fecha_inicio">Fecha Inicio <span class="text-danger">*</span></label>
                 <input
                     type="date"
                     class="form-control"
-                    id="fecha_planeada" required
-                    [(ngModel)]="mantenimiento.fecha_planeada"
-                    name="fecha_planeada"
-                    #fecha_planeada="ngModel"
+                    id="fecha_inicio" required
+                    [(ngModel)]="mantenimiento.fecha_inicio"
+                    name="fecha_inicio"
+                    #fecha_inicio="ngModel"
+                    disabled={{!edit}}
                 >
             </div>
     
-            <div *ngIf="fecha_planeada.invalid && (fecha_planeada.dirty || fecha_planeada.touched)" class="alert alert-danger">
-                <div *ngIf="fecha_planeada.errors.required">
-                    La fecha planeada es obligatoria.
+            <div *ngIf="fecha_inicio.invalid && (fecha_inicio.dirty || fecha_inicio.touched)" class="alert alert-danger">
+                <div *ngIf="fecha_inicio.errors.required">
+                    La fecha inicial es obligatoria.
                 </div>
             </div>
         </div>
-
-        <div class="col-12">
-            <div class="form-group">
-                <label class="form-control-label" for="fecha_real">Fecha Inicio<span class="text-danger">*</span></label>
-                <input
-                    type="date"
-                    class="form-control"
-                    id="fecha_real" required
-                    [(ngModel)]="mantenimiento.fecha_real"
-                    name="fecha_real"
-                    #fecha_real="ngModel"
-                >
+        <div>
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-title-update1">
+                    Auditoría
+                </h6>
             </div>
-    
-            <div *ngIf="fecha_real.invalid && (fecha_real.dirty || fecha_real.touched)" class="alert alert-danger">
-                <div *ngIf="fecha_real.errors.required">
-                    La fecha real es obligatoria.
+            <br>
+            <div class="col-12">
+                <div class="form-group">
+                    <label class="form-control-label" for="id_auditor">Auditor <span class="text-danger">*</span></label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="id_auditor" required
+                        [(ngModel)]="auditor"
+                        name="id_auditor"
+                        #id_auditor="ngModel"
+                        disabled
+                    >
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label class="form-control-label" for="aprobar">Aprobar <span class="text-danger">*</span></label>
+                    <input
+                        type="checkbox"
+                        class="form-control"
+                        id="aprobar" required
+                        [(ngModel)]="auditor"
+                        name="aprobar"
+                        #aprobar="ngModel"
+                    >
                 </div>
             </div>
         </div>
 
     </div>
   
-    <button class="btn btn-primary" type="submit" (click)="continue(createForm)">
+    <button *ngIf="edit" class="btn btn-primary" type="submit" [disabled] = "createForm.invalid" (click)="continue(createForm)">
         Guardar
     </button>
   
-    <button class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="modaladd.hide()">
+    <button *ngIf="edit" class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+        Cancelar
+    </button>
+
+    <button *ngIf="!edit" class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
         Cerrar
     </button>
 </form>

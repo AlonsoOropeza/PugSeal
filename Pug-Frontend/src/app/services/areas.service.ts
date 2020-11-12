@@ -12,11 +12,7 @@ export class AreasService {
 
   public async getAreas() {
     let response: any;
-    try {
-      response = this.http.request('GET', environment.url + 'api/areas/').toPromise();
-    } catch (error) {
-      console.log('no se encontro la info ' + error);
-    }
+    response = this.http.request('GET', environment.url + 'api/areas/').toPromise();
     return response;
   }
 

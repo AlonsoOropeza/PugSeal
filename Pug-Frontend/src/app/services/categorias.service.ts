@@ -14,11 +14,7 @@ export class CategoriasService {
 
   public async getCategorias() {
     let response: any;
-    try {
-      response = this.http.request('GET', environment.url + 'api/categorias/').toPromise();
-    } catch (error) {
-      console.log('no se encontro la info ' + error);
-    }
+    response = this.http.request('GET', environment.url + 'api/categorias/').toPromise();
     return response;
   }
 

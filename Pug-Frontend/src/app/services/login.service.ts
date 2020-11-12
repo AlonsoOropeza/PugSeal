@@ -27,7 +27,7 @@ export class LoginService {
             await this.setUser('Token ' + response.auth_token);
           },
           async (error) => {
-              this.notificationsService.showNotification('Las credenciales son incorrectas', true);
+              this.notificationsService.showNotification('Las credenciales son incorrectas', false);
           }
       );
   }

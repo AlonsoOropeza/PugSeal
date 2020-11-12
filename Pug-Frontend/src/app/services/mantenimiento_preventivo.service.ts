@@ -13,11 +13,20 @@ export class MantenimientoPreventivoService {
 
   public async getMantenimientosPreventivos() {
     let response: any;
-    response = this.http.request('GET', environment.url + 'api/mantenimiento/preventivo').toPromise();
+    response = this.http.request('GET', environment.url + 'api/mantenimiento/preventivo/').toPromise();
     return response;
   }
 
   public async createMantenimientoPreventivo(mantenimiento: MantenimientoPreventivo) {
-    return this.http.post(environment.url + 'api/mantenimiento/preventivo', mantenimiento);
+    return this.http.post(environment.url + 'api/mantenimiento/preventivo/', mantenimiento);
   }
+
+  public async updateMantenimiento(mantenimiento: MantenimientoPreventivo) {
+    return this.http.patch(environment.url + 'api/mantenimiento/preventivo/' + mantenimiento.id_mantprev + '/', mantenimiento);
+  }
+
+  public async deleteMantenimiento(mantenimiento: MantenimientoPreventivo) {
+    return this.http.delete(environment.url + 'api/mantenimiento/preventivo/' + mantenimiento.id_mantprev + '/');
+  }
+
 }

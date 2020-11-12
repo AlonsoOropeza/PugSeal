@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Empleado } from 'app/models/models.model';
+import { Usuario } from 'app/models/models.model';
 import { environment } from 'environments/environment';
 
 @Injectable({
@@ -40,7 +40,7 @@ export class EmpleadosService {
     return response;
   }
 
-  public async createEmpleado(empleado: Empleado) {
+  public async createEmpleado(empleado: Usuario) {
     try {
       console.log('se envio');
       const response = this.http.post(environment.url + 'api/empleados/', empleado).subscribe();

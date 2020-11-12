@@ -37,37 +37,6 @@ class MantenimientoPreventivoViewSet(viewsets.ModelViewSet):
 	serializer_class = MantenimientoPreventivoSerializer
 	queryset = Mantenimiento_Preventivo.objects.all()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+class AuditoresViewSet(viewsets.ModelViewSet):
+	serializer_class = EmpleadoSerializer
+	queryset = Usuario.objects.filter(rol='Auditor')

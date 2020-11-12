@@ -152,7 +152,7 @@
                 </div>
             </div>
         </div>
-        <div>
+        <div *ngIf="user.rol === 'Auditor'">
             <div class="modal-header">
                 <h6 class="modal-title" id="modal-title-update1">
                     Aprobar la solicitud
@@ -161,11 +161,11 @@
             <br>
             <div class="col-12">
                 <div class="form-group">
-                    <label class="form-control-label" for="id_auditor">Aprobado por <span class="text-danger">*</span></label>
+                    <label class="form-control-label" for="id_auditor">Aprobado por</label>
                     <input
                         type="text"
                         class="form-control"
-                        id="id_auditor" required
+                        id="id_auditor"
                         [(ngModel)]="auditor"
                         name="id_auditor"
                         #id_auditor="ngModel"
@@ -175,11 +175,11 @@
             </div>
             <div class="col-12">
                 <div class="form-group">
-                    <label class="form-control-label" for="aprobado">Aprobar <span class="text-danger">*</span></label>
+                    <label class="form-control-label" for="aprobado">Aprobar</label>
                     <input
                         type="checkbox"
                         class="form-control"
-                        id="aprobado" required
+                        id="aprobado"
                         [(ngModel)]="mantenimiento.aprobado"
                         name="aprobado"
                         #aprobado="ngModel"

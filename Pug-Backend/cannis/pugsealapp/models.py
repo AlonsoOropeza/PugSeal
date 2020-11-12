@@ -72,12 +72,13 @@ class Mantenimiento_Preventivo(models.Model):
     frecuencia_anual = models.IntegerField(default=0)
     fecha_inicio = models.DateField(null=True, default=timezone.now)
     id_empleado = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="empleado")
-    auditado = models.BooleanField(default=False)
     fecha_creacion = models.DateTimeField(default=timezone.now)
 
     # Auditor modifica estos campos
     id_auditor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="auditor", blank=True)
     comentarios_auditor = models.CharField(max_length=1000, null=True, blank=True)
+    aprobado = models.BooleanField(default=False)
+    auditado = models.BooleanField(default=False)
 
     # Supervisor modifica estos campos
     id_supervisor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="supervisor", blank=True)

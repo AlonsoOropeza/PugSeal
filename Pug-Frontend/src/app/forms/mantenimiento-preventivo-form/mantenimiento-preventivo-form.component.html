@@ -155,13 +155,13 @@
         <div>
             <div class="modal-header">
                 <h6 class="modal-title" id="modal-title-update1">
-                    Auditoría
+                    Aprobar la solicitud
                 </h6>
             </div>
             <br>
             <div class="col-12">
                 <div class="form-group">
-                    <label class="form-control-label" for="id_auditor">Auditor <span class="text-danger">*</span></label>
+                    <label class="form-control-label" for="id_auditor">Aprobado por <span class="text-danger">*</span></label>
                     <input
                         type="text"
                         class="form-control"
@@ -175,14 +175,14 @@
             </div>
             <div class="col-12">
                 <div class="form-group">
-                    <label class="form-control-label" for="aprobar">Aprobar <span class="text-danger">*</span></label>
+                    <label class="form-control-label" for="aprobado">Aprobar <span class="text-danger">*</span></label>
                     <input
                         type="checkbox"
                         class="form-control"
-                        id="aprobar" required
-                        [(ngModel)]="auditor"
-                        name="aprobar"
-                        #aprobar="ngModel"
+                        id="aprobado" required
+                        [(ngModel)]="mantenimiento.aprobado"
+                        name="aprobado"
+                        #aprobado="ngModel"
                     >
                 </div>
             </div>

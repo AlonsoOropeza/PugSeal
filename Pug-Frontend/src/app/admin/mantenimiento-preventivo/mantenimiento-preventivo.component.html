@@ -32,8 +32,8 @@
                                         <td>{{mantenimiento.actividad}}</td>
                                         <td>{{mantenimiento.id_categoria}}</td>
                                         <td>{{mantenimiento.fecha_inicio}}</td>
-                                        <td *ngIf="mantenimiento.auditado">Sí</td>
-                                        <td *ngIf="!mantenimiento.auditado">No</td>
+                                        <td *ngIf="mantenimiento.aprobado">Sí</td>
+                                        <td *ngIf="!mantenimiento.aprobado">No</td>
                                         <td>
                                             <button class="btn btn-default btn-block" (click)="addRequest(modalupdate, mantenimiento, false)">
                                                 Visualizar

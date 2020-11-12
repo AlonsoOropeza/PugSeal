@@ -52,7 +52,7 @@ export class MantenimientoPreventivoComponent implements OnInit {
       }
     };
     this.loadInfo();
-    this.titulos = ['Actividad', 'Categoria', 'Fecha De Inicio', 'Auditado', 'Ver', 'Editar'];
+    this.titulos = ['Actividad', 'Categoria', 'Fecha De Inicio', 'Aprobado', 'Ver', 'Editar'];
   }
 
   public async loadInfo() {
@@ -100,9 +100,9 @@ export class MantenimientoPreventivoComponent implements OnInit {
   public addRequest(modal: TemplateRef<any>, mantenimiento?: MantenimientoPreventivo, edit?: boolean) {
     this.edit = edit !== undefined ? edit : true;
     if (this.edit) {
-      if (mantenimiento && mantenimiento.auditado && this.user.rol === 'Encargado_Mantenimiento' ) {
+      if (mantenimiento && mantenimiento.aprobado && this.user.rol === 'Encargado_Mantenimiento' ) {
         this.edit = false;
-        this.notificationsService.showWarning('La solicitud ya ha sido auditada, por lo que no puede modificarse.');
+        this.notificationsService.showWarning('La solicitud ya ha sido aprobada, por lo que no puede modificarse.');
       } else {
         this.edit = true;
       }
@@ -112,6 +112,14 @@ export class MantenimientoPreventivoComponent implements OnInit {
   }
 
   public async update(form: NgForm) {
+    if (form.value.frecuencia_anual < 1 || form.value.frecuencia_anual > 12) {
+      this.notificationsService.showNotification('La frecuencia anual debe realizarse entre 1 a 12 veces al año', false);
+      throw new Error('Error');
+    }
+    if (form.value.aprobado) {
+      this.mantenimiento.id_auditor = this.user.id;
+    }
+
     this.spinner.showSpinner();
     (await this.mantenimientoService.updateMantenimiento(this.mantenimiento)).subscribe(
       async () => {

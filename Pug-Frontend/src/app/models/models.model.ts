@@ -8,10 +8,11 @@ export class MantenimientoPreventivo {
     public frecuencia_anual?: number;
     public fecha_inicio?: Date;
     public id_empleado?: number;
-    public auditado?: boolean;
     public fecha_creacion?: Date;
+    public aprobado?: boolean;
 
     // Por definir
+    public auditado?: boolean;
     public fecha_planeada?: Date;
     public duracion_horas?: number;
     public comentarios_supervisor?: string;
@@ -33,6 +34,7 @@ export class MantenimientoPreventivo {
         this.comentarios_auditor = json?.comentarios_auditor ? json.comentarios_auditor : null;
         this.supervisado = json?.supervisado ? json.supervisado : false;
         this.auditado = json?.auditado ? json.auditado : false;
+        this.aprobado = json?.aprobado ? json.aprobado : false;
         this.id_proveedor = json?.id_proveedor ? json.id_proveedor : null;
         this.id_categoria = json?.id_categoria ? json.id_categoria : null;
         this.id_auditor = json?.id_auditor ? json.id_auditor : null;

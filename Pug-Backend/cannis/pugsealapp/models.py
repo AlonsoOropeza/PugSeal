@@ -102,3 +102,28 @@ class Bitacora_Mediciones(models.Model):
     observaciones = models.CharField(max_length=255, unique=True, default='')
     class Meta:
         verbose_name_plural = "Bitácora Mediciones"
+
+class Requisicion(models.Model):
+    id_requisicion = models.AutoField(primary_key=True)
+    concepto = models.CharField(max_length=255)
+    enlace_concepto = models.CharField(max_length=255, null=True)
+    justificacion = models.TextField(max_length=500)
+    cantidad = models.IntegerField()
+    costo = models.FloatField(default=0)
+    fecha_creacion = models.DateField(default=timezone.now)
+    fecha_estimada = models.DateField(null=True, default=timezone.now)
+    fecha_entrega = models.DateField(null=True, default=timezone.now)
+    aprobacion_auditor = models.BooleanField(default=False)
+    aprobacion_director_gral = models.BooleanField(default=False)
+    proveedor = models.CharField(max_length=255)
+    id_solicitante = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="solicitante", blank=True)
+    metodo_de_pago = models.CharField(max_length=255)
+    id_hotel = models.ForeignKey(Hotel, on_delete=models.SET_NULL, null=True, blank=True)
+    observaciones = models.TextField(null=True, default='')
+    finalizado = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name_plural = "Requisiciones"
+    def __str__(self):
+        return "%s" % self.concepto
+

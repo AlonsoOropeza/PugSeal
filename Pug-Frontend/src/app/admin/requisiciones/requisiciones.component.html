@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Requisiciones</h4>
+                        <p class="category">Aquí se encuentran las solicitudes de Requisiciones</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-default btn-block" (click)="addRequest(modaladd, null, true)">
+                                <p>Crear Solicitud</p>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th *ngFor="let titulo of titulos">{{ titulo }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let requisicion of requisiciones">
+                                        <td>{{requisicion.concepto}}</td>
+                                        <td>{{requisicion.cantidad}}</td>
+                                        <td>{{requisicion.costo}}</td>
+                                        <td *ngIf="requisicion.finalizado">Finalizado</td>
+                                        <td *ngIf="!requisicion.finalizado">No Finalizado</td>
+                                        <td>
+                                            <button class="btn btn-default btn-block" (click)="addRequest(modalupdate, requisicion, true)">
+                                                Modificar
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-default btn-block" (click)="addRequest(modalupdate, requisicion, false)">
+                                                Visualizar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                          </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #modaladd>
+    <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+            <span aria-hidden="true"> × </span>
+        </button>
+        <h6 class="modal-title" id="modal-title-default">
+          Agregar Solicitud
+        </h6>   
+    </div>
+    
+    <div class="modal-body">
+        <app-requisicion-form
+        [requisicion]="requisicion"
+        [modaladd]="modalComponent"
+        (continueparent)="create($event)"
+        (cancelparent)="cancel()"
+        ></app-requisicion-form>
+    </div>
+</ng-template>
+
+<ng-template #modalupdate>
+    <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+            <span aria-hidden="true"> × </span>
+        </button>
+        <h6 class="modal-title" id="modal-title-default">
+          Editar Solicitud
+        </h6>
+      </div>
+      <div class="modal-body">
+        <app-requisicion-form
+        [requisicion]="requisicion"
+        [modaladd]="modalComponent"
+        (continueparent)="update($event)"
+        (cancelparent)="cancel()"
+        ></app-requisicion-form>
+      </div>
+</ng-template>
+
+<ng-template #datatable></ng-template>

@@ -13,6 +13,7 @@ class UserAdmin2(UserAdmin):
     )
 admin.site.register(Proveedor)
 admin.site.register(Area)
+admin.site.register(Requisicion)
 admin.site.register(Categoria)
 admin.site.register(Usuario, UserAdmin2)
 admin.site.register(Hotel)

@@ -22,7 +22,7 @@ class CategoriaSerializer(serializers.ModelSerializer):
 class EmpleadoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
-        fields = '__all__'
+        fields = ('id', 'first_name', 'last_name', 'telefono', 'email', 'rol')
 
 class HotelSerializer(serializers.ModelSerializer):
     class Meta:

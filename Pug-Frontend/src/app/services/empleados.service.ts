@@ -1,6 +1,7 @@
+import { async } from '@angular/core/testing';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Empleado } from 'app/models/models.model';
+import { Usuario } from 'app/models/models.model';
 import { environment } from 'environments/environment';
 
 @Injectable({
@@ -12,42 +13,29 @@ export class EmpleadosService {
 
   public async getEmpleados() {
     let response: any;
-    try {
-      response = this.http.request('GET', environment.url + 'api/empleados/').toPromise();
-    } catch (error) {
-      console.log('no se encontro la info ' + error);
-    }
+    response = this.http.request('GET', environment.url + 'api/empleados/').toPromise();
+    return response;
+  }
+
+  public async getAuditores() {
+    let response: any;
+    response = this.http.request('GET', environment.url + 'api/auditores/').toPromise();
     return response;
   }
 
   public async getSolicitantes() {
     let response: any;
-    try {
-      response = this.http.request('GET', environment.url + 'api/solicitantes/').toPromise();
-    } catch (error) {
-      console.log('no se encontro la info ' + error);
-    }
+    response = this.http.request('GET', environment.url + 'api/solicitantes/').toPromise();
     return response;
   }
 
   public async getSupervisores() {
     let response: any;
-    try {
-      response = this.http.request('GET', environment.url + 'api/supervisores/').toPromise();
-    } catch (error) {
-      console.log('no se encontro la info ' + error);
-    }
+    response = this.http.request('GET', environment.url + 'api/supervisores/').toPromise();
     return response;
   }
 
-  public async createEmpleado(empleado: Empleado) {
-    try {
-      console.log('se envio');
-      const response = this.http.post(environment.url + 'api/empleados/', empleado).subscribe();
-      console.log(response);
-    } catch (error) {
-      console.log('no se pudo crear la solicitud ' + error);
-      throw new Error('no se pudo crear la solicitud');
-    }
+  public async createEmpleado(empleado: Usuario) {
+    return this.http.post(environment.url + 'api/empleados/', empleado).subscribe();
   }
 }

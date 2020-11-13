@@ -12,6 +12,8 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 
 export class BitacoraMedicionesFormComponent {
   @Input() bitacora: BitacoraMediciones;
+  @Input() auditores: Usuario[];
+  @Input() responsables: Usuario[];
   @Input() user: Usuario;
   @Input() modaladd: BsModalRef;
   @Output() continueparent = new EventEmitter();

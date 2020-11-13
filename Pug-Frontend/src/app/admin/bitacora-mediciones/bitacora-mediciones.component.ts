@@ -16,7 +16,10 @@ import { CookieService } from 'ngx-cookie-service';
 export class BitacoraMedicionesComponent implements OnInit {
   public bitacoras: BitacoraMediciones[];
   public bitacora: BitacoraMediciones;
-  public titulos: string[];
+  public auditor: Usuario;
+  public auditores: Usuario[];
+  public responsable: Usuario;
+  public responsables: Usuario[];
   public modalComponent: BsModalRef;
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
@@ -38,6 +41,8 @@ export class BitacoraMedicionesComponent implements OnInit {
     try {
       this.spinner.showSpinner();
       this.bitacoras = await this.bitacoraMedicionesService.getBitacoras();
+      this.auditores = await this.bitacoraMedicionesService.getAuditores();
+      this.responsables = await this.bitacoraMedicionesService.getResponsables();
     } catch (error) {
       throw new Error(error);
     } finally {
@@ -66,6 +71,7 @@ export class BitacoraMedicionesComponent implements OnInit {
       }
     );
     this.spinner.hideSpinner();
+    console.log(this.bitacora);
     this.modalComponent.hide();
   }
 

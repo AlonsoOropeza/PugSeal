@@ -20,6 +20,18 @@ export class BitacoraMedicionesService {
     return response;
   }
 
+  public async getAuditores() {
+    let response: any;
+    response = this.http.request('GET', environment.url + 'api/auditores/').toPromise();
+    return response;
+  }
+
+  public async getResponsables() {
+    let response: any;
+    response = this.http.request('GET', environment.url + 'api/responsables').toPromise();
+    return response;
+  }
+
   public async createBitacora(bitacora: BitacoraMediciones) {
     return this.http.post(environment.url + 'api/bitacora/mediciones/', bitacora);
   }

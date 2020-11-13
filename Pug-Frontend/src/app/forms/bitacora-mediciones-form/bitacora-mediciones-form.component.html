@@ -144,31 +144,35 @@
 
         <div class="col-12">
             <div class="form-group">
-                <label class="form-control-label" for="responsable">Responsable</label>
-                <input
-                    type="text"
+                <label class="form-control-label" for="responsable_id">Responsable</label>
+                <select
                     class="form-control"
-                    id="responsable"
-                    [(ngModel)]="bitacora.responsable"
-                    name="responsable"
-                    #responsable="ngModel"
-                    maxlength="500"
+                    id="responsable_id"
+                    [(ngModel)]="bitacora.responsable_id"
+                    name="responsable_id"
+                    #auditor="ngModel"
                 >
+                <option *ngFor="let responsable of responsables" value="{{ responsable.id }}">
+                    {{ responsable.first_name }} {{ responsable.last_name }}
+                </option>
+                </select>
             </div>
         </div>
 
         <div class="col-12">
             <div class="form-group">
-                <label class="form-control-label" for="auditor">Auditor</label>
-                <input
-                    type="text"
+                <label class="form-control-label" for="auditor_id">Auditor</label>
+                <select
                     class="form-control"
-                    id="auditor"
-                    [(ngModel)]="bitacora.auditor"
-                    name="auditor"
+                    id="auditor_id"
+                    [(ngModel)]="bitacora.auditor_id"
+                    name="auditor_id"
                     #auditor="ngModel"
-                    maxlength="500"
                 >
+                <option *ngFor="let auditor of auditores" value="{{ auditor.id }}">
+                    {{ auditor.first_name }} {{ auditor.last_name }}
+                </option>
+                </select>
             </div>
         </div>
 

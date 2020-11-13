@@ -65,6 +65,8 @@
         [modaladd]="modalComponent"
         (continueparent)="create($event)"
         (cancelparent)="cancel()"
+        [auditores]="auditores"
+        [responsables]="responsables"
         ></app-bitacora-mediciones-form>
       </div>
 </ng-template>
@@ -81,6 +83,8 @@
       <div class="modal-body">
         <app-bitacora-form
         [bitacora]="bitacora"
+        [auditores]="auditores"
+        [responsables]="responsables"
         [user]="user"
         [modaladd]="modalComponent"
         (continueparent)="update($event)"

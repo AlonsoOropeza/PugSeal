@@ -41,39 +41,10 @@ class BitacoraMedicionesViewSet(viewsets.ModelViewSet):
 	serializer_class = BitacoraMedicionesSerializer
 	queryset = Bitacora_Mediciones.objects.all()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class AuditoresViewSet(viewsets.ModelViewSet):
 	serializer_class = EmpleadoSerializer
 	queryset = Usuario.objects.filter(rol='Auditor')
+
+class ResponsablesViewSet(viewsets.ModelViewSet):
+	serializer_class = EmpleadoSerializer
+	queryset = Usuario.objects.all()

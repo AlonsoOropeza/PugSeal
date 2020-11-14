@@ -47,12 +47,12 @@ export class BitacoraMedicionesComponent implements OnInit {
       this.responsables = await this.bitacoraMedicionesService.getResponsables();
       this.bitacoras.forEach(bitacora => {
         this.auditores.forEach(auditor => {
-          if (bitacora.auditor_id === auditor.id) {
+          if (bitacora.auditor === auditor.id) {
             bitacora.auditor_name = auditor.first_name + ' ' + auditor.last_name;
           }
         },
         this.responsables.forEach(responsable => {
-          if (bitacora.responsable_id === responsable.id) {
+          if (bitacora.responsable === responsable.id) {
             bitacora.responsable_name = responsable.first_name + ' ' + responsable.last_name;
           }
         })
@@ -77,9 +77,10 @@ export class BitacoraMedicionesComponent implements OnInit {
     console.log(this.bitacora);
     const input = {  
       ...this.bitacora,
-      responsable: this.bitacora.responsable_id,
-      auditor: this.bitacora.auditor_id
+      responsable: this.bitacora.responsable,
+      auditor: this.bitacora.auditor
     };
+    
       (await this.bitacoraMedicionesService.createBitacora(input)).subscribe(
         async () => {
           this.notificationsService.showNotification('Se ha creado correctamente la bitácora.', true)
@@ -90,7 +91,6 @@ export class BitacoraMedicionesComponent implements OnInit {
         this.bitacoras = await this.bitacoraMedicionesService.getBitacoras()
       }
     );
-    console.log(this.bitacora);
     this.spinner.hideSpinner();
     this.modalComponent.hide();
   }

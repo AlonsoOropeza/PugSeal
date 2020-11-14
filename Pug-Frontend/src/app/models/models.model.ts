@@ -138,8 +138,8 @@ export class BitacoraMediciones {
     public presion?: number;
     public temperatura_alberca_jacuzzi?: number;
     public temperatura_calder?: number;
-    public responsable_id?: number;
-    public auditor_id?: number;
+    public responsable?: number;
+    public auditor?: number;
     public observaciones?: string;
     public auditor_name?: string;
     public responsable_name?: string;
@@ -156,8 +156,8 @@ export class BitacoraMediciones {
             this.presion = json?.presion ? json.presion : null;
             this.temperatura_alberca_jacuzzi = json?.temperatura_alberca_jacuzzi ? json.temperatura_alberca_jacuzzi : null;
             this.temperatura_calder = json?.temperatura_calder ? json.temperatura_calder : null;
-            this.responsable_id = json?.responsable_id ? json.responsable_id : null;
-            this.auditor_id = json?.auditor_id ? json.auditor_id : null;
+            this.responsable = json?.responsable ? json.responsable : null;
+            this.auditor = json?.auditor ? json.auditor : null;
             this.observaciones = json?.observaciones ? json.observaciones : '';
             this.auditor_name = json?.auditor_name ? json.auditor_name : 'sin auditor';
             this.responsable_name = json?.responsable_name ? json.responsable_name : 'sin responsable';

@@ -144,12 +144,12 @@
 
         <div class="col-12">
             <div class="form-group">
-                <label class="form-control-label" for="responsable_id">Responsable</label>
+                <label class="form-control-label" for="responsable">Responsable</label>
                 <select
                     class="form-control"
-                    id="responsable_id"
-                    [(ngModel)]="bitacora.responsable_id"
-                    name="responsable_id"
+                    id="responsable"
+                    [(ngModel)]="bitacora.responsable"
+                    name="responsable"
                     #auditor="ngModel"
                 >
                 <option *ngFor="let responsable of responsables" value="{{ responsable.id }}">
@@ -161,12 +161,12 @@
 
         <div class="col-12">
             <div class="form-group">
-                <label class="form-control-label" for="auditor_id">Auditor</label>
+                <label class="form-control-label" for="auditor">Auditor</label>
                 <select
                     class="form-control"
-                    id="auditor_id"
-                    [(ngModel)]="bitacora.auditor_id"
-                    name="auditor_id"
+                    id="auditor"
+                    [(ngModel)]="bitacora.auditor"
+                    name="auditor"
                     #auditor="ngModel"
                 >
                 <option *ngFor="let auditor of auditores" value="{{ auditor.id }}">

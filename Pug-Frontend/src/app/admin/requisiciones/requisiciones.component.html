@@ -62,13 +62,14 @@
           Agregar Solicitud
         </h6>   
     </div>
-    
+
     <div class="modal-body">
         <app-requisicion-form
         [requisicion]="requisicion"
         [modaladd]="modalComponent"
         (continueparent)="create($event)"
         (cancelparent)="cancel()"
+        [edit]="edit"
         ></app-requisicion-form>
     </div>
 </ng-template>
@@ -88,6 +89,7 @@
         [modaladd]="modalComponent"
         (continueparent)="update($event)"
         (cancelparent)="cancel()"
+        [edit]="edit"
         ></app-requisicion-form>
       </div>
 </ng-template>

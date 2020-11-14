@@ -9,8 +9,8 @@
                     id="concepto" required
                     [(ngModel)]="requisicion.concepto"
                     name="concepto"
-                    disabled={{!edit}}
                     #concepto="ngModel"
+                    disabled={{!edit}}
                 >
             </div>
             <div *ngIf="concepto.invalid && (concepto.dirty || concepto.touched)" class="alert alert-danger">
@@ -114,7 +114,7 @@
     </div>
     <div class="col-12">
         <div class="form-group">
-            <label class="form-control-label" for="aprobacion_director_gral">Aprobación Dir. General</label>
+            <label  class="form-control-label" for="aprobacion_director_gral" >Aprobación Dir. General</label>
             <input
                 type="checkbox"
                 class="form-control"

@@ -1,3 +1,4 @@
+import { Usuario, Hotel } from './../../models/models.model';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { NotificationsService } from './../../services/notifications.service';
 import { NgForm } from '@angular/forms';
@@ -24,6 +25,8 @@ export class RequisicionesComponent implements OnInit {
   dtTrigger = new Subject();
   public edit = true;
   public proveedores: Proveedor[];
+  private user: Usuario;
+  public hoteles: Hotel[];
 
   constructor(
     private cookies: CookieService,
@@ -32,10 +35,11 @@ export class RequisicionesComponent implements OnInit {
     private modalService: BsModalService,
     private notificationsService: NotificationsService,
     private proveedoresService: ProveedoresService,
-    private empleadosService: EmpleadosService
+    private empleadosService: EmpleadosService,
   ) { }
 
   ngOnInit(): void {
+    this.user = JSON.parse(this.cookies.get('user'));
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
@@ -50,23 +54,24 @@ export class RequisicionesComponent implements OnInit {
   public async loadInfo() {
       this.spinner.showSpinner();
       this.requisiciones = await this.requisicionesService.getRequisiciones();
-     //this.proveedores = await this.proveedoresService.getProveedores();
       this.dtTrigger.next();
       this.spinner.hideSpinner();
   }
 
-  /**
-   * Funcion para desplegar un modal para crear una categoría
-   * @param modal
-   */
+   /**
+    * Funcion para desplegar un modal para crear una requisición
+    * @param modal: TemplateRef
+    * @param requisicion: Requisicion
+    * @param edit: boolean
+    */
   public addRequest(modal: TemplateRef<any>, requisicion?: Requisicion, edit?: boolean) {
     this.edit = edit ? edit : false;
     this.requisicion = requisicion ? requisicion : new Requisicion();
     this.modalComponent = this.modalService.show(modal, {backdrop : 'static', keyboard: false, class: 'modal-dialog-centered'});
   }
-
+ 
   public async create(form: NgForm) {
-    //validación
+    // validación
     this.spinner.showSpinner();
       (await this.requisicionesService.createRequisiciones(this.requisicion)).subscribe(
         async () => {

@@ -141,20 +141,25 @@ export class BitacoraMediciones {
     public responsable_id?: number;
     public auditor_id?: number;
     public observaciones?: string;
+    public auditor_name?: string;
+    public responsable_name?: string;
+
 
         constructor(json?: BitacoraMediciones) {
-            this.id_medicion = json?.id_medicion ? json.id_medicion : undefined;
+            this.id_medicion = json?.id_medicion ? json.id_medicion : null;
             this.fecha = json?.fecha ? json.fecha : new Date();
-            this.cloro = json?.cloro ? json.cloro : undefined;
-            this.porcentaje_nivel_agua = json?.porcentaje_nivel_agua ? json.porcentaje_nivel_agua : undefined;
-            this.porcentaje_gas = json?.porcentaje_gas ? json.porcentaje_gas : undefined;
-            this.luz = json?.luz ? json.luz : undefined;
-            this.lectura = json?.lectura ? json.lectura : undefined;
-            this.presion = json?.presion ? json.presion : undefined;
-            this.temperatura_alberca_jacuzzi = json?.temperatura_alberca_jacuzzi ? json.temperatura_alberca_jacuzzi : undefined;
-            this.temperatura_calder = json?.temperatura_calder ? json.temperatura_calder : undefined;
-            this.responsable_id = json?.responsable_id ? json.responsable_id : undefined;
-            this.auditor_id = json?.auditor_id ? json.auditor_id : undefined;
+            this.cloro = json?.cloro ? json.cloro : null;
+            this.porcentaje_nivel_agua = json?.porcentaje_nivel_agua ? json.porcentaje_nivel_agua : null;
+            this.porcentaje_gas = json?.porcentaje_gas ? json.porcentaje_gas : null;
+            this.luz = json?.luz ? json.luz : null;
+            this.lectura = json?.lectura ? json.lectura : null;
+            this.presion = json?.presion ? json.presion : null;
+            this.temperatura_alberca_jacuzzi = json?.temperatura_alberca_jacuzzi ? json.temperatura_alberca_jacuzzi : null;
+            this.temperatura_calder = json?.temperatura_calder ? json.temperatura_calder : null;
+            this.responsable_id = json?.responsable_id ? json.responsable_id : null;
+            this.auditor_id = json?.auditor_id ? json.auditor_id : null;
             this.observaciones = json?.observaciones ? json.observaciones : '';
+            this.auditor_name = json?.auditor_name ? json.auditor_name : 'sin auditor';
+            this.responsable_name = json?.responsable_name ? json.responsable_name : 'sin responsable';
         }
 }

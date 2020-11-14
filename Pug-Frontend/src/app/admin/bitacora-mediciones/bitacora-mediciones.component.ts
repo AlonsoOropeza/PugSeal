@@ -7,6 +7,7 @@ import { SpinnerService } from 'app/services/spinner.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+import { kill } from 'process';
 
 @Component({
   selector: 'app-bitacora-mediciones',
@@ -18,6 +19,7 @@ export class BitacoraMedicionesComponent implements OnInit {
   public bitacora: BitacoraMediciones;
   public auditor: Usuario;
   public auditores: Usuario[];
+  public auditor_name: any;
   public responsable: Usuario;
   public responsables: Usuario[];
   public modalComponent: BsModalRef;
@@ -43,6 +45,18 @@ export class BitacoraMedicionesComponent implements OnInit {
       this.bitacoras = await this.bitacoraMedicionesService.getBitacoras();
       this.auditores = await this.bitacoraMedicionesService.getAuditores();
       this.responsables = await this.bitacoraMedicionesService.getResponsables();
+      this.bitacoras.forEach(bitacora => {
+        this.auditores.forEach(auditor => {
+          if (bitacora.auditor_id === auditor.id) {
+            bitacora.auditor_name = auditor.first_name + ' ' + auditor.last_name;
+          }
+        },
+        this.responsables.forEach(responsable => {
+          if (bitacora.responsable_id === responsable.id) {
+            bitacora.responsable_name = responsable.first_name + ' ' + responsable.last_name;
+          }
+        })
+      )})
     } catch (error) {
       throw new Error(error);
     } finally {
@@ -60,7 +74,13 @@ export class BitacoraMedicionesComponent implements OnInit {
 
   public async create (form: NgForm) {
     this.spinner.showSpinner();
-      (await this.bitacoraMedicionesService.createBitacora(this.bitacora)).subscribe(
+    console.log(this.bitacora);
+    const input = {  
+      ...this.bitacora,
+      responsable: this.bitacora.responsable_id,
+      auditor: this.bitacora.auditor_id
+    };
+      (await this.bitacoraMedicionesService.createBitacora(input)).subscribe(
         async () => {
           this.notificationsService.showNotification('Se ha creado correctamente la bitácora.', true)
           this.bitacoras = await this.bitacoraMedicionesService.getBitacoras()
@@ -70,8 +90,8 @@ export class BitacoraMedicionesComponent implements OnInit {
         this.bitacoras = await this.bitacoraMedicionesService.getBitacoras()
       }
     );
-    this.spinner.hideSpinner();
     console.log(this.bitacora);
+    this.spinner.hideSpinner();
     this.modalComponent.hide();
   }
 

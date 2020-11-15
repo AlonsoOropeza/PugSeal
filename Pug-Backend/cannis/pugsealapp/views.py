@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status, viewsets, filters
 from rest_framework.response import Response
 from pugsealapp.models import Area, Categoria, Usuario, Hotel, Ubicacion, Proveedor, Mantenimiento_Preventivo, Requisicion
-from pugsealapp.serializer import AreaSerializer, CategoriaSerializer, EmpleadoSerializer, HotelSerializer, UbicacionSerializer, ProveedorSerializer, MantenimientoPreventivoSerializer, RequisicionSerializer
+from pugsealapp.serializer import AreaSerializer, CategoriaSerializer, EmpleadoSerializer, HotelSerializer, UbicacionSerializer, ProveedorSerializer, MantenimientoPreventivoSerializer, RequisicionSerializer, HotelSerializer
 
 class AreasViewSet(viewsets.ModelViewSet):
 	serializer_class = AreaSerializer
@@ -42,6 +42,10 @@ class MantenimientoPreventivoViewSet(viewsets.ModelViewSet):
 class RequisicionViewSet(viewsets.ModelViewSet):
 	serializer_class = RequisicionSerializer
 	queryset = Requisicion.objects.all()
+
+class HotelViewSet(viewsets.ModelViewSet):
+	serializer_class = HotelSerializer
+	queryset = Hotel.objects.all()
 
 
 

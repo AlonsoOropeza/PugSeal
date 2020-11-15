@@ -168,10 +168,10 @@ export class Requisicion {
         this.justificacion = json?.justificacion ? json.justificacion : '';
         this.cantidad = json?.cantidad ? json.cantidad : undefined;
         this.costo = json?.costo ? json.costo : undefined;
-        this.fecha_creacion = json?.fecha_creacion ? json.fecha_creacion : new Date();
-        this.fecha_estimada = json?.fecha_estimada ? json.fecha_estimada : new Date();
-        this.fecha_entrega = json?.fecha_entrega ? json.fecha_entrega : new Date();
-        this.aprobacion_auditor = json?.aprobacion_auditor ? json.aprobacion_auditor: false;   
+        this.fecha_creacion = json?.fecha_creacion ? json.fecha_creacion : undefined;
+        this.fecha_estimada = json?.fecha_estimada ? json.fecha_estimada : undefined;
+        this.fecha_entrega = json?.fecha_entrega ? json.fecha_entrega : undefined ;
+        this.aprobacion_auditor = json?.aprobacion_auditor ? json.aprobacion_auditor: false;
         this.aprobacion_director_gral = json?.aprobacion_director_gral ? json.aprobacion_director_gral : false;
         this.proveedor = json?.proveedor ? json.proveedor : '';
         this.id_solicitante = json?.id_solicitante ? json.id_solicitante : null;

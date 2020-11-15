@@ -1,3 +1,4 @@
+import { HotelService } from './../../services/hotel.service';
 import { Usuario, Hotel } from './../../models/models.model';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { NotificationsService } from './../../services/notifications.service';
@@ -36,6 +37,7 @@ export class RequisicionesComponent implements OnInit {
     private notificationsService: NotificationsService,
     private proveedoresService: ProveedoresService,
     private empleadosService: EmpleadosService,
+    private hotelService: HotelService
   ) { }
 
   ngOnInit(): void {
@@ -54,6 +56,7 @@ export class RequisicionesComponent implements OnInit {
   public async loadInfo() {
       this.spinner.showSpinner();
       this.requisiciones = await this.requisicionesService.getRequisiciones();
+      this.hoteles = await this.hotelService.getHoteles();
       this.dtTrigger.next();
       this.spinner.hideSpinner();
   }
@@ -69,9 +72,8 @@ export class RequisicionesComponent implements OnInit {
     this.requisicion = requisicion ? requisicion : new Requisicion();
     this.modalComponent = this.modalService.show(modal, {backdrop : 'static', keyboard: false, class: 'modal-dialog-centered'});
   }
- 
   public async create(form: NgForm) {
-    // validación
+    console.log(form.value.concepto);
     this.spinner.showSpinner();
       (await this.requisicionesService.createRequisiciones(this.requisicion)).subscribe(
         async () => {

@@ -10,7 +10,7 @@ import { Requisicion } from 'app/models/models.model';
   styleUrls: ['./requisicion-form.component.css']
 })
 
-export class RequisicionFormComponent{
+export class RequisicionFormComponent {
 
   @Input() requisicion: Requisicion;
   @Input() edit: boolean;

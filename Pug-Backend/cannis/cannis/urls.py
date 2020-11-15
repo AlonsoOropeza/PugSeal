@@ -29,6 +29,7 @@ router.register('api/proveedores', ProveedoresViewSet)
 router.register('api/empleados', EmpleadosViewSet)
 router.register('api/mantenimiento/preventivo', MantenimientoPreventivoViewSet)
 router.register('api/requisiciones', RequisicionViewSet)
+router.register('api/hoteles', HotelViewSet)
 
 urlpatterns = [
     path('users/', UserViewSet.as_view({

@@ -9,6 +9,7 @@ from rest_framework import status, viewsets, filters
 from rest_framework.response import Response
 from pugsealapp.models import Area, Categoria, Usuario, Hotel, Ubicacion, Proveedor, Mantenimiento_Preventivo, Bitacora_Mediciones
 from pugsealapp.serializer import AreaSerializer, CategoriaSerializer, EmpleadoSerializer, HotelSerializer, UbicacionSerializer, ProveedorSerializer, MantenimientoPreventivoSerializer, BitacoraMedicionesSerializer
+from django.shortcuts import redirect
 
 class AreasViewSet(viewsets.ModelViewSet):
 	serializer_class = AreaSerializer
@@ -48,3 +49,6 @@ class AuditoresViewSet(viewsets.ModelViewSet):
 class ResponsablesViewSet(viewsets.ModelViewSet):
 	serializer_class = EmpleadoSerializer
 	queryset = Usuario.objects.all()
+
+def URLView(request):
+    return redirect('admin/')

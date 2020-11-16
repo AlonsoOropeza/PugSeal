@@ -13,25 +13,44 @@
                         </div>
                         <div class="col-md-3">
                             <button class="btn btn-default btn-block" (click)="addRequest(modaladd)">
-                                <p>Crear Registro</p>
+                                <p>Crear registro</p>
                             </button>
                         </div>
                     </div>
                     <!-- [START] ACCORDION -->                  
                     <accordion>
                         <accordion-group *ngFor="let bitacora of bitacoras">
-                            <p>{{ bitacora.fecha }}</p>
-                            <p>{{ bitacora.cloro }}</p>
-                            <p>{{ bitacora.porcentaje_nivel_agua }}</p>
-                            <p>{{ bitacora.porcentaje_gas }}</p>
-                            <p>{{ bitacora.luz }}</p>
-                            <p>{{ bitacora.lectura }}</p>
-                            <p>{{ bitacora.presion }}</p>
-                            <p>{{ bitacora.temperatura_alberca_jacuzzi }}</p>
-                            <p>{{ bitacora.temperatura_caldero }}</p>
-                            <p>{{ bitacora.responsable_name }}</p>
-                            <p>{{ bitacora.auditor_name }}</p>
-                            <p>{{ bitacora.observaciones }}</p>
+                            <p><strong>Fecha: </strong>{{ bitacora.fecha }}</p>
+                            <p><strong>Niveles de cloro: </strong>{{ bitacora.cloro }}</p>
+                            <p><strong>Nivel de agua: </strong>{{ bitacora.porcentaje_nivel_agua }}%</p>
+                            <p><strong>Nivel de gas: </strong>{{ bitacora.porcentaje_gas }}%</p>
+                            <p><strong>Luz: </strong>{{ bitacora.luz }} KW/H</p>
+                            <p><strong>PH: </strong>{{ bitacora.lectura }}</p>
+                            <p><strong>Presión: </strong>{{ bitacora.presion }} psi</p>
+                            <p><strong>Temperatura alberca jacuzzi: </strong>{{ bitacora.temperatura_alberca_jacuzzi }} °C</p>
+                            <p><strong>Temperatura caldera: </strong>{{ bitacora.temperatura_caldera }} °C</p>
+                            <p><strong>Responsable: </strong>{{ bitacora.responsable_name }}</p>
+                            <p><strong>Auditor: </strong>{{ bitacora.auditor_name }}</p>
+                            <p><strong>Observaciones: </strong>{{ bitacora.observaciones }}</p>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <!-- [START] UPDATE BUTTON -->
+                                        <button class="btn btn-success btn-block" (click)="addRequest(modalupdate, bitacora, true)">
+                                            Editar registro
+                                        </button>
+                                        <!-- [END] UPDATE BUTTON-->
+                                    </div>
+                                    <br>
+                                    <div class="col">
+                                        <!-- [START] DELETE BUTTON -->
+                                        <button class="btn btn-danger btn-block" (click)="addRequest(modaldelete, bitacora)">
+                                            Eliminar registro
+                                        </button>
+                                        <!-- [END] DELETE BUTTON -->
+                                    </div>
+                                </div>
+                            </div>
                         </accordion-group>
                     </accordion>
                     <!-- [END] ACCORDION -->    
@@ -40,24 +59,16 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
+<!-- START [MODALADD]-->
 <ng-template #modaladd>
     <div class="modal-header">
         <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
             <span aria-hidden="true"> × </span>
           </button>
         <h6 class="modal-title" id="modal-title-default">
-          Agregar registro
+          Crear registro
         </h6>
-    
       </div>
-    
       <div class="modal-body">
         <app-bitacora-mediciones-form
         [bitacora]="bitacora"
@@ -70,7 +81,8 @@
         ></app-bitacora-mediciones-form>
       </div>
 </ng-template>
-
+<!-- END [MODALADD]-->
+<!-- START [MODALUPDATE]-->
 <ng-template #modalupdate>
     <div class="modal-header">
         <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
@@ -81,7 +93,7 @@
         </h6>
       </div>
       <div class="modal-body">
-        <app-bitacora-form
+        <app-bitacora-mediciones-form
         [bitacora]="bitacora"
         [auditores]="auditores"
         [responsables]="responsables"
@@ -89,6 +101,31 @@
         [modaladd]="modalComponent"
         (continueparent)="update($event)"
         (cancelparent)="cancel()"
-        ></app-bitacora-form>
+        ></app-bitacora-mediciones-form>
       </div>
 </ng-template>
+<!-- END [MODALUPDATE]-->
+<!-- START MODALDELETE-->
+<ng-template #modaldelete>
+    <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+            <span aria-hidden="true"> × </span>
+        </button>
+        <h6 class="modal-title" id="modal-title-update1">
+            Eliminar registro
+        </h6>
+      </div>
+    
+      <div class="modal-body">
+        ¿Estás seguro que deseas eliminar este registro? Esta operación es irreversible. 
+        <form>
+            <button class="btn btn-primary" type="submit" (click)="delete(mantenimiento)">
+                Eliminar
+            </button>
+            <button class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+                Cancelar
+            </button>
+        </form>
+      </div>
+</ng-template>
+<!-- END MODALDELETE-->

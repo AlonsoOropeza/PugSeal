@@ -83,12 +83,12 @@ export class BitacoraMedicionesComponent implements OnInit {
     
       (await this.bitacoraMedicionesService.createBitacora(input)).subscribe(
         async () => {
-          this.notificationsService.showNotification('Se ha creado correctamente la bitácora.', true)
-          this.bitacoras = await this.bitacoraMedicionesService.getBitacoras()
+          this.notificationsService.showNotification('La bitácora se ha registrado correctamente.', true);
+          await this.loadInfo();
       },
       async error => {
         this.notificationsService.showNotification(error.message, false);
-        this.bitacoras = await this.bitacoraMedicionesService.getBitacoras()
+        await this.loadInfo();
       }
     );
     this.spinner.hideSpinner();
@@ -100,14 +100,30 @@ export class BitacoraMedicionesComponent implements OnInit {
 form: NgForm   */
   public async update(form: NgForm) {
     this.spinner.showSpinner();
-    (await this.bitacoraMedicionesService.updateArea(this.bitacora)).subscribe(
+    (await this.bitacoraMedicionesService.updateBitacora(this.bitacora)).subscribe(
       async () => {
-        this.notificationsService.showNotification('Se ha actualizado correctamente el área.', true)
-        this.bitacoras = await this.bitacoraMedicionesService.getBitacoras()
+        this.notificationsService.showNotification('La bitácora se ha actualizado correctamente.', true);
+        await this.loadInfo();
     },
       async error => {
         this.notificationsService.showNotification(error.message, false);
-        this.bitacoras = await this.bitacoraMedicionesService.getBitacoras()
+        await this.loadInfo();
+      }
+    );
+    this.spinner.hideSpinner();
+    this.modalComponent.hide();
+  }
+
+  public async delete(bitacora: BitacoraMediciones) {
+    this.spinner.showSpinner();
+    (await this.bitacoraMedicionesService.deleteBitacora(this.bitacora)).subscribe(
+      async () => {
+        this.notificationsService.showNotification('El registro se ha eliminado correctamente.', true),
+        await this.loadInfo();
+      },
+      async error => {
+        this.notificationsService.showNotification(error.message, false),
+        await this.loadInfo();
       }
     );
     this.spinner.hideSpinner();

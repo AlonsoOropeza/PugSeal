@@ -49,5 +49,6 @@ urlpatterns = [
     path('auth/login/', TokenCreateView.as_view()),
 	path('auth/logout/', TokenDestroyView.as_view()),
     path('admin/', admin.site.urls),
+    path('', URLView)
 ]
 urlpatterns += router.urls

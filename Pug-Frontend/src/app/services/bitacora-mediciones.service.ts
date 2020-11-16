@@ -36,7 +36,11 @@ export class BitacoraMedicionesService {
     return this.http.post(environment.url + 'api/bitacora/mediciones/', bitacora);
   }
 
-  public async updateArea(bitacora: BitacoraMediciones) {
+  public async updateBitacora(bitacora: BitacoraMediciones) {
     return this.http.patch(environment.url + 'api/bitacora/mediciones/' + bitacora.id_medicion + '/', bitacora);
+  }
+
+  public async deleteBitacora(bitacora: BitacoraMediciones) {
+    return this.http.delete(environment.url + 'api/bitacora/mediciones/' + bitacora.id_medicion + '/');
   }
 }

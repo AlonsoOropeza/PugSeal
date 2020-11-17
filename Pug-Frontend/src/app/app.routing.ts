@@ -25,7 +25,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'areas'
+    redirectTo: 'dashboard'
   },
   {
     path: 'login',

@@ -13,6 +13,8 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { MantenimientoPreventivoComponent } from '../../admin/mantenimiento-preventivo/mantenimiento-preventivo.component'
 import { CategoriasComponent } from 'app/admin/categorias/categorias.component';
 import { AreasComponent } from 'app/admin/areas/areas.component';
+import { BitacoraMedicionesComponent } from 'app/admin/bitacora-mediciones/bitacora-mediciones.component';
+
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',                component: HomeComponent },
@@ -24,6 +26,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'notifications',            component: NotificationsComponent },
     { path: 'upgrade',                  component: UpgradeComponent },
     { path: 'mantenimiento-preventivo', component: MantenimientoPreventivoComponent},
+    { path: 'bitacora-mediciones',      component: BitacoraMedicionesComponent},
     { path: 'categorias',               component: CategoriasComponent},
     { path: 'areas',                    component: AreasComponent},
     { path: 'proveedores',              component: ProveedoresComponent}

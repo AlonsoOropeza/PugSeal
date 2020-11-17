@@ -27,6 +27,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { ProveedoresComponent } from './admin/proveedores/proveedores.component';
 import { ProveedorFormComponent } from './forms/proveedor-form/proveedor-form.component';
 import { LoginComponent } from './login/login.component';
+import { BitacoraMedicionesComponent } from './admin/bitacora-mediciones/bitacora-mediciones.component';
+import { BitacoraMedicionesFormComponent } from './forms/bitacora-mediciones-form/bitacora-mediciones-form.component';
+import { AccordionModule } from 'ngx-accordion';
 
 
 @NgModule({
@@ -43,7 +46,8 @@ import { LoginComponent } from './login/login.component';
     CommonModule,
     NgxSpinnerModule,
     DataTablesModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AccordionModule
   ],
   declarations: [
     AppComponent,
@@ -56,7 +60,9 @@ import { LoginComponent } from './login/login.component';
     AreasComponent,
     ProveedoresComponent,
     ProveedorFormComponent,
-    LoginComponent
+    LoginComponent,
+    BitacoraMedicionesComponent,
+    BitacoraMedicionesFormComponent
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

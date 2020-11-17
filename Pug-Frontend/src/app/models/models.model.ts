@@ -149,6 +149,7 @@ export class Requisicion {
     public justificacion?: string;
     public cantidad?: number;
     public costo?: number;
+    public categoria?: string;
     public fecha_creacion?: Date;
     public fecha_estimada?: Date;
     public fecha_entrega?: Date;
@@ -166,12 +167,13 @@ export class Requisicion {
         this.concepto = json?.concepto ? json.concepto : '';
         this.enlace_concepto = json?.enlace_concepto ? json.enlace_concepto : '';
         this.justificacion = json?.justificacion ? json.justificacion : '';
-        this.cantidad = json?.cantidad ? json.cantidad : undefined;
-        this.costo = json?.costo ? json.costo : undefined;
+        this.cantidad = json?.cantidad ? json.cantidad : null;
+        this.costo = json?.costo ? json.costo : 0;
+        this.categoria = json?.categoria ? json.categoria : '';
         this.fecha_creacion = json?.fecha_creacion ? json.fecha_creacion : undefined;
         this.fecha_estimada = json?.fecha_estimada ? json.fecha_estimada : undefined;
         this.fecha_entrega = json?.fecha_entrega ? json.fecha_entrega : undefined ;
-        this.aprobacion_auditor = json?.aprobacion_auditor ? json.aprobacion_auditor: false;
+        this.aprobacion_auditor = json?.aprobacion_auditor ? json.aprobacion_auditor : false;
         this.aprobacion_director_gral = json?.aprobacion_director_gral ? json.aprobacion_director_gral : false;
         this.proveedor = json?.proveedor ? json.proveedor : '';
         this.id_solicitante = json?.id_solicitante ? json.id_solicitante : null;

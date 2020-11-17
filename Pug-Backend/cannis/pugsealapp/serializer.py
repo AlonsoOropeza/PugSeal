@@ -58,5 +58,5 @@ class UserSerializer(serializers.ModelSerializer):
 class RequisicionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Requisicion
-        fields = ('id_requisicion', 'concepto', 'enlace_concepto',  'justificacion', 'cantidad', 'costo', 'proveedor',  'fecha_creacion', 'fecha_estimada', 'fecha_entrega', 'id_solicitante',
+        fields = ('id_requisicion', 'concepto', 'enlace_concepto',  'justificacion', 'cantidad', 'costo', 'categoria', 'proveedor',  'fecha_creacion', 'fecha_estimada', 'fecha_entrega', 'id_solicitante',
         'metodo_de_pago', 'id_hotel', 'observaciones', 'aprobacion_auditor', 'aprobacion_director_gral', 'finalizado')

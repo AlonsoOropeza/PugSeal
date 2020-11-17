@@ -110,6 +110,7 @@ class Requisicion(models.Model):
     justificacion = models.TextField(max_length=500, null=True, blank=True)
     cantidad = models.IntegerField(default=1)
     costo = models.FloatField(default=0)
+    categoria = models.CharField(max_length = 255, default='', blank=True)
     fecha_creacion = models.DateField(default=timezone.now)
     fecha_estimada = models.DateField( null=True, blank=True)
     fecha_entrega = models.DateField(null=True, blank=True)

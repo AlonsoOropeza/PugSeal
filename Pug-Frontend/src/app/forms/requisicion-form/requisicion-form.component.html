@@ -1,30 +1,52 @@
 <form #createForm="ngForm" class="modals">
-    <div class="row">
-        <div class="col-12">
-            <div class="form-group">
-                <label class="form-control-label" for="concepto">Concepto <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="concepto" required [(ngModel)]="requisicion.concepto"
-                    name="concepto" #concepto="ngModel" disabled={{!edit}}>
-            </div>
-            <div *ngIf="concepto.invalid && (concepto.dirty || concepto.touched)" class="alert alert-danger">
-                <div *ngIf="concepto.errors.required">
-                    El nombre de la empresa es obligatorio.
-                </div>
+    <div class="col-12" *ngIf="(requisicion.id_solicitante != null)">
+        <div class="form-group">
+            <label class="form-control-label" for="concepto">Solicitante:  </label>
+            <input type="text" class="form-control" id="id_solicitante"  [(ngModel)]="name"
+                name="id_solicitante" #id_solicitante="ngModel" disabled=True >
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="form-group">
+            <label class="form-control-label" for="concepto">Concepto <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="concepto" required [(ngModel)]="requisicion.concepto"
+                name="concepto" #concepto="ngModel" disabled={{!edit}}>
+        </div>
+        <div *ngIf="concepto.invalid && (concepto.dirty || concepto.touched)" class="alert alert-danger">
+            <div *ngIf="concepto.errors.required">
+                El nombre del concepto es un campo obligatorio.
             </div>
         </div>
-        <div class="col-12">
-            <div class="form-group">
-                <label class="form-control-label" for="enlace_concepto">Enlace</label>
-                <input type="text" class="form-control" id="enlace_concepto" [(ngModel)]="requisicion.enlace_concepto"
-                    name="enlace_concepto" #enlace_concepto="ngModel" disabled={{!edit}} maxlength="300">
+    </div>
+    <div class="col-12">
+        <div class="form-group">
+            <label class="form-control-label" for="enlace_concepto">Enlace</label>
+            <input type="text" class="form-control" id="enlace_concepto" [(ngModel)]="requisicion.enlace_concepto"
+                name="enlace_concepto" #enlace_concepto="ngModel" disabled={{!edit}} maxlength="300">
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="form-group">
+            <label class="form-control-label" for="cantidad">Cantidad <span class="text-danger">*</span></label>
+            <input type="number" class="form-control" id="cantidad" [(ngModel)]="requisicion.cantidad" name="cantidad"
+                disabled={{!edit}} #cantidad="ngModel" required>
+        </div>
+        <div *ngIf="cantidad.invalid && (cantidad.dirty || cantidad.touched)" class="alert alert-danger">
+            <div *ngIf="cantidad.errors.required">
+                La cantidad es un campo obligatorio.
             </div>
         </div>
-        <div class="col-12">
-            <div class="form-group">
-                <label class="form-control-label" for="cantidad">Cantidad <span class="text-danger">*</span></label>
-                <input type="number" class="form-control" id="cantidad" [(ngModel)]="requisicion.cantidad"
-                    name="cantidad" disabled={{!edit}} #estado="ngModel">
-            </div>
+    </div>
+    <div class="col-12">
+        <div class="form-group">
+            <label class="form-control-label" for="categoria">Categoría </label>
+            <select class="form-control" id="categoria" [(ngModel)]="requisicion.categoria" name="categoria"
+                disabled={{!edit}} #categoria="ngModel">
+                <option value="Mantto. Correctivo">Mantto. Correctivo</option>
+                <option value="Mantto. Preventivo">Mantto. Preventivo</option>
+                <option value="Mejorar experiencia laboral">Mejorar experiencia laboral</option>
+                <option value="Reposición de herramienta/blancos">Reposición de herramienta/blancos</option>
+            </select>
         </div>
     </div>
     <div class="col-12">
@@ -36,16 +58,34 @@
     </div>
     <div class="col-12">
         <div class="form-group">
-            <label class="form-control-label" for="id_hotel">Hotel </label>
+            <label class="form-control-label" for="id_hotel">Hotel <span class="text-danger">*</span></label>
             <select class="form-control" id="id_hotel" [(ngModel)]="requisicion.id_hotel" name="id_hotel"
-                disabled={{!edit}} #id_hotel="ngModel">
+                disabled={{!edit}} #id_hotel="ngModel" required>
                 <option *ngFor="let hotel of hoteles" value="{{hotel.id_hotel}}">{{hotel.nombre}}</option>
             </select>
         </div>
+        <div *ngIf="id_hotel.invalid && (id_hotel.dirty || id_hotel.touched)" class="alert alert-danger">
+            <div *ngIf="id_hotel.errors.required">
+                El hotel es un campo obligatorio.
+            </div>
+        </div>
     </div>
-    <div class="col-12">
+    <div class="col-6">
         <div class="form-group">
-            <label class="form-control-label" for="costo">Costo <span class="text-danger">*</span></label>
+            <label class="form-control-label" for="fecha_creacion">Fecha de Solicitud <span
+                    class="text-danger">*</span></label>
+            <input type="date" class="form-control" id="fecha_creacion" [(ngModel)]="requisicion.fecha_creacion"
+                name="fecha_creacion" disabled={{!edit}} #fecha_creacion="ngModel" required>
+        </div>
+        <div *ngIf="fecha_creacion.invalid && (fecha_creacion.dirty || fecha_creacion.touched)" class="alert alert-danger">
+            <div *ngIf="fecha_creacion.errors.required">
+                La fecha de solicitud es un campo obligatorio.
+            </div>
+        </div>
+    </div>
+    <div class="col-12" *ngIf="(this.user.rol != 'encargadoMantenimiento')">
+        <div class="form-group">
+            <label class="form-control-label" for="costo">Costo </label>
             <input type="number" class="form-control" id="costo" [(ngModel)]="requisicion.costo" name="costo"
                 disabled={{!edit}} #costo="ngModel">
         </div>
@@ -53,11 +93,13 @@
     <div class="col-12">
         <div class="form-group">
             <label class="form-control-label" for="proveedor">Proveedor </label>
-            <input type="text" class="form-control" id="proveedor" [(ngModel)]="requisicion.proveedor" name="proveedor"
-                #proveedor="ngModel" disabled={{!edit}} maxlength="100">
+            <select class="form-control" id="proveedor" [(ngModel)]="requisicion.proveedor" name="proveedor"
+                disabled={{!edit}} #proveedor="ngModel">
+                <option *ngFor="let provedor of proveedores" value="{{provedor.nombre_empresa}}">{{provedor.nombre_empresa}}</option>
+            </select>
         </div>
     </div>
-    <div class="col-12">
+    <div class="col-12" *ngIf="(this.user.rol != 'encargadoMantenimiento')">
         <div class="form-group">
             <label class="form-control-label" for="aprobacion_auditor">Aprobación auditor</label>
             <input type="checkbox" class="form-control" id="aprobacion_auditor"
@@ -65,7 +107,8 @@
                 #aprobacion_auditor="ngModel">
         </div>
     </div>
-    <div class="col-12">
+    <div class="col-12"
+        *ngIf="(this.user.rol != 'encargadoMantenimiento') && (this.user.rol != 'auditorOperativo') && (this.requisicion.costo >= 2000)">
         <div class="form-group">
             <label class="form-control-label" for="aprobacion_director_gral">Aprobación Dir. General</label>
             <input type="checkbox" class="form-control" id="aprobacion_director_gral"
@@ -73,48 +116,43 @@
                 #aprobacion_director_gral="ngModel">
         </div>
     </div>
-    <div class="col-12">
+    <div class="col-12"
+        *ngIf="(this.user.rol != 'encargadoMantenimiento') && (this.user.rol != 'auditorOperativo') && (this.user.rol != 'facilitadorOperativo')">
         <div class="form-group">
-            <label class="form-control-label" for="metodo_de_pago">Método de pago <span
-                    class="text-danger">*</span></label>
+            <label class="form-control-label" for="metodo_de_pago">Método de pago </label>
             <select class="form-control" id="metodo_de_pago" [(ngModel)]="requisicion.metodo_de_pago"
                 name="metodo_de_pago" disabled={{!edit}} #metodo_de_pago="ngModel">
-                <option value="efectivo">Efectivo</option>
-                <option value="tarjeta">Tarjeta de crédito/débito</option>
-                <option value="tarjeta">Caja Chica</option>
+                <option value="En línea / Transferencia">En línea / Transferencia</option>
+                <option value="Comprar con caja chica">Comprar con caja chica</option>
             </select>
         </div>
     </div>
-    <div class="col-6">
-        <div class="form-group">
-            <label class="form-control-label" for="fecha_creacion">Fecha de Creación <span
-                    class="text-danger">*</span></label>
-            <input type="date" class="form-control" id="fecha_creacion" [(ngModel)]="requisicion.fecha_creacion"
-                name="fecha_creacion" disabled={{!edit}} #fecha_creacion="ngModel">
-        </div>
-    </div>
-    <div class="col-6">
+    <div class="col-6"
+        *ngIf="(this.user.rol != 'encargadoMantenimiento') && (this.user.rol != 'auditorOperativo') && (this.user.rol != 'facilitadorOperativo')">
         <div class="form-group">
             <label class="form-control-label" for="fecha_estimada">Fecha de Estimada de entrega</label>
             <input type="date" class="form-control" id="fecha_estimada" [(ngModel)]="requisicion.fecha_estimada"
                 name="fecha_estimada" disabled={{!edit}} #fecha_estimada="ngModel">
         </div>
     </div>
-    <div class="col-12">
+    <div class="col-12"
+        *ngIf="(this.user.rol != 'encargadoMantenimiento') && (this.user.rol != 'auditorOperativo') && (this.user.rol != 'facilitadorOperativo')">
         <div class="form-group">
             <label class="form-control-label" for="observaciones">Observaciones</label>
             <input type="text" class="form-control" id="observaciones" [(ngModel)]="requisicion.observaciones"
                 name="observaciones" #observaciones="ngModel" disabled={{!edit}} maxlength="200">
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-6"
+        *ngIf="(this.user.rol != 'encargadoMantenimiento') && (this.user.rol != 'auditorOperativo') && (this.user.rol != 'facilitadorOperativo') && (this.user.rol != 'encargadoAdministrativo')">
         <div class="form-group">
             <label class="form-control-label" for="fecha_entrega">Fecha de entrega</label>
             <input type="date" class="form-control" id="fecha_entrega" [(ngModel)]="requisicion.fecha_entrega"
                 name="fecha_entrega" disabled={{!edit}} #fecha_entrega="ngModel">
         </div>
     </div>
-    <div class="col-12">
+    <div class="col-12"
+        *ngIf="(this.user.rol != 'encargadoMantenimiento') && (this.user.rol != 'auditorOperativo') && (this.user.rol != 'facilitadorOperativo') && (this.user.rol != 'encargadoAdministrativo')">
         <div class="form-group">
             <label class="form-control-label" for="finalizado">Finalizado</label>
             <input type="checkbox" class="form-control" id="finalizado" [(ngModel)]="requisicion.finalizado"

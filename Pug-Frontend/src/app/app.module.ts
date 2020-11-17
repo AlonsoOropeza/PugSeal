@@ -38,6 +38,9 @@ import { UsuariosComponent } from './admin/usuarios/usuarios.component';
 registerLocaleData(localeEs);
 
 
+import { BitacoraMedicionesComponent } from './admin/bitacora-mediciones/bitacora-mediciones.component';
+import { BitacoraMedicionesFormComponent } from './forms/bitacora-mediciones-form/bitacora-mediciones-form.component';
+import { AccordionModule } from 'ngx-accordion';
 
 
 @NgModule({
@@ -60,6 +63,7 @@ registerLocaleData(localeEs);
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
+    AccordionModule
   ],
   declarations: [
     AppComponent,
@@ -75,7 +79,9 @@ registerLocaleData(localeEs);
     LoginComponent,
     CalendarioComponent,
     GestionComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    BitacoraMedicionesComponent,
+    BitacoraMedicionesFormComponent
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

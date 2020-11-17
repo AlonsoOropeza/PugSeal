@@ -10,6 +10,10 @@ import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { MantenimientoPreventivoComponent } from '../../admin/mantenimiento-preventivo/mantenimiento-preventivo.component'
+import { CategoriasComponent } from 'app/admin/categorias/categorias.component';
+import { AreasComponent } from 'app/admin/areas/areas.component';
+import { BitacoraMedicionesComponent } from 'app/admin/bitacora-mediciones/bitacora-mediciones.component';
+import { ProveedoresComponent } from 'app/admin/proveedores/proveedores.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',                component: HomeComponent                    },
@@ -22,6 +26,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'upgrade',                  component: UpgradeComponent                 },
     { path: 'mantenimiento-preventivo', component: MantenimientoPreventivoComponent },
     { path: 'calendario',               component: CalendarioComponent              },
-    { path: 'gestion',                  component: GestionComponent                 }
-];
-
+    { path: 'gestion',                  component: GestionComponent                 },
+    { path: 'bitacora-mediciones',      component: BitacoraMedicionesComponent      },
+    { path: 'categorias',               component: CategoriasComponent              },
+    { path: 'areas',                    component: AreasComponent                   },
+    { path: 'proveedores',              component: ProveedoresComponent             }
+]

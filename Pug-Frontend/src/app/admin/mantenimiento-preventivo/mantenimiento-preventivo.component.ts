@@ -52,7 +52,7 @@ export class MantenimientoPreventivoComponent implements OnInit {
       }
     };
     this.loadInfo();
-    this.titulos = ['Actividad', 'Categoria', 'Fecha De Inicio', 'Aprobado', 'Ver', 'Editar'];
+    this.titulos = ['Actividad', 'Fecha De Inicio', 'Aprobado', 'Ver', 'Editar'];
   }
 
   public async loadInfo() {

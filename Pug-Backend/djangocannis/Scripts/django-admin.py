@@ -1,4 +1,4 @@
-#!C:\Users\irvpr\Documents\isc_2011\semestre_07\semestrei\repo\PugSeal\Pug-Backend\djangocannis\Scripts\python.exe
+#!c:\users\irvpr\documents\isc_2011\semestre_07\semestrei\repo\pugseal\pug-backend\djangocannis\scripts\python.exe
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

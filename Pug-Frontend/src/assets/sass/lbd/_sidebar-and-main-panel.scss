@@ -266,12 +266,18 @@
     overflow: auto;
 
     .main-content{
-        padding: 30px 15px;
-        min-height: calc(100% - 123px);
+        padding-top: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 5px;
     }
 
     > .footer{
-        border-top: 1px solid #e7e7e7;
+        
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
     }
 
     .navbar{

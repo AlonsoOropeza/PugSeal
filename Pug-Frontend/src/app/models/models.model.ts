@@ -123,4 +123,43 @@ export class Hotel {
         this.longitud = json?.longitud ? json.longitud : '';
         this.id_hotel = json?.id_hotel ? json.id_hotel : undefined;
     }
+
+
+}
+
+export class BitacoraMediciones {
+    public id_medicion?: number;
+    public fecha?: Date;
+    public cloro?: number;
+    public porcentaje_nivel_agua?: number;
+    public porcentaje_gas?: number;
+    public luz?: number;
+    public lectura?: number;
+    public presion?: number;
+    public temperatura_alberca_jacuzzi?: number;
+    public temperatura_calder?: number;
+    public responsable?: number;
+    public auditor?: number;
+    public observaciones?: string;
+    public auditor_name?: string;
+    public responsable_name?: string;
+
+
+        constructor(json?: BitacoraMediciones) {
+            this.id_medicion = json?.id_medicion ? json.id_medicion : null;
+            this.fecha = json?.fecha ? json.fecha : new Date();
+            this.cloro = json?.cloro ? json.cloro : null;
+            this.porcentaje_nivel_agua = json?.porcentaje_nivel_agua ? json.porcentaje_nivel_agua : null;
+            this.porcentaje_gas = json?.porcentaje_gas ? json.porcentaje_gas : null;
+            this.luz = json?.luz ? json.luz : null;
+            this.lectura = json?.lectura ? json.lectura : null;
+            this.presion = json?.presion ? json.presion : null;
+            this.temperatura_alberca_jacuzzi = json?.temperatura_alberca_jacuzzi ? json.temperatura_alberca_jacuzzi : null;
+            this.temperatura_calder = json?.temperatura_calder ? json.temperatura_calder : null;
+            this.responsable = json?.responsable ? json.responsable : null;
+            this.auditor = json?.auditor ? json.auditor : null;
+            this.observaciones = json?.observaciones ? json.observaciones : '';
+            this.auditor_name = json?.auditor_name ? json.auditor_name : 'sin auditor';
+            this.responsable_name = json?.responsable_name ? json.responsable_name : 'sin responsable';
+        }
 }

@@ -28,7 +28,9 @@ router.register('api/areas', AreasViewSet)
 router.register('api/proveedores', ProveedoresViewSet)
 router.register('api/empleados', EmpleadosViewSet)
 router.register('api/mantenimiento/preventivo', MantenimientoPreventivoViewSet)
+router.register('api/bitacora/mediciones', BitacoraMedicionesViewSet)
 router.register('api/auditores', AuditoresViewSet)
+router.register('api/responsables', ResponsablesViewSet)
 
 urlpatterns = [
     path('users/', UserViewSet.as_view({
@@ -47,5 +49,6 @@ urlpatterns = [
     path('auth/login/', TokenCreateView.as_view()),
 	path('auth/logout/', TokenDestroyView.as_view()),
     path('admin/', admin.site.urls),
+    path('', URLView)
 ]
 urlpatterns += router.urls

@@ -7,8 +7,9 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status, viewsets, filters
 from rest_framework.response import Response
-from pugsealapp.models import Area, Categoria, Usuario, Hotel, Ubicacion, Proveedor, Mantenimiento_Preventivo
-from pugsealapp.serializer import AreaSerializer, CategoriaSerializer, EmpleadoSerializer, HotelSerializer, UbicacionSerializer, ProveedorSerializer, MantenimientoPreventivoSerializer
+from pugsealapp.models import Area, Categoria, Usuario, Hotel, Ubicacion, Proveedor, Mantenimiento_Preventivo, Bitacora_Mediciones
+from pugsealapp.serializer import AreaSerializer, CategoriaSerializer, EmpleadoSerializer, HotelSerializer, UbicacionSerializer, ProveedorSerializer, MantenimientoPreventivoSerializer, BitacoraMedicionesSerializer
+from django.shortcuts import redirect
 
 class AreasViewSet(viewsets.ModelViewSet):
 	serializer_class = AreaSerializer
@@ -37,6 +38,17 @@ class MantenimientoPreventivoViewSet(viewsets.ModelViewSet):
 	serializer_class = MantenimientoPreventivoSerializer
 	queryset = Mantenimiento_Preventivo.objects.all()
 
+class BitacoraMedicionesViewSet(viewsets.ModelViewSet):
+	serializer_class = BitacoraMedicionesSerializer
+	queryset = Bitacora_Mediciones.objects.all()
+
 class AuditoresViewSet(viewsets.ModelViewSet):
 	serializer_class = EmpleadoSerializer
 	queryset = Usuario.objects.filter(rol='Auditor')
+
+class ResponsablesViewSet(viewsets.ModelViewSet):
+	serializer_class = EmpleadoSerializer
+	queryset = Usuario.objects.all()
+
+def URLView(request):
+    return redirect('admin/')

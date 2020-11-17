@@ -25,7 +25,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'areas'
+    redirectTo: 'dashboard'
   },
   {
     path: 'login',
@@ -38,7 +38,7 @@ const routes: Routes = [
     CommonModule,
     BrowserModule,
     RouterModule.forRoot(routes, {
-       useHash: true
+       useHash: false
     })
   ],
   exports: [

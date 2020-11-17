@@ -101,8 +101,8 @@ class Bitacora_Mediciones(models.Model):
     presion = models.DecimalField(decimal_places=2, max_digits = 10)
     temperatura_alberca_jacuzzi = models.DecimalField(decimal_places=2, max_digits = 10)
     temperatura_caldera = models.DecimalField(decimal_places=2, max_digits = 10)
-    responsable = models.CharField(max_length=255, unique=True, default='')
-    auditor = models.CharField(max_length=255, unique=True, default='')
+    responsable = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="responsable_name", blank=True)
+    auditor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="auditor_name", blank=True)
     observaciones = models.CharField(max_length=255, unique=True, default='')
     class Meta:
         verbose_name_plural = "Bitácora Mediciones"

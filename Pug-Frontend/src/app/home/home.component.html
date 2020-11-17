@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-4">
                 <lbd-chart
-                  [title]="'Email Statistics'"
+                  [title]="'Solicitudes de mantenimiento'"
                   [subtitle]="'Last Campaign Performance'"
                   [chartClass]="'ct-perfect-fourth'"
                   [chartType]="emailChartType"
@@ -16,7 +16,7 @@
             </div>
             <div class="col-md-8">
                 <lbd-chart
-                  [title]="'Users Behavior'"
+                  [title]="'Uso a través del tiempo'"
                   [subtitle]="'24 Hours performance'"
                   [chartType]="hoursChartType"
                   [chartData]="hoursChartData"
@@ -32,14 +32,14 @@
         <div class="row">
             <div class="col-md-6">
                 <lbd-chart
-                  [title]="'2014 Sales'"
+                  [title]="'Ingresos anuales'"
                   [subtitle]="'All products including Taxes'"
                   [chartType]="activityChartType"
                   [chartData]="activityChartData"
                   [chartOptions]="activityChartOptions"
                   [chartResponsive]="activityChartResponsive"
                   [legendItems]="activityChartLegendItems"
-                  [withHr]="true"
+                  [withHr]="false"
                   [footerIconClass]="'fa fa-check'"
                   [footerText]="'Data information certified'">
                 </lbd-chart>
@@ -47,7 +47,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Tasks</h4>
+                        <h4 class="title">Tareas</h4>
                         <p class="category">Backend development</p>
                     </div>
                     <div class="content">
@@ -172,12 +172,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="footer">
-                            <hr>
-                            <div class="stats">
-                                <i class="fa fa-history"></i> Updated 3 minutes ago
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

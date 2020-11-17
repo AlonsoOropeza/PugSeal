@@ -18,7 +18,10 @@ export const LIMPIEZAROUTES: RouteInfo[] = [
 ];
 export const ADMINROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
+  { path: '/calendario', title: 'Calendario',  icon: 'pe-7s-date', class: '' },
   { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'pe-7s-note2', class: '' },
+  { path: '/gestion', title: 'Gestión Interna',  icon: 'pe-7s-network', class: '' },
+  // { path: '/user', title: 'User Profile',  icon: 'pe-7s-user', class: '' },
   { path: '/bitacora-mediciones', title: 'Bitacora Mediciones', icon: 'pe-7s-note2', class: ''},
   { path: '/areas', title: 'Areas',  icon: 'pe-7s-note2', class: '' },
   { path: '/categorias', title: 'Categorias',  icon: 'pe-7s-note2', class: '' },
@@ -44,12 +47,12 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(this.getCookie('user'));
-    let routes: any; 
+    let routes: any;
     if (this.user.rol === 'Admin') {
       routes = ADMINROUTES;
-    } else if(this.user.rol === 'Limpieza'){
+    } else if ( this.user.rol === 'Limpieza') {
       routes = LIMPIEZAROUTES;
-    } else{
+    } else {
       routes = ROUTES;
     }
     this.menuItems = routes.filter(menuItem => menuItem);

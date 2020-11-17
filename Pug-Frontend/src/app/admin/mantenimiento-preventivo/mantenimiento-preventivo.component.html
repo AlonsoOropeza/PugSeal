@@ -30,7 +30,6 @@
                                 <tbody>
                                     <tr *ngFor="let mantenimiento of mantenimientos">
                                         <td>{{mantenimiento.actividad}}</td>
-                                        <td>{{mantenimiento.id_categoria}}</td>
                                         <td>{{mantenimiento.fecha_inicio}}</td>
                                         <td *ngIf="mantenimiento.aprobado">Sí</td>
                                         <td *ngIf="!mantenimiento.aprobado">No</td>

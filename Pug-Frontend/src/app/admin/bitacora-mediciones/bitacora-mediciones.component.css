@@ -13,7 +13,7 @@
   
   /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
   .active, .accordion:hover {
-    background-color: #ccc;
+    background-color: #444;
   }
   
   /* Style the accordion panel. Note: hidden by default */
@@ -23,3 +23,94 @@
     display: none;
     overflow: hidden;
   }
+
+
+
+.btn
+{
+  padding: 13px 20px 4px;
+  font-size: 17px;
+  font-weight: bold;
+  border-radius: 4px;
+  background-color: #000000;
+  color: #F8F8F8;
+  border-color: #000000;
+  transition: 0.4s;
+
+  margin-bottom: 15px;
+}
+
+.btn:hover
+{
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+
+.btn-success
+{
+  width: 40%;
+  padding: 13px 20px 12px;
+  font-size: 17px;
+  font-weight: bold;
+  border-radius: 4px;
+  background-color: #F8F8F8;
+  color: #000000;
+  border-color: #000000;
+  transition: 0.4s;
+
+  float: left;
+  margin-right: 15px;
+  margin-left: auto;
+  margin-bottom: 15px;
+}
+
+.btn-success:hover
+{
+  background-color: #000000;
+  color: #F8F8F8;
+  border-color: #000000;
+}
+
+.btn-danger
+{
+  width: 40%;
+  padding: 13px 20px 12px;
+  font-size: 17px;
+  font-weight: bold;
+  border-radius: 4px;
+  background-color: #F8F8F8;
+  color: #9B444B;
+  border-color: #9B444B;
+  transition: 0.4s;
+
+  float: left;
+  margin-right: auto;
+  margin-left: 15px;
+  margin-bottom: 15px;
+}
+
+.btn-danger:hover
+{
+  background-color: #9B444B;
+  color: #F8F8F8;
+  border-color: #9B444B;
+}
+
+.card{
+    padding: 15px;
+}
+
+.modal-dialog-centered{
+    display: flex;
+    align-items: center;
+}
+
+.table>caption+thead>tr:first-child>td, .table>caption+thead>tr:first-child>th, .table>colgroup+thead>tr:first-child>td, .table>colgroup+thead>tr:first-child>th, .table>thead:first-child>tr:first-child>td, .table>thead:first-child>tr:first-child>th
+{
+    border:0;
+}
+table.dataTable.no-footer {
+    border-bottom: 0;
+}
+

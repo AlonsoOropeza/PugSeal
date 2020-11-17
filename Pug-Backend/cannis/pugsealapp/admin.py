@@ -19,5 +19,6 @@ admin.site.register(Usuario, UserAdmin2)
 admin.site.register(Hotel)
 admin.site.register(Ubicacion)
 admin.site.register(Mantenimiento_Preventivo)
+admin.site.register(Bitacora_Mediciones)
 
 # Register your models here.

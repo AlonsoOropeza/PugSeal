@@ -63,24 +63,28 @@ class Ubicacion(models.Model):
 #Las siguientes son dependencias, por eso no están en orden alfabetico
 
 class Mantenimiento_Preventivo(models.Model):
+    #Encargado selecciona estos campos
     id_mantprev = models.AutoField(primary_key=True)
-    id_categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True, blank=True)
-    id_proveedor = models.ForeignKey(Proveedor, on_delete=models.SET_NULL, null=True, blank=True)
-    id_supervisor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="supervisor", blank=True)
-    id_auditor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="auditor", blank=True)    
-    id_empleado = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="empleado", blank=True)
+    id_categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True)
     actividad = models.CharField(max_length=255)
+    id_proveedor = models.ForeignKey(Proveedor, on_delete=models.SET_NULL, null=True)
+    cotizacion = models.FloatField(default=0, blank=True, null=True)
     frecuencia_anual = models.IntegerField(default=0)
-    mes_inicio = models.CharField(max_length=255)
+    fecha_inicio = models.DateField(null=True, default=timezone.now)
+    id_empleado = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="empleado")
     fecha_creacion = models.DateTimeField(default=timezone.now)
-    fecha_planeada = models.DateField(null=True)
-    fecha_real = models.DateField(null=True)
-    duracion_horas = models.FloatField(default=0)
-    presupuesto_plan = models.FloatField(default=0)
-    cotizacion = models.FloatField(default=0)
-    comentarios_supervisor = models.CharField(max_length=1000, null=True, blank=True)
+
+    # Auditor modifica estos campos
+    id_auditor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="auditor", blank=True)
     comentarios_auditor = models.CharField(max_length=1000, null=True, blank=True)
-    activo = models.BooleanField(default=True)
+    aprobado = models.BooleanField(default=False)
+    auditado = models.BooleanField(default=False)
+
+    # Supervisor modifica estos campos
+    id_supervisor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="supervisor", blank=True)
+    comentarios_supervisor = models.CharField(max_length=1000, null=True, blank=True)
+    supervisado = models.BooleanField(default=False)
+
     class Meta:
         verbose_name_plural = "Solicitudes de Mantenimiento Preventivo"
     def __str__(self):
@@ -97,8 +101,8 @@ class Bitacora_Mediciones(models.Model):
     presion = models.DecimalField(decimal_places=2, max_digits = 10)
     temperatura_alberca_jacuzzi = models.DecimalField(decimal_places=2, max_digits = 10)
     temperatura_caldera = models.DecimalField(decimal_places=2, max_digits = 10)
-    responsable = models.CharField(max_length=255, unique=True, default='')
-    auditor = models.CharField(max_length=255, unique=True, default='')
+    responsable = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="responsable_name", blank=True)
+    auditor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="auditor_name", blank=True)
     observaciones = models.CharField(max_length=255, unique=True, default='')
     class Meta:
         verbose_name_plural = "Bitácora Mediciones"

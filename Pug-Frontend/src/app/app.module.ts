@@ -29,6 +29,20 @@ import { ProveedorFormComponent } from './forms/proveedor-form/proveedor-form.co
 import { LoginComponent } from './login/login.component';
 import { RequisicionesComponent } from './admin/requisiciones/requisiciones.component';
 import { RequisicionFormComponent } from './forms/requisicion-form/requisicion-form.component';
+import { CalendarioComponent } from './admin/calendario/calendario.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+import { GestionComponent } from './admin/gestion/gestion.component';
+import { UsuariosComponent } from './admin/usuarios/usuarios.component';
+registerLocaleData(localeEs);
+
+
+import { BitacoraMedicionesComponent } from './admin/bitacora-mediciones/bitacora-mediciones.component';
+import { BitacoraMedicionesFormComponent } from './forms/bitacora-mediciones-form/bitacora-mediciones-form.component';
+import { AccordionModule } from 'ngx-accordion';
 
 
 @NgModule({
@@ -45,7 +59,13 @@ import { RequisicionFormComponent } from './forms/requisicion-form/requisicion-f
     CommonModule,
     NgxSpinnerModule,
     DataTablesModule,
-    ToastrModule.forRoot()
+    NgbModalModule,
+    ToastrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+    AccordionModule
   ],
   declarations: [
     AppComponent,
@@ -60,7 +80,12 @@ import { RequisicionFormComponent } from './forms/requisicion-form/requisicion-f
     ProveedorFormComponent,
     LoginComponent,
     RequisicionesComponent,
-    RequisicionFormComponent
+    RequisicionFormComponent,
+    CalendarioComponent,
+    GestionComponent,
+    UsuariosComponent,
+    BitacoraMedicionesComponent,
+    BitacoraMedicionesFormComponent
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

@@ -1,0 +1,81 @@
+.btn
+{
+  padding: 13px 20px 4px;
+  font-size: 17px;
+  font-weight: bold;
+  border-radius: 4px;
+  background-color: #000000;
+  color: #F8F8F8;
+  border-color: #000000;
+  transition: 0.4s;
+
+  margin-bottom: 15px;
+}
+
+.btn:hover
+{
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+.btn-ver
+{
+padding: 13px 20px 12px;
+  font-size: 17px;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  color: #333333;
+  border-color: #333333;
+  transition: 0.4s;
+
+  margin-bottom: 2px;
+}
+.btn-ver:hover
+{
+    background-color: #333333;
+    color: #F8F8F8;
+    border-color: #333333;
+}
+
+.btn-modificar
+{
+    padding: 13px 20px 12px;
+    font-size: 17px;
+    border-radius: 4px;
+    background-color: #F8F8F8;
+    color: #333333;
+    border-color: #333333;
+    transition: 0.4s;
+    
+    margin-bottom: 2px;
+}
+.btn-modificar:hover
+{
+    background-color: #333333;
+    color: #F8F8F8;
+    border-color: #333333;
+}
+
+.table>caption+thead>tr:first-child>td, .table>caption+thead>tr:first-child>th, .table>colgroup+thead>tr:first-child>td, .table>colgroup+thead>tr:first-child>th, .table>thead:first-child>tr:first-child>td, .table>thead:first-child>tr:first-child>th
+{
+    border:0;
+}
+table.dataTable.no-footer {
+    border-bottom: 0;
+}
+
+.dataTables_wrapper .dataTables_info {
+    clear: both;
+    float: left;
+    padding-top: 0.755em;
+    margin-left: 10px !important;
+}
+
+#DataTables_Table_0_length.dataTables_length
+{
+    margin-left: 20px;
+}
+
+.dataTables_wrapper .dataTables_length{
+    margin-left: 20px;
+   }

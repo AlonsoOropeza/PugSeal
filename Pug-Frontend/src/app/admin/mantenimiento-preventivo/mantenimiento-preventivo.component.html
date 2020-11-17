@@ -35,17 +35,17 @@
                                         <td *ngIf="mantenimiento.aprobado">Sí</td>
                                         <td *ngIf="!mantenimiento.aprobado">No</td>
                                         <td>
-                                            <button class="btn btn-default btn-block" (click)="addRequest(modalupdate, mantenimiento, false)">
+                                            <button class="btn-ver  btn-block" (click)="addRequest(modalupdate, mantenimiento, false)">
                                                 Visualizar
                                             </button>
                                         </td>
                                         <td>
-                                            <button class="btn btn-default btn-block" (click)="addRequest(modalupdate, mantenimiento, true)">
+                                            <button class="btn-modificar  btn-block" (click)="addRequest(modalupdate, mantenimiento, true)">
                                                 Modificar
                                             </button>
                                         </td>
                                         <td *ngIf="user.rol === 'Auditor' || user.rol === 'Admin'" (click)="addRequest(modaldelete, mantenimiento)">
-                                            <button class="btn btn-default btn-block" >
+                                            <button class="btn-eliminar  btn-block" >
                                                 Eliminar
                                             </button>
                                         </td>

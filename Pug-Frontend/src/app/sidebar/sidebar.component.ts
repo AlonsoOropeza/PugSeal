@@ -11,7 +11,6 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
-  { path: '/bitacora-mediciones', title: 'Bitacora Mediciones', icon: 'pe-7s-note2', class: ''},
 ];
 export const LIMPIEZAROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
@@ -50,6 +49,8 @@ export class SidebarComponent implements OnInit {
       routes = ADMINROUTES;
     } else if(this.user.rol === 'Limpieza'){
       routes = LIMPIEZAROUTES;
+    } else{
+      routes = ROUTES;
     }
     this.menuItems = routes.filter(menuItem => menuItem);
   }

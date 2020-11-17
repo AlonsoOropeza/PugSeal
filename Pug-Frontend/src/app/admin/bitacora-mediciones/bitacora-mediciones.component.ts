@@ -68,11 +68,17 @@ export class BitacoraMedicionesComponent implements OnInit {
    * addRequest
    */
   public addRequest(modal: TemplateRef<any>, bitacora?: BitacoraMediciones) {
+    if(this.user.rol !== 'Admin' && this.user.rol !== 'Limpieza'){
+      this.notificationsService.showNotification('No tienes las credenciales necesarias para crear una bitacora', false);
+      throw new Error('Sin Permisos');
+      
+    }
     this.bitacora = bitacora ? bitacora : new BitacoraMediciones();
     this.modalComponent = this.modalService.show(modal, {backdrop : 'static', keyboard: false, class: 'modal-dialog-centered'});
   }
 
   public async create (form: NgForm) {
+    
     this.spinner.showSpinner();
     console.log(this.bitacora);
     const input = {  

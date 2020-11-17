@@ -27,6 +27,17 @@ import { ToastrModule } from 'ngx-toastr';
 import { ProveedoresComponent } from './admin/proveedores/proveedores.component';
 import { ProveedorFormComponent } from './forms/proveedor-form/proveedor-form.component';
 import { LoginComponent } from './login/login.component';
+import { CalendarioComponent } from './admin/calendario/calendario.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+import { GestionComponent } from './admin/gestion/gestion.component';
+import { UsuariosComponent } from './admin/usuarios/usuarios.component';
+registerLocaleData(localeEs);
+
+
 
 
 @NgModule({
@@ -43,7 +54,12 @@ import { LoginComponent } from './login/login.component';
     CommonModule,
     NgxSpinnerModule,
     DataTablesModule,
-    ToastrModule.forRoot()
+    NgbModalModule,
+    ToastrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   declarations: [
     AppComponent,
@@ -56,7 +72,10 @@ import { LoginComponent } from './login/login.component';
     AreasComponent,
     ProveedoresComponent,
     ProveedorFormComponent,
-    LoginComponent
+    LoginComponent,
+    CalendarioComponent,
+    GestionComponent,
+    UsuariosComponent
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

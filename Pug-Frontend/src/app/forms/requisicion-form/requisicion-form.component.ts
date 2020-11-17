@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { Empleado, Hotel, Proveedor, Usuario } from './../../models/models.model';
+import {  Hotel, Proveedor, Usuario } from './../../models/models.model';
 import { Requisicion } from 'app/models/models.model';
 
 @Component({
@@ -16,7 +16,6 @@ export class RequisicionFormComponent {
   @Input() edit: boolean;
   @Input() modaladd: BsModalRef;
   @Input() hoteles: Hotel[];
-  @Input() empleados: Empleado[];
   @Input() proveedores: Proveedor[];
   @Input() user: Usuario;
   @Input() name: String;

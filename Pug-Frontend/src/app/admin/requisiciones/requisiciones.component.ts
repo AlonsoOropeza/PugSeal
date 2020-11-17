@@ -3,7 +3,7 @@ import { Usuario, Hotel } from './../../models/models.model';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { NotificationsService } from './../../services/notifications.service';
 import { NgForm } from '@angular/forms';
-import { Proveedor, Requisicion, Categoria, Empleado } from 'app/models/models.model';
+import { Proveedor, Requisicion, Categoria } from 'app/models/models.model';
 import { RequisicionesService } from 'app/services/requisiciones.service';
 import { SpinnerService } from 'app/services/spinner.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';

@@ -27,6 +27,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { ProveedoresComponent } from './admin/proveedores/proveedores.component';
 import { ProveedorFormComponent } from './forms/proveedor-form/proveedor-form.component';
 import { LoginComponent } from './login/login.component';
+import { RequisicionesComponent } from './admin/requisiciones/requisiciones.component';
+import { RequisicionFormComponent } from './forms/requisicion-form/requisicion-form.component';
 import { CalendarioComponent } from './admin/calendario/calendario.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -77,6 +79,8 @@ import { AccordionModule } from 'ngx-accordion';
     ProveedoresComponent,
     ProveedorFormComponent,
     LoginComponent,
+    RequisicionesComponent,
+    RequisicionFormComponent,
     CalendarioComponent,
     GestionComponent,
     UsuariosComponent,

@@ -1,3 +1,36 @@
+<div>
+  <h1>Mis actividades de {{ mes }}</h1>
+  <accordion>
+    <accordion-group heading="Semana" *ngFor="let event of events">   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
+        <p><strong>Actividad: </strong>{{ event.actividad }}</p>
+        <p><strong>Semana: </strong>{{ event.semana }}</p>
+    </accordion-group>
+  </accordion>
+  <div class="content table-responsive table-full-width">
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" 
+    class="table table-hover table-striped row-border hover">
+      <thead>
+        <tr>
+          <th *ngFor="let titulo of titulos">{{ titulo }}</th>
+          <th *ngIf="user.rol === 'Auditor' || user.rol === 'Admin'">Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let solicitud of events">
+          <td>{{solicitud.actividad}}</td>
+          <td>{{solicitud.fecha_inicio}}</td>
+          <td *ngIf="solicitud.aprobado">Sí</td>
+          <td *ngIf="!solicitud.aprobado">No</td>
+          <td>
+            <button class="btn-ver  btn-block" (click)="addRequest(modalupdate, mantenimiento, false)">
+                Visualizar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 <div class="row text-center">
   <div class="col-md-4">
     <div class="btn-group">

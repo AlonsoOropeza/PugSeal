@@ -7,6 +7,8 @@
         "start": "ng serve",
         "start+install": "npm install && ng serve",
         "build": "ng build",
+        "build+deploy": "ng build && firebase deploy",
+        "buildProd+deploy": "ng build --prod && firebase deploy",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",

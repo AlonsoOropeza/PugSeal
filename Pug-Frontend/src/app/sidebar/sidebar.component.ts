@@ -11,10 +11,12 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
+  { path: '/actividades', title: 'Actividades',  icon: 'pe-7s-date', class: '' },
 ];
 export const LIMPIEZAROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
   { path: '/bitacora-mediciones', title: 'Bitacora Mediciones', icon: 'pe-7s-note2', class: ''},
+  { path: '/actividades', title: 'Actividades',  icon: 'pe-7s-date', class: '' },
 ];
 export const ADMINROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
@@ -25,7 +27,8 @@ export const ADMINROUTES: RouteInfo[] = [
   { path: '/bitacora-mediciones', title: 'Bitacora Mediciones', icon: 'pe-7s-note2', class: ''},
   { path: '/areas', title: 'Areas',  icon: 'pe-7s-note2', class: '' },
   { path: '/categorias', title: 'Categorias',  icon: 'pe-7s-note2', class: '' },
-  { path: '/proveedores', title: 'Proveedores',  icon: 'pe-7s-portfolio', class: '' }
+  { path: '/proveedores', title: 'Proveedores',  icon: 'pe-7s-portfolio', class: '' },
+  { path: '/actividades', title: 'Mis Actividades',  icon: 'pe-7s-date', class: '' },
 ];
 
 @Component({

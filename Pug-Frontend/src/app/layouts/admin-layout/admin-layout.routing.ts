@@ -1,6 +1,6 @@
 import { GestionComponent } from './../../admin/gestion/gestion.component';
 import { CalendarioComponent } from './../../admin/calendario/calendario.component';
-import { Routes } from '@angular/router';
+import { Routes, ActivatedRouteSnapshot } from '@angular/router';
 import { HomeComponent } from '../../home/home.component';
 import { UserComponent } from '../../user/user.component';
 import { TablesComponent } from '../../tables/tables.component';
@@ -14,6 +14,7 @@ import { CategoriasComponent } from 'app/admin/categorias/categorias.component';
 import { AreasComponent } from 'app/admin/areas/areas.component';
 import { BitacoraMedicionesComponent } from 'app/admin/bitacora-mediciones/bitacora-mediciones.component';
 import { ProveedoresComponent } from 'app/admin/proveedores/proveedores.component';
+import { ActividadesComponent } from 'app/admin/actividades/actividades.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',                component: HomeComponent                    },
@@ -30,5 +31,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'bitacora-mediciones',      component: BitacoraMedicionesComponent      },
     { path: 'categorias',               component: CategoriasComponent              },
     { path: 'areas',                    component: AreasComponent                   },
-    { path: 'proveedores',              component: ProveedoresComponent             }
+    { path: 'proveedores',              component: ProveedoresComponent             },
+    { path: 'actividades',              component: ActividadesComponent             }
 ]

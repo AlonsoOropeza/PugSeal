@@ -33,6 +33,7 @@ router.register('api/hoteles', HotelViewSet)
 router.register('api/bitacora/mediciones', BitacoraMedicionesViewSet)
 router.register('api/auditores', AuditoresViewSet)
 router.register('api/responsables', ResponsablesViewSet)
+router.register('api/mantenimiento/correctivo', MantenimientoCorrectivoViewSet)
 
 urlpatterns = [
     path('users/', UserViewSet.as_view({

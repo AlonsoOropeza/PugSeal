@@ -132,3 +132,31 @@ class Requisicion(models.Model):
     def __str__(self):
         return "%s" % self.concepto
 
+class Mantenimiento_Correctivo(models.Model):
+    id_mantcor = models.AutoField(primary_key=True)
+    id_solicitante = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="encargado_solicitud", blank= True)
+    id_encargado = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="encargado_correctivo", blank= True)
+    id_supervisor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="supervisor_correctivo", blank= True)
+    fecha_solicitud = models.DateField(default=timezone.now)
+    semana = models.IntegerField(default=0)
+    id_hotel = models.ForeignKey(Hotel, on_delete=models.SET_NULL, null=True, blank=True)
+    id_area = models.ForeignKey(Area, on_delete=models.SET_NULL, null=True, blank=True)
+    descripcion_problema =  models.CharField(max_length=255)
+    id_categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True)
+    id_proveedor = models.ForeignKey(Proveedor, on_delete=models.SET_NULL, null=True)
+    costo_trabajo = models.FloatField(default=0, null=True, blank=True)
+    costo_material = models.FloatField(default=0, null=True, blank=True)
+    horas_trabajo = models.CharField(max_length = 255, default='', blank=True)
+    fecha_finalizacion = models.DateField(null=True, blank=True)
+    comentario_supervisor = models.TextField(max_length=500, null=True, blank=True)
+    calif_calidad = models.IntegerField(null=True, blank=True, default=1)
+    calif_terminacion = models.IntegerField(null=True, blank=True, default=1)
+    calif_limpieza = models.IntegerField(null=True, blank=True, default=1)
+    calif_totalidad = models.IntegerField(null=True, blank=True, default=1)
+    finalizada = models.BooleanField(default=False)
+    estado = models.CharField(max_length = 255, default='', blank=True)
+
+    class Meta:
+        verbose_name_plural = "Solicitudes de Mantenimiento Correctivo"
+    def __str__(self):
+        return "%s" % self.descripcion_problema

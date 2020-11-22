@@ -12,6 +12,7 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
     { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'pe-7s-note2', class: '' },
+    { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'pe-7s-note2', class: '' },
     { path: '/calendario', title: 'Calendario',  icon: 'pe-7s-date', class: '' },
     { path: '/requisiciones', title: 'Requisiciones',  icon: 'pe-7s-portfolio', class: '' },
     { path: '/table', title: 'Table List',  icon: 'pe-7s-note2', class: '' },
@@ -28,6 +29,7 @@ export const ADMINROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
   { path: '/calendario', title: 'Calendario',  icon: 'pe-7s-date', class: '' },
   { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'pe-7s-note2', class: '' },
+  { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'pe-7s-note2', class: '' },
   { path: '/gestion', title: 'Gestión Interna',  icon: 'pe-7s-network', class: '' },
   // { path: '/user', title: 'User Profile',  icon: 'pe-7s-user', class: '' },
   { path: '/bitacora-mediciones', title: 'Bitacora Mediciones', icon: 'pe-7s-note2', class: ''},

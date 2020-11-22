@@ -146,7 +146,7 @@ class Mantenimiento_Correctivo(models.Model):
     id_proveedor = models.ForeignKey(Proveedor, on_delete=models.SET_NULL, null=True)
     costo_trabajo = models.FloatField(default=0, null=True, blank=True)
     costo_material = models.FloatField(default=0, null=True, blank=True)
-    horas_trabajo = models.CharField(max_length = 255, default='', blank=True)
+    horas_trabajo = models.CharField(max_length = 255, default='', null=True, blank=True)
     fecha_finalizacion = models.DateField(null=True, blank=True)
     comentario_supervisor = models.TextField(max_length=500, null=True, blank=True)
     calif_calidad = models.IntegerField(null=True, blank=True, default=1)

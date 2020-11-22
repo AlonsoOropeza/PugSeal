@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common'
 
 import { AppRoutingModule } from './app.routing';
 import { NavbarModule } from './shared/navbar/navbar.module';
@@ -43,6 +44,8 @@ registerLocaleData(localeEs);
 import { BitacoraMedicionesComponent } from './admin/bitacora-mediciones/bitacora-mediciones.component';
 import { BitacoraMedicionesFormComponent } from './forms/bitacora-mediciones-form/bitacora-mediciones-form.component';
 import { AccordionModule } from 'ngx-accordion';
+import { MantenimientoCorrectivoComponent } from './admin/mantenimiento-correctivo/mantenimiento-correctivo.component';
+import { MantenimientoCorrectivoFormComponent } from './forms/mantenimiento-correctivo-form/mantenimiento-correctivo-form.component';
 
 
 @NgModule({
@@ -85,9 +88,11 @@ import { AccordionModule } from 'ngx-accordion';
     GestionComponent,
     UsuariosComponent,
     BitacoraMedicionesComponent,
-    BitacoraMedicionesFormComponent
+    BitacoraMedicionesFormComponent,
+    MantenimientoCorrectivoComponent,
+    MantenimientoCorrectivoFormComponent
   ],
-  providers: [CookieService],
+  providers: [CookieService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

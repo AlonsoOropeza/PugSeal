@@ -3,13 +3,17 @@ import { ROUTES } from '../../sidebar/sidebar.component';
 import {Location } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 import { Usuario } from 'app/models/models.model';
+import { Router } from '@angular/router';
+
+
 
 
 @Component({
     // moduleId: module.id,
     // tslint:disable-next-line: component-selector
     selector: 'navbar-cmp',
-    templateUrl: 'navbar.component.html'
+    templateUrl: 'navbar.component.html',
+    styleUrls: ['navbar.component.css']
 })
 
 export class NavbarComponent implements OnInit {
@@ -19,7 +23,7 @@ export class NavbarComponent implements OnInit {
     private sidebarVisible: boolean;
     public user: Usuario;
 
-    constructor(location: Location,  private element: ElementRef, private cookies: CookieService) {
+    constructor(location: Location,  private element: ElementRef, private cookies: CookieService, private router: Router) {
       this.location = location;
           this.sidebarVisible = false;
     }
@@ -37,8 +41,11 @@ export class NavbarComponent implements OnInit {
     }
 
     public logOut() {
+        
         this.cookies.delete('user');
-        window.location.reload();
+        //window.location.reload();
+        this.router.navigateByUrl('')
+        
     }
 
     sidebarOpen() {

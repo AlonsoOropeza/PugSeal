@@ -7,8 +7,8 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status, viewsets, filters
 from rest_framework.response import Response
-from pugsealapp.models import Area, Categoria, Usuario, Hotel, Ubicacion, Proveedor, Mantenimiento_Preventivo, Bitacora_Mediciones
-from pugsealapp.serializer import AreaSerializer, CategoriaSerializer, EmpleadoSerializer, HotelSerializer, UbicacionSerializer, ProveedorSerializer, MantenimientoPreventivoSerializer, BitacoraMedicionesSerializer
+from pugsealapp.models import Area, Categoria, Usuario, Hotel, Ubicacion, Proveedor, Mantenimiento_Preventivo, Requisicion , Bitacora_Mediciones
+from pugsealapp.serializer import AreaSerializer, CategoriaSerializer, EmpleadoSerializer, HotelSerializer, UbicacionSerializer, ProveedorSerializer, MantenimientoPreventivoSerializer, RequisicionSerializer, HotelSerializer, BitacoraMedicionesSerializer
 from django.shortcuts import redirect
 
 class AreasViewSet(viewsets.ModelViewSet):
@@ -42,6 +42,13 @@ class BitacoraMedicionesViewSet(viewsets.ModelViewSet):
 	serializer_class = BitacoraMedicionesSerializer
 	queryset = Bitacora_Mediciones.objects.all()
 
+class RequisicionViewSet(viewsets.ModelViewSet):
+	serializer_class = RequisicionSerializer
+	queryset = Requisicion.objects.all()
+
+class HotelViewSet(viewsets.ModelViewSet):
+	serializer_class = HotelSerializer
+	queryset = Hotel.objects.all()
 class AuditoresViewSet(viewsets.ModelViewSet):
 	serializer_class = EmpleadoSerializer
 	queryset = Usuario.objects.filter(rol='Auditor')

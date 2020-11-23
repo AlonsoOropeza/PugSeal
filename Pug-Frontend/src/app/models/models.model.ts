@@ -163,3 +163,45 @@ export class BitacoraMediciones {
             this.responsable_name = json?.responsable_name ? json.responsable_name : 'sin responsable';
         }
 }
+
+export class Requisicion {
+    public id_requisicion?: number;
+    public concepto?: string;
+    public enlace_concepto?: string;
+    public justificacion?: string;
+    public cantidad?: number;
+    public costo?: number;
+    public categoria?: string;
+    public fecha_creacion?: Date;
+    public fecha_estimada?: Date;
+    public fecha_entrega?: Date;
+    public aprobacion_auditor?: boolean;
+    public aprobacion_director_gral?: boolean;
+    public proveedor?: string;
+    public id_solicitante?: number;
+    public metodo_de_pago: string;
+    public id_hotel?: number;
+    public observaciones?: string;
+    public finalizado?: boolean;
+
+    constructor(json?: Requisicion) {
+        this.id_requisicion = json?.id_requisicion ? json.id_requisicion : null;
+        this.concepto = json?.concepto ? json.concepto : '';
+        this.enlace_concepto = json?.enlace_concepto ? json.enlace_concepto : '';
+        this.justificacion = json?.justificacion ? json.justificacion : '';
+        this.cantidad = json?.cantidad ? json.cantidad : null;
+        this.costo = json?.costo ? json.costo : 0;
+        this.categoria = json?.categoria ? json.categoria : '';
+        this.fecha_creacion = json?.fecha_creacion ? json.fecha_creacion : undefined;
+        this.fecha_estimada = json?.fecha_estimada ? json.fecha_estimada : undefined;
+        this.fecha_entrega = json?.fecha_entrega ? json.fecha_entrega : undefined ;
+        this.aprobacion_auditor = json?.aprobacion_auditor ? json.aprobacion_auditor : false;
+        this.aprobacion_director_gral = json?.aprobacion_director_gral ? json.aprobacion_director_gral : false;
+        this.proveedor = json?.proveedor ? json.proveedor : '';
+        this.id_solicitante = json?.id_solicitante ? json.id_solicitante : null;
+        this.metodo_de_pago = json?.metodo_de_pago ? json.metodo_de_pago : '';
+        this.id_hotel = json?.id_hotel ? json.id_hotel : null;
+        this.observaciones = json?.observaciones ? json.observaciones : '';
+        this.finalizado = json?.finalizado ? json.finalizado : false;
+    }
+}

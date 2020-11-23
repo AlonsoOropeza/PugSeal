@@ -10,8 +10,20 @@ declare interface RouteInfo {
     class: string;
 }
 export const ROUTES: RouteInfo[] = [
+<<<<<<< HEAD
   { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
   { path: '/actividades', title: 'Actividades',  icon: 'pe-7s-date', class: '' },
+=======
+    { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
+    { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'pe-7s-note2', class: '' },
+    { path: '/calendario', title: 'Calendario',  icon: 'pe-7s-date', class: '' },
+    { path: '/requisiciones', title: 'Requisiciones',  icon: 'pe-7s-portfolio', class: '' },
+    { path: '/table', title: 'Table List',  icon: 'pe-7s-note2', class: '' },
+    { path: '/typography', title: 'Typography',  icon: 'pe-7s-news-paper', class: '' },
+    { path: '/icons', title: 'Icons',  icon: 'pe-7s-science', class: '' },
+    { path: '/maps', title: 'Maps',  icon: 'pe-7s-map-marker', class: '' },
+    { path: '/notifications', title: 'Notifications',  icon: 'pe-7s-bell', class: '' }
+>>>>>>> 8d6d31c8a563fc45c0fcbc99969624980e2a94f9
 ];
 export const LIMPIEZAROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
@@ -28,7 +40,17 @@ export const ADMINROUTES: RouteInfo[] = [
   { path: '/areas', title: 'Areas',  icon: 'pe-7s-note2', class: '' },
   { path: '/categorias', title: 'Categorias',  icon: 'pe-7s-note2', class: '' },
   { path: '/proveedores', title: 'Proveedores',  icon: 'pe-7s-portfolio', class: '' },
+<<<<<<< HEAD
   { path: '/actividades', title: 'Mis Actividades',  icon: 'pe-7s-date', class: '' },
+=======
+  { path: '/requisiciones', title: 'Requisiciones',  icon: 'pe-7s-portfolio', class: '' },
+  { path: '/user', title: 'User Profile',  icon: 'pe-7s-user', class: '' },
+  { path: '/table', title: 'Table List',  icon: 'pe-7s-note2', class: '' },
+  { path: '/typography', title: 'Typography',  icon: 'pe-7s-news-paper', class: '' },
+  { path: '/icons', title: 'Icons',  icon: 'pe-7s-science', class: '' },
+  { path: '/maps', title: 'Maps',  icon: 'pe-7s-map-marker', class: '' },
+  { path: '/notifications', title: 'Notifications',  icon: 'pe-7s-bell', class: '' },
+>>>>>>> 8d6d31c8a563fc45c0fcbc99969624980e2a94f9
 ];
 
 @Component({

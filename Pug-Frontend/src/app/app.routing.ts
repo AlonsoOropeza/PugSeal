@@ -24,13 +24,14 @@ const routes: Routes = [
         }]
   },
   {
-    path: '**',
-    redirectTo: 'dashboard'
-  },
-  {
     path: 'login',
     component: LoginComponent,
-   }
+  },
+  {
+    path: '**',
+    redirectTo: 'dashboard'
+  }
+  
 ];
 
 @NgModule({

@@ -1,0 +1,26 @@
+.navbar-brand
+{
+    margin-top: 14px;
+    margin-left: 50px;
+}
+.ng-star-inserted
+{
+    margin-top: 8px;
+
+}
+.close
+{
+    border-radius: 4px;
+    background-color: #000000FF !important;
+    color: #F8F8F8;
+    margin-top: 15px;
+    text-shadow: none;
+    padding: 10px 15px 10px;
+    filter: alpha(opacity=100);
+    opacity: 1.0;
+    transition: .8;
+}
+.close:hover
+{
+    opacity: .2;
+}

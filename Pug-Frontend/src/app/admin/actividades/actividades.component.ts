@@ -32,6 +32,7 @@ export class ActividadesComponent implements OnInit {
   public mes: String;
   public modalComponent: BsModalRef;
   public events: any[] = [];
+  public actividad_semanas: any[] = [];
 
   constructor(
     private modal: NgbModal,
@@ -68,6 +69,31 @@ export class ActividadesComponent implements OnInit {
         ];
       }
     });
+    for (let index = 1; index < 53; index++) {
+      let events = [];
+      this.solicitudes.forEach(solicitud => {
+        if (moment(solicitud.fecha_inicio).week() === index && solicitud.id_empleado === this.user.id) {
+          events = [
+            ...events,
+            {
+              ...solicitud,
+              semana: moment(new Date(solicitud.fecha_inicio)).week()
+            },
+          ];
+        }
+      });
+      const element = 'Semana ' + index;
+      this.actividad_semanas = [
+        ...this.actividad_semanas,
+        {
+          titulo: element,
+          eventos: {
+            events
+          }
+        }
+      ]
+    }
+    console.log(this.actividad_semanas);
     this.spinner.hideSpinner();
     this.categorias = await this.categoriasService.getCategorias();
     this.empleados = await this.empleadosService.getEmpleados();
@@ -75,9 +101,6 @@ export class ActividadesComponent implements OnInit {
 
     const first  =  new Date(new Date().getFullYear(), 0, 1);
     const last  =  new Date(new Date().getFullYear(), 11, 31);
-    for (const i = first; i <= last; i.setDate(i.getDate() + 7)) {
-      console.log(moment(i).week(), i);
-    }
   }
 
   public addRequest(modal: TemplateRef<any>, mantenimiento?: MantenimientoPreventivo, edit?: boolean) {

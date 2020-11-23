@@ -33,9 +33,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'categorias',               component: CategoriasComponent              },
     { path: 'areas',                    component: AreasComponent                   },
     { path: 'proveedores',              component: ProveedoresComponent             },
-<<<<<<< HEAD
-    { path: 'actividades',              component: ActividadesComponent             }
-=======
+    { path: 'actividades',              component: ActividadesComponent             },
     { path: 'requisiciones',            component: RequisicionesComponent           }
->>>>>>> 8d6d31c8a563fc45c0fcbc99969624980e2a94f9
 ]

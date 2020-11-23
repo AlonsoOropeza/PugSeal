@@ -9,23 +9,23 @@
         </div>
         <div class="col-12">
             <div class="form-group">
-                <label class="form-control-label" for="fecha_inicio">Fecha de Solicitud<span
+                <label class="form-control-label" for="fecha_solicitud">Fecha de Solicitud<span
                         class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="fecha_inicio"  [(ngModel)]="startDate"  
-                    name="fecha_inicio" #fecha_inicio="ngModel" disabled=true value=" {{mantenimiento.fecha_solicitud}}"
+                <input type="date" class="form-control" id="fecha_solicitud"  [(ngModel)]="mantenimiento.fecha_solicitud"  
+                    name="fecha_solicitud" #fecha_solicitud="ngModel"  
                     disabled={{!edit}}>
             </div>
         </div>
-        <div *ngIf="fecha_inicio.invalid && (fecha_inicio.dirty || fecha_inicio.touched)" class="alert alert-danger">
-            <div *ngIf="fecha_inicio.errors.required">
+        <div *ngIf="fecha_solicitud.invalid && (fecha_solicitud.dirty || fecha_solicitud.touched)" class="alert alert-danger">
+            <div *ngIf="fecha_solicitud.errors.required">
                 La fecha de solicitud es un campo obligatorio.
             </div>
         </div>
         <div class="col-12">
             <div class="form-group">
-                <label class="form-control-label" for="proveedor">Semana </label>
-                <input class="form-control" id="semana" required [(ngModel)]="week"
-                    name="semana" #semana="ngModel" disabled=true value="{{mantenimiento.semana}}">
+                <label class="form-control-label" for="semana">Semana </label>
+                <input class="form-control" id="semana" required [ngModel]="mantenimiento.fecha_solicitud |  date:'w'"  
+                    name="semana" #semana="ngModel" disabled=true value="{{mantenimiento.fecha_solicitud |  date:'w'}}">
             </div>
         </div>
         <div *ngIf="semana.invalid && (semana.dirty || semana.touched)" class="alert alert-danger">
@@ -50,7 +50,7 @@
         <div class="col-12">
             <div class="form-group">
                 <label class="form-control-label" for="id_area">Habitación o Área <span class="text-danger">*</span></label>
-                <select class="form-control" id="id_area" [(ngModel)]="mantenimiento.id_hotel" name="id_area"
+                <select class="form-control" id="id_area" [(ngModel)]="mantenimiento.id_area" name="id_area"
                     disabled={{!edit}} #id_area="ngModel" required>
                     <option *ngFor="let area of areas" value="{{area.id_area}}">{{area.nombre}}</option>
                 </select>

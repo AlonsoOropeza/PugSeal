@@ -1,6 +1,6 @@
 import { GestionComponent } from './../../admin/gestion/gestion.component';
 import { CalendarioComponent } from './../../admin/calendario/calendario.component';
-import { Routes } from '@angular/router';
+import { Routes, ActivatedRouteSnapshot } from '@angular/router';
 import { HomeComponent } from '../../home/home.component';
 import { UserComponent } from '../../user/user.component';
 import { TablesComponent } from '../../tables/tables.component';
@@ -15,6 +15,7 @@ import { AreasComponent } from 'app/admin/areas/areas.component';
 import { RequisicionesComponent } from 'app/admin/requisiciones/requisiciones.component';
 import { BitacoraMedicionesComponent } from 'app/admin/bitacora-mediciones/bitacora-mediciones.component';
 import { ProveedoresComponent } from 'app/admin/proveedores/proveedores.component';
+import { ActividadesComponent } from 'app/admin/actividades/actividades.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',                component: HomeComponent                    },
@@ -32,5 +33,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'categorias',               component: CategoriasComponent              },
     { path: 'areas',                    component: AreasComponent                   },
     { path: 'proveedores',              component: ProveedoresComponent             },
+    { path: 'actividades',              component: ActividadesComponent             },
     { path: 'requisiciones',            component: RequisicionesComponent           }
 ]

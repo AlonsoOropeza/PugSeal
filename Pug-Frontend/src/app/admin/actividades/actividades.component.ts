@@ -1,10 +1,7 @@
 import { Meses } from './../../shared/diccionarios';
 import { MantenimientoPreventivoService } from 'app/services/mantenimiento_preventivo.service';
 import { Component, OnInit } from '@angular/core';
-import { ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
-import { startOfDay, endOfDay, subDays, addDays, endOfMonth,  isSameDay,  isSameMonth,  addHours } from 'date-fns';
-import { Subject } from 'rxjs';
-import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
+import { ViewChild, TemplateRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Categoria, MantenimientoPreventivo, Proveedor, Usuario } from 'app/models/models.model';
 import { SpinnerService } from 'app/services/spinner.service';
@@ -17,71 +14,25 @@ import { CategoriasService } from 'app/services/categorias.service';
 import { NgForm } from '@angular/forms';
 import moment = require('moment');
 
-const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
-  },
-};
-
 @Component({
-  selector: 'app-calendario',
-  templateUrl: './calendario.component.html',
-  styleUrls: ['./calendario.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-actividades',
+  templateUrl: './actividades.component.html',
+  styleUrls: ['./actividades.component.css']
 })
-export class CalendarioComponent implements OnInit {
+export class ActividadesComponent implements OnInit {
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   public solicitudes: MantenimientoPreventivo[];
-  public view: CalendarView = CalendarView.Month;
-  public CalendarView = CalendarView;
-  public viewDate: Date = new Date();
-  public loaded = false;
-  public edit = true;
   public user: Usuario;
   public proveedores: Proveedor[];
   public empleados: Usuario[];
   public categorias: Categoria[];
+  public edit: boolean;
   public mantenimiento: MantenimientoPreventivo;
-  public mes: any;
-  dtOptions: DataTables.Settings = {};
-  dtTrigger = new Subject();
-
-  public modalData: {
-    action: string;
-    event: CalendarEvent;
-  };
+  public mes: String;
   public modalComponent: BsModalRef;
-  public titulos: string[];
-  public actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      },
-    },
-    {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: 'Delete',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      },
-    },
-  ];
-  public refresh: Subject<any> = new Subject();
   public events: any[] = [];
-  public activeDayIsOpen = false;
+  public actividad_semanas: any[] = [];
 
   constructor(
     private modal: NgbModal,
@@ -99,46 +50,50 @@ export class CalendarioComponent implements OnInit {
   ngOnInit() {
     this.user = JSON.parse(this.cookies.get('user'));
     this.loadInfo();
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
-      language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
-      }
-    };
-    this.titulos = ['Actividad', 'Fecha De Inicio', 'Aprobado', 'Ver', 'Editar'];
   }
 
   public async loadInfo() {
-    this.mes = moment(new Date()).month();
-    console.log(this.mes);
-    this.mes = Meses[this.mes];
-    console.log(this.mes);
-
+    const mes = moment(new Date()).month();
+    this.mes = Meses[mes];
     this.events = [];
     this.spinner.showSpinner();
     this.solicitudes = await this.mantenimientoPreventivoService.getMantenimientosPreventivos();
-    console.log(this.solicitudes);
     this.solicitudes.forEach(solicitud => {
-      if(solicitud.id_empleado === this.user.id){
+      if (solicitud.id_empleado === this.user.id) {
           this.events = [
           ...this.events,
           {
             ...solicitud,
-            actions: this.actions,
-            title: solicitud.actividad,
-            start: new Date(solicitud.fecha_inicio),
-            end: new Date(solicitud.fecha_inicio),
-            color: colors.yellow,
-            allDay: true,
             semana: moment(new Date(solicitud.fecha_inicio)).week()
           },
         ];
       }
     });
-    console.log(this.events);
-    this.refresh.next();
-    this.dtTrigger.next();
+    for (let index = 1; index < 53; index++) {
+      let events = [];
+      this.solicitudes.forEach(solicitud => {
+        if (moment(solicitud.fecha_inicio).week() === index && solicitud.id_empleado === this.user.id) {
+          events = [
+            ...events,
+            {
+              ...solicitud,
+              semana: moment(new Date(solicitud.fecha_inicio)).week()
+            },
+          ];
+        }
+      });
+      const element = 'Semana ' + index;
+      this.actividad_semanas = [
+        ...this.actividad_semanas,
+        {
+          titulo: element,
+          eventos: {
+            events
+          }
+        }
+      ]
+    }
+    console.log(this.actividad_semanas);
     this.spinner.hideSpinner();
     this.categorias = await this.categoriasService.getCategorias();
     this.empleados = await this.empleadosService.getEmpleados();
@@ -146,46 +101,6 @@ export class CalendarioComponent implements OnInit {
 
     const first  =  new Date(new Date().getFullYear(), 0, 1);
     const last  =  new Date(new Date().getFullYear(), 11, 31);
-    for (const i = first; i <= last; i.setDate(i.getDate() + 7)) {
-      console.log(moment(i).week(), i);
-    }
-  }
-
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-      }
-      this.viewDate = date;
-    }
-  }
-
-  eventTimesChanged({
-    event,
-    newStart,
-    newEnd,
-  }: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map((iEvent) => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd,
-        };
-      }
-      return iEvent;
-    });
-    this.handleEvent('Dropped or resized', event);
-  }
-
-  handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
   }
 
   public addRequest(modal: TemplateRef<any>, mantenimiento?: MantenimientoPreventivo, edit?: boolean) {
@@ -200,35 +115,6 @@ export class CalendarioComponent implements OnInit {
     }
     this.mantenimiento = mantenimiento ? mantenimiento : new MantenimientoPreventivo();
     this.modalComponent = this.modalService.show(modal, {backdrop : 'static', keyboard: false, class: 'modal-dialog-centered'});
-  }
-
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
-  }
-
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter((event) => event !== eventToDelete);
-  }
-
-  setView(view: CalendarView) {
-    this.view = view;
-  }
-
-  closeOpenMonthViewDay() {
-    this.activeDayIsOpen = false;
   }
 
   public async cancel() {

@@ -43,6 +43,7 @@ registerLocaleData(localeEs);
 import { BitacoraMedicionesComponent } from './admin/bitacora-mediciones/bitacora-mediciones.component';
 import { BitacoraMedicionesFormComponent } from './forms/bitacora-mediciones-form/bitacora-mediciones-form.component';
 import { AccordionModule } from 'ngx-accordion';
+import { ActividadesComponent } from './admin/actividades/actividades.component';
 
 
 @NgModule({
@@ -85,7 +86,8 @@ import { AccordionModule } from 'ngx-accordion';
     GestionComponent,
     UsuariosComponent,
     BitacoraMedicionesComponent,
-    BitacoraMedicionesFormComponent
+    BitacoraMedicionesFormComponent,
+    ActividadesComponent
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

@@ -20,7 +20,7 @@ export const LIMPIEZAROUTES: RouteInfo[] = [
 ];
 export const ADMINROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
-  { path: '/calendario', title: 'Mi calendario',  icon: 'pe-7s-date', class: '' },
+  { path: '/calendario', title: 'Calendario de actividades',  icon: 'pe-7s-date', class: '' },
   { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'pe-7s-note2', class: '' },
   { path: '/gestion', title: 'Gestión Interna',  icon: 'pe-7s-network', class: '' },
   // { path: '/user', title: 'User Profile',  icon: 'pe-7s-user', class: '' },

@@ -1,11 +1,54 @@
 <div>
-    <h1>Mis actividades de {{ mes }}</h1>
-    <accordion>
-      <accordion-group heading="Semana" *ngFor="let event of events">   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
+  <h1>Mis actividades asignadas de {{ mes }}</h1>
+  <accordion>
+    <accordion-group heading="Semana 45" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
+      
+    </accordion-group>
+    <accordion-group heading="Semana 46" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
+      <accordion>
+        <accordion-group *ngFor="let event of events" heading="Evento 3" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
           <p><strong>Actividad: </strong>{{ event.actividad }}</p>
-          <p><strong>Semana: </strong>{{ event.semana }}</p>
-      </accordion-group>
-    </accordion>
+        </accordion-group>
+        
+      </accordion>
+    </accordion-group>
+    <accordion-group heading="Semana 47" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
+      <!--p><strong>Actividad: </strong>{{ event.actividad }}</p>
+      <p><strong>Semana: </strong>{{ event.semana }}</p-->
+        <div class="content table-responsive table-full-width">
+
+        <table class="table table-hover table-striped row-border hover">
+          <thead>
+              <tr>
+                  <th >Actividad</th>
+                  <th >Estado</th>
+                  <th>Fecha</th>
+                  <th >Acciones</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let event of events">
+                  <td>{{event.actividad}}</td>
+                  <td *ngIf="event.aprobado">Aprobado</td>
+                  <td *ngIf="!event.activo">No Aprobado</td>
+                  <td>{{ event.fecha_inicio }}</td>
+                  <td>
+                    <button class="btn btn-ver btn-lg" >
+                      Visualizar
+                  </button>
+                  <button class="btn btn-ver btn-lg">
+                    Completar
+                </button>
+                  </td>
+              </tr>
+          </tbody>
+    </table>
+    </div>
+    </accordion-group>
+    <accordion-group heading="Semana 48" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
+      
+    </accordion-group>
+  </accordion>
   </div>
 
   

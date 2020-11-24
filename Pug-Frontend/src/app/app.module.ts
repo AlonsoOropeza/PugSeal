@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common'
 
 import { AppRoutingModule } from './app.routing';
 import { NavbarModule } from './shared/navbar/navbar.module';
@@ -42,6 +43,8 @@ import { NgxSelectModule } from 'ngx-select-ex';
 import { BitacoraMedicionesComponent } from './admin/bitacora-mediciones/bitacora-mediciones.component';
 import { BitacoraMedicionesFormComponent } from './forms/bitacora-mediciones-form/bitacora-mediciones-form.component';
 import { AccordionModule } from 'ngx-accordion';
+import { MantenimientoCorrectivoComponent } from './admin/mantenimiento-correctivo/mantenimiento-correctivo.component';
+import { MantenimientoCorrectivoFormComponent } from './forms/mantenimiento-correctivo-form/mantenimiento-correctivo-form.component';
 import { ActividadesComponent } from './admin/actividades/actividades.component';
 import { PresupuestoComponent } from './admin/presupuesto/presupuesto.component';
 
@@ -88,10 +91,12 @@ import { PresupuestoComponent } from './admin/presupuesto/presupuesto.component'
     UsuariosComponent,
     BitacoraMedicionesComponent,
     BitacoraMedicionesFormComponent,
+    MantenimientoCorrectivoComponent,
+    MantenimientoCorrectivoFormComponent,
     ActividadesComponent,
     PresupuestoComponent
   ],
-  providers: [CookieService],
+  providers: [CookieService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

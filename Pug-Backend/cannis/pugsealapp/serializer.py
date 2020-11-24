@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.password_validation import validate_password
-from pugsealapp.models import Area, Categoria, Usuario, Hotel, Ubicacion, Proveedor, Mantenimiento_Preventivo, Bitacora_Mediciones, Requisicion
+from pugsealapp.models import Area, Categoria, Usuario, Hotel, Ubicacion, Proveedor, Mantenimiento_Preventivo, Bitacora_Mediciones, Requisicion, Mantenimiento_Correctivo
 from djoser import utils
 from djoser.compat import get_user_email, get_user_email_field_name
 from djoser.conf import settings
@@ -63,4 +63,9 @@ class RequisicionSerializer(serializers.ModelSerializer):
 class BitacoraMedicionesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bitacora_Mediciones
+        fields = '__all__'
+
+class MantenimientoCorrectivoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Mantenimiento_Correctivo
         fields = '__all__'

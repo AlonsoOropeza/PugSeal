@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  url : 'https://nomadic-lodge-293014.uc.r.appspot.com/'
+  url : 'http://127.0.0.1:8000/'
 };

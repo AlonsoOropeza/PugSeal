@@ -209,3 +209,55 @@ export class Requisicion {
         this.finalizado = json?.finalizado ? json.finalizado : false;
     }
 }
+
+
+export class MantenimientoCorrectivo {
+    // Creacion de solicitud
+    public id_mantcor?: number;
+    public id_solicitante?: number;
+    public id_encargado?: number;
+    public id_supervisor?: number;
+    public fecha_solicitud?: Date;
+    public semana?: number;
+    public id_hotel?: number;
+    public id_area?: number;
+    public descripcion_problema?: String;
+    public id_categoria?: number;
+    public id_proveedor?: number;
+    public costo_trabajo?: number;
+    public costo_material?: number;
+    public horas_trabajo?: number;
+    public fecha_finalizacion?: Date;
+    public comentarios_supervisor?: string;
+    public calif_calidad?: number;
+    public calif_terminacion?: number;
+    public calif_limpieza?: number;
+    public calif_totalidad?: number;
+    public finalizado?: boolean;
+    public estado?: string;
+
+    constructor(json?: MantenimientoCorrectivo) {
+        this.id_mantcor = json?.id_mantcor ? json.id_mantcor : null;
+        this.id_solicitante = json?.id_solicitante ? json.id_solicitante : null;
+        this.id_encargado = json?.id_encargado ? json.id_encargado : null;
+        this.id_supervisor = json?.id_supervisor ? json.id_supervisor : null;
+        this.fecha_solicitud = json?.fecha_solicitud ? json.fecha_solicitud : undefined;
+        this.semana = json?.semana ? json.semana : 0;
+        this.id_hotel = json?.id_hotel ? json.id_hotel : null;
+        this.id_area = json?.id_area ? json.id_area : null;
+        this.descripcion_problema = json?.descripcion_problema ? json.descripcion_problema : null;
+        this.id_categoria = json?.id_categoria ? json.id_categoria : null;
+        this.id_proveedor = json?.id_proveedor ? json.id_proveedor : null;
+        this.costo_trabajo = json?.costo_trabajo ? json.costo_trabajo : null;
+        this.costo_material = json?.costo_material ? json.costo_material : null;
+        this.horas_trabajo = json?.horas_trabajo ? json.horas_trabajo : null;
+        this.fecha_finalizacion = json?.fecha_finalizacion ? json.fecha_finalizacion : undefined;
+        this.comentarios_supervisor = json?.comentarios_supervisor ? json.comentarios_supervisor : null;
+        this.calif_calidad = json?.calif_calidad ? json.calif_calidad : null;
+        this.calif_terminacion = json?.calif_terminacion ? json.calif_terminacion : null;
+        this.calif_limpieza = json?.calif_limpieza ? json.calif_limpieza : null;
+        this.calif_totalidad = json?.calif_totalidad ? json.calif_totalidad : null;
+        this.finalizado = json?.finalizado ? json.finalizado : false;
+        this.estado = json?.estado ? json.estado : null;
+    }
+}

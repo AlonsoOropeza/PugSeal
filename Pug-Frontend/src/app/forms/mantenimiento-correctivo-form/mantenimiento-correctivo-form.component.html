@@ -1,0 +1,129 @@
+<form #createForm="ngForm" class="modals">
+    <div class="row">
+        <div class="col-12" *ngIf="(mantenimiento.id_solicitante != null)">
+            <div class="form-group">
+                <label class="form-control-label" for="concepto">Solicitante:  </label>
+                <input type="text" class="form-control" id="id_solicitante"  [(ngModel)]="name"
+                    name="id_solicitante" #id_solicitante="ngModel" disabled=True >
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="fecha_solicitud">Fecha de Solicitud<span
+                        class="text-danger">*</span></label>
+                <input type="date" class="form-control" id="fecha_solicitud"  [(ngModel)]="mantenimiento.fecha_solicitud"  
+                    name="fecha_solicitud" #fecha_solicitud="ngModel" (change)="changeDate()"
+                    disabled={{!edit}}>
+            </div>
+        </div>
+        <div *ngIf="fecha_solicitud.invalid && (fecha_solicitud.dirty || fecha_solicitud.touched)" class="alert alert-danger">
+            <div *ngIf="fecha_solicitud.errors.required">
+                La fecha de solicitud es un campo obligatorio.
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="semana">Semana </label>
+                <input class="form-control" id="semana" required [(ngModel)]="mantenimiento.semana"
+                    name="semana" #semana="ngModel" readonly >
+            </div>
+        </div>
+        <div *ngIf="semana.invalid && (semana.dirty || semana.touched)" class="alert alert-danger">
+            <div *ngIf="semana.errors.required">
+                La semana es obligatoria.
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="id_hotel">Hotel <span class="text-danger">*</span></label>
+                <select class="form-control" id="id_hotel" [(ngModel)]="mantenimiento.id_hotel" name="id_hotel"
+                    disabled={{!edit}} #id_hotel="ngModel" required>
+                    <option *ngFor="let hotel of hoteles" value="{{hotel.id_hotel}}">{{hotel.nombre}}</option>
+                </select>
+            </div>
+            <div *ngIf="id_hotel.invalid && (id_hotel.dirty || id_hotel.touched)" class="alert alert-danger">
+                <div *ngIf="id_hotel.errors.required">
+                    El hotel es un campo obligatorio.
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="id_area">Habitación o Área <span class="text-danger">*</span></label>
+                <select class="form-control" id="id_area" [(ngModel)]="mantenimiento.id_area" name="id_area"
+                    disabled={{!edit}} #id_area="ngModel" required>
+                    <option *ngFor="let area of areas" value="{{area.id_area}}">{{area.nombre}}</option>
+                </select>
+            </div>
+            <div *ngIf="id_area.invalid && (id_area.dirty || id_area.touched)" class="alert alert-danger">
+                <div *ngIf="id_area.errors.required">
+                    El área o habitación es un campo obligatorio.
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="descripcion_problema">Describe el problema o necesidad<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="descripcion_problema" required [(ngModel)]="mantenimiento.descripcion_problema"
+                    name="descripcion_problema" #descripcion_problema="ngModel" disabled={{!edit}}>
+            </div>
+            <div *ngIf="descripcion_problema.invalid && (descripcion_problema.dirty || descripcion_problema.touched)" class="alert alert-danger">
+                <div *ngIf="descripcion_problema.errors.required">
+                    La descipción del problema o necesidad es un campo obligatorio.
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="id_categoria">Categoría<span class="text-danger">*</span></label>
+                <select class="form-control" id="id_categoria" [(ngModel)]="mantenimiento.id_categoria" name="id_categoria"
+                    disabled={{!edit}} #id_categoria="ngModel" required>
+                    <option *ngFor="let categoria of categorias" value="{{categoria.id_categoria}}">{{categoria.nombre}}</option>
+                </select>
+            </div>
+            <div *ngIf="id_categoria.invalid && (id_categoria.dirty || id_categoria.touched)" class="alert alert-danger">
+                <div *ngIf="id_categoria.errors.required">
+                    La categoría es un campo obligatorio.
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="proveedor">Proveedor <span class="text-danger">*</span></label>
+                <select class="form-control" id="proveedor" required [(ngModel)]="mantenimiento.id_proveedor"
+                    name="proveedor" #proveedor="ngModel" disabled={{!edit}}>
+                    <option *ngFor="let proveedor of proveedores" value="{{proveedor.id_proveedor}}">
+                        {{proveedor.nombre_empresa}}</option>
+                </select>
+            </div>
+        </div>
+        <div *ngIf="proveedor.invalid && (proveedor.dirty || proveedor.touched)" class="alert alert-danger">
+            <div *ngIf="proveedor.errors.required">
+                El proveedor es obligatorio.
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="estado">Estado de solicitud </label>
+                <select class="form-control" id="estado" [(ngModel)]="mantenimiento.estado" name="estado"
+                    disabled={{!edit}} #estado="ngModel">
+                    <option value="Alto">Alto</option>
+                    <option value="Medio">Medio</option>
+                    <option value="Bajo">Bajo</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <button *ngIf="edit" class="btn btn-primary" type="submit" [disabled]="createForm.invalid"
+        (click)="continue(createForm)">
+        Guardar
+    </button>
+
+    <button *ngIf="edit" class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+        Cancelar
+    </button>
+
+    <button *ngIf="!edit" class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+        Cerrar
+    </button>
+</form>

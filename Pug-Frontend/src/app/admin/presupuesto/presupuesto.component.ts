@@ -60,7 +60,6 @@ export class PresupuestoComponent implements OnInit {
     this.solicitudes = await this.mantenimientoPreventivoService.getMantenimientosPreventivos();
     this.solicitudes.forEach(solicitud => {
       if (solicitud.id_empleado === this.user.id) {
-        total += solicitud.cotizacion;
           this.events = [
           ...this.events,
           {
@@ -71,15 +70,16 @@ export class PresupuestoComponent implements OnInit {
       }
     });
     for (let index = 0; index < 12; index++) {
+      total = 0;
       let events = [];
       this.solicitudes.forEach(solicitud => {
         if (moment(solicitud.fecha_inicio).month() === index) {
+          total += solicitud.cotizacion;
           events = [
             ...events,
             {
               ...solicitud,
               semana: moment(new Date(solicitud.fecha_inicio)).week(),
-              total
             },
           ];
         }
@@ -91,7 +91,8 @@ export class PresupuestoComponent implements OnInit {
           titulo: element,
           eventos: {
             events
-          }
+          },
+          total
         }
       ]
     }

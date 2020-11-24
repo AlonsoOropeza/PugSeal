@@ -59,7 +59,7 @@ export class MantenimientoPreventivoComponent implements OnDestroy, OnInit {
     this.loadInfo().then(() => {
       this.render();
     });
-    this.titulos = ['Actividad', 'Mes', 'Aprobado', 'Semana', 'Ver', 'Editar'];
+    this.titulos = ['Actividad', 'Aprobado', 'Mes', 'Semana', 'Ver', 'Editar'];
   }
 
   public async loadInfo() {
@@ -132,6 +132,7 @@ export class MantenimientoPreventivoComponent implements OnDestroy, OnInit {
   }
 
   public async update(form: NgForm) {
+    const mant_del = this.mantenimiento;
     if (form.value.frecuencia_anual < 1 || form.value.frecuencia_anual > 12) {
       this.notificationsService.showNotification('La frecuencia anual debe realizarse entre 1 a 12 veces al año', false);
       throw new Error('Error');
@@ -151,6 +152,7 @@ export class MantenimientoPreventivoComponent implements OnDestroy, OnInit {
           await this.create(form, fecha);
       }, 5000);
       });
+      this.delete(mant_del);
     } else {
       this.spinner.showSpinner();
         (await this.mantenimientoService.updateMantenimiento(this.mantenimiento)).subscribe(
@@ -200,9 +202,10 @@ export class MantenimientoPreventivoComponent implements OnDestroy, OnInit {
     }
   }
 
-  public async delete(mantenimiento: MantenimientoPreventivo) {
+  public async delete(mantenimiento?: MantenimientoPreventivo) {
+    const mant = mantenimiento ? mantenimiento : this.mantenimiento;
     this.spinner.showSpinner();
-    (await this.mantenimientoService.deleteMantenimiento(this.mantenimiento)).subscribe(
+    (await this.mantenimientoService.deleteMantenimiento(mant)).subscribe(
       async () => {
         this.notificationsService.showNotification('Se ha eliminado correctamente la solicitud.', true),
         this.loadInfo();

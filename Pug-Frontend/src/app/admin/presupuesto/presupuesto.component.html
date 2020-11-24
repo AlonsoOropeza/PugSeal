@@ -1,38 +1,51 @@
-<div>
-    <h1>Presupuesto Anual</h1>
-    <accordion>
-      <accordion-group *ngFor="let mes of actividad_meses" heading="{{mes.titulo}}" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
-        <div class="content table-responsive table-full-width">
-          <table class="table table-hover table-striped row-border hover">
-            <thead>
-                <tr>
-                    <th>Suma</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let event of mes.eventos.events">
-                    <td>{{event.cotizacion}}</td>
-                </tr>
-            </tbody>
-      </table>
-      </div>
-      <div class="content table-responsive table-full-width">
-        <table class="table table-hover table-striped row-border hover">
-          <thead>
-              <tr>
-                  <th>Total</th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr>
-                  <td>{{mes.total}}</td>
-              </tr>
-          </tbody>
-    </table>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Presupuesto anual</h4>
+                        <p class="category">Desde aquí se pueden obtener los datos necesarios para tomar decisiones a partir del presupuesto.</p>
+                    </div>
+                    <accordion>
+                        <accordion-group *ngFor="let mes of actividad_meses" heading="{{mes.titulo}} - ${{mes.total}} mxn" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
+                          <div class="content table-responsive table-full-width" *ngIf="mes.eventos.events.length > 0">
+                              <table class="table table-hover table-striped row-border hover">
+                                  <thead>
+                                      <tr>
+                                          <th>Costos individuales</th>
+                                          <th>Actividad</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr *ngFor="let event of mes.eventos.events">
+                                          <td>${{event.cotizacion}} mxn</td>
+                                          <td>{{event.actividad}}</td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                        <div class="content table-responsive table-full-width">
+                          <table class="table table-hover table-striped row-border hover">
+                            <thead>
+                                <tr>
+                                    <th>Total de costos de {{mes.titulo}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>${{mes.total}} mxn</td>
+                                </tr>
+                            </tbody>
+                      </table>
+                      </div>
+                        </accordion-group>
+                      </accordion>
+                </div>
+            </div>
+        </div>
     </div>
-      </accordion-group>
-    </accordion>
-  </div>
-  <br><br>
+</div>
+<br><br>
   
     

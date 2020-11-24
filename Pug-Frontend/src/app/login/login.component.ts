@@ -21,9 +21,11 @@ export class LoginComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    const user: Usuario = JSON.parse(this.getCookie('user'))
-    if (user) {
-      this.router.navigateByUrl('/dashboard');
+    if (this.cookies.check('user')) {
+      const user: Usuario = JSON.parse(this.getCookie('user'))
+      if (user) {
+        this.router.navigateByUrl('/dashboard');
+      }
     }
   }
 

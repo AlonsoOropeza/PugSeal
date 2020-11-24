@@ -1,7 +1,7 @@
 import { ProveedoresService } from './../../services/proveedores.service';
 import { EmpleadosService } from './../../services/empleados.service';
 import { CategoriasService } from './../../services/categorias.service';
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MantenimientoPreventivo, Proveedor, Categoria, Usuario } from 'app/models/models.model';
 import { MantenimientoPreventivoService } from 'app/services/mantenimiento_preventivo.service';
@@ -10,6 +10,9 @@ import { SpinnerService } from 'app/services/spinner.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+import { DataTableDirective } from 'angular-datatables';
+import moment = require('moment');
+import { Meses } from 'app/shared/diccionarios';
 
 
 @Component({
@@ -17,8 +20,9 @@ import { CookieService } from 'ngx-cookie-service';
   templateUrl: './mantenimiento-preventivo.component.html',
   styleUrls: ['./mantenimiento-preventivo.component.css']
 })
-export class MantenimientoPreventivoComponent implements OnInit {
-
+export class MantenimientoPreventivoComponent implements OnDestroy, OnInit {
+  @ViewChild(DataTableDirective, {static: false})
+  dtElement: DataTableDirective;
   public mantenimiento: MantenimientoPreventivo;
   public mantenimientos: MantenimientoPreventivo[];
   public titulos: string[];
@@ -30,6 +34,7 @@ export class MantenimientoPreventivoComponent implements OnInit {
   public empleados: Usuario[];
   public categorias: Categoria[];
   public user: Usuario;
+  public isAdmin = false;
 
   constructor(
     private mantenimientoService: MantenimientoPreventivoService,
@@ -46,40 +51,55 @@ export class MantenimientoPreventivoComponent implements OnInit {
     this.user = JSON.parse(this.cookies.get('user'));
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 10,
+      pageLength: 25,
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
       }
     };
-    this.loadInfo();
-    this.titulos = ['Actividad', 'Fecha', 'Aprobado', 'Ver', 'Editar'];
+    this.loadInfo().then(() => {
+      this.render();
+    });
+    this.titulos = ['Actividad', 'Mes', 'Aprobado', 'Semana', 'Ver', 'Editar'];
   }
 
   public async loadInfo() {
     this.spinner.showSpinner();
+    if (this.user.rol === 'Admin') {
+      this.isAdmin = true;
+    }
     this.mantenimientos = await this.mantenimientoService.getMantenimientosPreventivos();
+    this.mantenimientos.forEach(element => {
+      element.mes = element.fecha_inicio ? Meses[moment(element.fecha_inicio).month()] : null;
+      element.semana = element.fecha_inicio ? moment(element.fecha_inicio).week() : null;
+    });
+
     this.categorias = await this.categoriasService.getCategorias();
     this.empleados = await this.empleadosService.getEmpleados();
     this.proveedores = await this.proveedoresService.getProveedores();
-    this.dtTrigger.next();
     this.spinner.hideSpinner();
+    console.log(this.mantenimientos);
+
   }
 
-  public async create(form: NgForm) {
+  public async create(form?: NgForm, fecha?: any) {
     if (form.value.frecuencia_anual < 1 || form.value.frecuencia_anual > 12) {
       this.notificationsService.showNotification('La frecuencia anual debe realizarse entre 1 a 12 veces al año', false);
       throw new Error('Error');
     }
+    this.mantenimiento.fecha_inicio = fecha ? fecha : this.mantenimiento.fecha_inicio;
+    this.mantenimiento.fecha_inicio = this.mantenimiento.fecha_inicio ? this.mantenimiento.fecha_inicio : null;
+
+    console.log(this.mantenimiento.fecha_inicio);
 
     this.spinner.showSpinner();
       (await this.mantenimientoService.createMantenimientoPreventivo(this.mantenimiento)).subscribe(
         async () => {
           this.notificationsService.showNotification('Se ha creado correctamente la solicitud.', true)
-          this.mantenimientos = await this.mantenimientoService.getMantenimientosPreventivos()
+          this.loadInfo();
         },
         async error => {
           this.notificationsService.showNotification(error.message, false);
-          this.mantenimientos = await this.mantenimientoService.getMantenimientosPreventivos()
+          this.loadInfo();
         }
     );
     this.spinner.hideSpinner();
@@ -87,7 +107,7 @@ export class MantenimientoPreventivoComponent implements OnInit {
   }
 
   public async cancel() {
-    this.mantenimientos = await this.mantenimientoService.getMantenimientosPreventivos();
+    this.loadInfo();
     this.modalComponent.hide();
   }
 
@@ -119,20 +139,65 @@ export class MantenimientoPreventivoComponent implements OnInit {
     if (form.value.aprobado) {
       this.mantenimiento.id_auditor = this.user.id;
     }
+    console.log(form.value.meses);
+    
+    if (!this.mantenimiento.fecha_inicio && form.value.meses !== []) {
+      form.value.meses.forEach(async element => {
+        this.mantenimiento.fecha_inicio = await this.selectMonth(element);
+        const fecha = this.mantenimiento.fecha_inicio.toISOString().split('T')[0];
+        this.mantenimiento.fecha_inicio = fecha;
+        // console.log(fecha);
+        setTimeout(async () => {
+          await this.create(form, fecha);
+      }, 5000);
+      });
+    } else {
+      this.spinner.showSpinner();
+        (await this.mantenimientoService.updateMantenimiento(this.mantenimiento)).subscribe(
+          async () => {
+            this.notificationsService.showNotification('Se ha actualizado correctamente la solicitud.', true),
+            this.loadInfo();
+          },
+          async error => {
+            this.notificationsService.showNotification(error.message, false),
+            this.loadInfo();
+          }
+        );
+        this.spinner.hideSpinner();
+      this.modalComponent.hide();
+    }
 
-    this.spinner.showSpinner();
-    (await this.mantenimientoService.updateMantenimiento(this.mantenimiento)).subscribe(
-      async () => {
-        this.notificationsService.showNotification('Se ha actualizado correctamente la solicitud.', true),
-        this.mantenimientos = await this.mantenimientoService.getMantenimientosPreventivos()
-      },
-      async error => {
-        this.notificationsService.showNotification(error.message, false),
-        this.mantenimientos = await this.mantenimientoService.getMantenimientosPreventivos()
-      }
-    );
-    this.spinner.hideSpinner();
-    this.modalComponent.hide();
+  }
+
+  public async selectMonth(mes: string) {
+    switch (mes) {
+      case 'Enero':
+        return new Date(2021, 0, 15);
+      case 'Febrero':
+        return new Date(2021, 1, 15);
+      case 'Marzo':
+        return new Date(2021, 2, 15);
+      case 'Abril':
+        return new Date(2021, 3, 15);
+      case 'Mayo':
+        return new Date(2021, 4, 15);
+      case 'Junio':
+        return new Date(2021, 5, 15);
+      case 'Julio':
+        return new Date(2021, 6, 15);
+      case 'Agosto':
+        return new Date(2021, 7, 15);
+      case 'Septiembre':
+        return new Date(2021, 8, 15);
+      case 'Octubre':
+        return new Date(2021, 9, 15);
+      case 'Noviembre':
+        return new Date(2021, 10, 15);
+      case 'Diciembre':
+        return new Date(2021, 11, 15);
+      default:
+        return new Date();
+    }
   }
 
   public async delete(mantenimiento: MantenimientoPreventivo) {
@@ -140,15 +205,29 @@ export class MantenimientoPreventivoComponent implements OnInit {
     (await this.mantenimientoService.deleteMantenimiento(this.mantenimiento)).subscribe(
       async () => {
         this.notificationsService.showNotification('Se ha eliminado correctamente la solicitud.', true),
-        this.mantenimientos = await this.mantenimientoService.getMantenimientosPreventivos()
+        this.loadInfo();
       },
       async error => {
         this.notificationsService.showNotification(error.message, false),
-        this.mantenimientos = await this.mantenimientoService.getMantenimientosPreventivos()
+        this.loadInfo();
       }
     );
     this.spinner.hideSpinner();
     this.modalComponent.hide();
+  }
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
+  }
+
+  render(): void {
+    this.dtTrigger.next();
+  }
+
+  async rerender(): Promise<void> {
+    this.dtTrigger.unsubscribe();
+    this.dtTrigger.next();
   }
 
 }

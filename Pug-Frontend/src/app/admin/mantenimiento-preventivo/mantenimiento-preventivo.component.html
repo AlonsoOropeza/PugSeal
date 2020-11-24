@@ -30,9 +30,12 @@
                                 <tbody>
                                     <tr *ngFor="let mantenimiento of mantenimientos">
                                         <td>{{mantenimiento.actividad}}</td>
-                                        <td>{{mantenimiento.fecha_inicio}}</td>
+                                        <td *ngIf="mantenimiento.fecha_inicio">{{mantenimiento.mes}}</td>
+                                        <td *ngIf="!mantenimiento.fecha_inicio">Aún no se asignan meses</td>
                                         <td *ngIf="mantenimiento.aprobado">Sí</td>
                                         <td *ngIf="!mantenimiento.aprobado">No</td>
+                                        <td *ngIf="mantenimiento.fecha_inicio">{{mantenimiento.semana}}</td>
+                                        <td *ngIf="!mantenimiento.fecha_inicio">Aún no se asignan semanas</td>
                                         <td>
                                             <button class="btn-ver  btn-block" (click)="addRequest(modalupdate, mantenimiento, false)">
                                                 Visualizar
@@ -106,6 +109,7 @@
         [proveedores]="proveedores"
         [categorias]="categorias"
         [empleados]="empleados"
+        [admin]="isAdmin"
         [user]="user"
         (continueparent)="update($event)"
         (cancelparent)="cancel()"

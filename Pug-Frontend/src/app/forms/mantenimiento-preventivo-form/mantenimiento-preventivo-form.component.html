@@ -1,26 +1,5 @@
 <form #createForm="ngForm" class="modals">
     <div class="row">
-        <div class="col-12">
-            <div class="form-group">
-                <label class="form-control-label" for="proveedor">Categoría <span class="text-danger">*</span></label>
-                <select
-                    class="form-control"
-                    id="categoria" required
-                    [(ngModel)]="mantenimiento.id_categoria"
-                    name="categoria"
-                    #categoria="ngModel"
-                    disabled={{!edit}}
-                >
-                <option *ngFor="let categoria of categorias" value="{{categoria.id_categoria}}">{{categoria.nombre}}</option>
-                </select>
-            </div>
-        </div>
-        
-        <div *ngIf="categoria.invalid && (categoria.dirty || categoria.touched)" class="alert alert-danger">
-            <div *ngIf="categoria.errors.required">
-                La categoría es obligatoria.
-            </div>
-        </div>
 
         <div class="col-12">
             <div class="form-group">
@@ -44,7 +23,29 @@
             </div>
         </div>
 
-        <div class="col-12">
+        <div class="col">
+            <div class="form-group">
+                <label class="form-control-label" for="proveedor">Categoría <span class="text-danger">*</span></label>
+                <select
+                    class="form-control"
+                    id="categoria" required
+                    [(ngModel)]="mantenimiento.id_categoria"
+                    name="categoria"
+                    #categoria="ngModel"
+                    disabled={{!edit}}
+                >
+                <option *ngFor="let categoria of categorias" value="{{categoria.id_categoria}}">{{categoria.nombre}}</option>
+                </select>
+            </div>
+        </div>
+        
+        <div *ngIf="categoria.invalid && (categoria.dirty || categoria.touched)" class="alert alert-danger">
+            <div *ngIf="categoria.errors.required">
+                La categoría es obligatoria.
+            </div>
+        </div>
+
+        <div class="col">
             <div class="form-group">
                 <label class="form-control-label" for="proveedor">Proveedor <span class="text-danger">*</span></label>
                 <select
@@ -92,16 +93,19 @@
 
         <div class="col-12">
             <div class="form-group">
-                <label class="form-control-label" for="cotizacion">Cotización <span class="text-danger">*</span></label>
-                <input
-                    type="number"
-                    class="form-control"
-                    id="cotizacion" required
-                    [(ngModel)]="mantenimiento.cotizacion"
-                    name="cotizacion"
-                    #cotizacion="ngModel"
-                    disabled={{!edit}}
-                >
+                <label class="form-control-label" for="cotizacion">Costo Estimado<span class="text-danger">*</span></label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="cotizacion" required
+                        [(ngModel)]="mantenimiento.cotizacion"
+                        name="cotizacion"
+                        #cotizacion="ngModel"
+                        disabled={{!edit}}
+                    >
+                    </div>
             </div>
     
             <div *ngIf="cotizacion.invalid && (cotizacion.dirty || cotizacion.touched)" class="alert alert-danger">
@@ -132,58 +136,62 @@
             </div>
         </div>
 
-        <div class="col-12">
-            <div class="form-group">
-                <label class="form-control-label" for="fecha_inicio">Fecha Inicio <span class="text-danger">*</span></label>
-                <input
-                    type="date"
-                    class="form-control"
-                    id="fecha_inicio" required
-                    [(ngModel)]="mantenimiento.fecha_inicio"
-                    name="fecha_inicio"
-                    #fecha_inicio="ngModel"
-                    disabled={{!edit}}
-                >
-            </div>
-    
-            <div *ngIf="fecha_inicio.invalid && (fecha_inicio.dirty || fecha_inicio.touched)" class="alert alert-danger">
-                <div *ngIf="fecha_inicio.errors.required">
-                    La fecha inicial es obligatoria.
+        <div *ngIf="admin  && !mantenimiento.fecha_inicio">
+            <hr>
+            <h6 class="modal-title" id="modal-title-default">
+                Asignar meses
+            </h6>
+            <hr>
+
+            <div class="col">
+                <div class="form-group">
+                    <label class="form-control-label" for="meses">Meses</label>
+                    <ngx-select [multiple]="true"
+                        [items]="items"
+                        [(ngModel)]="ngxValue"
+                        [autoClearSearch]="false"
+                        placeholder="Presiona para seleccionar los meses"
+                        name="meses"
+                        dropDownMenuOtherClasses="dropdown-menu-right"
+                        autoActiveOnMouseEnter
+                        >
+                    </ngx-select>
                 </div>
             </div>
-        </div>
-        <div *ngIf="user.rol === 'Auditor'">
-            <div class="modal-header">
-                <h6 class="modal-title" id="modal-title-update1">
-                    Aprobar la solicitud
-                </h6>
-            </div>
-            <br>
-            <div class="col-12">
-                <div class="form-group">
-                    <label class="form-control-label" for="id_auditor">Aprobado por</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="id_auditor"
-                        [(ngModel)]="auditor"
-                        name="id_auditor"
-                        #id_auditor="ngModel"
-                        disabled
-                    >
+
+            <div *ngIf="user.rol === 'Auditor'">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="modal-title-update1">
+                        Aprobar la solicitud
+                    </h6>
                 </div>
-            </div>
-            <div class="col-12">
-                <div class="form-group">
-                    <label class="form-control-label" for="aprobado">Aprobar</label>
-                    <input
-                        type="checkbox"
-                        class="form-control"
-                        id="aprobado"
-                        [(ngModel)]="mantenimiento.aprobado"
-                        name="aprobado"
-                        #aprobado="ngModel"
-                    >
+                <br>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label class="form-control-label" for="id_auditor">Aprobado por</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="id_auditor"
+                            [(ngModel)]="auditor"
+                            name="id_auditor"
+                            #id_auditor="ngModel"
+                            disabled
+                        >
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label class="form-control-label" for="aprobado">Aprobar</label>
+                        <input
+                            type="checkbox"
+                            class="form-control"
+                            id="aprobado"
+                            [(ngModel)]="mantenimiento.aprobado"
+                            name="aprobado"
+                            #aprobado="ngModel"
+                        >
+                    </div>
                 </div>
             </div>
         </div>

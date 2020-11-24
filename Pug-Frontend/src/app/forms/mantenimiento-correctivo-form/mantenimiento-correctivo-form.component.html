@@ -24,8 +24,8 @@
         <div class="col-12">
             <div class="form-group">
                 <label class="form-control-label" for="semana">Semana </label>
-                <input class="form-control" id="semana" required [ngModel]="mantenimiento.fecha_solicitud |  date:'w'"  
-                    name="semana" #semana="ngModel" disabled=true value="{{mantenimiento.fecha_solicitud |  date:'w'}}">
+                <input class="form-control" id="semana" required [ngModel]="mantenimiento.fecha_solicitud |  date:'w'"  (mouseenter)="mantenimiento.semana = $event.target.value"
+                    name="semana" #semana="ngModel" value="{{mantenimiento.fecha_solicitud |  date:'w'}}" readonly >
             </div>
         </div>
         <div *ngIf="semana.invalid && (semana.dirty || semana.touched)" class="alert alert-danger">

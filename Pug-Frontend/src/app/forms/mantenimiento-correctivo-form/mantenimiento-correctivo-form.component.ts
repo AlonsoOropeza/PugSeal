@@ -29,9 +29,7 @@ export class MantenimientoCorrectivoFormComponent implements OnInit{
   public startDate: any;
   public yearStart: any;
 
-
   ngOnInit(): void{
-    
    // console.log(this.startDate);
    // this.getWeek(this.startDate);
   }
@@ -39,6 +37,7 @@ export class MantenimientoCorrectivoFormComponent implements OnInit{
 
   public continue(form: NgForm) {
     //this.mantenimiento.semana = 
+    console.log(this.mantenimiento.semana);
     this.continueparent.emit(form);
   }
 
@@ -46,9 +45,13 @@ export class MantenimientoCorrectivoFormComponent implements OnInit{
     this.cancelparent.emit();
   }
 
-  updateWeek(value: number){
+  hola(value: any){
     console.log(value);
-    this.mantenimiento.semana = value;
+  }
+
+  updateWeek(value: number){
+    //console.log(value);
+    this.mantenimiento.semana = value;  
   }
 
   /*public getWeek(date: any){

@@ -43,6 +43,7 @@ import { BitacoraMedicionesComponent } from './admin/bitacora-mediciones/bitacor
 import { BitacoraMedicionesFormComponent } from './forms/bitacora-mediciones-form/bitacora-mediciones-form.component';
 import { AccordionModule } from 'ngx-accordion';
 import { ActividadesComponent } from './admin/actividades/actividades.component';
+import { PresupuestoComponent } from './admin/presupuesto/presupuesto.component';
 
 
 @NgModule({
@@ -87,7 +88,8 @@ import { ActividadesComponent } from './admin/actividades/actividades.component'
     UsuariosComponent,
     BitacoraMedicionesComponent,
     BitacoraMedicionesFormComponent,
-    ActividadesComponent
+    ActividadesComponent,
+    PresupuestoComponent
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

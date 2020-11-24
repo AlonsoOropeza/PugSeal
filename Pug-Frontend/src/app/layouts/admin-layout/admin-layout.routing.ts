@@ -1,3 +1,4 @@
+import { PresupuestoComponent } from './../../admin/presupuesto/presupuesto.component';
 import { GestionComponent } from './../../admin/gestion/gestion.component';
 import { CalendarioComponent } from './../../admin/calendario/calendario.component';
 import { Routes, ActivatedRouteSnapshot } from '@angular/router';
@@ -34,5 +35,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'areas',                    component: AreasComponent                   },
     { path: 'proveedores',              component: ProveedoresComponent             },
     { path: 'actividades',              component: ActividadesComponent             },
-    { path: 'requisiciones',            component: RequisicionesComponent           }
+    { path: 'requisiciones',            component: RequisicionesComponent           },
+    { path: 'presupuesto',              component: PresupuestoComponent             }
 ]

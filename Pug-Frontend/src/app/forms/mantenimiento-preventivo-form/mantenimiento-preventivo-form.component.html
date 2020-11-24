@@ -136,7 +136,7 @@
             </div>
         </div>
 
-        <div *ngIf="admin  && !mantenimiento.fecha_inicio">
+        <div *ngIf="admin  && !mantenimiento.fecha_inicio && aprobado">
             <hr>
             <h6 class="modal-title" id="modal-title-default">
                 Asignar meses
@@ -158,43 +158,43 @@
                     </ngx-select>
                 </div>
             </div>
-
-            <div *ngIf="user.rol === 'Auditor'">
-                <div class="modal-header">
-                    <h6 class="modal-title" id="modal-title-update1">
-                        Aprobar la solicitud
-                    </h6>
+        </div>
+        <div *ngIf="user.rol === 'Auditor' && !mantenimiento.fecha_inicio">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-title-update1">
+                    Aprobar la solicitud
+                </h6>
+            </div>
+            <br>
+            <div class="col-12">
+                <div class="form-group">
+                    <label class="form-control-label" for="id_auditor">Aprobado por</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="id_auditor"
+                        [(ngModel)]="auditor"
+                        name="id_auditor"
+                        #id_auditor="ngModel"
+                        disabled
+                    >
                 </div>
-                <br>
-                <div class="col-12">
-                    <div class="form-group">
-                        <label class="form-control-label" for="id_auditor">Aprobado por</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="id_auditor"
-                            [(ngModel)]="auditor"
-                            name="id_auditor"
-                            #id_auditor="ngModel"
-                            disabled
-                        >
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="form-group">
-                        <label class="form-control-label" for="aprobado">Aprobar</label>
-                        <input
-                            type="checkbox"
-                            class="form-control"
-                            id="aprobado"
-                            [(ngModel)]="mantenimiento.aprobado"
-                            name="aprobado"
-                            #aprobado="ngModel"
-                        >
-                    </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label class="form-control-label" for="aprobado">Aprobar</label>
+                    <input
+                        type="checkbox"
+                        class="form-control"
+                        id="aprobado"
+                        [(ngModel)]="mantenimiento.aprobado"
+                        name="aprobado"
+                        #aprobado="ngModel"
+                    >
                 </div>
             </div>
         </div>
+       
 
     </div>
   

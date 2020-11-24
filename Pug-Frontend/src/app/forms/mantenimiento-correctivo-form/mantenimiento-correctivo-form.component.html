@@ -12,7 +12,7 @@
                 <label class="form-control-label" for="fecha_solicitud">Fecha de Solicitud<span
                         class="text-danger">*</span></label>
                 <input type="date" class="form-control" id="fecha_solicitud"  [(ngModel)]="mantenimiento.fecha_solicitud"  
-                    name="fecha_solicitud" #fecha_solicitud="ngModel"  
+                    name="fecha_solicitud" #fecha_solicitud="ngModel" (change)="changeDate()"
                     disabled={{!edit}}>
             </div>
         </div>
@@ -24,8 +24,8 @@
         <div class="col-12">
             <div class="form-group">
                 <label class="form-control-label" for="semana">Semana </label>
-                <input class="form-control" id="semana" required [ngModel]="mantenimiento.fecha_solicitud |  date:'w'"  (mouseenter)="mantenimiento.semana = $event.target.value"
-                    name="semana" #semana="ngModel" value="{{mantenimiento.fecha_solicitud |  date:'w'}}" readonly >
+                <input class="form-control" id="semana" required [(ngModel)]="mantenimiento.semana"
+                    name="semana" #semana="ngModel" readonly >
             </div>
         </div>
         <div *ngIf="semana.invalid && (semana.dirty || semana.touched)" class="alert alert-danger">

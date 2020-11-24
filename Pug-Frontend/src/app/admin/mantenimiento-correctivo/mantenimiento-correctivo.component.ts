@@ -12,6 +12,7 @@ import { SpinnerService } from 'app/services/spinner.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+import moment = require('moment');
 
 
 @Component({
@@ -71,6 +72,9 @@ export class MantenimientoCorrectivoComponent implements OnInit {
     this.proveedores = await this.proveedoresService.getProveedores();
     this.hoteles = await this.hotelesService.getHoteles();
     this.areas = await this.areaService.getAreas();
+    this.mantenimientos.forEach(mantenimiento => {
+      mantenimiento.semana = moment(mantenimiento.fecha_solicitud).week();
+    });
     this.dtTrigger.next();
     this.spinner.hideSpinner();
   }

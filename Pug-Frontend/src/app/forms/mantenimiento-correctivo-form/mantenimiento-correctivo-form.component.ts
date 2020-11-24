@@ -5,6 +5,7 @@ import { Categoria, Usuario, MantenimientoCorrectivo, Proveedor , Hotel, Area} f
 import { EventEmitter } from '@angular/core';
 import { getWeek } from 'date-fns';
 import { DatePipe, formatDate } from '@angular/common';
+import moment = require('moment');
 @Component({
   selector: 'app-mantenimiento-correctivo-form',
   templateUrl: './mantenimiento-correctivo-form.component.html',
@@ -54,6 +55,9 @@ export class MantenimientoCorrectivoFormComponent implements OnInit{
     this.mantenimiento.semana = value;  
   }
 
+  changeDate() {
+    this.mantenimiento.semana = moment(this.mantenimiento.fecha_solicitud).week();
+  }
   /*public getWeek(date: any){
     console.log(this.mantenimiento.semana);
     date = new Date();

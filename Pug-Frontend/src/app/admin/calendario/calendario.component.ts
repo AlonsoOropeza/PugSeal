@@ -1,3 +1,4 @@
+import { Meses } from './../../shared/diccionarios';
 import { MantenimientoPreventivoService } from 'app/services/mantenimiento_preventivo.service';
 import { Component, OnInit } from '@angular/core';
 import { ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
@@ -14,8 +15,7 @@ import { ProveedoresService } from 'app/services/proveedores.service';
 import { EmpleadosService } from 'app/services/empleados.service';
 import { CategoriasService } from 'app/services/categorias.service';
 import { NgForm } from '@angular/forms';
-
-
+import moment = require('moment');
 
 const colors: any = {
   red: {
@@ -52,13 +52,16 @@ export class CalendarioComponent implements OnInit {
   public empleados: Usuario[];
   public categorias: Categoria[];
   public mantenimiento: MantenimientoPreventivo;
+  public mes: any;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger = new Subject();
 
   public modalData: {
     action: string;
     event: CalendarEvent;
   };
   public modalComponent: BsModalRef;
-
+  public titulos: string[];
   public actions: CalendarEventAction[] = [
     {
       label: '<i class="fas fa-fw fa-pencil-alt"></i>',
@@ -77,8 +80,7 @@ export class CalendarioComponent implements OnInit {
     },
   ];
   public refresh: Subject<any> = new Subject();
-  public events: CalendarEvent[] = [];
-
+  public events: any[] = [];
   public activeDayIsOpen = false;
 
   constructor(
@@ -97,33 +99,56 @@ export class CalendarioComponent implements OnInit {
   ngOnInit() {
     this.user = JSON.parse(this.cookies.get('user'));
     this.loadInfo();
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
+      }
+    };
+    this.titulos = ['Actividad', 'Fecha De Inicio', 'Aprobado', 'Ver', 'Editar'];
   }
 
   public async loadInfo() {
+    this.mes = moment(new Date()).month();
+    console.log(this.mes);
+    this.mes = Meses[this.mes];
+    console.log(this.mes);
+
     this.events = [];
     this.spinner.showSpinner();
     this.solicitudes = await this.mantenimientoPreventivoService.getMantenimientosPreventivos();
     console.log(this.solicitudes);
     this.solicitudes.forEach(solicitud => {
-      this.events = [
-        ...this.events,
-        {
-          ...solicitud,
-          actions: this.actions,
-          title: solicitud.actividad,
-          start: new Date(solicitud.fecha_inicio),
-          end: new Date(solicitud.fecha_inicio),
-          color: colors.yellow,
-          allDay: true,
-        },
-      ];
+      if(solicitud.id_empleado === this.user.id){
+          this.events = [
+          ...this.events,
+          {
+            ...solicitud,
+            actions: this.actions,
+            title: solicitud.actividad,
+            start: new Date(solicitud.fecha_inicio),
+            end: new Date(solicitud.fecha_inicio),
+            color: colors.yellow,
+            allDay: true,
+            semana: moment(new Date(solicitud.fecha_inicio)).week()
+          },
+        ];
+      }
     });
     console.log(this.events);
     this.refresh.next();
+    this.dtTrigger.next();
     this.spinner.hideSpinner();
     this.categorias = await this.categoriasService.getCategorias();
     this.empleados = await this.empleadosService.getEmpleados();
     this.proveedores = await this.proveedoresService.getProveedores();
+
+    const first  =  new Date(new Date().getFullYear(), 0, 1);
+    const last  =  new Date(new Date().getFullYear(), 11, 31);
+    for (const i = first; i <= last; i.setDate(i.getDate() + 7)) {
+      console.log(moment(i).week(), i);
+    }
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {

@@ -36,7 +36,7 @@ class EmpleadosViewSet(viewsets.ModelViewSet):
 
 class MantenimientoPreventivoViewSet(viewsets.ModelViewSet):
 	serializer_class = MantenimientoPreventivoSerializer
-	queryset = Mantenimiento_Preventivo.objects.all()
+	queryset = Mantenimiento_Preventivo.objects.order_by('fecha_inicio')
 
 class BitacoraMedicionesViewSet(viewsets.ModelViewSet):
 	serializer_class = BitacoraMedicionesSerializer

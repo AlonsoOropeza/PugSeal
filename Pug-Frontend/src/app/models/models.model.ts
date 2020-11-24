@@ -6,10 +6,12 @@ export class MantenimientoPreventivo {
     public id_proveedor?: number;
     public cotizacion?: number;
     public frecuencia_anual?: number;
-    public fecha_inicio?: Date;
+    public fecha_inicio?: any;
     public id_empleado?: number;
     public fecha_creacion?: Date;
     public aprobado?: boolean;
+    public mes?: string;
+    public semana?: number;
 
     // Por definir
     public auditado?: boolean;
@@ -27,7 +29,7 @@ export class MantenimientoPreventivo {
         this.frecuencia_anual = json?.frecuencia_anual ? json.frecuencia_anual : null;
         this.fecha_creacion = json?.fecha_creacion ? json.fecha_creacion : new Date();
         this.fecha_planeada = json?.fecha_planeada ? json.fecha_planeada : new Date();
-        this.fecha_inicio = json?.fecha_inicio ? json.fecha_inicio : new Date();
+        this.fecha_inicio = json?.fecha_inicio ? json.fecha_inicio : null;
         this.duracion_horas = json?.duracion_horas ? json.duracion_horas : null;
         this.cotizacion = json?.cotizacion ? json.cotizacion : null;
         this.comentarios_supervisor = json?.comentarios_supervisor ? json.comentarios_supervisor : null;
@@ -40,6 +42,8 @@ export class MantenimientoPreventivo {
         this.id_auditor = json?.id_auditor ? json.id_auditor : null;
         this.id_supervisor = json?.id_supervisor ? json.id_supervisor : null;
         this.id_empleado = json?.id_empleado ? json.id_empleado : null;
+        this.mes = json?.mes ? json.mes : null;
+        this.semana = json?.semana ? json.semana : null;
     }
 }
 

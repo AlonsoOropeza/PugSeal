@@ -3,6 +3,7 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Categoria, Usuario, MantenimientoPreventivo, Proveedor } from 'app/models/models.model';
 import { EventEmitter } from '@angular/core';
+import { INgxSelectOption } from 'ngx-select-ex';
 
 @Component({
   selector: 'app-mantenimiento-preventivo-form',
@@ -17,11 +18,14 @@ export class MantenimientoPreventivoFormComponent implements OnInit {
   @Input() supervisores: Usuario[];
   @Input() proveedores: Proveedor[];
   @Input() edit: boolean;
+  @Input() admin: boolean;
   @Input() modaladd: BsModalRef;
   @Output() continueparent = new EventEmitter();
   @Output() cancelparent = new EventEmitter();
   public auditor: any;
   @Input() user: Usuario;
+  public items: string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  public ngxValue: any = [];
 
   // Para precargar el auditor en la forma
   ngOnInit(): void {

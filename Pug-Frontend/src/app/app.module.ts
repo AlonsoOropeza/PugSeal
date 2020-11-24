@@ -39,13 +39,14 @@ import localeEs from '@angular/common/locales/es';
 import { GestionComponent } from './admin/gestion/gestion.component';
 import { UsuariosComponent } from './admin/usuarios/usuarios.component';
 registerLocaleData(localeEs);
-
-
+import { NgxSelectModule } from 'ngx-select-ex';
 import { BitacoraMedicionesComponent } from './admin/bitacora-mediciones/bitacora-mediciones.component';
 import { BitacoraMedicionesFormComponent } from './forms/bitacora-mediciones-form/bitacora-mediciones-form.component';
 import { AccordionModule } from 'ngx-accordion';
 import { MantenimientoCorrectivoComponent } from './admin/mantenimiento-correctivo/mantenimiento-correctivo.component';
 import { MantenimientoCorrectivoFormComponent } from './forms/mantenimiento-correctivo-form/mantenimiento-correctivo-form.component';
+import { ActividadesComponent } from './admin/actividades/actividades.component';
+import { PresupuestoComponent } from './admin/presupuesto/presupuesto.component';
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import { MantenimientoCorrectivoFormComponent } from './forms/mantenimiento-corr
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
-    AccordionModule
+    AccordionModule,
+    NgxSelectModule
   ],
   declarations: [
     AppComponent,
@@ -90,7 +92,9 @@ import { MantenimientoCorrectivoFormComponent } from './forms/mantenimiento-corr
     BitacoraMedicionesComponent,
     BitacoraMedicionesFormComponent,
     MantenimientoCorrectivoComponent,
-    MantenimientoCorrectivoFormComponent
+    MantenimientoCorrectivoFormComponent,
+    ActividadesComponent,
+    PresupuestoComponent
   ],
   providers: [CookieService, DatePipe],
   bootstrap: [AppComponent]

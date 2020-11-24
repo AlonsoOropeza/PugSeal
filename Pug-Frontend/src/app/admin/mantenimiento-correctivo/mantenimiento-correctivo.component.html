@@ -1,1 +1,144 @@
-<p>mantenimiento-correctivo works!</p>
+<!DOCTYPE html>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Mantenimiento Correctivo</h4>
+                        <p class="category">Aquí se encuentra el detalle sobre las solicitudes de mantenimiento correctivo.</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-default btn-block" (click)="addRequest(modaladd)">
+                                <p>Crear Solicitud</p>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" 
+                        class="table table-hover table-striped row-border hover">
+                                <thead>
+                                    <tr>
+                                        <th *ngFor="let titulo of titulos">{{ titulo }}</th>
+                                       <!--<th *ngIf="user.rol === 'Auditor' || user.rol === 'Admin'">Eliminar</th>--> 
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let mantenimiento of mantenimientos">
+                                        <td>{{mantenimiento.descripcion_problema}}</td>
+                                        <td>{{mantenimiento.fecha_solicitud}}</td>
+                                        <td>{{mantenimiento.finalizado}}</td>
+                                        <td>
+                                            <button class="btn-ver  btn-block" (click)="addRequest(modalupdate, mantenimiento, false)">
+                                                Visualizar
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="btn-modificar  btn-block" (click)="addRequest(modalupdate, mantenimiento, true)">
+                                                Modificar
+                                            </button>
+                                        </td>
+                                        <td *ngIf="user.rol === 'Auditor' || user.rol === 'Admin'" (click)="addRequest(modaldelete, mantenimiento)">
+                                            <button class="btn-eliminar  btn-block" >
+                                                Eliminar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #modaladd>
+    <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+            <span aria-hidden="true"> × </span>
+          </button>
+        <h6 class="modal-title" id="modal-title-default">
+          Agregar solicitud
+        </h6>
+    
+      </div>
+    
+      <div class="modal-body">
+        <app-mantenimiento-correctivo-form
+        [mantenimiento]="mantenimiento"
+        [edit]="edit"
+        [modaladd]="modalComponent"
+        [proveedores]="proveedores"
+        [categorias]="categorias"
+        [empleados]="empleados"
+        [hoteles]="hoteles"
+        [areas]="areas"
+        [user]="user"
+        [name]="name"
+        (continueparent)="create($event)"
+        (cancelparent)="cancel()"
+        ></app-mantenimiento-correctivo-form>
+      </div>
+</ng-template>
+
+<ng-template #modalupdate>
+    <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+            <span aria-hidden="true"> × </span>
+        </button>
+        <h6 *ngIf="edit" class="modal-title" id="modal-title-update1">
+            Editar solicitud
+        </h6>
+        <h6 *ngIf="!edit" class="modal-title" id="modal-title-update2">
+            Visualizar solicitud
+        </h6>
+    
+      </div>
+    
+      <div class="modal-body">
+        <app-mantenimiento-correctivo-form
+        [mantenimiento]="mantenimiento"
+        [edit]="edit"
+        [modaladd]="modalComponent"
+        [proveedores]="proveedores"
+        [categorias]="categorias"
+        [empleados]="empleados"
+        [hoteles]="hoteles"
+        [user]="user"
+        [areas]="areas"
+        [name]="name"
+        (continueparent)="update($event)"
+        (cancelparent)="cancel()"
+        ></app-mantenimiento-correctivo-form>
+      </div>
+</ng-template>
+
+<ng-template #modaldelete>
+    <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+            <span aria-hidden="true"> × </span>
+        </button>
+        <h6 class="modal-title" id="modal-title-update1">
+            Eliminar solicitud
+        </h6>
+      </div>
+    
+      <div class="modal-body">
+        ¿Estás seguro que deseas eliminar esta solicitud? Esta operación es irreversible. 
+        <form>
+            <button class="btn btn-primary" type="submit" (click)="delete(mantenimiento)">
+                Eliminar
+            </button>
+            <button class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+                Cancelar
+            </button>
+        </form>
+      </div>
+</ng-template>
+
+<ng-template #datatable></ng-template>

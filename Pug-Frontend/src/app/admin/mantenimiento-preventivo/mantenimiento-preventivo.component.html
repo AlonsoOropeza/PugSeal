@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-<app-presupuesto></app-presupuesto>
-
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
@@ -32,25 +30,25 @@
                                 <tbody>
                                     <tr *ngFor="let mantenimiento of mantenimientos">
                                         <td>{{mantenimiento.actividad}}</td>
-                                        <td *ngIf="mantenimiento.fecha_inicio">{{mantenimiento.mes}}</td>
-                                        <td *ngIf="!mantenimiento.fecha_inicio">Aún no se asignan meses</td>
                                         <td *ngIf="mantenimiento.aprobado">Sí</td>
                                         <td *ngIf="!mantenimiento.aprobado">No</td>
+                                        <td *ngIf="mantenimiento.fecha_inicio">{{mantenimiento.mes}}</td>
+                                        <td *ngIf="!mantenimiento.fecha_inicio">Aún no se asignan meses</td>
                                         <td *ngIf="mantenimiento.fecha_inicio">{{mantenimiento.semana}}</td>
                                         <td *ngIf="!mantenimiento.fecha_inicio">Aún no se asignan semanas</td>
                                         <td>
                                             <button class="btn-ver  btn-block" (click)="addRequest(modalupdate, mantenimiento, false)">
-                                                Visualizar
+                                                <i class="glyphicon glyphicon-chevron-right"></i>
                                             </button>
                                         </td>
                                         <td>
                                             <button class="btn-modificar  btn-block" (click)="addRequest(modalupdate, mantenimiento, true)">
-                                                Modificar
+                                                <i class="glyphicon glyphicon-edit"></i>
                                             </button>
                                         </td>
                                         <td *ngIf="user.rol === 'Auditor' || user.rol === 'Admin'" (click)="addRequest(modaldelete, mantenimiento)">
                                             <button class="btn-eliminar  btn-block" >
-                                                Eliminar
+                                                <i class="glyphicon glyphicon-trash"></i>
                                             </button>
                                         </td>
                                     </tr>
@@ -62,6 +60,7 @@
         </div>
     </div>
 </div>
+<app-presupuesto></app-presupuesto>
 
 <ng-template #modaladd>
     <div class="modal-header">

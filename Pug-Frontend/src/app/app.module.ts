@@ -38,12 +38,12 @@ import localeEs from '@angular/common/locales/es';
 import { GestionComponent } from './admin/gestion/gestion.component';
 import { UsuariosComponent } from './admin/usuarios/usuarios.component';
 registerLocaleData(localeEs);
-
-
+import { NgxSelectModule } from 'ngx-select-ex';
 import { BitacoraMedicionesComponent } from './admin/bitacora-mediciones/bitacora-mediciones.component';
 import { BitacoraMedicionesFormComponent } from './forms/bitacora-mediciones-form/bitacora-mediciones-form.component';
 import { AccordionModule } from 'ngx-accordion';
 import { ActividadesComponent } from './admin/actividades/actividades.component';
+import { PresupuestoComponent } from './admin/presupuesto/presupuesto.component';
 
 
 @NgModule({
@@ -66,7 +66,8 @@ import { ActividadesComponent } from './admin/actividades/actividades.component'
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
-    AccordionModule
+    AccordionModule,
+    NgxSelectModule
   ],
   declarations: [
     AppComponent,
@@ -87,7 +88,8 @@ import { ActividadesComponent } from './admin/actividades/actividades.component'
     UsuariosComponent,
     BitacoraMedicionesComponent,
     BitacoraMedicionesFormComponent,
-    ActividadesComponent
+    ActividadesComponent,
+    PresupuestoComponent
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

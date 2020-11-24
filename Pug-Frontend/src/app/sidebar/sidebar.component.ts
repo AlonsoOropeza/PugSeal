@@ -10,8 +10,8 @@ declare interface RouteInfo {
     class: string;
 }
 export const ROUTES: RouteInfo[] = [
-  { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
-  { path: '/actividades', title: 'Actividades',  icon: 'pe-7s-date', class: '' },
+  { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
+  { path: '/actividades', title: 'Mis Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
     { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'pe-7s-note2', class: '' },
     { path: '/calendario', title: 'Calendario de actividades',  icon: 'pe-7s-date', class: '' },
     { path: '/requisiciones', title: 'Requisiciones',  icon: 'pe-7s-portfolio', class: '' },
@@ -22,21 +22,22 @@ export const ROUTES: RouteInfo[] = [
     { path: '/notifications', title: 'Notifications',  icon: 'pe-7s-bell', class: '' }
 ];
 export const LIMPIEZAROUTES: RouteInfo[] = [
-  { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
+  { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
   { path: '/bitacora-mediciones', title: 'Bitacora Mediciones', icon: 'pe-7s-note2', class: ''},
-  { path: '/actividades', title: 'Actividades',  icon: 'pe-7s-date', class: '' },
+  { path: '/actividades', title: 'Mis Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
 ];
 export const ADMINROUTES: RouteInfo[] = [
-  { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
-  { path: '/calendario', title: 'Calendario de actividades',  icon: 'pe-7s-date', class: '' },
+  { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
+  { path: '/presupuesto', title: 'Presupuesto anual',  icon: 'glyphicon glyphicon-usd', class: '' },
+  { path: '/actividades', title: 'Mis Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
+  { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
   { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'pe-7s-note2', class: '' },
-  { path: '/gestion', title: 'Gestión Interna',  icon: 'pe-7s-network', class: '' },
+  { path: '/gestion', title: 'Gestión Interna',  icon: 'glyphicon glyphicon-cog', class: '' },
   // { path: '/user', title: 'User Profile',  icon: 'pe-7s-user', class: '' },
   { path: '/bitacora-mediciones', title: 'Bitacora Mediciones', icon: 'pe-7s-note2', class: ''},
   { path: '/areas', title: 'Areas',  icon: 'pe-7s-note2', class: '' },
   { path: '/categorias', title: 'Categorias',  icon: 'pe-7s-note2', class: '' },
   { path: '/proveedores', title: 'Proveedores',  icon: 'pe-7s-portfolio', class: '' },
-  { path: '/actividades', title: 'Mis Actividades',  icon: 'pe-7s-date', class: '' },
   { path: '/requisiciones', title: 'Requisiciones',  icon: 'pe-7s-portfolio', class: '' },
 ];
 

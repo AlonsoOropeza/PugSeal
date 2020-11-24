@@ -46,6 +46,7 @@
         "ngx-accordion": "0.0.17",
         "ngx-bootstrap": "^6.1.0",
         "ngx-cookie-service": "^10.1.1",
+        "ngx-select-ex": "^5.0.2",
         "ngx-spinner": "^9.0.1",
         "ngx-toastr": "^12.1.0",
         "perfect-scrollbar": "1.4.0",

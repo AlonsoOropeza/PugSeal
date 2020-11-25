@@ -26,6 +26,7 @@ export class MantenimientoPreventivoFormComponent implements OnInit {
   @Input() user: Usuario;
   public items: string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   public ngxValue: any = [];
+  public aprobado = false;
 
   // Para precargar el auditor en la forma
   ngOnInit(): void {
@@ -35,6 +36,7 @@ export class MantenimientoPreventivoFormComponent implements OnInit {
         this.auditor = empleado.first_name + ' ' + empleado.last_name;
       }
     });
+    this.aprobado = this.mantenimiento.aprobado ? this.mantenimiento.aprobado : false;
   }
 
   public continue(form: NgForm) {

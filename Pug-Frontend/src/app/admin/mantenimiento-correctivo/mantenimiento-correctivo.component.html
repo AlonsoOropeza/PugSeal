@@ -34,17 +34,17 @@
                                         <td>{{mantenimiento.finalizado}}</td>
                                         <td>
                                             <button class="btn-ver  btn-block" (click)="addRequest(modalupdate, mantenimiento, false)">
-                                                Visualizar
+                                                <i class="glyphicon glyphicon-chevron-right"></i>
                                             </button>
                                         </td>
                                         <td>
                                             <button class="btn-modificar  btn-block" (click)="addRequest(modalupdate, mantenimiento, true)">
-                                                Modificar
+                                                <i class="glyphicon glyphicon-edit"></i>
                                             </button>
                                         </td>
                                         <td *ngIf="user.rol === 'Auditor' || user.rol === 'Admin'" (click)="addRequest(modaldelete, mantenimiento)">
                                             <button class="btn-eliminar  btn-block" >
-                                                Eliminar
+                                                <i class="glyphicon glyphicon-trash"></i>
                                             </button>
                                         </td>
                                     </tr>

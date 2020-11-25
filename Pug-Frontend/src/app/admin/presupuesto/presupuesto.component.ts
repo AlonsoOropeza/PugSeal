@@ -32,6 +32,8 @@ export class PresupuestoComponent implements OnInit {
   public modalComponent: BsModalRef;
   public events: any[] = [];
   public actividad_meses: any[] = [];
+  public items: string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  public ngxValue: any;
 
   constructor(
     private modal: NgbModal,
@@ -53,9 +55,8 @@ export class PresupuestoComponent implements OnInit {
 
   public async loadInfo() {
     let total = 0;
-    const mes = moment(new Date()).month();
-    this.mes = Meses[mes];
     this.events = [];
+    this.actividad_meses = [];
     this.spinner.showSpinner();
     this.solicitudes = await this.mantenimientoPreventivoService.getMantenimientosPreventivos();
     this.solicitudes.forEach(solicitud => {
@@ -96,14 +97,70 @@ export class PresupuestoComponent implements OnInit {
         }
       ]
     }
-    console.log(this.actividad_meses);
     this.spinner.hideSpinner();
-    this.categorias = await this.categoriasService.getCategorias();
-    this.empleados = await this.empleadosService.getEmpleados();
-    this.proveedores = await this.proveedoresService.getProveedores();
 
-    const first  =  new Date(new Date().getFullYear(), 0, 1);
-    const last  =  new Date(new Date().getFullYear(), 11, 31);
+
   }
+
+  public addRequest(modal: TemplateRef<any>, mantenimiento: MantenimientoPreventivo) {
+    this.mantenimiento = mantenimiento;
+    this.modalComponent = this.modalService.show(modal, {backdrop : 'static', keyboard: false, class: 'modal-dialog-centered'});
+  }
+
+  public async update(form: NgForm) {
+    this.spinner.showSpinner();
+    this.mantenimiento.fecha_inicio = await this.selectMonth(this.ngxValue);
+    const fecha = this.mantenimiento.fecha_inicio.toISOString().split('T')[0];
+    this.mantenimiento.fecha_inicio = fecha;
+      (await this.mantenimientoService.updateMantenimiento(this.mantenimiento)).subscribe(
+        async () => {
+          this.notificationsService.showNotification('Se ha actualizado correctamente el mantenimiento.', true),
+          this.loadInfo();
+        },
+        async error => {
+          this.notificationsService.showNotification(error.message, false),
+          this.loadInfo();
+        }
+      );
+      this.spinner.hideSpinner();
+      this.modalComponent.hide();
+  }
+
+  public async cancel() {
+    this.loadInfo();
+    this.modalComponent.hide();
+  }
+
+  public async selectMonth(mes: string) {
+    switch (mes) {
+      case 'Enero':
+        return new Date(2021, 0, 15);
+      case 'Febrero':
+        return new Date(2021, 1, 15);
+      case 'Marzo':
+        return new Date(2021, 2, 15);
+      case 'Abril':
+        return new Date(2021, 3, 15);
+      case 'Mayo':
+        return new Date(2021, 4, 15);
+      case 'Junio':
+        return new Date(2021, 5, 15);
+      case 'Julio':
+        return new Date(2021, 6, 15);
+      case 'Agosto':
+        return new Date(2021, 7, 15);
+      case 'Septiembre':
+        return new Date(2021, 8, 15);
+      case 'Octubre':
+        return new Date(2021, 9, 15);
+      case 'Noviembre':
+        return new Date(2021, 10, 15);
+      case 'Diciembre':
+        return new Date(2021, 11, 15);
+      default:
+        return new Date();
+    }
+  }
+
 }
 

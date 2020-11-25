@@ -21,6 +21,11 @@
                                       <tr *ngFor="let event of mes.eventos.events">
                                           <td>${{event.cotizacion}} mxn</td>
                                           <td>{{event.actividad}}</td>
+                                          <td>
+                                            <button class="btn-modificar  btn-block" (click)="addRequest(modalupdate, event)">
+                                                <i class="glyphicon glyphicon-edit"></i>
+                                            </button>
+                                        </td>
                                       </tr>
                                   </tbody>
                               </table>
@@ -48,4 +53,44 @@
 </div>
 <br><br>
   
-    
+<ng-template #modalupdate>
+    <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+            <span aria-hidden="true"> × </span>
+        </button>
+        <h6 class="modal-title" id="modal-title-update1">
+            Cambiar mes
+        </h6>
+      </div>
+      <div class="modal-body">
+        <form #updateForm="ngForm" class="modals">
+            <div class="row">        
+                <div class="col">
+                    <div class="form-group">
+                        <label class="form-control-label" for="meses">Mes</label>
+                        <ngx-select [multiple]="false"
+                            [items]="items"
+                            [(ngModel)]="ngxValue"
+                            [autoClearSearch]="false"
+                            placeholder="Presiona para seleccionar el mes"
+                            name="meses"
+                            dropDownMenuOtherClasses="dropdown-menu-right"
+                            autoActiveOnMouseEnter
+                            >
+                        </ngx-select>
+                    </div>
+                </div>
+            </div>
+          
+            <button  class="btn btn-primary" type="submit" [disabled] = "updateForm.invalid" (click)="update(updateForm)">
+                Guardar
+            </button>
+          
+            <button class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+                Cancelar
+            </button>
+
+        </form>
+        
+      </div>
+</ng-template>

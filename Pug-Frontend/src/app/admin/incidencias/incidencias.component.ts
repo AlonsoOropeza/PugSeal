@@ -36,6 +36,7 @@ export class IncidenciasComponent implements OnInit {
   public hoteles: Hotel[];
   public areas: Area[];
   public name: String;
+  public inconclusas: MantenimientoCorrectivo[];
 
   constructor(
     private modal: NgbModal,
@@ -58,7 +59,7 @@ export class IncidenciasComponent implements OnInit {
   }
 
   public async loadInfo() {
-    let porcentaje = 0.0;
+    let porcentaje:any;
     let incidecnias_finalizadas = 0;
     let incidencias_totales = 0;
     const mes = moment(new Date()).month();
@@ -76,6 +77,20 @@ export class IncidenciasComponent implements OnInit {
       ];
     });
     console.log(this.solicitudes);
+    //INCONCLUSAS
+    this.inconclusas = [];
+    this.solicitudes.forEach(solicitud => {
+      if (!solicitud.finalizada){
+      this.inconclusas = [
+        ...this.inconclusas,
+        {
+          ...solicitud,
+          semana: moment(new Date(solicitud.fecha_solicitud)).week()
+        },
+      ];
+    }
+    });
+
     for (let index = 1; index < 53; index++) {
       porcentaje = 0.0;
       incidecnias_finalizadas = 0;
@@ -97,9 +112,9 @@ export class IncidenciasComponent implements OnInit {
         }
         if(incidencias_totales > 0){
           porcentaje = (incidecnias_finalizadas/incidencias_totales) * 100;
-          porcentaje = Math.round(porcentaje);
+          porcentaje = Math.round(porcentaje) + ' %';
         }else{
-          porcentaje = 100;
+          porcentaje = 'NA';
         }
         console.log(porcentaje * 100, incidecnias_finalizadas, incidencias_totales);
       });

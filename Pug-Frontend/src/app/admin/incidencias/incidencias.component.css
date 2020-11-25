@@ -1,0 +1,62 @@
+.btn-ver
+{
+padding: 13px 20px 12px;
+  font-size: 17px;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  color: #333333;
+  border-color: #333333;
+  transition: 0.4s;
+
+  margin-bottom: 2px;
+}
+.btn-ver:hover
+{
+    background-color: #333333;
+    color: #F8F8F8;
+    border-color: #333333;
+}
+
+.btn-aprobar
+{
+    padding: 13px 20px 12px;
+    font-size: 17px;
+    border-radius: 4px;
+    background-color: #F8F8F8;
+    color: #333333;
+    border-color: #333333;
+    transition: 0.4s;
+    
+    margin-bottom: 2px;
+}
+.btn-aprobar:hover
+{
+    background-color: #333333;
+    color: #F8F8F8;
+    border-color: #333333;
+}
+
+.btn-finalizar
+{
+    padding: 13px 20px 12px;
+    font-size: 17px;
+    border-radius: 4px;
+    background-color: #9B444B;
+    color: #F8F8F8;
+    border-color: #9B444B;
+    transition: 0.4s;
+    
+    margin-bottom: 2px;
+}
+.btn-finalizar:hover
+{
+    background-color: #333333;
+    color: #F8F8F8;
+    border-color: #333333;
+}
+
+.panel-default>.panel-heading
+{
+    background-color: #333333;
+    color: #F8F8F8;
+}

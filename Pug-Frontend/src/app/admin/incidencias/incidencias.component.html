@@ -1,7 +1,51 @@
 <div>
     <h1>Incidencias</h1>
     <accordion>
-      <accordion-group *ngFor="let semana of incidencias_semanas" heading="{{semana.titulo}} - {{semana.porcentaje}} %" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
+      <accordion-group  heading="Inconclusas" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
+        <div class="content table-responsive table-full-width">
+          <table class="table table-hover table-striped row-border hover">
+            <thead>
+                <tr>
+                    <th>Actividad</th>
+                    <th>Fecha</th>
+                    <th>Gasto estimado</th>
+                    <th>Semana</th>
+                    <th>Vizualizar</th>
+                    <th>Aprobar</th>
+                    <th>Finalizar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let event of inconclusas" >
+                      <td>{{event.descripcion_problema}}</td>
+                      <td>{{ event.fecha_solicitud }}</td>
+                      <td>${{ event.costo_trabajo }}</td>
+                      <td>{{ event.semana }}</td>
+                      <td>
+                        <button class="btn btn-ver btn-lg" (click)="addRequest(modalupdate, event, false)" >
+                          <i class="glyphicon glyphicon-chevron-right"></i>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="btn btn-aprobar btn-lg" (click)="addRequest(modalupdate, event, false)" >
+                          <i class="pe-7s-check"></i>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="btn btn-finalizar btn-lg" (click)="addRequest(modalupdate, event, false)" >
+                          <i class="pe-7s-clock"></i>
+                        </button>
+                      </td>
+                </tr>
+            </tbody>
+      </table>
+      </div>
+      </accordion-group>
+    </accordion>
+    
+
+    <accordion>
+      <accordion-group *ngFor="let semana of incidencias_semanas" heading="{{semana.titulo}} - {{semana.porcentaje}}" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
         <div class="content table-responsive table-full-width">
           <table class="table table-hover table-striped row-border hover">
             <thead>
@@ -11,7 +55,9 @@
                     <th>Fecha</th>
                     <th>Gasto estimado</th>
                     <th>Calificacion</th>
-                    <th>Acciones</th>
+                    <th>Vizualizar</th>
+                    <th>Aprobar</th>
+                    <th>Finalizar</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,8 +70,18 @@
                     <td>{{ (event.calif_calidad + event.calif_terminacion + event.calif_limpieza + event.calif_totalidad )/4}}</td>
                     <td>
                       <button class="btn btn-ver btn-lg" (click)="addRequest(modalupdate, event, false)" >
-                        Expandir
-                    </button>
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <button class="btn btn-aprobar btn-lg" (click)="addRequest(modalupdate, event, false)" >
+                        <i class="pe-7s-check"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <button class="btn btn-finalizar btn-lg" (click)="addRequest(modalupdate, event, false)" >
+                        <i class="pe-7s-clock"></i>
+                      </button>
                     </td>
                 </tr>
             </tbody>

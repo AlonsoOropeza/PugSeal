@@ -18,6 +18,7 @@ import { BitacoraMedicionesComponent } from 'app/admin/bitacora-mediciones/bitac
 import { ProveedoresComponent } from 'app/admin/proveedores/proveedores.component';
 import { MantenimientoCorrectivoComponent } from '../../admin/mantenimiento-correctivo/mantenimiento-correctivo.component'
 import { ActividadesComponent } from 'app/admin/actividades/actividades.component';
+import { IncidenciasComponent } from 'app/admin/incidencias/incidencias.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',                component: HomeComponent                    },
@@ -38,5 +39,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'proveedores',              component: ProveedoresComponent             },
     { path: 'actividades',              component: ActividadesComponent             },
     { path: 'requisiciones',            component: RequisicionesComponent           },
-    { path: 'presupuesto',              component: PresupuestoComponent             }
+    { path: 'presupuesto',              component: PresupuestoComponent             },
+    { path: 'incidencias',              component: IncidenciasComponent             },
 ]

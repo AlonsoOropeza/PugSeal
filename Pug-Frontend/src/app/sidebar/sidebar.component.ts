@@ -12,11 +12,13 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
   { path: '/actividades', title: 'Mis Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
+  { path: '/incidencias', title: 'Incidencias', icon: 'glyphicon glyphicon-tasks', class: ''},
     { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
     { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
     { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
     { path: '/requisiciones', title: 'Requisiciones',  icon: 'glyphicon glyphicon-list-alt', class: '' }
-];
+
+]
 export const LIMPIEZAROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
   { path: '/bitacora-mediciones', title: 'Bitacora Mediciones', icon: 'glyphicon glyphicon-list-alt', class: ''},
@@ -26,6 +28,7 @@ export const ADMINROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
   { path: '/presupuesto', title: 'Presupuesto anual',  icon: 'glyphicon glyphicon-usd', class: '' },
   { path: '/actividades', title: 'Mis Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
+  { path: '/incidencias', title: 'Incidencias', icon: 'glyphicon glyphicon-tasks', class: ''},
   { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
   { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
   { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },

@@ -22,10 +22,12 @@ export class AuthService implements CanActivate {
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot
     ): Promise<boolean | UrlTree> {
-      const user: Usuario = JSON.parse(this.getCookie('user'))
-      if (user) {
-        console.log('simon');
-        return true;
+      if (this.cookies.check('user')) {
+        const user: Usuario = JSON.parse(this.getCookie('user'))
+        if (user) {
+          return true;
+        }
+        return false;
       }
       return false;
   }

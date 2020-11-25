@@ -48,6 +48,7 @@ import { MantenimientoCorrectivoFormComponent } from './forms/mantenimiento-corr
 import { ActividadesComponent } from './admin/actividades/actividades.component';
 import { PresupuestoComponent } from './admin/presupuesto/presupuesto.component';
 import { IncidenciasComponent } from './admin/incidencias/incidencias.component';
+import { FinalizarMantCorFormComponent } from './forms/finalizar-mant-cor-form/finalizar-mant-cor-form.component';
 
 
 @NgModule({
@@ -96,7 +97,8 @@ import { IncidenciasComponent } from './admin/incidencias/incidencias.component'
     MantenimientoCorrectivoFormComponent,
     ActividadesComponent,
     PresupuestoComponent,
-    IncidenciasComponent
+    IncidenciasComponent,
+    FinalizarMantCorFormComponent
   ],
   providers: [CookieService, DatePipe],
   bootstrap: [AppComponent]

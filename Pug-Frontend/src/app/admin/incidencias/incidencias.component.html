@@ -32,7 +32,7 @@
                         </button>
                       </td>
                       <td>
-                        <button class="btn btn-finalizar btn-lg" (click)="addRequest(modalupdate, event, false)" >
+                        <button class="btn btn-finalizar btn-lg" (click)="addRequest(modalend, event, true)" >
                           <i class="pe-7s-clock"></i>
                         </button>
                       </td>
@@ -79,7 +79,7 @@
                       </button>
                     </td>
                     <td>
-                      <button class="btn btn-finalizar btn-lg" (click)="addRequest(modalupdate, event, false)" >
+                      <button class="btn btn-finalizar btn-lg" (click)="addRequest(modalend, event, true)" >
                         <i class="pe-7s-clock"></i>
                       </button>
                     </td>
@@ -123,4 +123,30 @@
         (cancelparent)="cancel()"
         ></app-mantenimiento-correctivo-form>
       </div>
+</ng-template>
+
+<ng-template #modalend>
+  <div class="modal-header">
+      <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+          <span aria-hidden="true"> × </span>
+      </button>
+      <h6 *ngIf="edit" class="modal-title" id="modal-title-update1">
+          Editar solicitud
+      </h6>
+      <h6 *ngIf="!edit" class="modal-title" id="modal-title-update2">
+          Visualizar solicitud
+      </h6>
+  </div>
+  
+    <div class="modal-body">
+      <app-finalizar-mant-cor-form
+      [mantenimiento]="mantenimiento"
+      [edit]="edit"
+      [modaladd]="modalComponent"
+      [empleados]="empleados"
+      [name]="name"
+      (continueparent)="update($event)"
+      (cancelparent)="cancel()"
+      ></app-finalizar-mant-cor-form>
+    </div>
 </ng-template>

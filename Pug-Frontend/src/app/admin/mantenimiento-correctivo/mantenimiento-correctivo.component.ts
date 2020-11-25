@@ -36,6 +36,7 @@ export class MantenimientoCorrectivoComponent implements OnInit {
   public areas: Area[];
   public user: Usuario;
   public name: String;
+  public canDelete = false;
   
   constructor(
     private mantenimientoService: MantenimientoCorrectivoService,
@@ -66,6 +67,7 @@ export class MantenimientoCorrectivoComponent implements OnInit {
 
   public async loadInfo() {
     this.spinner.showSpinner();
+    this.canDelete = this.user.rol === 'Admin' || this.user.rol === 'Auditor' ? true : false;
     this.mantenimientos = await this.mantenimientoService.getMantenimientosCorrectivos();
     this.categorias = await this.categoriasService.getCategorias();
     this.empleados = await this.empleadosService.getEmpleados();
@@ -117,7 +119,7 @@ export class MantenimientoCorrectivoComponent implements OnInit {
     }
 
     if (this.edit) {
-      if (mantenimiento && mantenimiento.finalizado && this.user.rol === 'encargadoMantenimiento' ) {
+      if (mantenimiento && mantenimiento.finalizada && this.user.rol === 'encargadoMantenimiento' ) {
         this.edit = false;
         this.notificationsService.showWarning('La solicitud ya ha sido aprobada, por lo que no puede modificarse.');
       } else {

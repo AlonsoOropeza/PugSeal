@@ -24,7 +24,8 @@
                                 <thead>
                                     <tr>
                                         <th *ngFor="let titulo of titulos">{{ titulo }}</th>
-                                       <!--<th *ngIf="user.rol === 'Auditor' || user.rol === 'Admin'">Eliminar</th>--> 
+
+                                        <th *ngIf="canDelete">Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -42,7 +43,7 @@
                                                 Modificar
                                             </button>
                                         </td>
-                                        <td *ngIf="user.rol === 'Auditor' || user.rol === 'Admin'" (click)="addRequest(modaldelete, mantenimiento)">
+                                        <td *ngIf="canDelete" (click)="addRequest(modaldelete, mantenimiento)">
                                             <button class="btn-eliminar  btn-block" >
                                                 Eliminar
                                             </button>

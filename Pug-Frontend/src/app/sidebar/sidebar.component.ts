@@ -12,6 +12,7 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
   { path: '/actividades', title: 'Mis Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
+  { path: '/incidencias', title: 'Incidencias', icon: 'glyphicon glyphicon-tasks', class: ''},
     { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'pe-7s-note2', class: '' },
     { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'pe-7s-note2', class: '' },
     { path: '/calendario', title: 'Calendario de actividades',  icon: 'pe-7s-date', class: '' },
@@ -31,6 +32,7 @@ export const ADMINROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
   { path: '/presupuesto', title: 'Presupuesto anual',  icon: 'glyphicon glyphicon-usd', class: '' },
   { path: '/actividades', title: 'Mis Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
+  { path: '/incidencias', title: 'Incidencias', icon: 'glyphicon glyphicon-tasks', class: ''},
   { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
   { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'pe-7s-note2', class: '' },
   { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'pe-7s-note2', class: '' },

@@ -13,6 +13,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CookieService } from 'ngx-cookie-service';
 import { HotelService } from 'app/services/hotel.service';
 import { AreasService } from 'app/services/areas.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-incidencias',
@@ -159,11 +160,6 @@ export class IncidenciasComponent implements OnInit {
     this.mantenimiento = mantenimiento ? mantenimiento : new MantenimientoCorrectivo();
     this.modalComponent = this.modalService.show(modal, {backdrop : 'static', keyboard: false, class: 'modal-dialog-centered'});
   }
-  
-  public async cancel() {
-    this.mantenimiento = await this.mantenimientoService.getMantenimientosCorrectivos();
-    this.modalComponent.hide();
-  }
 
     /**
    * Recibe Id del solicitante para obtener el nombre.
@@ -173,4 +169,24 @@ export class IncidenciasComponent implements OnInit {
     this.name = this.empleados.find(x => x.id === id).first_name;
   }
 
+  public async update(form: NgForm) {
+      this.spinner.showSpinner();
+      (await this.mantenimientoService.updateMantenimientoCorrectivo(this.mantenimiento)).subscribe(
+        async () => {
+          this.notificationsService.showNotification('Se ha actualizado correctamente la solicitud.', true),
+          this.mantenimiento = await this.mantenimientoService.getMantenimientosCorrectivos()
+        },
+        async error => {
+          this.notificationsService.showNotification(error.message, false),
+          this.mantenimiento = await this.mantenimientoService.getMantenimientosCorrectivos()
+        }
+      );
+      this.spinner.hideSpinner();
+      this.modalComponent.hide();
+    }
+
+    public async cancel() {
+      this.mantenimiento = await this.mantenimientoService.getMantenimientosCorrectivos();
+      this.modalComponent.hide();
+    }
 }

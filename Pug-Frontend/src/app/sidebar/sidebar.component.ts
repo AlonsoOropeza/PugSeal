@@ -13,19 +13,15 @@ export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
   { path: '/actividades', title: 'Mis Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
   { path: '/incidencias', title: 'Incidencias', icon: 'glyphicon glyphicon-tasks', class: ''},
-    { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'pe-7s-note2', class: '' },
-    { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'pe-7s-note2', class: '' },
-    { path: '/calendario', title: 'Calendario de actividades',  icon: 'pe-7s-date', class: '' },
-    { path: '/requisiciones', title: 'Requisiciones',  icon: 'pe-7s-portfolio', class: '' },
-    { path: '/table', title: 'Table List',  icon: 'pe-7s-note2', class: '' },
-    { path: '/typography', title: 'Typography',  icon: 'pe-7s-news-paper', class: '' },
-    { path: '/icons', title: 'Icons',  icon: 'pe-7s-science', class: '' },
-    { path: '/maps', title: 'Maps',  icon: 'pe-7s-map-marker', class: '' },
-    { path: '/notifications', title: 'Notifications',  icon: 'pe-7s-bell', class: '' }
-];
+    { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
+    { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
+    { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
+    { path: '/requisiciones', title: 'Requisiciones',  icon: 'glyphicon glyphicon-list-alt', class: '' }
+
+]
 export const LIMPIEZAROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
-  { path: '/bitacora-mediciones', title: 'Bitacora Mediciones', icon: 'pe-7s-note2', class: ''},
+  { path: '/bitacora-mediciones', title: 'Bitacora Mediciones', icon: 'glyphicon glyphicon-list-alt', class: ''},
   { path: '/actividades', title: 'Mis Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
 ];
 export const ADMINROUTES: RouteInfo[] = [
@@ -34,15 +30,15 @@ export const ADMINROUTES: RouteInfo[] = [
   { path: '/actividades', title: 'Mis Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
   { path: '/incidencias', title: 'Incidencias', icon: 'glyphicon glyphicon-tasks', class: ''},
   { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
-  { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'pe-7s-note2', class: '' },
-  { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'pe-7s-note2', class: '' },
+  { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
+  { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
   { path: '/gestion', title: 'Gestión Interna',  icon: 'glyphicon glyphicon-cog', class: '' },
   // { path: '/user', title: 'User Profile',  icon: 'pe-7s-user', class: '' },
-  { path: '/bitacora-mediciones', title: 'Bitacora Mediciones', icon: 'pe-7s-note2', class: ''},
-  { path: '/areas', title: 'Areas',  icon: 'pe-7s-note2', class: '' },
-  { path: '/categorias', title: 'Categorias',  icon: 'pe-7s-note2', class: '' },
-  { path: '/proveedores', title: 'Proveedores',  icon: 'pe-7s-portfolio', class: '' },
-  { path: '/requisiciones', title: 'Requisiciones',  icon: 'pe-7s-portfolio', class: '' },
+  { path: '/bitacora-mediciones', title: 'Bitacora Mediciones', icon: 'glyphicon glyphicon-list-alt', class: ''},
+  { path: '/areas', title: 'Areas',  icon: 'glyphicon glyphicon-list-alt', class: '' },
+  { path: '/categorias', title: 'Categorias',  icon: 'glyphicon glyphicon-list-alt', class: '' },
+  { path: '/proveedores', title: 'Proveedores',  icon: 'glyphicon glyphicon-list-alt', class: '' },
+  { path: '/requisiciones', title: 'Requisiciones',  icon: 'glyphicon glyphicon-list-alt', class: '' },
 ];
 
 @Component({

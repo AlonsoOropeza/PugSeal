@@ -35,6 +35,7 @@ export class MantenimientoPreventivoComponent implements OnDestroy, OnInit {
   public categorias: Categoria[];
   public user: Usuario;
   public isAdmin = false;
+  public canDelete = false;
 
   constructor(
     private mantenimientoService: MantenimientoPreventivoService,
@@ -67,6 +68,7 @@ export class MantenimientoPreventivoComponent implements OnDestroy, OnInit {
     if (this.user.rol === 'Admin') {
       this.isAdmin = true;
     }
+    this.canDelete = this.user.rol === 'Admin' || this.user.rol === 'Auditor' ? true : false;
     this.mantenimientos = await this.mantenimientoService.getMantenimientosPreventivos();
     this.mantenimientos.forEach(element => {
       element.mes = element.fecha_inicio ? Meses[moment(element.fecha_inicio).month()] : null;
@@ -140,9 +142,8 @@ export class MantenimientoPreventivoComponent implements OnDestroy, OnInit {
     if (form.value.aprobado) {
       this.mantenimiento.id_auditor = this.user.id;
     }
-    console.log(form.value.meses);
-    
-    if (!this.mantenimiento.fecha_inicio && form.value.meses !== []) {
+
+    if (!this.mantenimiento.fecha_inicio && form.value.meses !== [] && form.value.meses !== undefined && this.mantenimiento.aprobado) {
       form.value.meses.forEach(async element => {
         this.mantenimiento.fecha_inicio = await this.selectMonth(element);
         const fecha = this.mantenimiento.fecha_inicio.toISOString().split('T')[0];

@@ -47,6 +47,7 @@ import { MantenimientoCorrectivoComponent } from './admin/mantenimiento-correcti
 import { MantenimientoCorrectivoFormComponent } from './forms/mantenimiento-correctivo-form/mantenimiento-correctivo-form.component';
 import { ActividadesComponent } from './admin/actividades/actividades.component';
 import { PresupuestoComponent } from './admin/presupuesto/presupuesto.component';
+import { ActividadesFormComponent } from './forms/actividades-form/actividades-form.component';
 
 
 @NgModule({
@@ -94,7 +95,8 @@ import { PresupuestoComponent } from './admin/presupuesto/presupuesto.component'
     MantenimientoCorrectivoComponent,
     MantenimientoCorrectivoFormComponent,
     ActividadesComponent,
-    PresupuestoComponent
+    PresupuestoComponent,
+    ActividadesFormComponent
   ],
   providers: [CookieService, DatePipe],
   bootstrap: [AppComponent]

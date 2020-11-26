@@ -1,0 +1,50 @@
+<form #updateForm="ngForm" class="modals">
+    <div class="row">
+
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="duracion_horas">Tiempo tomado<span class="text-danger">*</span></label>
+                <div class="input-group">
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="duracion_horas" required
+                        [(ngModel)]="mantenimiento.duracion_horas"
+                        name="duracion_horas"
+                        #duracion_horas="ngModel"
+                    >
+                    <span class="input-group-addon"> horas</span>
+                    </div>
+            </div>
+    
+            <div *ngIf="duracion_horas.invalid && (duracion_horas.dirty || duracion_horas.touched)" class="alert alert-danger">
+                <div *ngIf="duracion_horas.errors.required">
+                    El tiempo tomado es obligatorio.
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="terminado">Finalizar <span class="text-danger">*</span></label>
+                <input
+                    type="checkbox"
+                    class="form-control"
+                    id="terminado" required
+                    [(ngModel)]="mantenimiento.terminado"
+                    name="terminado"
+                    #terminado="ngModel"
+                >
+            </div>
+        </div>
+    </div>
+
+  
+    <button class="btn btn-primary" type="submit" [disabled] = "updateForm.invalid" (click)="continue(updateForm)">
+        Guardar
+    </button>
+  
+    <button class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+        Cancelar
+    </button>
+</form>

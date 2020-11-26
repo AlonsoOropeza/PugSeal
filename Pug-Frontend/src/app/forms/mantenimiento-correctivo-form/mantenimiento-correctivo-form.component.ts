@@ -33,6 +33,9 @@ export class MantenimientoCorrectivoFormComponent implements OnInit{
   ngOnInit(): void{
    // console.log(this.startDate);
    // this.getWeek(this.startDate);
+   this.areas = this.areas.filter(area => area.activo === true);
+   this.categorias = this.categorias.filter(categoria => categoria.activo === true);
+  this.proveedores = this.proveedores.filter(proveedor => proveedor.activo === true);
   }
 
 

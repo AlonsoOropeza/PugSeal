@@ -56,6 +56,7 @@ export class ActividadesComponent implements OnInit {
     const mes = moment(new Date()).month();
     this.mes = Meses[mes];
     this.events = [];
+    this.actividad_semanas = [];
     this.spinner.showSpinner();
     this.solicitudes = await this.mantenimientoPreventivoService.getMantenimientosPreventivos();
     this.solicitudes.forEach(solicitud => {
@@ -72,7 +73,7 @@ export class ActividadesComponent implements OnInit {
     for (let index = 1; index < 53; index++) {
       let events = [];
       this.solicitudes.forEach(solicitud => {
-        if (moment(solicitud.fecha_inicio).week() === index && solicitud.id_empleado === this.user.id) {
+        if (moment(solicitud.fecha_inicio).week() === index && solicitud.id_empleado === this.user.id && solicitud.aprobado) {
           events = [
             ...events,
             {
@@ -103,17 +104,8 @@ export class ActividadesComponent implements OnInit {
     const last  =  new Date(new Date().getFullYear(), 11, 31);
   }
 
-  public addRequest(modal: TemplateRef<any>, mantenimiento?: MantenimientoPreventivo, edit?: boolean) {
-    this.edit = edit !== undefined ? edit : true;
-    if (this.edit) {
-      if (mantenimiento && mantenimiento.aprobado && this.user.rol === 'Encargado_Mantenimiento' ) {
-        this.edit = false;
-        this.notificationsService.showWarning('La solicitud ya ha sido aprobada, por lo que no puede modificarse.');
-      } else {
-        this.edit = true;
-      }
-    }
-    this.mantenimiento = mantenimiento ? mantenimiento : new MantenimientoPreventivo();
+  public addRequest(modal: TemplateRef<any>, mantenimiento: MantenimientoPreventivo) {
+    this.mantenimiento = mantenimiento;
     this.modalComponent = this.modalService.show(modal, {backdrop : 'static', keyboard: false, class: 'modal-dialog-centered'});
   }
 
@@ -122,24 +114,21 @@ export class ActividadesComponent implements OnInit {
   }
 
   public async update(form: NgForm) {
-    if (form.value.frecuencia_anual < 1 || form.value.frecuencia_anual > 12) {
-      this.notificationsService.showNotification('La frecuencia anual debe realizarse entre 1 a 12 veces al año', false);
-      throw new Error('Error');
-    }
-    if (form.value.aprobado) {
-      this.mantenimiento.id_auditor = this.user.id;
-    }
-
     this.spinner.showSpinner();
-    (await this.mantenimientoService.updateMantenimiento(this.mantenimiento)).subscribe(
-      async () => {
-        this.notificationsService.showNotification('Se ha actualizado correctamente la solicitud.', true),
-        await this.loadInfo();
-      },
-      async error => {
-        this.notificationsService.showNotification(error.message, false)
-      }
-    );
+    if (this.mantenimiento.terminado) {
+      this.notificationsService.showWarning('No puedes modificar un mantenimiento que ha sido finalizado');
+      await this.loadInfo();
+    } else {
+      (await this.mantenimientoService.updateMantenimiento(this.mantenimiento)).subscribe(
+        async () => {
+          this.notificationsService.showNotification('Se ha actualizado correctamente el mantenimiento.', true),
+          await this.loadInfo();
+        },
+        async error => {
+          this.notificationsService.showNotification(error.message, false)
+        }
+      );
+    }
     this.spinner.hideSpinner();
     this.modalComponent.hide();
   }

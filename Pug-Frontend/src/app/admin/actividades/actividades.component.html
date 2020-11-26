@@ -1,36 +1,47 @@
-<div>
-  <h1>Mis actividades asignadas</h1>
-  <accordion>
-    <accordion-group *ngFor="let semana of actividad_semanas" heading="{{semana.titulo}}" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
-      <div class="content table-responsive table-full-width">
-        <table class="table table-hover table-striped row-border hover">
-          <thead>
-              <tr>
-                  <th>Actividad</th>
-                  <th>Estado</th>
-                  <th>Fecha</th>
-                  <th>Gasto estimado</th>
-                  <th>Acciones</th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr *ngFor="let event of semana.eventos.events">
-                  <td>{{event.actividad}}</td>
-                  <td *ngIf="event.aprobado">Aprobado</td>
-                  <td *ngIf="!event.activo">No Aprobado</td>
-                  <td>{{ event.fecha_inicio }}</td>
-                  <td>${{ event.cotizacion }}</td>
-                  <td>
-                    <button class="btn btn-ver btn-lg" >
-                      Expandir
-                  </button>
-                  </td>
-              </tr>
-          </tbody>
-    </table>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+              <h4 class="title">Mis actividades asignadas</h4>
+              <p class="category">Desde aquí se pueden obtener mis actividades asignadas y se puede marcar la realización de las mismas.</p>
+          </div>
+          <accordion>
+            <accordion-group *ngFor="let semana of actividad_semanas" heading="{{semana.titulo}}" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
+              <div class="content table-responsive table-full-width">
+                <table class="table table-hover table-striped row-border hover">
+                  <thead>
+                      <tr>
+                          <th>Actividad</th>
+                          <th>Fecha Estimada</th>
+                          <th>Gasto estimado</th>
+                          <th>Estado</th>
+                          <th>Finalizar</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let event of semana.eventos.events">
+                          <td>{{event.actividad}}</td>
+                          <td>{{ event.fecha_inicio }}</td>
+                          <td>${{ event.cotizacion }}</td>
+                          <td *ngIf="event.terminado"><i class="glyphicon glyphicon-ok text-success"></i></td>
+                          <td *ngIf="!event.terminado"><i class="glyphicon glyphicon-remove text-danger"></i></td>
+                          <td>
+                            <button class="btn btn-ver btn-lg" (click)="addRequest(modalupdate, event)">
+                              <i class="glyphicon glyphicon-check"></i>
+                          </button>
+                          </td>
+                      </tr>
+                  </tbody>
+            </table>
+            </div>
+            </accordion-group>
+          </accordion>
+        </div>
+      </div>
     </div>
-    </accordion-group>
-  </accordion>
+  </div>
 </div>
 <br><br>
 
@@ -41,27 +52,18 @@
         <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
             <span aria-hidden="true"> × </span>
         </button>
-        <h6 *ngIf="edit" class="modal-title" id="modal-title-update1">
-            Editar solicitud
+        <h6 class="modal-title" id="modal-title-update1">
+            Finalizar actividad
         </h6>
-        <h6 *ngIf="!edit" class="modal-title" id="modal-title-update2">
-            Visualizar solicitud
-        </h6>
-    
       </div>
     
       <div class="modal-body">
-        <app-mantenimiento-preventivo-form
+        <app-actividades-form
         [mantenimiento]="mantenimiento"
-        [edit]="edit"
         [modaladd]="modalComponent"
-        [proveedores]="proveedores"
-        [categorias]="categorias"
-        [empleados]="empleados"
-        [user]="user"
         (continueparent)="update($event)"
         (cancelparent)="cancel()"
-        ></app-mantenimiento-preventivo-form>
+        ></app-actividades-form>
       </div>
   </ng-template>
   

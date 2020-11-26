@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Presupuesto anual</h4>
+                        <h4 class="title">Presupuesto anual - {{nextYear}}</h4>
                         <p class="category">Desde aquí se pueden obtener los datos necesarios para tomar decisiones a partir del presupuesto.</p>
                     </div>
                     <accordion>
@@ -45,7 +45,25 @@
                       </table>
                       </div>
                         </accordion-group>
-                      </accordion>
+                    </accordion>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-hover table-striped row-border hover">
+                        <thead>
+                            <tr>
+                                <th>Total de costos del {{nextYear}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>$ {{totalAnual}} mxn</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
                 </div>
             </div>
         </div>

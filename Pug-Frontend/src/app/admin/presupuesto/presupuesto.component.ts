@@ -34,6 +34,8 @@ export class PresupuestoComponent implements OnInit {
   public actividad_meses: any[] = [];
   public items: string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   public ngxValue: any;
+  public nextYear = moment(new Date()).year() + 1;
+  public totalAnual = 0;
 
   constructor(
     private modal: NgbModal,
@@ -97,9 +99,10 @@ export class PresupuestoComponent implements OnInit {
         }
       ]
     }
+    this.actividad_meses.forEach(element => {
+      this.totalAnual += element.total;
+    });
     this.spinner.hideSpinner();
-
-
   }
 
   public addRequest(modal: TemplateRef<any>, mantenimiento: MantenimientoPreventivo) {

@@ -30,6 +30,10 @@ export class MantenimientoPreventivoFormComponent implements OnInit {
 
   // Para precargar el auditor en la forma
   ngOnInit(): void {
+
+    this.categorias = this.categorias.filter(categoria => categoria.activo === true);
+    this.proveedores = this.proveedores.filter(proveedor => proveedor.activo === true);
+
     this.auditor = this.mantenimiento.id_auditor ? this.mantenimiento.id_auditor : 'Aún no cuenta con un auditor';
     this.empleados.forEach(empleado => {
       if (empleado.id === this.auditor ) {

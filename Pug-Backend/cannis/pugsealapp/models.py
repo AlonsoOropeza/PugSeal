@@ -68,22 +68,30 @@ class Mantenimiento_Preventivo(models.Model):
     id_categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True)
     actividad = models.CharField(max_length=255)
     id_proveedor = models.ForeignKey(Proveedor, on_delete=models.SET_NULL, null=True)
-    cotizacion = models.FloatField(default=0, blank=True, null=True)
+    cotizacion = models.FloatField(default=0)
     frecuencia_anual = models.IntegerField(default=0)
-    fecha_inicio = models.DateField(null=True, default=timezone.now)
     fecha_creacion = models.DateTimeField(default=timezone.now)
 
     # Aprobacion
     id_auditor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="auditor", blank=True)
+    aprobado = models.BooleanField(default=False)
+
+    #mmds de sandra
+    fecha_inicio = models.DateField(null=True, blank=True)
 
     # finalizacion (encargado)
     id_empleado = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="empleado", blank=True)
     duracion_horas = models.FloatField(default=0, blank=True, null=True)
     fecha_terminacion = models.DateField(null=True, blank=True)
+    comentarios_encargado = models.CharField(max_length=1000, null=True, blank=True)
 
     # Supervisor
     id_supervisor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="supervisor", blank=True)
     comentarios_supervisor = models.CharField(max_length=1000, null=True, blank=True)
+
+    # Auditor
+    comentarios_auditor = models.CharField(max_length=1000, null=True, blank=True)
+
 
     class Meta:
         verbose_name_plural = "Solicitudes de Mantenimiento Preventivo"

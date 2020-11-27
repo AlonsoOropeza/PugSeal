@@ -53,6 +53,13 @@ export class ActividadesComponent implements OnInit {
   }
 
   public async loadInfo() {
+    this.categorias = await this.categoriasService.getCategorias();
+    this.empleados = await this.empleadosService.getEmpleados();
+    this.proveedores = await this.proveedoresService.getProveedores();
+
+    let nombre_categoria: String;
+    let nombre_empleado: String;
+    let nombre_proveedor: String;
     const mes = moment(new Date()).month();
     this.mes = Meses[mes];
     this.events = [];
@@ -74,11 +81,29 @@ export class ActividadesComponent implements OnInit {
       let events = [];
       this.solicitudes.forEach(solicitud => {
         if (moment(solicitud.fecha_inicio).week() === index && solicitud.id_empleado === this.user.id && solicitud.aprobado) {
+          this.categorias.forEach(categoria => {
+            if (solicitud.id_categoria === categoria.id_categoria) {
+              nombre_categoria = categoria.nombre;
+            }
+          })
+          this.empleados.forEach(empleado => {
+            if (solicitud.id_empleado === empleado.id) {
+              nombre_empleado = empleado.first_name + ' ' + empleado.last_name;
+            }
+          })
+          this.proveedores.forEach(proveedor => {
+            if (solicitud.id_proveedor === proveedor.id_proveedor) {
+              nombre_proveedor = proveedor.nombre_empresa;
+            }
+          })
           events = [
             ...events,
             {
               ...solicitud,
-              semana: moment(new Date(solicitud.fecha_inicio)).week()
+              semana: moment(new Date(solicitud.fecha_inicio)).week(),
+              nombre_categoria,
+              nombre_empleado,
+              nombre_proveedor
             },
           ];
         }
@@ -96,9 +121,6 @@ export class ActividadesComponent implements OnInit {
     }
     console.log(this.actividad_semanas);
     this.spinner.hideSpinner();
-    this.categorias = await this.categoriasService.getCategorias();
-    this.empleados = await this.empleadosService.getEmpleados();
-    this.proveedores = await this.proveedoresService.getProveedores();
 
     const first  =  new Date(new Date().getFullYear(), 0, 1);
     const last  =  new Date(new Date().getFullYear(), 11, 31);
@@ -115,7 +137,7 @@ export class ActividadesComponent implements OnInit {
 
   public async update(form: NgForm) {
     this.spinner.showSpinner();
-    if (this.mantenimiento.terminado) {
+    if (this.mantenimiento.id_empleado) {
       this.notificationsService.showWarning('No puedes modificar un mantenimiento que ha sido finalizado');
       await this.loadInfo();
     } else {

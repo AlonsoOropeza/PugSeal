@@ -13,20 +13,29 @@
                 <table class="table table-hover table-striped row-border hover">
                   <thead>
                       <tr>
+                          <th>Categoria</th>
                           <th>Actividad</th>
-                          <th>Fecha Estimada</th>
-                          <th>Gasto estimado</th>
-                          <th>Estado</th>
-                          <th>Finalizar</th>
+                          <th>Proveedor</th>
+                          <th>Fecha Realizacion</th>
+                          <th>Horas</th>
+                          <th>Realizado por</th>
+                          <th>Supervisado por</th>
+                          <th>Auditado por</th>
+                          <!--<th>Gasto estimado</th>-->
+                         <th>Finalizar</th>
                       </tr>
                   </thead>
                   <tbody>
                       <tr *ngFor="let event of semana.eventos.events">
+                          <td>{{event.nombre_categoria}}</td>
                           <td>{{event.actividad}}</td>
-                          <td>{{ event.fecha_inicio }}</td>
-                          <td>${{ event.cotizacion }}</td>
-                          <td *ngIf="event.terminado"><i class="glyphicon glyphicon-ok text-success"></i></td>
-                          <td *ngIf="!event.terminado"><i class="glyphicon glyphicon-remove text-danger"></i></td>
+                          <td>{{event.nombre_proveedor}}</td>
+                          <td>{{ event.fecha_terminacion }}</td>
+                          <td>{{event.duracion_horas}}</td>
+                          <td>{{event.nombre_empleado}}</td>
+                          <td>{{event.nombre_supervisor}}</td>
+                          <td>{{event.nombre_auditor}}</td>
+                          <!--<td>${{ event.cotizacion }}</td>-->
                           <td>
                             <button class="btn btn-ver btn-lg" (click)="addRequest(modalupdate, event)">
                               <i class="glyphicon glyphicon-check"></i>

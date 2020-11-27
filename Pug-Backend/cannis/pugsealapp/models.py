@@ -71,22 +71,19 @@ class Mantenimiento_Preventivo(models.Model):
     cotizacion = models.FloatField(default=0, blank=True, null=True)
     frecuencia_anual = models.IntegerField(default=0)
     fecha_inicio = models.DateField(null=True, default=timezone.now)
-    id_empleado = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="empleado")
     fecha_creacion = models.DateTimeField(default=timezone.now)
-    terminado = models.BooleanField(default=False)
 
     # Aprobacion
     id_auditor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="auditor", blank=True)
-    aprobado = models.BooleanField(default=False)
 
     # finalizacion (encargado)
+    id_empleado = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="empleado", blank=True)
     duracion_horas = models.FloatField(default=0, blank=True, null=True)
     fecha_terminacion = models.DateField(null=True, blank=True)
 
     # Supervisor
     id_supervisor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="supervisor", blank=True)
     comentarios_supervisor = models.CharField(max_length=1000, null=True, blank=True)
-    supervisado = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = "Solicitudes de Mantenimiento Preventivo"

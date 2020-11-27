@@ -3,8 +3,9 @@ import { Input } from '@angular/core';
 import { Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MantenimientoPreventivo } from 'app/models/models.model';
+import { MantenimientoPreventivo, Usuario } from 'app/models/models.model';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+
 
 @Component({
   selector: 'app-actividades-form',
@@ -15,6 +16,7 @@ export class ActividadesFormComponent implements OnInit {
 
   @Input() mantenimiento: MantenimientoPreventivo;
   @Input() modaladd: BsModalRef;
+  @Input() user: Usuario;
   @Output() continueparent = new EventEmitter();
   @Output() cancelparent = new EventEmitter();
 

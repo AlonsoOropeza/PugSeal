@@ -69,30 +69,6 @@
 
         <div class="col-12">
             <div class="form-group">
-                <label class="form-control-label" for="proveedor">Encargado <span class="text-danger">*</span></label>
-                <select
-                    class="form-control"
-                    id="encargado" required
-                    [(ngModel)]="mantenimiento.id_empleado"
-                    name="encargado"
-                    #encargado="ngModel"
-                    disabled={{!edit}}
-                >
-                <option *ngFor="let empleado of empleados" value="{{empleado.id}}">
-                    {{empleado.first_name }} {{empleado.last_name}}
-                </option>
-                </select>
-            </div>
-        </div>
-
-        <div *ngIf="encargado.invalid && (encargado.dirty || encargado.touched)" class="alert alert-danger">
-            <div *ngIf="encargado.errors.required">
-                El encargado es obligatorio.
-            </div>
-        </div>
-
-        <div class="col-12">
-            <div class="form-group">
                 <label class="form-control-label" for="cotizacion">Costo Estimado<span class="text-danger">*</span></label>
                 <div class="input-group">
                     <span class="input-group-addon">$</span>

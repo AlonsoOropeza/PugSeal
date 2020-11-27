@@ -4,11 +4,11 @@
       <div class="col-md-12">
         <div class="card">
           <div class="header">
-              <h4 class="title">Mis actividades asignadas</h4>
-              <p class="category">Desde aquí se pueden obtener mis actividades asignadas y se puede marcar la realización de las mismas.</p>
+              <h4 class="title">Actividades</h4>
+              <p class="category">Desde aquí se puede marcar la finalización, supervisón y auditoría de las actividades.</p>
           </div>
           <accordion>
-            <accordion-group *ngFor="let semana of actividad_semanas" heading="{{semana.titulo}}" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
+            <accordion-group *ngFor="let semana of actividad_semanas" heading="mes - {{semana.titulo}} - {{semana.eventos.events.length}} actividades" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
               <div class="content table-responsive table-full-width">
                 <table class="table table-hover table-striped row-border hover">
                   <thead>
@@ -22,7 +22,9 @@
                           <th>Supervisado por</th>
                           <th>Auditado por</th>
                           <!--<th>Gasto estimado</th>-->
-                         <th>Finalizar</th>
+                         <th *ngIf="user.rol === 'Encargado_Mantenimiento'">Finalizar</th>
+                         <th *ngIf="user.rol === 'Supervisor'">Supervisar</th>
+                         <th *ngIf="user.rol === 'Auditor'">Auditar</th>  
                       </tr>
                   </thead>
                   <tbody>
@@ -30,14 +32,38 @@
                           <td>{{event.nombre_categoria}}</td>
                           <td>{{event.actividad}}</td>
                           <td>{{event.nombre_proveedor}}</td>
-                          <td>{{ event.fecha_terminacion }}</td>
-                          <td>{{event.duracion_horas}}</td>
-                          <td>{{event.nombre_empleado}}</td>
-                          <td>{{event.nombre_supervisor}}</td>
-                          <td>{{event.nombre_auditor}}</td>
+                          <td *ngIf="!event.fecha_terminacion">N/A</td>
+                          <td *ngIf="event.fecha_terminacion">{{ event.fecha_terminacion }}</td>
+                          <td *ngIf="!event.duracion_horas">N/A</td>
+                          <td *ngIf="event.duracion_horas">{{event.duracion_horas}}</td>
+                          <td>{{event.nombre_empleado}}
+                            <button *ngIf="event.comentarios_encargado" (click)="showComment(modalComment, event.comentarios_encargado)">
+                              <i class="glyphicon glyphicon-comment"></i>
+                            </button>
+                          </td>
+                          <td>{{event.nombre_supervisor}}
+                            <button *ngIf="event.comentarios_supervisor" (click)="showComment(modalComment, event.comentarios_supervisor)">
+                              <i class="glyphicon glyphicon-comment"></i>
+                            </button>
+                          </td>
+                          <td>{{event.nombre_auditor}}
+                            <button *ngIf="event.comentarios_auditor" (click)="showComment(modalComment, event.comentarios_auditor)">
+                              <i class="glyphicon glyphicon-comment"></i>
+                            </button>
+                          </td>
                           <!--<td>${{ event.cotizacion }}</td>-->
-                          <td>
-                            <button class="btn btn-ver btn-lg" (click)="addRequest(modalupdate, event)">
+                          <td *ngIf="user.rol === 'Encargado_Mantenimiento'">
+                            <button class="btn btn-ver btn-lg" (click)="addRequest(modalActividad, event)">
+                              <i class="glyphicon glyphicon-check"></i>
+                          </button>
+                          </td>
+                          <td *ngIf="user.rol === 'Supervisor'">
+                            <button class="btn btn-ver btn-lg" (click)="addRequest(modalActividad, event)">
+                              <i class="glyphicon glyphicon-check"></i>
+                          </button>
+                          </td>
+                          <td *ngIf="user.rol === 'Auditor'">
+                            <button class="btn btn-ver btn-lg" (click)="addRequest(modalActividad, event)">
                               <i class="glyphicon glyphicon-check"></i>
                           </button>
                           </td>
@@ -56,23 +82,104 @@
 
   
   
-  <ng-template #modalupdate>
+  <ng-template #modalActividad>
+    <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+            <span aria-hidden="true"> × </span>
+        </button>
+        <h6 *ngIf="user.rol === 'Encargado_Mantenimiento'" class="modal-title" id="modal-title-update1">
+            Finalizar actividad
+        </h6>
+        <h6 *ngIf="user.rol === 'Supervisor'" class="modal-title" id="modal-title-update1">
+          Supervisar actividad
+        </h6>
+        <h6 *ngIf="user.rol === 'Auditor'" class="modal-title" id="modal-title-update1">
+          Auditar actividad
+        </h6>
+      </div>
+    
+      <div class="modal-body">
+        <div *ngIf="user.rol === 'Encargado_Mantenimiento'">
+          <app-actividades-form
+          [mantenimiento]="mantenimiento"
+          [modaladd]="modalComponent"
+          (continueparent)="terminarActividad($event)"
+          (cancelparent)="cancel()"
+          [user]="user"
+          ></app-actividades-form>
+        </div>
+      </div>
+
+      <div *ngIf="user.rol === 'Supervisor'">
+        <form #updateForm="ngForm" class="modals">
+          <label class="form-control-label" for="comentarios_supervisor">Comentarios <span class="text-danger">*</span></label>
+          <textarea
+          class="form-control"
+          id="comentarios_supervisor" required
+          [(ngModel)]="mantenimiento.comentarios_supervisor"
+          name="comentarios_supervisor"
+          #comentarios_supervisor="ngModel"
+        >
+        </textarea>
+        <div *ngIf="comentarios_supervisor.invalid && (comentarios_supervisor.dirty || comentarios_supervisor.touched)" class="alert alert-danger">
+          <div *ngIf="comentarios_supervisor.errors.required">
+            Los comentarios son obligatorios.
+          </div>
+        </div>
+
+        <button class="btn btn-primary" type="submit" [disabled] = "updateForm.invalid" (click)="update()">
+          Guardar
+      </button>
+    
+      <button class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+          Cancelar
+      </button>
+
+        </form>
+      </div>
+
+      <div *ngIf="user.rol === 'Auditor'">
+        <form #updateForm="ngForm" class="modals">
+          <label class="form-control-label" for="comentarios_auditor">Comentarios <span class="text-danger">*</span></label>
+          <textarea
+          class="form-control"
+          id="comentarios_auditor" required
+          [(ngModel)]="mantenimiento.comentarios_auditor"
+          name="comentarios_auditor"
+          #comentarios_auditor="ngModel"
+        >
+        </textarea>
+        <div *ngIf="comentarios_auditor.invalid && (comentarios_auditor.dirty || comentarios_auditor.touched)" class="alert alert-danger">
+          <div *ngIf="comentarios_auditor.errors.required">
+            Los comentarios son obligatorios.
+          </div>
+        </div>
+
+        <button class="btn btn-primary" type="submit" [disabled] = "updateForm.invalid" (click)="update()">
+          Guardar
+      </button>
+    
+      <button class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+          Cancelar
+      </button>
+
+        </form>
+      </div>
+
+  </ng-template>
+
+  <ng-template #modalComment>
     <div class="modal-header">
         <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
             <span aria-hidden="true"> × </span>
         </button>
         <h6 class="modal-title" id="modal-title-update1">
-            Finalizar actividad
+           Comentarios
         </h6>
       </div>
     
       <div class="modal-body">
-        <app-actividades-form
-        [mantenimiento]="mantenimiento"
-        [modaladd]="modalComponent"
-        (continueparent)="update($event)"
-        (cancelparent)="cancel()"
-        ></app-actividades-form>
+        {{comentario}}
       </div>
   </ng-template>
   

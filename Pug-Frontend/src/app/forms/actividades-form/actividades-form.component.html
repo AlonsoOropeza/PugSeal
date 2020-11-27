@@ -26,17 +26,43 @@
 
         <div class="col-12">
             <div class="form-group">
-                <label class="form-control-label" for="terminado">Finalizar <span class="text-danger">*</span></label>
-                <input
-                    type="checkbox"
-                    class="form-control"
-                    id="terminado" required
-                    [(ngModel)]="mantenimiento.terminado"
-                    name="terminado"
-                    #terminado="ngModel"
-                >
+                <label class="form-control-label" for="comentarios">Comentarios</label>
+                    <textarea
+                        class="form-control"
+                        id="comentarios_encargado"
+                        [(ngModel)]="mantenimiento.comentarios_encargado"
+                        name="comentarios_encargado"
+                        #comentarios_encargado="ngModel"
+                    >
+                    </textarea>
+            </div>
+    
+            <div *ngIf="comentarios_encargado.invalid && (comentarios_encargado.dirty || comentarios_encargado.touched)" class="alert alert-danger">
+                Los comentarios son inválidos.
             </div>
         </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="cotizacion">¿Nueva Cotización?</label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="cotizacion" 
+                        [(ngModel)]="mantenimiento.cotizacion"
+                        name="cotizacion"
+                        #cotizacion="ngModel"
+                    >
+                    </div>
+            </div>
+    
+            <div *ngIf="cotizacion.invalid && (cotizacion.dirty || cotizacion.touched)" class="alert alert-danger">
+                La cotización es inválida.
+            </div>
+        </div>
+
     </div>
 
   

@@ -11,31 +11,33 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
-  { path: '/actividades', title: 'Mis Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
+  { path: '/actividades', title: 'Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
     { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
     { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
     { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
-    { path: '/requisiciones', title: 'Requisiciones',  icon: 'glyphicon glyphicon-list-alt', class: '' }
 ];
-export const LIMPIEZAROUTES: RouteInfo[] = [
+export const SUPERVISORROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
-  { path: '/bitacora-mediciones', title: 'Bitacora Mediciones', icon: 'glyphicon glyphicon-list-alt', class: ''},
-  { path: '/actividades', title: 'Mis Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
+  { path: '/actividades', title: 'Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
+  { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
+];
+export const AUDITORROUTES: RouteInfo[] = [
+  { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
+  { path: '/actividades', title: 'Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
+  { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
+  { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
+  { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
 ];
 export const ADMINROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
   { path: '/presupuesto', title: 'Presupuesto anual',  icon: 'glyphicon glyphicon-usd', class: '' },
-  { path: '/actividades', title: 'Mis Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
-  { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
+  { path: '/actividades', title: 'Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
   { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
   { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
-  { path: '/gestion', title: 'Gestión Interna',  icon: 'glyphicon glyphicon-cog', class: '' },
   // { path: '/user', title: 'User Profile',  icon: 'pe-7s-user', class: '' },
-  { path: '/bitacora-mediciones', title: 'Bitacora Mediciones', icon: 'glyphicon glyphicon-list-alt', class: ''},
   { path: '/areas', title: 'Areas',  icon: 'glyphicon glyphicon-list-alt', class: '' },
   { path: '/categorias', title: 'Categorias',  icon: 'glyphicon glyphicon-list-alt', class: '' },
   { path: '/proveedores', title: 'Proveedores',  icon: 'glyphicon glyphicon-list-alt', class: '' },
-  { path: '/requisiciones', title: 'Requisiciones',  icon: 'glyphicon glyphicon-list-alt', class: '' },
 ];
 
 @Component({
@@ -54,8 +56,10 @@ export class SidebarComponent implements OnInit {
     let routes: any;
     if (this.user.rol === 'Admin') {
       routes = ADMINROUTES;
-    } else if ( this.user.rol === 'Limpieza') {
-      routes = LIMPIEZAROUTES;
+    } else if (this.user.rol === 'Supervisor') {
+      routes = SUPERVISORROUTES;
+    } else if (this.user.rol === 'Auditor') {
+      routes = AUDITORROUTES;
     } else {
       routes = ROUTES;
     }

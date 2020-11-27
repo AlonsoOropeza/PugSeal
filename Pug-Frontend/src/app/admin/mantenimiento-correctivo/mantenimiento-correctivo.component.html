@@ -24,14 +24,15 @@
                                 <thead>
                                     <tr>
                                         <th *ngFor="let titulo of titulos">{{ titulo }}</th>
-                                       <!--<th *ngIf="user.rol === 'Auditor' || user.rol === 'Admin'">Eliminar</th>--> 
+
+                                        <th *ngIf="canDelete">Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let mantenimiento of mantenimientos">
                                         <td>{{mantenimiento.descripcion_problema}}</td>
                                         <td>{{mantenimiento.fecha_solicitud}}</td>
-                                        <td>{{mantenimiento.finalizado}}</td>
+                                        <td>{{mantenimiento.finalizada}}</td>
                                         <td>
                                             <button class="btn-ver  btn-block" (click)="addRequest(modalupdate, mantenimiento, false)">
                                                 <i class="glyphicon glyphicon-chevron-right"></i>
@@ -42,7 +43,7 @@
                                                 <i class="glyphicon glyphicon-edit"></i>
                                             </button>
                                         </td>
-                                        <td *ngIf="user.rol === 'Auditor' || user.rol === 'Admin'" (click)="addRequest(modaldelete, mantenimiento)">
+                                        <td *ngIf="canDelete" (click)="addRequest(modaldelete, mantenimiento)">
                                             <button class="btn-eliminar  btn-block" >
                                                 <i class="glyphicon glyphicon-trash"></i>
                                             </button>

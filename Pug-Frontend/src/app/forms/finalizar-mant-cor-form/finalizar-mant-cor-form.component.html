@@ -1,0 +1,100 @@
+<form #createForm="ngForm" class="modals">
+    <div class="row">
+        <div class="col-12" *ngIf="(mantenimiento.id_solicitante != null)">
+            <div class="form-group">
+                <label class="form-control-label" for="concepto">Solicitante:  </label>
+                <input type="text" class="form-control" id="id_solicitante"  [(ngModel)]="name"
+                    name="id_solicitante" #id_solicitante="ngModel" disabled=True >
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="descripcion_problema">Describe el problema o necesidad<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="descripcion_problema" required [(ngModel)]="mantenimiento.descripcion_problema"
+                    name="descripcion_problema" #descripcion_problema="ngModel" disabled=True>
+            </div>
+            <div *ngIf="descripcion_problema.invalid && (descripcion_problema.dirty || descripcion_problema.touched)" class="alert alert-danger">
+                <div *ngIf="descripcion_problema.errors.required">
+                    La descipción del problema o necesidad es un campo obligatorio.
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="costo_trabajo">Costo del trabajo (Incluyendo IVA)</label>
+                <input type="number" class="form-control" id="costo_trabajo" [(ngModel)]="mantenimiento.costo_trabajo" name="costo_trabajo"
+                    disabled={{!edit}} #costo_trabajo="ngModel" >
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="costo_material">Costo del material (Incluyendo IVA)</label>
+                <input type="number" class="form-control" id="costo_material" [(ngModel)]="mantenimiento.costo_material" name="costo_material"
+                    disabled={{!edit}} #costo_material="ngModel" >
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="horas_trabajo">Horas de ejecución total </label>
+                <select class="form-control" id="horas_trabajo" [(ngModel)]="mantenimiento.estado" name="horas_trabajo"
+                    disabled={{!edit}} #horas_trabajo="ngModel">
+                    <option value="30 min">30 min</option>
+                    <option value="45 min">45 min</option>
+                    <option value="1 hora">1 hora</option>
+                    <option value="2 horas">2 horas</option>
+                    <option value="3 horas">3 horas</option>
+                    <option value="4 horas">4 horas</option>
+                    <option value="5 horas">5 horas</option>
+                    <option value="6 horas">6 horas</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="fecha_finalizacion">Fecha de Finalización<span
+                        class="text-danger">*</span></label>
+                <input type="date" class="form-control" id="fecha_finalizacion"  [(ngModel)]="mantenimiento.fecha_finalizacion"  
+                    name="fecha_finalizacion" #fecha_finalizacion="ngModel"
+                    disabled={{!edit}}>
+            </div>
+        </div>
+        <div *ngIf="fecha_finalizacion.invalid && (fecha_finalizacion.dirty || fecha_finalizacion.touched)" class="alert alert-danger">
+            <div *ngIf="fecha_finalizacion.errors.required">
+                La fecha de finalización es un campo obligatorio.
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="id_encargado">Encargado de finalización <span class="text-danger">*</span></label>
+                <select class="form-control" id="id_encargado" [(ngModel)]="mantenimiento.id_encargado" name="id_encargado"
+                    disabled={{!edit}} #id_encargado="ngModel" >
+                    <option *ngFor="let empleado of empleados" value="{{empleado.id}}">{{empleado.first_name}}</option>
+                </select>
+            </div>
+            <div *ngIf="id_encargado.invalid && (id_encargado.dirty || id_encargado.touched)" class="alert alert-danger">
+                <div *ngIf="id_encargado.errors.required">
+                    El encargado es un campo obligatorio.
+                </div>
+            </div>
+        </div>
+        <div class="col-12" >
+            <div class="form-group">
+                <label class="form-control-label" for="finalizada">Finalizado</label>
+                <input type="checkbox" class="form-control" id="finalizada" [(ngModel)]="mantenimiento.finalizada"
+                    name="finalizada" disabled={{!edit}} #finalizado="ngModel">
+            </div>
+        </div>
+    </div>
+    <button *ngIf="edit" class="btn btn-primary" type="submit" [disabled]="createForm.invalid"
+        (click)="continue(createForm)">
+        Guardar
+    </button>
+
+    <button *ngIf="edit" class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+        Cancelar
+    </button>
+
+    <button *ngIf="!edit" class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+        Cerrar
+    </button>
+</form>

@@ -245,7 +245,7 @@ export class MantenimientoCorrectivo {
     public calif_terminacion?: number;
     public calif_limpieza?: number;
     public calif_totalidad?: number;
-    public finalizado?: boolean;
+    public finalizada?: boolean;
     public estado?: string;
 
     constructor(json?: MantenimientoCorrectivo) {
@@ -269,7 +269,7 @@ export class MantenimientoCorrectivo {
         this.calif_terminacion = json?.calif_terminacion ? json.calif_terminacion : null;
         this.calif_limpieza = json?.calif_limpieza ? json.calif_limpieza : null;
         this.calif_totalidad = json?.calif_totalidad ? json.calif_totalidad : null;
-        this.finalizado = json?.finalizado ? json.finalizado : false;
+        this.finalizada = json?.finalizada ? json.finalizada : false;
         this.estado = json?.estado ? json.estado : null;
     }
 }

@@ -1,0 +1,152 @@
+<div>
+    <h1>Incidencias</h1>
+    <accordion>
+      <accordion-group  heading="Inconclusas" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
+        <div class="content table-responsive table-full-width">
+          <table class="table table-hover table-striped row-border hover">
+            <thead>
+                <tr>
+                    <th>Actividad</th>
+                    <th>Fecha</th>
+                    <th>Gasto estimado</th>
+                    <th>Semana</th>
+                    <th>Vizualizar</th>
+                    <th>Aprobar</th>
+                    <th>Finalizar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let event of inconclusas" >
+                      <td>{{event.descripcion_problema}}</td>
+                      <td>{{ event.fecha_solicitud }}</td>
+                      <td>${{ event.costo_trabajo }}</td>
+                      <td>{{ event.semana }}</td>
+                      <td>
+                        <button class="btn btn-ver btn-lg" (click)="addRequest(modalupdate, event, false)" >
+                          <i class="glyphicon glyphicon-chevron-right"></i>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="btn btn-aprobar btn-lg" (click)="addRequest(modalupdate, event, false)" >
+                          <i class="pe-7s-check"></i>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="btn btn-finalizar btn-lg" (click)="addRequest(modalend, event, true)" >
+                          <i class="pe-7s-clock"></i>
+                        </button>
+                      </td>
+                </tr>
+            </tbody>
+      </table>
+      </div>
+      </accordion-group>
+    </accordion>
+    
+
+    <accordion>
+      <accordion-group *ngFor="let semana of incidencias_semanas" heading="{{semana.titulo}} - {{semana.porcentaje}}" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
+        <div class="content table-responsive table-full-width">
+          <table class="table table-hover table-striped row-border hover">
+            <thead>
+                <tr>
+                    <th>Actividad</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                    <th>Gasto estimado</th>
+                    <th>Calificacion</th>
+                    <th>Vizualizar</th>
+                    <th>Aprobar</th>
+                    <th>Finalizar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let event of semana.eventos.events">
+                    <td>{{event.descripcion_problema}}</td>
+                    <td *ngIf="event.finalizada">Aprobado</td>
+                    <td *ngIf="!event.finalizada">No Aprobado</td>
+                    <td>{{ event.fecha_solicitud }}</td>
+                    <td>${{ event.costo_trabajo }}</td>
+                    <td>{{ (event.calif_calidad + event.calif_terminacion + event.calif_limpieza + event.calif_totalidad )/4}}</td>
+                    <td>
+                      <button class="btn btn-ver btn-lg" (click)="addRequest(modalupdate, event, false)" >
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <button class="btn btn-aprobar btn-lg" (click)="addRequest(modalupdate, event, false)" >
+                        <i class="pe-7s-check"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <button class="btn btn-finalizar btn-lg" (click)="addRequest(modalend, event, true)" >
+                        <i class="pe-7s-clock"></i>
+                      </button>
+                    </td>
+                </tr>
+            </tbody>
+      </table>
+      </div>
+      </accordion-group>
+    </accordion>
+  </div>
+  <br><br>
+  
+    
+    
+  <ng-template #modalupdate>
+    <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+            <span aria-hidden="true"> × </span>
+        </button>
+        <h6 *ngIf="edit" class="modal-title" id="modal-title-update1">
+            Editar solicitud
+        </h6>
+        <h6 *ngIf="!edit" class="modal-title" id="modal-title-update2">
+            Visualizar solicitud
+        </h6>
+    </div>
+    
+      <div class="modal-body">
+        <app-mantenimiento-correctivo-form
+        [mantenimiento]="mantenimiento"
+        [edit]="edit"
+        [modaladd]="modalComponent"
+        [proveedores]="proveedores"
+        [categorias]="categorias"
+        [empleados]="empleados"
+        [hoteles]="hoteles"
+        [user]="user"
+        [areas]="areas"
+        [name]="name"
+        (continueparent)="update($event)"
+        (cancelparent)="cancel()"
+        ></app-mantenimiento-correctivo-form>
+      </div>
+</ng-template>
+
+<ng-template #modalend>
+  <div class="modal-header">
+      <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+          <span aria-hidden="true"> × </span>
+      </button>
+      <h6 *ngIf="edit" class="modal-title" id="modal-title-update1">
+          Editar solicitud
+      </h6>
+      <h6 *ngIf="!edit" class="modal-title" id="modal-title-update2">
+          Visualizar solicitud
+      </h6>
+  </div>
+  
+    <div class="modal-body">
+      <app-finalizar-mant-cor-form
+      [mantenimiento]="mantenimiento"
+      [edit]="edit"
+      [modaladd]="modalComponent"
+      [empleados]="empleados"
+      [name]="name"
+      (continueparent)="update($event)"
+      (cancelparent)="cancel()"
+      ></app-finalizar-mant-cor-form>
+    </div>
+</ng-template>

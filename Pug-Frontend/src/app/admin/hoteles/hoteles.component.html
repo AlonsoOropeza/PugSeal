@@ -36,11 +36,6 @@
                                                 <i class="glyphicon glyphicon-edit"></i>
                                             </button>
                                         </td>
-                                        <td>
-                                            <button class="btn btn-modificar btn-block" (click)="addRequest(modalupdate, hotel)">
-                                                <i class="glyphicon glyphicon-edit"></i>
-                                            </button>
-                                        </td>
                                     </tr>
                                 </tbody>
                           </table>
@@ -58,19 +53,19 @@
             <span aria-hidden="true"> × </span>
           </button>
         <h6 class="modal-title" id="modal-title-default">
-          Agregar área
+          Agregar hotel
         </h6>
     
       </div>
     
       <div class="modal-body">
-        <app-area-form
-        [area]="area"
+        <app-hotel-form
+        [hotel]="hotel"
         [user]="user"
         [modaladd]="modalComponent"
         (continueparent)="create($event)"
         (cancelparent)="cancel()"
-        ></app-area-form>
+        ></app-hotel-form>
       </div>
 </ng-template>
 
@@ -80,17 +75,17 @@
             <span aria-hidden="true"> × </span>
         </button>
         <h6 class="modal-title" id="modal-title-default">
-          Editar área
+          Editar hotel
         </h6>
       </div>
       <div class="modal-body">
-        <app-area-form
+        <app-hotel-form
         [hotel]="hotel"
         [user]="user"
         [modaladd]="modalComponent"
         (continueparent)="update($event)"
         (cancelparent)="cancel()"
-        ></app-area-form>
+        ></app-hotel-form>
       </div>
 </ng-template>
 

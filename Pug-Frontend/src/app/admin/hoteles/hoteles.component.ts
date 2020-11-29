@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Hotel, Usuario } from 'app/models/models.model';
 import { HotelService } from 'app/services/hotel.service';
 import { NotificationsService } from 'app/services/notifications.service';
@@ -6,6 +6,7 @@ import { SpinnerService } from 'app/services/spinner.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-hoteles',
@@ -41,7 +42,7 @@ export class HotelesComponent implements OnInit {
       }
     };
     this.loadInfo();
-    this.titulos = ['Hotel', 'Dirección', 'Activo', 'Modificar', 'Eliminar'];
+    this.titulos = ['Hotel', 'Dirección', 'Activo', 'Editar'];
   }
   public async loadInfo() {
     try {
@@ -53,5 +54,47 @@ export class HotelesComponent implements OnInit {
     } finally {
       this.spinner.hideSpinner();
     }
+  }
+
+  public addRequest(modal: TemplateRef<any>, hotel?: Hotel) {
+    this.hotel = hotel ? hotel : new Hotel();
+    this.modalComponent = this.modalService.show(modal, {backdrop : 'static', keyboard: false, class: 'modal-dialog-centered'});
+  }
+
+  public async create(form: NgForm) {
+    this.spinner.showSpinner();
+      (await this.hotelService.createHotel(this.hotel)).subscribe(
+        async () => {
+          this.notificationsService.showNotification('Se ha creado correctamente el hotel.', true)
+          this.hoteles = await this.hotelService.getHoteles()
+      },
+      async error => {
+        this.notificationsService.showNotification(error.message, false);
+        this.hoteles = await this.hotelService.getHoteles()
+      }
+    );
+    this.spinner.hideSpinner();
+    this.modalComponent.hide();
+  }
+
+  public async update(form: NgForm) {
+    this.spinner.showSpinner();
+    (await this.hotelService.updateHotel(this.hotel)).subscribe(
+      async () => {
+        this.notificationsService.showNotification('Se ha actualizado correctamente el hotel.', true)
+        this.hoteles = await this.hotelService.getHoteles()
+    },
+      async error => {
+        this.notificationsService.showNotification(error.message, false);
+        this.hoteles = await this.hotelService.getHoteles()
+      }
+    );
+    this.spinner.hideSpinner();
+    this.modalComponent.hide();
+  }
+
+  public async cancel() {
+    this.hoteles = await this.hotelService.getHoteles();
+    this.modalComponent.hide();
   }
 }

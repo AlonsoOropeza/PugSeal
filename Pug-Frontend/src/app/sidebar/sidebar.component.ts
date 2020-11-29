@@ -27,6 +27,9 @@ export const AUDITORROUTES: RouteInfo[] = [
   { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
   { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
   { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
+  { path: '/areas', title: 'Areas',  icon: 'glyphicon glyphicon-list-alt', class: '' },
+  { path: '/categorias', title: 'Categorias',  icon: 'glyphicon glyphicon-list-alt', class: '' },
+  { path: '/proveedores', title: 'Proveedores',  icon: 'glyphicon glyphicon-list-alt', class: '' },
 ];
 export const ADMINROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },

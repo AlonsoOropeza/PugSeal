@@ -36,7 +36,6 @@ export class ActividadesComponent implements OnInit {
   public actividad_semanas: any[] = [];
   public comentario: string;
 
-
   constructor(
     private modal: NgbModal,
     private mantenimientoPreventivoService: MantenimientoPreventivoService,

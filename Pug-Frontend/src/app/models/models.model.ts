@@ -128,16 +128,14 @@ export class Area {
 export class Hotel {
     public nombre?: string;
     public direccion?: string;
-    public latitud?: string;
-    public longitud?: string;
     public id_hotel?: number;
+    public activo?: boolean;
 
     constructor(json?: Hotel) {
         this.nombre = json?.nombre ? json.nombre : '';
         this.direccion = json?.direccion ? json.direccion : '';
-        this.latitud = json?.latitud ? json.latitud : '';
-        this.longitud = json?.longitud ? json.longitud : '';
         this.id_hotel = json?.id_hotel ? json.id_hotel : undefined;
+        this.activo = json?.activo ? json.activo : true;
     }
 
 

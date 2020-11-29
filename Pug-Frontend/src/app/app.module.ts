@@ -50,6 +50,7 @@ import { PresupuestoComponent } from './admin/presupuesto/presupuesto.component'
 import { ActividadesFormComponent } from './forms/actividades-form/actividades-form.component';
 import { IncidenciasComponent } from './admin/incidencias/incidencias.component';
 import { FinalizarMantCorFormComponent } from './forms/finalizar-mant-cor-form/finalizar-mant-cor-form.component';
+import { CalificarMantCorFormComponent } from './forms/calificar-mant-cor-form/calificar-mant-cor-form.component';
 
 
 @NgModule({
@@ -100,7 +101,8 @@ import { FinalizarMantCorFormComponent } from './forms/finalizar-mant-cor-form/f
     PresupuestoComponent,
     ActividadesFormComponent,
     IncidenciasComponent,
-    FinalizarMantCorFormComponent
+    FinalizarMantCorFormComponent,
+    CalificarMantCorFormComponent
   ],
   providers: [CookieService, DatePipe],
   bootstrap: [AppComponent]

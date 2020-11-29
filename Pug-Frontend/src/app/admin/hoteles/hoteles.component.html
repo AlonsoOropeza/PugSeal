@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Hoteles</h4>
+                        <p class="category">Aquí se encuentran los hoteles</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-default btn-block" (click)="addRequest(modaladd)">
+                                <p>Crear Hotel</p>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th *ngFor="let titulo of titulos">{{ titulo }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let hotel of hoteles">
+                                        <td>{{hotel.nombre}}</td>
+                                        <td>{{hotel.direccion}}</td>
+                                        <td *ngIf="hotel.activo">Activo</td>
+                                        <td *ngIf="!hotel.activo">Inactivo</td>
+                                        <td>
+                                            <button class="btn btn-modificar btn-block" (click)="addRequest(modalupdate, hotel)">
+                                                <i class="glyphicon glyphicon-edit"></i>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-modificar btn-block" (click)="addRequest(modalupdate, hotel)">
+                                                <i class="glyphicon glyphicon-edit"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                          </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #modaladd>
+    <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+            <span aria-hidden="true"> × </span>
+          </button>
+        <h6 class="modal-title" id="modal-title-default">
+          Agregar área
+        </h6>
+    
+      </div>
+    
+      <div class="modal-body">
+        <app-area-form
+        [area]="area"
+        [user]="user"
+        [modaladd]="modalComponent"
+        (continueparent)="create($event)"
+        (cancelparent)="cancel()"
+        ></app-area-form>
+      </div>
+</ng-template>
+
+<ng-template #modalupdate>
+    <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+            <span aria-hidden="true"> × </span>
+        </button>
+        <h6 class="modal-title" id="modal-title-default">
+          Editar área
+        </h6>
+      </div>
+      <div class="modal-body">
+        <app-area-form
+        [hotel]="hotel"
+        [user]="user"
+        [modaladd]="modalComponent"
+        (continueparent)="update($event)"
+        (cancelparent)="cancel()"
+        ></app-area-form>
+      </div>
+</ng-template>
+
+<ng-template #datatable></ng-template>

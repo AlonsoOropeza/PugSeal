@@ -49,6 +49,7 @@ class RequisicionViewSet(viewsets.ModelViewSet):
 class HotelViewSet(viewsets.ModelViewSet):
 	serializer_class = HotelSerializer
 	queryset = Hotel.objects.all()
+	
 class AuditoresViewSet(viewsets.ModelViewSet):
 	serializer_class = EmpleadoSerializer
 	queryset = Usuario.objects.filter(rol='Auditor')

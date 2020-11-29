@@ -49,8 +49,12 @@ import { ActividadesComponent } from './admin/actividades/actividades.component'
 import { PresupuestoComponent } from './admin/presupuesto/presupuesto.component';
 import { IncidenciasComponent } from './admin/incidencias/incidencias.component';
 import { FinalizarMantCorFormComponent } from './forms/finalizar-mant-cor-form/finalizar-mant-cor-form.component';
+<<<<<<< HEAD
 import { HotelesComponent } from './admin/hoteles/hoteles.component';
 import { HotelFormComponent } from './forms/hotel-form/hotel-form.component';
+=======
+import { CalificarMantCorFormComponent } from './forms/calificar-mant-cor-form/calificar-mant-cor-form.component';
+>>>>>>> 8e27c829bd721ab9942d97489c282335e57dd0c0
 
 
 @NgModule({
@@ -101,8 +105,12 @@ import { HotelFormComponent } from './forms/hotel-form/hotel-form.component';
     PresupuestoComponent,
     IncidenciasComponent,
     FinalizarMantCorFormComponent,
+<<<<<<< HEAD
     HotelesComponent,
     HotelFormComponent
+=======
+    CalificarMantCorFormComponent
+>>>>>>> 8e27c829bd721ab9942d97489c282335e57dd0c0
   ],
   providers: [CookieService, DatePipe],
   bootstrap: [AppComponent]

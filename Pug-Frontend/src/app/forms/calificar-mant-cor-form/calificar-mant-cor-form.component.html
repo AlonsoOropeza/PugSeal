@@ -1,0 +1,82 @@
+<form #createForm="ngForm" class="modals">
+    <div class="row">
+        <div class="col-12" *ngIf="(mantenimiento.id_solicitante != null)">
+            <div class="form-group">
+                <label class="form-control-label" for="concepto">Solicitante:  </label>
+                <input type="text" class="form-control" id="id_solicitante"  [(ngModel)]="name"
+                    name="id_solicitante" #id_solicitante="ngModel" disabled=True >
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="calif_calidad">Calificacion Calidad </label>
+                <select class="form-control" id="calif_calidad" [(ngModel)]="mantenimiento.calif_calidad" name="calif_calidad"
+                    disabled={{!edit}} #calif_calidad="ngModel">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="calif_terminacion">Calificacion Terminado </label>
+                <select class="form-control" id="calif_terminacion" [(ngModel)]="mantenimiento.calif_terminacion" name="calif_terminacion"
+                    disabled={{!edit}} #calif_terminacion="ngModel">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="calif_limpieza">Calificacion Limpieza </label>
+                <select class="form-control" id="calif_limpieza" [(ngModel)]="mantenimiento.calif_limpieza" name="calif_limpieza"
+                    disabled={{!edit}} #calif_limpieza="ngModel">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="calif_totalidad">Calificacion Totalidad </label>
+                <select class="form-control" id="calif_totalidad" [(ngModel)]="mantenimiento.calif_totalidad" name="calif_totalidad"
+                    disabled={{!edit}} #calif_totalidad="ngModel">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="finalizada">Finalizado</label>
+                <input type="checkbox" class="form-control" id="finalizada" [(ngModel)]="mantenimiento.finalizada"
+                    name="finalizada" disabled={{!edit}} #finalizado="ngModel">
+            </div>
+        </div>
+    </div>
+    <button *ngIf="edit" class="btn btn-primary" type="submit" [disabled]="createForm.invalid"
+        (click)="continue(createForm)">
+        Guardar
+    </button>
+
+    <button *ngIf="edit" class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+        Cancelar
+    </button>
+
+    <button *ngIf="!edit" class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+        Cerrar
+    </button>
+</form>

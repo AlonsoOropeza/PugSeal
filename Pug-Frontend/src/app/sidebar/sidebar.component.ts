@@ -39,6 +39,7 @@ export const ADMINROUTES: RouteInfo[] = [
   { path: '/categorias', title: 'Categorias',  icon: 'glyphicon glyphicon-list-alt', class: '' },
   { path: '/proveedores', title: 'Proveedores',  icon: 'glyphicon glyphicon-list-alt', class: '' },
   { path: '/requisiciones', title: 'Requisiciones',  icon: 'glyphicon glyphicon-list-alt', class: '' },
+  { path: '/hoteles', title: 'Hoteles',  icon: 'pe-7s-map-2', class: '' },
 ];
 
 @Component({

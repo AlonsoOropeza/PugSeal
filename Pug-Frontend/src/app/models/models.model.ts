@@ -123,11 +123,7 @@ export class Hotel {
         this.nombre = json?.nombre ? json.nombre : '';
         this.direccion = json?.direccion ? json.direccion : '';
         this.id_hotel = json?.id_hotel ? json.id_hotel : undefined;
-<<<<<<< HEAD
-        this.activo = json?.activo ? json.activo : false;
-=======
         this.activo = json?.activo ? json.activo : true;
->>>>>>> 8e27c829bd721ab9942d97489c282335e57dd0c0
     }
 
 

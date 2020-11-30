@@ -37,7 +37,7 @@ export class MantenimientoCorrectivoComponent implements OnInit {
   public user: Usuario;
   public name: String;
   public canDelete = false;
-  
+
   constructor(
     private mantenimientoService: MantenimientoCorrectivoService,
     private spinner: SpinnerService,
@@ -114,7 +114,7 @@ export class MantenimientoCorrectivoComponent implements OnInit {
     this.edit = edit !== undefined ? edit : true;
     if (this.mantenimiento) {
       this.getNameById(this.mantenimiento.id_solicitante);
-    }else{
+    } else {
       this.getNameById(this.user.id);
     }
 

@@ -23,7 +23,7 @@ export class CalificarMantCorFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public continue(form: NgForm){
+  public continue(form: NgForm) {
     this.continueparent.emit(form);
   }
 

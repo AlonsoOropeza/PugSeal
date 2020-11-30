@@ -15,7 +15,7 @@ export class UsuariosComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    
+
       this.tableData1 = {
           headerRow: [ 'ID', 'Name', 'Country', 'City', 'Salary'],
           dataRows: [

@@ -41,11 +41,9 @@ export class NavbarComponent implements OnInit {
     }
 
     public logOut() {
-        
         this.cookies.delete('user');
-        //window.location.reload();
+        // window.location.reload();
         this.router.navigateByUrl('')
-        
     }
 
     sidebarOpen() {

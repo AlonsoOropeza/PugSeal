@@ -60,7 +60,7 @@ export class IncidenciasComponent implements OnInit {
   }
 
   public async loadInfo() {
-    let porcentaje:any;
+    let porcentaje: any;
     let incidecnias_finalizadas = 0;
     let incidencias_totales = 0;
     const mes = moment(new Date()).month();
@@ -78,10 +78,10 @@ export class IncidenciasComponent implements OnInit {
       ];
     });
     console.log(this.solicitudes);
-    //INCONCLUSAS
+    // INCONCLUSAS
     this.inconclusas = [];
     this.solicitudes.forEach(solicitud => {
-      if (!solicitud.finalizada){
+      if (!solicitud.finalizada) {
       this.inconclusas = [
         ...this.inconclusas,
         {
@@ -100,7 +100,7 @@ export class IncidenciasComponent implements OnInit {
       this.solicitudes.forEach(solicitud => {
         if (moment(solicitud.fecha_solicitud).week() === index) {
           incidencias_totales++;
-          if(solicitud.finalizada === true){
+          if (solicitud.finalizada === true) {
             incidecnias_finalizadas++;
           }
           events = [
@@ -111,10 +111,10 @@ export class IncidenciasComponent implements OnInit {
             },
           ];
         }
-        if(incidencias_totales > 0){
-          porcentaje = (incidecnias_finalizadas/incidencias_totales) * 100;
+        if (incidencias_totales > 0) {
+          porcentaje = (incidecnias_finalizadas / incidencias_totales) * 100;
           porcentaje = Math.round(porcentaje) + ' %';
-        }else{
+        } else {
           porcentaje = 'NA';
         }
         console.log(porcentaje * 100, incidecnias_finalizadas, incidencias_totales);

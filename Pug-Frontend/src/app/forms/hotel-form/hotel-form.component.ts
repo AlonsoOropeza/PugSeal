@@ -8,7 +8,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
   templateUrl: './hotel-form.component.html',
   styleUrls: ['./hotel-form.component.css']
 })
-export class HotelFormComponent{
+export class HotelFormComponent {
   @Input() hotel: Hotel;
   @Input() user: Usuario;
   @Input() modaladd: BsModalRef;

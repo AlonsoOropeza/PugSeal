@@ -13,13 +13,13 @@ export class NotificationsComponent implements OnInit {
 
   ngOnInit() {
   }
-  showNotification(message?: string, success?: boolean, from?, align?) {
+  showNotification( from?, align?) {
       const type = ['', 'info', 'success', 'warning', 'danger'];
-      const icon = success ? 'pe-7s-bell' : 'pe-7s-close-circle';
-      const color = success ? 'success' : 'danger';
+      const icon = align ? 'pe-7s-bell' : 'pe-7s-close-circle';
+      const color = align ? 'success' : 'danger';
       $.notify({
           icon: icon,
-          message: message
+          message: 'Hola xd'
       }, {
           type: type[color],
           timer: 1000,

@@ -1,0 +1,69 @@
+<form #createForm="ngForm" class="modals">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="nombre">Nombre<span class="text-danger">*</span></label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="nombre" required
+                    [(ngModel)]="categoria.nombre"
+                    name="nombre"
+                    #nombre="ngModel"
+                >
+            </div>
+    
+            <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger">
+                <div *ngIf="nombre.errors.required">
+                    El nombre de la categoría es obligatorio.
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="descripcion">Descripción</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="descripcion"
+                    [(ngModel)]="categoria.descripcion"
+                    name="descripcion"
+                    #descripcion="ngModel"
+                    maxlength="500"
+                >
+            </div>
+    
+            <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="alert alert-danger">
+                <div *ngIf="descripcion.errors.required">
+                    La descripción debe contener menos de 500 caracteres. 
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="estado">Estado</label>
+                <input
+                    type="checkbox"
+                    class="form-control"
+                    id="estado"
+                    [(ngModel)]="categoria.activo"
+                    name="estado"
+                    #estado="ngModel"
+                    maxlength="500"
+                >
+            </div>
+        </div>
+    </div>
+  
+    <button 
+    class="btn btn-primary" 
+    type="submit" 
+    [disabled] = "createForm.invalid"
+    (click)="continue(createForm)">
+        Guardar
+    </button>
+  
+    <button class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+        Cancelar
+    </button>
+</form>

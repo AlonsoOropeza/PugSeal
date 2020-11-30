@@ -26,8 +26,13 @@ SECRET_KEY = '+-hec*o=z7mxyfpv_0i8q=2u@b7wi9eclu4j#e=uggac&xou1b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
 
 # Application definition
 
@@ -39,8 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-    'pugsealapp',
+    'djoser',
     'rest_framework',
+    'rest_framework.authtoken',
+    'pugsealapp'
 ]
 
 # Specify the domains that can access the APIs
@@ -57,6 +64,16 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+#DJOSER 
+#https://djoser.readthedocs.io/en/latest/settings.html
+DJOSER = {
+    'SERIALIZERS': {
+       'current_user': 'pugsealapp.serializer.UserSerializer',
+        },
+}
+
+AUTH_USER_MODEL = 'pugsealapp.Usuario'
 
 ROOT_URLCONF = 'cannis.urls'
 
@@ -80,22 +97,59 @@ WSGI_APPLICATION = 'cannis.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cannismajoris',
-        'USER': 'irvingpercam',
-        'PASSWORD': '@novadepto321',
-        'HOST': 'db4free.net',
-        'PORT': '3306',
-        # connect options
-        'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",},
+# Check to see if MySQLdb is available; if not, have pymysql masquerade as
+# MySQLdb. This is a convenience feature for developers who cannot install
+# MySQLdb locally; when running in production on Google App Engine Standard
+# Environment, MySQLdb will be used.
+try:
+    import MySQLdb  # noqa: F401
+except ImportError:
+    import pymysql
+    pymysql.install_as_MySQLdb()
+
+# [START db_setup]
+if os.getenv('GAE_INSTANCE'):
+    # Running on production App Engine, so connect to Google Cloud SQL using
+    # the unix socket at /cloudsql/<your-cloudsql-connection string>
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '/cloudsql/nomadic-lodge-293014:us-central1:pugdb',
+            'NAME': 'pugsealapp',
+            'USER': 'root',
+            'PASSWORD': '1234',
+        }
     }
-}
+else:
+    # Running locally so connect to either a local MySQL instance or connect to
+    # Cloud SQL via the proxy. To start the proxy via command line:
+    #
+    #     $ cloud_sql_proxy -instances=[INSTANCE_CONNECTION_NAME]=tcp:3306
+    #
+    # See https://cloud.google.com/sql/docs/mysql-connect-proxy
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '127.0.0.1',
+            'PORT': '3306',
+            'NAME': 'pugsealapp',
+            'USER': 'root',
+            'PASSWORD': '1234',
+        }
+    }
+# [END db_setup]
 
-#LOS ODIO A TODOS ALV
+# Use a in-memory sqlite3 database when testing in CI systems
+if os.getenv('TRAMPOLINE_CI', None):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
+        }
+    }
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -118,7 +172,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-mx'
 
 TIME_ZONE = 'UTC'
 
@@ -132,4 +186,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATIC_ROOT = 'static'
 STATIC_URL = '/static/'

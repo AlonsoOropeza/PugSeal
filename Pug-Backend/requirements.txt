@@ -2,3 +2,5 @@ pymysql
 mysqlclient
 djangorestframework
 django-cors-headers
+djoser
+pylint-django

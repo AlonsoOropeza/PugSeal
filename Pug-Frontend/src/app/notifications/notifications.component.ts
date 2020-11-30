@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-declare var $:any;
+declare var $: any;
 
 @Component({
   selector: 'app-notifications',
@@ -13,14 +13,14 @@ export class NotificationsComponent implements OnInit {
 
   ngOnInit() {
   }
-  showNotification(from, align){
-      const type = ['','info','success','warning','danger'];
-
-      var color = Math.floor((Math.random() * 4) + 1);
+  showNotification( from?, align?) {
+      const type = ['', 'info', 'success', 'warning', 'danger'];
+      const icon = align ? 'pe-7s-bell' : 'pe-7s-close-circle';
+      const color = align ? 'success' : 'danger';
       $.notify({
-          icon: "pe-7s-gift",
-          message: "Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer."
-      },{
+          icon: icon,
+          message: 'Hola xd'
+      }, {
           type: type[color],
           timer: 1000,
           placement: {

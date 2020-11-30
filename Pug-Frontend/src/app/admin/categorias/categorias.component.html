@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Categorías</h4>
+                        <p class="category">Aquí se encuentran las categorías</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-default btn-block" (click)="addRequest(modaladd)">
+                                <p>Crear Categorías</p>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" 
+                        class="table table-hover table-striped row-border hover">
+                                <thead>
+                                    <tr>
+                                        <th *ngFor="let titulo of titulos">{{ titulo }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let categoria of categorias">
+                                        <td>{{categoria.nombre}}</td>
+                                        <td>{{categoria.descripcion}}</td>
+                                        <td *ngIf="categoria.activo">Activo</td>
+                                        <td *ngIf="!categoria.activo">Inactivo</td>
+                                        <td>
+                                            <button class="btn btn-modificar btn-block" (click)="addRequest(modalupdate, categoria)">
+                                                <i class="glyphicon glyphicon-edit"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #modaladd>
+    <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+            <span aria-hidden="true"> × </span>
+        </button>
+        <h6 class="modal-title" id="modal-title-default">
+          Agregar categoría
+        </h6>
+      </div>
+      <div class="modal-body">
+        <app-categoria-form
+        [categoria]="categoria"
+        [modaladd]="modalComponent"
+        (continueparent)="create($event)"
+        ></app-categoria-form>
+      </div>
+</ng-template>
+
+<ng-template #modalupdate>
+    <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+            <span aria-hidden="true"> × </span>
+        </button>
+        <h6 class="modal-title" id="modal-title-default">
+          Editar categoría
+        </h6>
+      </div>
+      <div class="modal-body">
+        <app-categoria-form
+        [categoria]="categoria"
+        [modaladd]="modalComponent"
+        (continueparent)="update($event)"
+        ></app-categoria-form>
+      </div>
+</ng-template>
+
+<ng-template #datatable></ng-template>

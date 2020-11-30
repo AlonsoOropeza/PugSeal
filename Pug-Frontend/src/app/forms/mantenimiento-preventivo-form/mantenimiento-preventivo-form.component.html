@@ -1,0 +1,212 @@
+<form #createForm="ngForm" class="modals">
+    <div class="row">
+
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="actividad">Actividad <span class="text-danger">*</span></label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="actividad" required
+                    [(ngModel)]="mantenimiento.actividad"
+                    name="actividad"
+                    #actividad="ngModel"
+                    disabled={{!edit}}
+
+                >
+            </div>
+    
+            <div *ngIf="actividad.invalid && (actividad.dirty || actividad.touched)" class="alert alert-danger">
+                <div *ngIf="actividad.errors.required">
+                    El título de la actividad es obligatorio.
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+                <label class="form-control-label" for="proveedor">Categoría <span class="text-danger">*</span></label>
+                <select
+                    class="form-control"
+                    id="categoria" required
+                    [(ngModel)]="mantenimiento.id_categoria"
+                    name="categoria"
+                    #categoria="ngModel"
+                    disabled={{!edit}}
+                >
+                <option *ngFor="let categoria of categorias" value="{{categoria.id_categoria}}">{{categoria.nombre}}</option>
+                </select>
+            </div>
+        </div>
+        
+        <div *ngIf="categoria.invalid && (categoria.dirty || categoria.touched)" class="alert alert-danger">
+            <div *ngIf="categoria.errors.required">
+                La categoría es obligatoria.
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+                <label class="form-control-label" for="proveedor">Proveedor <span class="text-danger">*</span></label>
+                <select
+                    class="form-control"
+                    id="proveedor" required
+                    [(ngModel)]="mantenimiento.id_proveedor"
+                    name="proveedor"
+                    #proveedor="ngModel"
+                    disabled={{!edit}}
+                >
+                <option *ngFor="let proveedor of proveedores" value="{{proveedor.id_proveedor}}">{{proveedor.nombre_empresa}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div *ngIf="proveedor.invalid && (proveedor.dirty || proveedor.touched)" class="alert alert-danger">
+            <div *ngIf="proveedor.errors.required">
+                El proveedor es obligatorio.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="proveedor">Encargado <span class="text-danger">*</span></label>
+                <select
+                    class="form-control"
+                    id="encargado" required
+                    [(ngModel)]="mantenimiento.id_empleado"
+                    name="encargado"
+                    #encargado="ngModel"
+                    disabled={{!edit}}
+                >
+                <option *ngFor="let empleado of empleados" value="{{empleado.id}}">
+                    {{empleado.first_name }} {{empleado.last_name}}
+                </option>
+                </select>
+            </div>
+        </div>
+
+        <div *ngIf="encargado.invalid && (encargado.dirty || encargado.touched)" class="alert alert-danger">
+            <div *ngIf="encargado.errors.required">
+                El encargado es obligatorio.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="cotizacion">Costo Estimado<span class="text-danger">*</span></label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="cotizacion" required
+                        [(ngModel)]="mantenimiento.cotizacion"
+                        name="cotizacion"
+                        #cotizacion="ngModel"
+                        disabled={{!edit}}
+                    >
+                    </div>
+            </div>
+    
+            <div *ngIf="cotizacion.invalid && (cotizacion.dirty || cotizacion.touched)" class="alert alert-danger">
+                <div *ngIf="cotizacion.errors.required">
+                    La cotización es obligatoria.
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="frecuencia_anual">Frecuencia Anual <span class="text-danger">*</span></label>
+                <input
+                    type="number"
+                    class="form-control"
+                    id="frecuencia_anual" required
+                    [(ngModel)]="mantenimiento.frecuencia_anual"
+                    name="frecuencia_anual"
+                    #frecuencia_anual="ngModel"
+                    disabled={{!edit}}
+                >
+            </div>
+    
+            <div *ngIf="frecuencia_anual.invalid && (frecuencia_anual.dirty || frecuencia_anual.touched)" class="alert alert-danger">
+                <div *ngIf="frecuencia_anual.errors.required">
+                    La frecuencia anual es obligatoria.
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="admin  && !mantenimiento.fecha_inicio && mantenimiento.aprobado && edit">
+            <hr>
+            <h6 class="modal-title" id="modal-title-default">
+                Asignar meses
+            </h6>
+            <hr>
+
+            <div class="col">
+                <div class="form-group">
+                    <label class="form-control-label" for="meses">Meses</label>
+                    <ngx-select [multiple]="true"
+                        [items]="items"
+                        [(ngModel)]="ngxValue"
+                        [autoClearSearch]="false"
+                        placeholder="Presiona para seleccionar los meses"
+                        name="meses"
+                        dropDownMenuOtherClasses="dropdown-menu-right"
+                        autoActiveOnMouseEnter
+                        >
+                    </ngx-select>
+                </div>
+            </div>
+        </div>
+        
+        <!--APROBACIÓN-->
+        <div *ngIf="user.rol === 'Auditor' && !mantenimiento.fecha_inicio && !aprobado && edit">
+            <hr>
+            <h6 class="modal-title" id="modal-title-default">
+                Aprobar solicitud
+            </h6>
+            <hr>
+            <div class="col-12">
+                <div class="form-group">
+                    <label class="form-control-label" for="aprobado">Aprobar</label>
+                    <input
+                        type="checkbox"
+                        class="form-control"
+                        id="aprobado"
+                        [(ngModel)]="mantenimiento.aprobado"
+                        name="aprobado"
+                        #aprobado="ngModel"
+                        disabled={{!edit}}
+                    >
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="id_auditor">Aprobado por</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="id_auditor"
+                    [(ngModel)]="auditor"
+                    name="id_auditor"
+                    #id_auditor="ngModel"
+                    disabled
+                >
+            </div>
+        </div>
+    </div>
+  
+    <button *ngIf="edit" class="btn btn-primary" type="submit" [disabled] = "createForm.invalid" (click)="continue(createForm)">
+        Guardar
+    </button>
+  
+    <button *ngIf="edit" class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+        Cancelar
+    </button>
+
+    <button *ngIf="!edit" class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+        Cerrar
+    </button>
+</form>

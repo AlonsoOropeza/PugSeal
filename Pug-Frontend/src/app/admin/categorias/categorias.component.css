@@ -1,0 +1,105 @@
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #f0f0f0;
+    color: #000000;
+}
+
+table.dataTable tbody tr {
+    background-color: #F8F8F8;
+}
+
+.btn
+{
+  padding: 13px 20px 4px;
+  font-size: 17px;
+  font-weight: bold;
+  border-radius: 4px;
+  background-color: #000000;
+  color: #F8F8F8;
+  border-color: #000000;
+  transition: 0.4s;
+
+  margin-bottom: 15px;
+  margin-right: 10px;
+}
+.btn:hover
+{
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+.btn-ver
+{
+padding: 13px 20px 12px;
+  font-size: 17px;
+  border-radius: 6px;
+  background-color: #FFFFFF;
+  color: #333333;
+  border-color: #333333;
+  transition: 0.4s;
+
+  margin-bottom: 2px;
+}
+.btn-ver:hover
+{
+    background-color: #333333;
+    color: #F8F8F8;
+    border-color: #333333;
+}
+
+.btn-modificar
+{
+    padding: 13px 20px 12px;
+    font-size: 17px;
+    border-radius: 6px;
+    background-color: #F8F8F8;
+    color: #333333;
+    border-color: #333333;
+    transition: 0.4s;
+    
+    margin-bottom: 2px;
+}
+.btn-modificar:hover
+{
+    background-color: #333333;
+    color: #F8F8F8;
+    border-color: #333333;
+}
+
+.btn-eliminar
+{
+    padding: 13px 20px 12px;
+    font-size: 17px;
+    border-radius: 6px;
+    background-color: #9B444B;
+    color: #F8F8F8;
+    border-color: #9B444B;
+    transition: 0.4s;
+    
+    margin-bottom: 2px;
+}
+.btn-eliminar:hover
+{
+    background-color: #333333;
+    color: #F8F8F8;
+    border-color: #333333;
+}
+
+.dataTables_wrapper .dataTables_length {
+    float: left;
+    margin-left: 15px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: #333333 !important;
+    border: 1px solid #979797;
+    background-color: white;
+    background: linear-gradient(to bottom, white 0%, white 0%) !important;
+}
+
+.table>caption+thead>tr:first-child>td, .table>caption+thead>tr:first-child>th, .table>colgroup+thead>tr:first-child>td, .table>colgroup+thead>tr:first-child>th, .table>thead:first-child>tr:first-child>td, .table>thead:first-child>tr:first-child>th
+{
+    border:0;
+}
+table.dataTable.no-footer {
+    border-bottom: 0;
+}

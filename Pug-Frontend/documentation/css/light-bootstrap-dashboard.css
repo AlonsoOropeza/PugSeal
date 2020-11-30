@@ -66,7 +66,7 @@ button.close {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-family: "Roboto","Helvetica Neue",Arial,sans-serif;
-  font-weight: 400;
+  font-weight: 100;
 }
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
@@ -562,7 +562,6 @@ input:focus {
 }
 .main-panel .main-content {
   padding: 30px 15px;
-  min-height: calc(100% - 123px);
 }
 .main-panel > .footer {
   border-top: 1px solid #e7e7e7;
@@ -1679,7 +1678,6 @@ input:focus {
   font-size: 16px;
 }
 .navbar.fixed {
-  width: calc(100% - $sidebar-width);
   right: 0;
   left: auto;
   border-radius: 0;

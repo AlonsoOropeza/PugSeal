@@ -15,12 +15,43 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.auth import views as auth_views
+
 from django.conf.urls import include 
-from pugsealapp import views
+from pugsealapp.views import *
+from rest_framework import routers
+from djoser.views import *
+
+router = routers.SimpleRouter()
+router.register('api/categorias', CategoriasViewSet)
+router.register('api/areas', AreasViewSet)
+router.register('api/proveedores', ProveedoresViewSet)
+router.register('api/empleados', EmpleadosViewSet)
+router.register('api/mantenimiento/preventivo', MantenimientoPreventivoViewSet)
+router.register('api/requisiciones', RequisicionViewSet)
+router.register('api/hoteles', HotelViewSet)
+router.register('api/bitacora/mediciones', BitacoraMedicionesViewSet)
+router.register('api/auditores', AuditoresViewSet)
+router.register('api/responsables', ResponsablesViewSet)
+router.register('api/mantenimiento/correctivo', MantenimientoCorrectivoViewSet)
 
 urlpatterns = [
+    path('users/', UserViewSet.as_view({
+    'get': 'list',
+    'post': 'create',
+    'delete': 'destroy',
+    'put': 'update',
+    'patch': 'partial_update'
+    })),
+    path('users/me/', UserViewSet.as_view({
+    'get': 'me',
+    'delete': 'me',
+    'put': 'me',
+    'patch': 'me'
+    })),
+    path('auth/login/', TokenCreateView.as_view()),
+	path('auth/logout/', TokenDestroyView.as_view()),
     path('admin/', admin.site.urls),
-    path('crear_categoria/', views.crear_categoria, name='crear_categoria'),
-    path('listar_categorias/', views.listar_categorias, name='listar_categorias')
-
+    path('', URLView)
 ]
+urlpatterns += router.urls

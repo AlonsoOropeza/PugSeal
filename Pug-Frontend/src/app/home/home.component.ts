@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
 import { LegendItem, ChartType } from '../lbd/lbd-chart/lbd-chart.component';
 import * as Chartist from 'chartist';
+import { MantenimientoCorrectivo } from 'app/models/models.model';
+import { MantenimientoCorrectivoService } from 'app/services/mantenimiento-correctivo.service';
+import { SpinnerService } from 'app/services/spinner.service';
+import moment = require('moment');
+import { Meses } from 'app/shared/diccionarios';
 
 @Component({
   selector: 'app-home',
@@ -24,19 +29,40 @@ export class HomeComponent implements OnInit {
     public activityChartOptions: any;
     public activityChartResponsive: any[];
     public activityChartLegendItems: LegendItem[];
-  constructor() { }
+
+    public mantenimientos: MantenimientoCorrectivo[];
+    public solicitudes: MantenimientoCorrectivo[];
+    public inconclusas: MantenimientoCorrectivo[];
+    public mes: String;
+    public events: any[] = [];
+    public mesSeleccionado: number;
+    public porcentajeFinalizadas: number;
+    public porcentajeNoFinalizadas: number;
+    public incidecnias_finalizadas = 0;
+    public incidencias_totales = 0;
+    public loaded = false;
+
+  constructor(
+    private spinner: SpinnerService,
+    private mantenimientoService: MantenimientoCorrectivoService
+  ) { }
+
+
 
   ngOnInit() {
+      this.loadInfo();
       this.emailChartType = ChartType.Pie;
       this.emailChartData = {
-        labels: ['62%', '32%', '6%'],
-        series: [62, 32, 6]
+        labels: ['Finalizadas', 'No Finalizadas'],
+        series: [10, 90]
       };
+
       this.emailChartLegendItems = [
         { title: 'Open', imageClass: 'fa fa-circle text-info' },
         { title: 'Bounce', imageClass: 'fa fa-circle text-danger' },
         { title: 'Unsubscribe', imageClass: 'fa fa-circle text-warning' }
       ];
+
 
       this.hoursChartType = ChartType.Line;
       this.hoursChartData = {
@@ -106,6 +132,42 @@ export class HomeComponent implements OnInit {
         { title: 'BMW 5 Series', imageClass: 'fa fa-circle text-danger' }
       ];
 
+
+    }
+
+    public async loadInfo() {
+      this.mesSeleccionado = new Date().getMonth();
+      this.porcentajeFinalizadas = 0;
+      this.porcentajeNoFinalizadas = 0;
+      this.incidecnias_finalizadas = 0;
+      this.incidencias_totales = 0;
+      this.spinner.showSpinner();
+      const mes = moment(new Date()).month();
+      this.mes = Meses[mes];
+      this.events = [];
+      this.solicitudes = await this.mantenimientoService.getMantenimientosCorrectivos();
+      this.solicitudes.forEach(solicitud => {
+        console.log(moment(new Date(solicitud.fecha_solicitud)).month(), this.mesSeleccionado - 1);
+        if (moment(new Date(solicitud.fecha_solicitud)).month() ===  this.mesSeleccionado - 1) {
+          this.incidencias_totales++;
+          if (solicitud.finalizada === true) {
+            this.incidecnias_finalizadas++;
+          }
+          this.events = [
+            ...this.events,
+            {
+              ...solicitud
+              //semana: moment(new Date(solicitud.fecha_solicitud)).week()
+            },
+          ];
+        }
+      });
+      this.porcentajeFinalizadas = Math.round((this.incidecnias_finalizadas / this.incidencias_totales)  * 100);
+      this.porcentajeNoFinalizadas = 100  - this.porcentajeFinalizadas;
+      console.log(this.porcentajeFinalizadas, this.porcentajeNoFinalizadas);
+      this.emailChartData.series = [this.porcentajeFinalizadas, this.porcentajeNoFinalizadas]
+      this.loaded = true;
+      this.spinner.hideSpinner();
 
     }
 

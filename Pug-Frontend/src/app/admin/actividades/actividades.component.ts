@@ -15,6 +15,7 @@ import { NgForm } from '@angular/forms';
 import moment = require('moment');
 import { data } from 'jquery';
 
+// Lista de componentes asociados
 @Component({
   selector: 'app-actividades',
   templateUrl: './actividades.component.html',
@@ -22,20 +23,24 @@ import { data } from 'jquery';
 })
 export class ActividadesComponent implements OnInit {
 
+  // Variables y arreglos
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   public solicitudes: MantenimientoPreventivo[];
   public user: Usuario;
-  public proveedores: Proveedor[];
-  public empleados: Usuario[];
-  public categorias: Categoria[];
+  public proveedores: Proveedor[]; // Lista de proveedores
+  public empleados: Usuario[]; // Lista de empleados
+  public categorias: Categoria[]; // Lista de categorías
   public edit: boolean;
   public mantenimiento: MantenimientoPreventivo;
   public mes: String;
   public modalComponent: BsModalRef;
-  public events: any[] = [];
+  public events: any[] = []; // Lista de eventos
   public actividad_semanas: any[] = [];
   public comentario: string;
+  public nuevaSemana: number;
+  public semanasDisponibles: number[] = []; // Lista de semanas por mes
 
+  // Constructor
   constructor(
     private modal: NgbModal,
     private mantenimientoPreventivoService: MantenimientoPreventivoService,
@@ -47,7 +52,7 @@ export class ActividadesComponent implements OnInit {
     private categoriasService: CategoriasService,
     private empleadosService: EmpleadosService,
     private cookies: CookieService,
-    ) {}
+  ) {}
 
   ngOnInit() {
     this.user = JSON.parse(this.cookies.get('user'));
@@ -55,20 +60,28 @@ export class ActividadesComponent implements OnInit {
   }
 
   public async loadInfo() {
+    // Carga la información de las tablas Categoría, Empleado, Proveedor
     this.categorias = await this.categoriasService.getCategorias();
     this.empleados = await this.empleadosService.getEmpleados();
     this.proveedores = await this.proveedoresService.getProveedores();
 
+    // Variables para guardar los nombres extraídos de las queries de Categoría, Empleado, Proveedor
     let nombre_categoria: String;
     let nombre_empleado: String;
     let nombre_proveedor: String;
     let nombre_auditor: String;
     let nombre_supervisor: String;
+
+    // Guarda el número de los meses en un arreglo
     const mes = moment(new Date()).month();
     this.mes = Meses[mes];
+
+    // Inicializa la lista de eventos
     this.events = [];
     this.actividad_semanas = [];
     this.spinner.showSpinner();
+
+    // Obtén el número de semana en que se realiza cada actividad de mantenimiento preventivo
     this.solicitudes = await this.mantenimientoPreventivoService.getMantenimientosPreventivos();
     this.solicitudes.forEach(solicitud => {
       this.events = [
@@ -77,8 +90,10 @@ export class ActividadesComponent implements OnInit {
           ...solicitud,
           semana: moment(new Date(solicitud.fecha_inicio)).week()
         },
-        ];
+      ];
     });
+
+
     for (let index = 1; index < 53; index++) {
       let events = [];
       this.solicitudes.forEach(solicitud => {
@@ -92,12 +107,15 @@ export class ActividadesComponent implements OnInit {
             }
           })
           this.empleados.forEach(empleado => {
+            // Imprime el nombre del encargado de mantenimiento que está asignado a la actividad
             if (solicitud.id_empleado && solicitud.id_empleado === empleado.id) {
               nombre_empleado = empleado.first_name + ' ' + empleado.last_name;
             }
+            // Imprime el nombre del auditor que está asignado a la actividad
             if (solicitud.id_auditor && solicitud.id_auditor === empleado.id) {
               nombre_auditor = empleado.first_name + ' ' + empleado.last_name;
             }
+            // Imprime el nombre del supervisor que está asignado a la actividad
             if (solicitud.id_supervisor && solicitud.id_supervisor === empleado.id) {
               nombre_supervisor = empleado.first_name + ' ' + empleado.last_name;
             }
@@ -119,6 +137,7 @@ export class ActividadesComponent implements OnInit {
           ];
         }
       });
+      // let mes = selectMonth(index+1%4);
       const element = 'Semana ' + index;
       this.actividad_semanas = [
         ...this.actividad_semanas,
@@ -139,6 +158,30 @@ export class ActividadesComponent implements OnInit {
 
   public addRequest(modal: TemplateRef<any>, mantenimiento: MantenimientoPreventivo) {
     this.mantenimiento = mantenimiento;
+    this.modalComponent = this.modalService.show(modal, {backdrop : 'static', keyboard: false, class: 'modal-dialog-centered'});
+  }
+
+  public async assignWeek(modal: TemplateRef<any>, mantenimiento: MantenimientoPreventivo) {
+    this.semanasDisponibles = [];
+    this.mantenimiento = mantenimiento;
+    this.mantenimiento.fecha_inicio = new Date(this.mantenimiento.fecha_inicio);
+    // Obtén el número de semana
+    this.nuevaSemana = moment(this.mantenimiento.fecha_inicio).week();
+    // Obtén el mes
+    const month = moment(this.mantenimiento.fecha_inicio).month();
+    // Obtén el año
+    const year = moment(this.mantenimiento.fecha_inicio).year();
+    // Obtén la 1° semana
+    const firstWeek = moment(new Date(year, month, 1 )).week();
+    // Obtén la última semana
+    // La última semana se obtiene restando un dia del 1° dia del siguiente mes
+    const nuevaFecha = new Date(year, month + 1, 1);
+    nuevaFecha.setDate((nuevaFecha.getDate() - 1));
+    const lastWeek = moment(nuevaFecha).week();
+
+    for (let index = firstWeek; index <= lastWeek; index++) {
+      this.semanasDisponibles.push(index);
+    }
     this.modalComponent = this.modalService.show(modal, {backdrop : 'static', keyboard: false, class: 'modal-dialog-centered'});
   }
 
@@ -188,6 +231,77 @@ export class ActividadesComponent implements OnInit {
     this.spinner.hideSpinner();
     this.modalComponent.hide();
   }
+
+  public async setWeek() {
+    this.spinner.showSpinner();
+
+    if (moment(this.mantenimiento.fecha_inicio).week() === this.nuevaSemana) {
+      this.notificationsService.showWarning('No se detectaron cambios')
+    } else {
+      await this.setNewDate(moment(this.mantenimiento.fecha_inicio).week(), this.nuevaSemana);
+      (await this.mantenimientoService.updateMantenimiento(this.mantenimiento)).subscribe(
+        async () => {
+          this.notificationsService.showNotification('Se ha actualizado correctamente el mantenimiento.', true),
+          await this.loadInfo();
+        },
+        async error => {
+          this.notificationsService.showNotification(error.message, false)
+        }
+      );
+    }
+    this.spinner.hideSpinner();
+    this.modalComponent.hide();
+  }
+
+  /**
+   * Parámetros: Número de semana actual, número de semana nuevo
+   * Objetivo: Cambiar la fecha de una actividad de mantenimiento preventivo cuando se cambia su semana de realización
+   */
+  private async setNewDate(currentWeek: number, newWeek: number) {
+    const dif = Math.abs(currentWeek - newWeek);
+    const days = dif * 7;
+    const auxDate = (new Date(this.mantenimiento.fecha_inicio)).getDate();
+    const newDate = new Date(this.mantenimiento.fecha_inicio);
+    if (currentWeek > newWeek) {
+      newDate.setDate(auxDate - days);
+    } else {
+      newDate.setDate(auxDate + days);
+    }
+    this.mantenimiento.fecha_inicio = newDate;
+    const fecha = this.mantenimiento.fecha_inicio.toISOString().split('T')[0];
+    this.mantenimiento.fecha_inicio = fecha;
+  }
+
+  /*public async selectMonth(index: number) {
+    switch (mes) {
+      case 'Enero':
+        return new Date(2021, 0, 15);
+      case 'Febrero':
+        return new Date(2021, 1, 15);
+      case 'Marzo':
+        return new Date(2021, 2, 15);
+      case 'Abril':
+        return new Date(2021, 3, 15);
+      case 'Mayo':
+        return new Date(2021, 4, 15);
+      case 'Junio':
+        return new Date(2021, 5, 15);
+      case 'Julio':
+        return new Date(2021, 6, 15);
+      case 'Agosto':
+        return new Date(2021, 7, 15);
+      case 'Septiembre':
+        return new Date(2021, 8, 15);
+      case 'Octubre':
+        return new Date(2021, 9, 15);
+      case 'Noviembre':
+        return new Date(2021, 10, 15);
+      case 'Diciembre':
+        return new Date(2021, 11, 15);
+      default:
+        return new Date();
+    }
+  }*/
 
 }
 

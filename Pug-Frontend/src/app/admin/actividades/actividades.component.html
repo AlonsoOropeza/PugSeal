@@ -8,7 +8,7 @@
               <p class="category">Desde aquí se puede marcar la finalización, supervisón y auditoría de las actividades.</p>
           </div>
           <accordion>
-            <accordion-group *ngFor="let semana of actividad_semanas" heading="mes - {{semana.titulo}} - {{semana.eventos.events.length}} actividades" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
+            <accordion-group *ngFor="let semana of actividad_semanas" heading="{{semana.titulo}} - {{semana.eventos.events.length}} actividades" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
               <div class="content table-responsive table-full-width">
                 <table class="table table-hover table-striped row-border hover">
                   <thead>
@@ -25,6 +25,7 @@
                          <th *ngIf="user.rol === 'Encargado_Mantenimiento'">Finalizar</th>
                          <th *ngIf="user.rol === 'Supervisor'">Supervisar</th>
                          <th *ngIf="user.rol === 'Auditor'">Auditar</th>  
+                         <th *ngIf="user.rol === 'Auditor'">Reasignar</th>  
                       </tr>
                   </thead>
                   <tbody>
@@ -67,6 +68,11 @@
                               <i class="glyphicon glyphicon-check"></i>
                           </button>
                           </td>
+                          <td *ngIf="user.rol === 'Auditor'">
+                            <button class="btn btn-ver btn-lg" (click)="assignWeek(modalWeek, event)">
+                              <i class="glyphicon glyphicon-calendar"></i>
+                          </button>
+                          </td>
                       </tr>
                   </tbody>
             </table>
@@ -79,8 +85,48 @@
   </div>
 </div>
 <br><br>
-
   
+<ng-template #modalWeek>
+  <div class="modal-header">
+    <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="cancel()">
+        <span aria-hidden="true"> × </span>
+    </button>
+    <h6 class="modal-title" id="modal-title-update1">
+        Cambiar semana
+    </h6>
+  </div>
+  <div class="modal-body">
+    <form #updateForm="ngForm" class="modals">
+        <div class="row">        
+            <div class="col">
+                <div class="form-group">
+                    <label class="form-control-label" for="semana">Semana</label>
+                    <ngx-select [multiple]="false"
+                        [items]="semanasDisponibles"
+                        [(ngModel)]="nuevaSemana"
+                        [autoClearSearch]="false"
+                        placeholder="Presiona para seleccionar la semana"
+                        name="semana"
+                        dropDownMenuOtherClasses="dropdown-menu-right"
+                        autoActiveOnMouseEnter
+                        >
+                    </ngx-select>
+                </div>
+            </div>
+        </div>
+      
+        <button  class="btn btn-primary" type="submit" [disabled] = "updateForm.invalid" (click)="setWeek()">
+            Guardar
+        </button>
+      
+        <button class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+            Cancelar
+        </button>
+
+    </form>
+    
+  </div>
+</ng-template>
   
   <ng-template #modalActividad>
     <div class="modal-header">

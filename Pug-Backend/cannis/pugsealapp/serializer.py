@@ -27,7 +27,7 @@ class EmpleadoSerializer(serializers.ModelSerializer):
 class HotelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hotel
-        fields = ('id_hotel','nombre', 'activo')
+        fields = ('id_hotel','nombre', 'direccion', 'activo')
 
 class UbicacionSerializer(serializers.ModelSerializer):
     class Meta:

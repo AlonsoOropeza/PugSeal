@@ -19,6 +19,7 @@ import { ProveedoresComponent } from 'app/admin/proveedores/proveedores.componen
 import { MantenimientoCorrectivoComponent } from '../../admin/mantenimiento-correctivo/mantenimiento-correctivo.component'
 import { ActividadesComponent } from 'app/admin/actividades/actividades.component';
 import { IncidenciasComponent } from 'app/admin/incidencias/incidencias.component';
+import { HotelesComponent } from 'app/admin/hoteles/hoteles.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',                component: HomeComponent                    },
@@ -41,4 +42,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'requisiciones',            component: RequisicionesComponent           },
     { path: 'presupuesto',              component: PresupuestoComponent             },
     { path: 'incidencias',              component: IncidenciasComponent             },
+    { path: 'hoteles',                  component: HotelesComponent                 },
 ]

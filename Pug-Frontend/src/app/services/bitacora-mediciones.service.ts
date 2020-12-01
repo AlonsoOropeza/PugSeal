@@ -14,7 +14,7 @@ export class BitacoraMedicionesService {
     let response: any;
     try {
       response = this.http.request('GET', environment.url + 'api/bitacora/mediciones/').toPromise();
-    } catch(error) {
+    } catch (error) {
       console.log('no se encontro la info' + error);
     }
     return response;

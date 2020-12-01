@@ -120,7 +120,7 @@ export class CalendarioComponent implements OnInit {
     this.solicitudes = await this.mantenimientoPreventivoService.getMantenimientosPreventivos();
     console.log(this.solicitudes);
     this.solicitudes.forEach(solicitud => {
-      if(solicitud.id_empleado === this.user.id){
+      if (solicitud.id_empleado === this.user.id) {
           this.events = [
           ...this.events,
           {

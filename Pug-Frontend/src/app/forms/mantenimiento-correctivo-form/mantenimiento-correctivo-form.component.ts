@@ -11,7 +11,7 @@ import moment = require('moment');
   templateUrl: './mantenimiento-correctivo-form.component.html',
   styleUrls: ['./mantenimiento-correctivo-form.component.css']
 })
-export class MantenimientoCorrectivoFormComponent implements OnInit{
+export class MantenimientoCorrectivoFormComponent {
 
   @Input() mantenimiento: MantenimientoCorrectivo;
   @Input() categorias: Categoria[];
@@ -30,17 +30,8 @@ export class MantenimientoCorrectivoFormComponent implements OnInit{
   public startDate: any;
   public yearStart: any;
 
-  ngOnInit(): void{
-   // console.log(this.startDate);
-   // this.getWeek(this.startDate);
-   this.areas = this.areas.filter(area => area.activo === true);
-   this.categorias = this.categorias.filter(categoria => categoria.activo === true);
-  this.proveedores = this.proveedores.filter(proveedor => proveedor.activo === true);
-  }
-
 
   public continue(form: NgForm) {
-    //this.mantenimiento.semana = 
     console.log(this.mantenimiento.semana);
     this.continueparent.emit(form);
   }
@@ -49,13 +40,13 @@ export class MantenimientoCorrectivoFormComponent implements OnInit{
     this.cancelparent.emit();
   }
 
-  hola(value: any){
+  hola(value: any) {
     console.log(value);
   }
 
-  updateWeek(value: number){
-    //console.log(value);
-    this.mantenimiento.semana = value;  
+  updateWeek(value: number) {
+    // console.log(value);
+    this.mantenimiento.semana = value;
   }
 
   changeDate() {
@@ -75,7 +66,6 @@ export class MantenimientoCorrectivoFormComponent implements OnInit{
     //let latest_date = this.datepipe.transform(new Date(), 'dd-MM-yyyy');
     //this.mantenimiento.fecha_solicitud = new Date(Date.parse(Date()));;
     console.log(this.mantenimiento.fecha_solicitud);
-  
     this.mantenimiento.semana = Math.ceil(( ( (date - this.yearStart) / 86400000) + 1) / 7);
 
   } */

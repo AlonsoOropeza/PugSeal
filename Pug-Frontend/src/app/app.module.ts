@@ -50,6 +50,8 @@ import { PresupuestoComponent } from './admin/presupuesto/presupuesto.component'
 import { ActividadesFormComponent } from './forms/actividades-form/actividades-form.component';
 import { IncidenciasComponent } from './admin/incidencias/incidencias.component';
 import { FinalizarMantCorFormComponent } from './forms/finalizar-mant-cor-form/finalizar-mant-cor-form.component';
+import { HotelesComponent } from './admin/hoteles/hoteles.component';
+import { HotelFormComponent } from './forms/hotel-form/hotel-form.component';
 import { CalificarMantCorFormComponent } from './forms/calificar-mant-cor-form/calificar-mant-cor-form.component';
 
 
@@ -102,6 +104,8 @@ import { CalificarMantCorFormComponent } from './forms/calificar-mant-cor-form/c
     ActividadesFormComponent,
     IncidenciasComponent,
     FinalizarMantCorFormComponent,
+    HotelesComponent,
+    HotelFormComponent,
     CalificarMantCorFormComponent
   ],
   providers: [CookieService, DatePipe],

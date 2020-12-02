@@ -32,7 +32,6 @@ export class MantenimientoCorrectivoFormComponent {
 
 
   public continue(form: NgForm) {
-    console.log(this.mantenimiento.semana);
     this.continueparent.emit(form);
   }
 
@@ -40,34 +39,12 @@ export class MantenimientoCorrectivoFormComponent {
     this.cancelparent.emit();
   }
 
-  hola(value: any) {
-    console.log(value);
-  }
-
   updateWeek(value: number) {
-    // console.log(value);
     this.mantenimiento.semana = value;
   }
 
   changeDate() {
     this.mantenimiento.semana = moment(this.mantenimiento.fecha_solicitud).week();
   }
-  /*public getWeek(date: any){
-    console.log(this.mantenimiento.semana);
-    date = new Date();
-    console.log(date);
-    date = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
-    date = new Date();
-    console.log(date);
-    date.setUTCDate(date.getUTCDate() + 4 - (date.getUTCDay() || 7));
-
-    this.yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
-
-    //let latest_date = this.datepipe.transform(new Date(), 'dd-MM-yyyy');
-    //this.mantenimiento.fecha_solicitud = new Date(Date.parse(Date()));;
-    console.log(this.mantenimiento.fecha_solicitud);
-    this.mantenimiento.semana = Math.ceil(( ( (date - this.yearStart) / 86400000) + 1) / 7);
-
-  } */
 
 }

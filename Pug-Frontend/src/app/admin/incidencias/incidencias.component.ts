@@ -77,7 +77,6 @@ export class IncidenciasComponent implements OnInit {
         },
       ];
     });
-    console.log(this.solicitudes);
     // INCONCLUSAS
     this.inconclusas = [];
     this.solicitudes.forEach(solicitud => {
@@ -117,7 +116,6 @@ export class IncidenciasComponent implements OnInit {
         } else {
           porcentaje = 'NA';
         }
-        console.log(porcentaje * 100, incidecnias_finalizadas, incidencias_totales);
       });
       const element = 'Semana ' + index;
       this.incidencias_semanas = [
@@ -131,7 +129,6 @@ export class IncidenciasComponent implements OnInit {
         }
       ]
     }
-    console.log(this.incidencias_semanas);
     this.spinner.hideSpinner();
     this.categorias = await this.categoriasService.getCategorias();
     this.empleados = await this.empleadosService.getEmpleados();

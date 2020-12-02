@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit {
     this.spinner.showSpinner();
     this.hoteles = await this.hotelService.getHoteles();
     this.spinner.hideSpinner();
-    console.log(this.hoteles);
   }
 
   public async login() {

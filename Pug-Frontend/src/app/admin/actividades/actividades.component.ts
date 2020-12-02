@@ -36,6 +36,7 @@ export class ActividadesComponent implements OnInit {
   public modalComponent: BsModalRef;
   public events: any[] = []; // Lista de eventos
   public actividad_semanas: any[] = [];
+  public actividad_meses: any[] = [];
   public comentario: string;
   public nuevaSemana: number;
   public semanasDisponibles: number[] = []; // Lista de semanas por mes
@@ -72,14 +73,11 @@ export class ActividadesComponent implements OnInit {
     let nombre_auditor: String;
     let nombre_supervisor: String;
 
-    // Guarda el número de los meses en un arreglo
-    const mes = moment(new Date()).month();
-    this.mes = Meses[mes];
-
     // Inicializa la lista de eventos
     this.events = [];
     this.actividad_semanas = [];
     this.spinner.showSpinner();
+    let mes = 0;
 
     // Obtén el número de semana en que se realiza cada actividad de mantenimiento preventivo
     this.solicitudes = await this.mantenimientoPreventivoService.getMantenimientosPreventivos();
@@ -92,7 +90,6 @@ export class ActividadesComponent implements OnInit {
         },
       ];
     });
-
 
     for (let index = 1; index < 53; index++) {
       let events = [];
@@ -137,23 +134,31 @@ export class ActividadesComponent implements OnInit {
           ];
         }
       });
-      // let mes = selectMonth(index+1%4);
+
+      // Asignar el mes a la semana
+      this.mes = Meses[mes];
+      if (index === 52) {
+        this.mes = 'Diciembre';
+      }
+
       const element = 'Semana ' + index;
       this.actividad_semanas = [
         ...this.actividad_semanas,
         {
           titulo: element,
-          eventos: {
-            events
-          }
+          mes: this.mes,
+          events
         }
       ]
-    }
-    console.log(this.actividad_semanas);
-    this.spinner.hideSpinner();
 
-    const first  =  new Date(new Date().getFullYear(), 0, 1);
-    const last  =  new Date(new Date().getFullYear(), 11, 31);
+      if (index >= (await this.getFirstWeek(mes + 1)) - 1 ) {
+        mes += 1;
+      }
+      if (mes === 12) {
+        mes = 0;
+      }
+    }
+    this.spinner.hideSpinner();
   }
 
   public addRequest(modal: TemplateRef<any>, mantenimiento: MantenimientoPreventivo) {
@@ -272,7 +277,7 @@ export class ActividadesComponent implements OnInit {
     this.mantenimiento.fecha_inicio = fecha;
   }
 
-  /*public async selectMonth(index: number) {
+  public async selectMonth(mes: string) {
     switch (mes) {
       case 'Enero':
         return new Date(2021, 0, 15);
@@ -301,7 +306,38 @@ export class ActividadesComponent implements OnInit {
       default:
         return new Date();
     }
-  }*/
+  }
+
+  public async getFirstWeek(mes: number) {
+    switch (mes) {
+      case 0:
+        return moment(new Date(2021, 0, 1)).week();
+      case 1:
+        return moment(new Date(2021, 1, 1)).week();
+      case 2:
+        return moment(new Date(2021, 2, 1)).week();
+      case 3:
+        return moment(new Date(2021, 3, 1)).week();
+      case 4:
+        return moment(new Date(2021, 4, 1)).week();
+      case 5:
+        return moment(new Date(2021, 5, 1)).week();
+      case 6:
+        return moment(new Date(2021, 6, 1)).week();
+      case 7:
+        return moment(new Date(2021, 7, 1)).week();
+      case 8:
+        return moment(new Date(2021, 8, 1)).week();
+      case 9:
+        return moment(new Date(2021, 9, 1)).week();
+      case 10:
+        return moment(new Date(2021, 10, 1)).week();
+      case 11:
+        return moment(new Date(2021, 11, 1)).week();
+      default:
+        return 52;
+    }
+  }
 
 }
 

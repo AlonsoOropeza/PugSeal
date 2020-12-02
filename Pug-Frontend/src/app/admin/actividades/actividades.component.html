@@ -8,7 +8,7 @@
               <p class="category">Desde aquí se puede marcar la finalización, supervisón y auditoría de las actividades.</p>
           </div>
           <accordion>
-            <accordion-group *ngFor="let semana of actividad_semanas" heading="{{semana.titulo}} - {{semana.eventos.events.length}} actividades" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
+            <accordion-group *ngFor="let semana of actividad_semanas" heading="{{semana.mes}} - {{semana.titulo}} - {{semana.events.length}} actividades" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
               <div class="content table-responsive table-full-width">
                 <table class="table table-hover table-striped row-border hover">
                   <thead>
@@ -29,7 +29,7 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr *ngFor="let event of semana.eventos.events">
+                      <tr *ngFor="let event of semana.events">
                           <td>{{event.nombre_categoria}}</td>
                           <td>{{event.actividad}}</td>
                           <td>{{event.nombre_proveedor}}</td>

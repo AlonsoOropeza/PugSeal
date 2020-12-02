@@ -47,6 +47,7 @@ import { MantenimientoCorrectivoComponent } from './admin/mantenimiento-correcti
 import { MantenimientoCorrectivoFormComponent } from './forms/mantenimiento-correctivo-form/mantenimiento-correctivo-form.component';
 import { ActividadesComponent } from './admin/actividades/actividades.component';
 import { PresupuestoComponent } from './admin/presupuesto/presupuesto.component';
+import { ActividadesFormComponent } from './forms/actividades-form/actividades-form.component';
 import { IncidenciasComponent } from './admin/incidencias/incidencias.component';
 import { FinalizarMantCorFormComponent } from './forms/finalizar-mant-cor-form/finalizar-mant-cor-form.component';
 import { HotelesComponent } from './admin/hoteles/hoteles.component';
@@ -100,6 +101,7 @@ import { CalificarMantCorFormComponent } from './forms/calificar-mant-cor-form/c
     MantenimientoCorrectivoFormComponent,
     ActividadesComponent,
     PresupuestoComponent,
+    ActividadesFormComponent,
     IncidenciasComponent,
     FinalizarMantCorFormComponent,
     HotelesComponent,

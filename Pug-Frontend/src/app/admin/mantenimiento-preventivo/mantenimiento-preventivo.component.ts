@@ -13,6 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { DataTableDirective } from 'angular-datatables';
 import moment = require('moment');
 import { Meses } from 'app/shared/diccionarios';
+import { getYear } from 'date-fns';
 
 
 @Component({
@@ -36,6 +37,7 @@ export class MantenimientoPreventivoComponent implements OnDestroy, OnInit {
   public user: Usuario;
   public isAdmin = false;
   public canDelete = false;
+  public nextYear = moment(new Date()).year() + 1;
 
   constructor(
     private mantenimientoService: MantenimientoPreventivoService,

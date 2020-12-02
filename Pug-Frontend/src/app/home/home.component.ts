@@ -157,7 +157,7 @@ export class HomeComponent implements OnInit {
             ...this.events,
             {
               ...solicitud
-              //semana: moment(new Date(solicitud.fecha_solicitud)).week()
+              // semana: moment(new Date(solicitud.fecha_solicitud)).week()
             },
           ];
         }
@@ -165,6 +165,7 @@ export class HomeComponent implements OnInit {
       this.porcentajeFinalizadas = Math.round((this.incidecnias_finalizadas / this.incidencias_totales)  * 100);
       this.porcentajeNoFinalizadas = 100  - this.porcentajeFinalizadas;
       console.log(this.porcentajeFinalizadas, this.porcentajeNoFinalizadas);
+      this.emailChartData.labels =  ['Finalizadas ' + this.porcentajeFinalizadas + '%', 'No Finalizadas ' + this.porcentajeNoFinalizadas + '%'],
       this.emailChartData.series = [this.porcentajeFinalizadas, this.porcentajeNoFinalizadas]
       this.loaded = true;
       this.spinner.hideSpinner();

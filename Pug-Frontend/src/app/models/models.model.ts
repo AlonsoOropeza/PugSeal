@@ -6,44 +6,56 @@ export class MantenimientoPreventivo {
     public id_proveedor?: number;
     public cotizacion?: number;
     public frecuencia_anual?: number;
-    public fecha_inicio?: any;
-    public id_empleado?: number;
     public fecha_creacion?: Date;
+
+    // aprobacion de solicitud
+    public id_auditor?: number;
     public aprobado?: boolean;
+
+    // meses y semanas
+    public fecha_inicio?: any;
     public mes?: string;
     public semana?: number;
 
-    // Por definir
-    public auditado?: boolean;
-    public fecha_planeada?: Date;
+    // Finalizacion
+    public id_empleado?: number;
+    public fecha_terminacion?: any;
     public duracion_horas?: number;
+    public comentarios_encargado?: string;
+
+    // Supervision
     public comentarios_supervisor?: string;
-    public comentarios_auditor?: string;
     public id_supervisor?: number;
-    public id_auditor?: number;
-    public supervisado?: boolean;
+
+    // Auditor
+    public comentarios_auditor?: string;
 
     constructor(json?: MantenimientoPreventivo) {
         this.id_mantprev = json?.id_mantprev ? json.id_mantprev : null;
         this.actividad = json?.actividad ? json.actividad : null;
         this.frecuencia_anual = json?.frecuencia_anual ? json.frecuencia_anual : null;
         this.fecha_creacion = json?.fecha_creacion ? json.fecha_creacion : new Date();
-        this.fecha_planeada = json?.fecha_planeada ? json.fecha_planeada : new Date();
-        this.fecha_inicio = json?.fecha_inicio ? json.fecha_inicio : null;
-        this.duracion_horas = json?.duracion_horas ? json.duracion_horas : null;
         this.cotizacion = json?.cotizacion ? json.cotizacion : null;
-        this.comentarios_supervisor = json?.comentarios_supervisor ? json.comentarios_supervisor : null;
-        this.comentarios_auditor = json?.comentarios_auditor ? json.comentarios_auditor : null;
-        this.supervisado = json?.supervisado ? json.supervisado : false;
-        this.auditado = json?.auditado ? json.auditado : false;
-        this.aprobado = json?.aprobado ? json.aprobado : false;
         this.id_proveedor = json?.id_proveedor ? json.id_proveedor : null;
         this.id_categoria = json?.id_categoria ? json.id_categoria : null;
+
         this.id_auditor = json?.id_auditor ? json.id_auditor : null;
-        this.id_supervisor = json?.id_supervisor ? json.id_supervisor : null;
-        this.id_empleado = json?.id_empleado ? json.id_empleado : null;
+        this.aprobado = json?.aprobado ? json.aprobado : false;
+
+        this.fecha_inicio = json?.fecha_inicio ? json.fecha_inicio : null;
         this.mes = json?.mes ? json.mes : null;
         this.semana = json?.semana ? json.semana : null;
+
+        this.id_empleado = json?.id_empleado ? json.id_empleado : null;
+        this.fecha_terminacion = json?.fecha_terminacion ? json.fecha_terminacion : null;
+        this.duracion_horas = json?.duracion_horas ? json.duracion_horas : null;
+        this.comentarios_encargado = json?.comentarios_encargado ? json.comentarios_encargado : null;
+
+        this.comentarios_supervisor = json?.comentarios_supervisor ? json.comentarios_supervisor : null;
+        this.id_supervisor = json?.id_supervisor ? json.id_supervisor : null;
+
+        this.comentarios_auditor = json?.comentarios_auditor ? json.comentarios_auditor : null;
+
     }
 }
 

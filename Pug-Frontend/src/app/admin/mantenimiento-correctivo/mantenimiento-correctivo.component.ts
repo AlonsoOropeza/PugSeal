@@ -83,7 +83,6 @@ export class MantenimientoCorrectivoComponent implements OnInit {
 
   public async create(form: NgForm) {
     this.mantenimiento.id_solicitante = this.user.id;
-    console.log(this.mantenimiento.fecha_solicitud);
     this.spinner.showSpinner();
       (await this.mantenimientoService.createMantenimientoCorrectivo(this.mantenimiento)).subscribe(
         async () => {

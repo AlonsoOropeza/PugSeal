@@ -111,14 +111,11 @@ export class CalendarioComponent implements OnInit {
 
   public async loadInfo() {
     this.mes = moment(new Date()).month();
-    console.log(this.mes);
     this.mes = Meses[this.mes];
-    console.log(this.mes);
 
     this.events = [];
     this.spinner.showSpinner();
     this.solicitudes = await this.mantenimientoPreventivoService.getMantenimientosPreventivos();
-    console.log(this.solicitudes);
     this.solicitudes.forEach(solicitud => {
       if (solicitud.id_empleado === this.user.id) {
           this.events = [
@@ -136,7 +133,6 @@ export class CalendarioComponent implements OnInit {
         ];
       }
     });
-    console.log(this.events);
     this.refresh.next();
     this.dtTrigger.next();
     this.spinner.hideSpinner();
@@ -146,9 +142,6 @@ export class CalendarioComponent implements OnInit {
 
     const first  =  new Date(new Date().getFullYear(), 0, 1);
     const last  =  new Date(new Date().getFullYear(), 11, 31);
-    for (const i = first; i <= last; i.setDate(i.getDate() + 7)) {
-      console.log(moment(i).week(), i);
-    }
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {

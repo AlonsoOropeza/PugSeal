@@ -4,23 +4,29 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Presupuesto anual</h4>
+                        <h4 class="title">Presupuesto anual - {{nextYear}}</h4>
                         <p class="category">Desde aquí se pueden obtener los datos necesarios para tomar decisiones a partir del presupuesto.</p>
                     </div>
                     <accordion>
-                        <accordion-group *ngFor="let mes of actividad_meses" heading="{{mes.titulo}} - ${{mes.total}} mxn" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
+                        <accordion-group *ngFor="let mes of actividad_meses" heading="{{mes.titulo}} - ${{mes.total}} mxn - {{mes.eventos.events.length}} actividades" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
                           <div class="content table-responsive table-full-width" *ngIf="mes.eventos.events.length > 0">
                               <table class="table table-hover table-striped row-border hover">
                                   <thead>
                                       <tr>
-                                          <th>Costos individuales</th>
+                                          <th>Categoría</th>
                                           <th>Actividad</th>
+                                          <th>Proveedor</th>
+                                          <th>Costos individuales</th>
+                                          <th>Acciones</th>
                                       </tr>
                                   </thead>
                                   <tbody>
                                       <tr *ngFor="let event of mes.eventos.events">
-                                          <td>${{event.cotizacion}} mxn</td>
+                                          <td>{{event.nombre_categoria}}</td>
                                           <td>{{event.actividad}}</td>
+                                          <td>{{event.nombre_proveedor}}</td>
+                                          <td>${{event.cotizacion}} mxn</td>
+                                          
                                           <td>
                                             <button class="btn-modificar  btn-block" (click)="addRequest(modalupdate, event)">
                                                 <i class="glyphicon glyphicon-edit"></i>
@@ -45,7 +51,25 @@
                       </table>
                       </div>
                         </accordion-group>
-                      </accordion>
+                    </accordion>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-hover table-striped row-border hover">
+                        <thead>
+                            <tr>
+                                <th>Total de costos del {{nextYear}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>$ {{totalAnual}} mxn</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
                 </div>
             </div>
         </div>

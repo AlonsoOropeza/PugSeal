@@ -13,6 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { DataTableDirective } from 'angular-datatables';
 import moment = require('moment');
 import { Meses } from 'app/shared/diccionarios';
+import { getYear } from 'date-fns';
 
 
 @Component({
@@ -36,6 +37,7 @@ export class MantenimientoPreventivoComponent implements OnDestroy, OnInit {
   public user: Usuario;
   public isAdmin = false;
   public canDelete = false;
+  public nextYear = moment(new Date()).year() + 1;
 
   constructor(
     private mantenimientoService: MantenimientoPreventivoService,
@@ -79,7 +81,6 @@ export class MantenimientoPreventivoComponent implements OnDestroy, OnInit {
     this.empleados = await this.empleadosService.getEmpleados();
     this.proveedores = await this.proveedoresService.getProveedores();
     this.spinner.hideSpinner();
-    console.log(this.mantenimientos);
 
   }
 
@@ -90,8 +91,6 @@ export class MantenimientoPreventivoComponent implements OnDestroy, OnInit {
     }
     this.mantenimiento.fecha_inicio = fecha ? fecha : this.mantenimiento.fecha_inicio;
     this.mantenimiento.fecha_inicio = this.mantenimiento.fecha_inicio ? this.mantenimiento.fecha_inicio : null;
-
-    console.log(this.mantenimiento.fecha_inicio);
 
     this.spinner.showSpinner();
       (await this.mantenimientoService.createMantenimientoPreventivo(this.mantenimiento)).subscribe(
@@ -148,7 +147,6 @@ export class MantenimientoPreventivoComponent implements OnDestroy, OnInit {
         this.mantenimiento.fecha_inicio = await this.selectMonth(element);
         const fecha = this.mantenimiento.fecha_inicio.toISOString().split('T')[0];
         this.mantenimiento.fecha_inicio = fecha;
-        // console.log(fecha);
         setTimeout(async () => {
           await this.create(form, fecha);
       }, 5000);

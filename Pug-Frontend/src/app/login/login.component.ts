@@ -1,8 +1,10 @@
+import { HotelService } from './../services/hotel.service';
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'app/models/models.model';
+import { Hotel, Usuario } from 'app/models/models.model';
 import { LoginService } from 'app/services/login.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { SpinnerService } from 'app/services/spinner.service';
 
 
 @Component({
@@ -13,11 +15,14 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   public email: string;
   public password: string;
+  public hoteles: Hotel[];
 
   constructor(
     public loginService: LoginService,
     private cookies: CookieService,
     private router: Router,
+    private spinner: SpinnerService,
+    private hotelService: HotelService,
     ) { }
 
   ngOnInit(): void {
@@ -27,6 +32,13 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/dashboard');
       }
     }
+    this.loadInfo();
+  }
+
+  public async loadInfo() {
+    this.spinner.showSpinner();
+    this.hoteles = await this.hotelService.getHoteles();
+    this.spinner.hideSpinner();
   }
 
   public async login() {

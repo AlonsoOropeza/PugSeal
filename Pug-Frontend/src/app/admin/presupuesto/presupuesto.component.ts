@@ -34,6 +34,8 @@ export class PresupuestoComponent implements OnInit {
   public actividad_meses: any[] = [];
   public items: string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   public ngxValue: any;
+  public nextYear = moment(new Date()).year() + 1;
+  public totalAnual = 0;
 
   constructor(
     private modal: NgbModal,
@@ -54,6 +56,13 @@ export class PresupuestoComponent implements OnInit {
   }
 
   public async loadInfo() {
+    this.categorias = await this.categoriasService.getCategorias();
+    this.empleados = await this.empleadosService.getEmpleados();
+    this.proveedores = await this.proveedoresService.getProveedores();
+
+    let nombre_categoria: String;
+    let nombre_empleado: String;
+    let nombre_proveedor: String;
     let total = 0;
     this.events = [];
     this.actividad_meses = [];
@@ -75,12 +84,30 @@ export class PresupuestoComponent implements OnInit {
       let events = [];
       this.solicitudes.forEach(solicitud => {
         if (moment(solicitud.fecha_inicio).month() === index) {
+          this.categorias.forEach(categoria => {
+            if (solicitud.id_categoria === categoria.id_categoria) {
+              nombre_categoria = categoria.nombre;
+            }
+          })
+          this.empleados.forEach(empleado => {
+            if (solicitud.id_empleado === empleado.id) {
+              nombre_empleado = empleado.first_name + ' ' + empleado.last_name;
+            }
+          })
+          this.proveedores.forEach(proveedor => {
+            if (solicitud.id_proveedor === proveedor.id_proveedor) {
+              nombre_proveedor = proveedor.nombre_empresa;
+            }
+          })
           total += solicitud.cotizacion;
           events = [
             ...events,
             {
               ...solicitud,
               semana: moment(new Date(solicitud.fecha_inicio)).week(),
+              nombre_categoria,
+              nombre_empleado,
+              nombre_proveedor
             },
           ];
         }
@@ -97,9 +124,10 @@ export class PresupuestoComponent implements OnInit {
         }
       ]
     }
+    this.actividad_meses.forEach(element => {
+      this.totalAnual += element.total;
+    });
     this.spinner.hideSpinner();
-
-
   }
 
   public addRequest(modal: TemplateRef<any>, mantenimiento: MantenimientoPreventivo) {

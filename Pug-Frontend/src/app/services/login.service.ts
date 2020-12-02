@@ -32,7 +32,6 @@ export class LoginService {
       );
   }
 
-  // tslint:disable-next-line: no-shadowed-variable
   public async setUser(token: string) {
     const httpOptions = {
       headers: new HttpHeaders({

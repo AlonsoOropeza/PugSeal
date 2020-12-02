@@ -78,7 +78,6 @@ export class BitacoraMedicionesComponent implements OnInit {
 
   public async create (form: NgForm) {
     this.spinner.showSpinner();
-    console.log(this.bitacora);
     const input = {
       ...this.bitacora,
       responsable: this.bitacora.responsable,

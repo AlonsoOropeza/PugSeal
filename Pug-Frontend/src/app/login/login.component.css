@@ -1,5 +1,3 @@
-@import url("https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.cs");
-@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css");
 
 main {
     font-family: "Karla", sans-serif;
@@ -7,10 +5,14 @@ main {
     min-height: 100vh; }
   
   .brand-wrapper {
-    margin-bottom: 19px; }
+    margin-bottom: 19px; 
+  }
     .brand-wrapper .logo {
-      height: 150px;
-      width: 500px }
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      height: 60%;
+    }
   
   .login-card {
     border: 0;
@@ -35,7 +37,7 @@ main {
       font-weight: normal;
       margin-bottom: 23px; }
     .login-card form {
-      max-width: 326px; }
+      max-width: 100%; }
     .login-card .form-control {
       border: 1px solid #d5dae2;
       padding: 15px 25px;

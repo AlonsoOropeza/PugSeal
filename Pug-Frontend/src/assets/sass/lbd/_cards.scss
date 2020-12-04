@@ -62,9 +62,38 @@
     }
     
     label{
-        font-size: $font-size-small;
+        font-size: $font-size-small;;
         margin-bottom: 5px;
         text-transform: uppercase;
+        color: #222222;
+    }
+
+    .dataTables_length, .dataTables_filter {
+        margin-bottom: 10px;
+    }
+
+    .dataTables_length label {
+        margin-left: 15px;
+        font-size: 14px;
+    }
+
+    .dataTables_filter label {
+        margin-right: 20px;
+        font-size: 14px;
+    }
+
+    .dataTables_info, .dataTables_paginate {
+        margin-top: 10px;
+    }
+
+    .dataTables_info {
+        margin-left: 15px;
+        font-size: 16px;
+    }
+
+    .dataTables_paginate {
+        margin-right: 15px;
+        font-size: 16px;
     }
 
     .title{

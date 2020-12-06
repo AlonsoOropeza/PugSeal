@@ -5,41 +5,41 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Áreas</h4>
-                        <p class="category">Aquí se encuentran las áreas</p>
+                        <h2 class="title"><strong>Áreas</strong></h2>
+                        <br>
+                        <p class="category">Aquí se encuentran las áreas o espacios que conforman el hotel.</p>
                     </div>
+                    <br>
                     <div class="row">
-                        <div class="col-md-9">
-
-                        </div>
                         <div class="col-md-3">
-                            <button class="btn btn-default btn-block" (click)="addRequest(modaladd)">
-                                <p>Crear Áreas</p>
+                            <button class="btn btn-default btn-block RegistrarBoton" (click)="addRequest(modaladd)">
+                                <p id="RegistrarTexto">Registrar área del hotel</p>
                             </button>
                         </div>
+                        <div class="col-md-9"></div>
                     </div>
                     <div class="content table-responsive table-full-width">
-                          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="table table-hover table-striped">
-                                <thead>
-                                    <tr>
-                                        <th *ngFor="let titulo of titulos">{{ titulo }}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let area of areas">
-                                        <td>{{area.nombre}}</td>
-                                        <td>{{area.descripcion}}</td>
-                                        <td *ngIf="area.activo">Activo</td>
-                                        <td *ngIf="!area.activo">Inactivo</td>
-                                        <td>
-                                            <button class="btn btn-modificar btn-block" (click)="addRequest(modalupdate, area)">
-                                                <i class="glyphicon glyphicon-edit"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                          </table>
-
+                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  
+                        class="table table-hover table-striped row-border hover">
+                            <thead>
+                                <tr>
+                                    <th *ngFor="let titulo of titulos">{{ titulo }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let area of areas">
+                                    <td>{{area.nombre}}</td>
+                                    <td>{{area.descripcion}}</td>
+                                    <td *ngIf="area.activo">Activo</td>
+                                    <td *ngIf="!area.activo">Inactivo</td>
+                                    <td>
+                                        <button class="btn btn-modificar btn-block" (click)="addRequest(modalupdate, area)">
+                                            <i class="glyphicon glyphicon-edit"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

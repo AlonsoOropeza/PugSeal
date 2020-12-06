@@ -71,7 +71,7 @@ h6
     border-radius: 5px;
 }
 
-.modal-header
+input[type=checkbox]
 {
-
+    width: 30px;
 }

@@ -1,3 +1,4 @@
+/* BOTONES */
 .btn
 {
   padding: 13px 20px 4px;
@@ -20,7 +21,7 @@
 
 .btn-ver
 {
-padding: 13px 20px 12px;
+  padding: 13px 20px 12px;
   font-size: 17px;
   border-radius: 4px;
   background-color: #FFFFFF;
@@ -30,6 +31,7 @@ padding: 13px 20px 12px;
 
   margin-bottom: 2px;
 }
+
 .btn-ver:hover
 {
     background-color: #333333;
@@ -56,6 +58,7 @@ padding: 13px 20px 12px;
     border-color: #333333;
 }
 
+/* TABLAS */
 .table>caption+thead>tr:first-child>td, .table>caption+thead>tr:first-child>th, .table>colgroup+thead>tr:first-child>td, .table>colgroup+thead>tr:first-child>th, .table>thead:first-child>tr:first-child>td, .table>thead:first-child>tr:first-child>th
 {
     border:0;
@@ -64,6 +67,7 @@ table.dataTable.no-footer {
     border-bottom: 0;
 }
 
+/* PERSONALIZADO */
 .dataTables_wrapper .dataTables_info {
     clear: both;
     float: left;
@@ -76,6 +80,48 @@ table.dataTable.no-footer {
     margin-left: 20px;
 }
 
-.dataTables_wrapper .dataTables_length{
+.dataTables_wrapper .dataTables_length
+{
     margin-left: 20px;
-   }
+}
+
+.category 
+{
+    font-size: 20px;
+    color: #222222
+}
+
+.card label
+{
+    margin-left: 20px;
+}
+
+#RegistrarTexto
+{
+    font-size: 20px;
+}
+
+.RegistrarBoton
+{
+    margin-left: 15px;
+}
+
+table
+{
+    padding-left: 14px;
+    padding-right: 14px;
+    font-size: 16px;
+}
+
+tbody, thead
+{
+    font-size: 16px;
+}
+
+table.dataTable thead th,
+table.dataTable thead td {
+  padding: 10px 10px;
+  border-bottom: 1px solid #222222;
+}
+
+

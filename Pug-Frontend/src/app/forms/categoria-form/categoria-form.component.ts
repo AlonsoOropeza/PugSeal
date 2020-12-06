@@ -19,7 +19,5 @@ export class CategoriaFormComponent {
 
   public cancel() {
     this.modaladd.hide();
-    window.location.reload();
   }
-
 }

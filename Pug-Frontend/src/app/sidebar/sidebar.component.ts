@@ -12,14 +12,16 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
   { path: '/actividades', title: 'Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
-    { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
-    { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
-    { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
+  { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
+  { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
+  { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
+  { path: '/faqs', title: 'FAQs',  icon: 'glyphicon glyphicon-calendar', class: '' },
 ];
 export const SUPERVISORROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
   { path: '/actividades', title: 'Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
   { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
+  { path: '/faqs', title: 'FAQs',  icon: 'glyphicon glyphicon-calendar', class: '' },
 ];
 export const AUDITORROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
@@ -30,6 +32,7 @@ export const AUDITORROUTES: RouteInfo[] = [
   { path: '/areas', title: 'Areas',  icon: 'glyphicon glyphicon-list-alt', class: '' },
   { path: '/categorias', title: 'Categorias',  icon: 'glyphicon glyphicon-list-alt', class: '' },
   { path: '/proveedores', title: 'Proveedores',  icon: 'glyphicon glyphicon-list-alt', class: '' },
+  { path: '/faqs', title: 'FAQs',  icon: 'glyphicon glyphicon-calendar', class: '' },
 ];
 export const ADMINROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
@@ -43,6 +46,7 @@ export const ADMINROUTES: RouteInfo[] = [
   { path: '/proveedores', title: 'Proveedores',  icon: 'glyphicon glyphicon-list-alt', class: '' },
   { path: '/requisiciones', title: 'Requisiciones',  icon: 'glyphicon glyphicon-list-alt', class: '' },
   { path: '/hoteles', title: 'Hoteles',  icon: 'pe-7s-map-2', class: '' },
+  { path: '/faqs', title: 'FAQs',  icon: 'glyphicon glyphicon-calendar', class: '' },
 ];
 
 @Component({

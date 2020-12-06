@@ -53,6 +53,7 @@ import { FinalizarMantCorFormComponent } from './forms/finalizar-mant-cor-form/f
 import { HotelesComponent } from './admin/hoteles/hoteles.component';
 import { HotelFormComponent } from './forms/hotel-form/hotel-form.component';
 import { CalificarMantCorFormComponent } from './forms/calificar-mant-cor-form/calificar-mant-cor-form.component';
+import { FaqsComponent } from './faqs/faqs.component';
 
 
 @NgModule({
@@ -106,7 +107,8 @@ import { CalificarMantCorFormComponent } from './forms/calificar-mant-cor-form/c
     FinalizarMantCorFormComponent,
     HotelesComponent,
     HotelFormComponent,
-    CalificarMantCorFormComponent
+    CalificarMantCorFormComponent,
+    FaqsComponent
   ],
   providers: [CookieService, DatePipe],
   bootstrap: [AppComponent]

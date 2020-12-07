@@ -4,19 +4,22 @@
       <div class="col-md-12">
         <div class="card">
           <div class="header">
-            <h4 class="title">Actividades</h4>
-            <p class="category">Desde aquí se puede marcar la finalización, supervisón y auditoría de las actividades.</p>
+            <h2 class="title"><strong>Actividades</strong></h2>
+            <br>
+            <p class="category">Aquí se marca la finalización, supervisión y auditoría de las actividades.</p>
           </div>
+          <br>
           <accordion>
-            <accordion-group *ngFor="let semana of actividad_semanas" heading="{{semana.mes}} - {{semana.titulo}} - {{semana.events.length}} actividades" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
+            <accordion-group *ngFor="let semana of actividad_semanas" 
+            heading="{{semana.mes}} - {{semana.titulo}} - {{semana.events.length}} actividades">
               <div class="content table-responsive table-full-width">
                 <table class="table table-hover table-striped row-border hover">
                   <thead>
                     <tr>
-                      <th>Categoria</th>
+                      <th>Categoría</th>
                       <th>Actividad</th>
                       <th>Proveedor</th>
-                      <th>Fecha Realizacion</th>
+                      <th>Fecha de realización</th>
                       <th>Horas</th>
                       <th>Realizado por</th>
                       <th>Supervisado por</th>
@@ -84,7 +87,6 @@
     </div>
   </div>
 </div>
-<br><br>
 
 <!-- 
   Modal: Asignar semana
@@ -181,10 +183,10 @@
             Los comentarios son obligatorios.
           </div>
         </div>
-        <button class="btn btn-primary" type="submit" [disabled] = "updateForm.invalid" (click)="update()">
+        <button class="btn btn-primary actividades" type="submit" [disabled] = "updateForm.invalid" (click)="update()">
           Guardar
         </button>
-        <button class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+        <button class="btn btn-link ml-auto actividades" data-dismiss="modal" type="button" (click)="cancel()">
           Cancelar
         </button>
     </form>
@@ -211,10 +213,10 @@
           Los comentarios son obligatorios.
         </div>
       </div>
-      <button class="btn btn-primary" type="submit" [disabled] = "updateForm.invalid" (click)="update()">
+      <button class="btn btn-primary actividades" type="submit" [disabled] = "updateForm.invalid" (click)="update()">
         Guardar
       </button>
-      <button class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
+      <button class="btn btn-link ml-auto actividades" data-dismiss="modal" type="button" (click)="cancel()">
         Cancelar
       </button>
     </form>

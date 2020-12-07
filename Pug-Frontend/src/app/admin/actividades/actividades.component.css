@@ -1,3 +1,9 @@
+.modal-content
+{
+    background-color: #88888888;
+    border-radius: 27.5px;
+}
+
 h6
 {
     font-size: 20px;
@@ -5,12 +11,6 @@ h6
 .form-control-label
 {
     font-size: 17px;
-}
-
-.modal-content
-{
-    background-color: #88888888;
-    border-radius: 27.5px;
 }
 
 .modal-title
@@ -21,6 +21,7 @@ h6
 {
     font-size: 32px;
 }
+
 .form-control
 {
     padding: 10px 10px;
@@ -35,10 +36,10 @@ h6
     padding: 13px 20px 12px;
     font-size: 17px;
     font-weight: bold;
-
     color: #888888;
     border-color: #888888;
 }
+
 .btn:hover
 {
     background-color: #444444;
@@ -61,4 +62,16 @@ h6
 .alert.alert-danger.ng-star-inserted
 {
     border-radius: 5px;
+}
+
+
+.category 
+{
+    font-size: 20px;
+    color: #222222
+}
+
+table
+{
+    font-size: 16px;
 }

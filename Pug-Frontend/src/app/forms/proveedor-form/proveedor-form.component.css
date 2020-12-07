@@ -70,3 +70,8 @@ h6
 {
     border-radius: 5px;
 }
+
+input[type=checkbox]
+{
+    width: 30px;
+}

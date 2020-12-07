@@ -20,15 +20,15 @@
    > thead > tr > td,
    > tbody > tr > td,
    > tfoot > tr > td{
-       padding: 12px 8px;
+       padding: 4px 4px;
        vertical-align: middle;
    }
    
     > thead > tr > th{
         border-bottom-width: 1px;
-        font-size: $font-size-small;
+        font-size: 16px;
         text-transform: uppercase;
-        color: $dark-gray;
+        color: #333333;
         font-weight: $font-weight-normal;
         padding-bottom: 5px;
     }

@@ -5,40 +5,40 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Categorías</h4>
-                        <p class="category">Aquí se encuentran las categorías</p>
+                        <h2 class="title"><strong>Categorías</strong></h2>
+                        <br>
+                        <p class="category">Aquí se encuentran las categorías de mantenimiento.</p>
                     </div>
+                    <br>
                     <div class="row">
-                        <div class="col-md-9">
-
-                        </div>
                         <div class="col-md-3">
-                            <button class="btn btn-default btn-block" (click)="addRequest(modaladd)">
-                                <p>Crear Categorías</p>
+                            <button class="btn btn-default btn-block RegistrarBoton" (click)="addRequest(modaladd)">
+                                <p id="RegistrarTexto">Registrar categoría</p>
                             </button>
                         </div>
+                        <div class="col-md-9"></div>
                     </div>
                     <div class="content table-responsive table-full-width">
                         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" 
                         class="table table-hover table-striped row-border hover">
-                                <thead>
-                                    <tr>
-                                        <th *ngFor="let titulo of titulos">{{ titulo }}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let categoria of categorias">
-                                        <td>{{categoria.nombre}}</td>
-                                        <td>{{categoria.descripcion}}</td>
-                                        <td *ngIf="categoria.activo">Activo</td>
-                                        <td *ngIf="!categoria.activo">Inactivo</td>
-                                        <td>
-                                            <button class="btn btn-modificar btn-block" (click)="addRequest(modalupdate, categoria)">
-                                                <i class="glyphicon glyphicon-edit"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                            <thead>
+                                <tr>
+                                    <th *ngFor="let titulo of titulos">{{ titulo }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let categoria of categorias">
+                                    <td>{{categoria.nombre}}</td>
+                                    <td>{{categoria.descripcion}}</td>
+                                    <td *ngIf="categoria.activo">Activo</td>
+                                    <td *ngIf="!categoria.activo">Inactivo</td>
+                                    <td>
+                                        <button class="btn btn-modificar btn-block" (click)="addRequest(modalupdate, categoria)">
+                                            <i class="glyphicon glyphicon-edit"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
                           </table>
                     </div>
                 </div>

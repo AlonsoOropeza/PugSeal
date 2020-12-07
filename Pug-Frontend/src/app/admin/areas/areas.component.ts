@@ -40,7 +40,7 @@ export class AreasComponent implements OnInit {
       }
     };
     this.loadInfo();
-    this.titulos = ['Nombre', 'Descripcion', 'Estado', 'Editar'];
+    this.titulos = ['Nombre', 'Descripción', 'Estado', 'Editar'];
   }
 
   public async loadInfo() {

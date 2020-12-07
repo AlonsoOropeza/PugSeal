@@ -167,7 +167,6 @@ export class MantenimientoPreventivoComponent implements OnDestroy, OnInit {
         this.spinner.hideSpinner();
       this.modalComponent.hide();
     }
-
   }
 
   public async selectMonth(mes: string) {

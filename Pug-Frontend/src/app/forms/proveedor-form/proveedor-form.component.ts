@@ -1,6 +1,6 @@
+import { Proveedor } from 'app/models/models.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Proveedor } from 'app/models/models.model';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -22,5 +22,4 @@ export class ProveedorFormComponent {
   public cancel() {
     this.cancelparent.emit();
   }
-
 }

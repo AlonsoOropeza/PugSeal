@@ -31,7 +31,6 @@ export class FaqsComponent implements OnInit {
   }
 
   public async loadInfo() {
-
     this.spinner.hideSpinner();
   }
 }

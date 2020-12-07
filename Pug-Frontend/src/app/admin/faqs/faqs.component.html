@@ -1,87 +1,35 @@
 <div class="main-content">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card">
-            <div class="header">
-                <h4 class="title">Actividades</h4>
-                <p class="category">Desde aquí se puede marcar la finalización, supervisón y auditoría de las actividades.</p>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Frequently Asked Questions</h4>
+                        <p class="category">Consulta las dudas más frecuentes sobre el uso del sistema.</p>
+                    </div>
+                    <accordion>
+                        <accordion-group heading="¿Cómo consulto mi nombre y rol en el sistema?">  
+                        <div class="content table-responsive table-full-width">
+                            <p>Ambos se encuentran en la parte superior derecha de la pantalla.</p>
+                        </div>
+                        </accordion-group>
+                        <accordion-group heading="¿Cómo cierro una sesión activa en la plataforma?">  
+                            <div class="content table-responsive table-full-width">
+                                <p>Presiona el botón “Cerrar sesión” en la parte superior derecha de la pantalla.</p>
+                            </div>
+                        </accordion-group>
+                        <div *ngIf="user.rol !== 'Supervisor'">
+                            <accordion-group heading="¿Cómo consulto las actividades de mantenimiento?">  
+                                <div class="content table-responsive table-full-width">
+                                    <p>a) Mantenimiento preventivo: Diríjase a la barra lateral izquierda y seleccione la opción “Mantenimiento Preventivo”.</p>
+                                    <p>b) Mantenimiento correctivo: Diríjase a la barra lateral izquierda y seleccione la opción “Mantenimiento Correctivo”.</p>
+                                </div>
+                            </accordion-group>
+                        </div>
+                    </accordion>
+                </div>
             </div>
-            <accordion>
-              <accordion-group *ngFor="let semana of actividad_semanas" heading="{{semana.mes}} - {{semana.titulo}} - {{semana.events.length}} actividades" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
-                <div class="content table-responsive table-full-width">
-                  <table class="table table-hover table-striped row-border hover">
-                    <thead>
-                        <tr>
-                            <th>Categoria</th>
-                            <th>Actividad</th>
-                            <th>Proveedor</th>
-                            <th>Fecha Realizacion</th>
-                            <th>Horas</th>
-                            <th>Realizado por</th>
-                            <th>Supervisado por</th>
-                            <th>Auditado por</th>
-                            <!--<th>Gasto estimado</th>-->
-                           <th *ngIf="user.rol === 'Encargado_Mantenimiento'">Finalizar</th>
-                           <th *ngIf="user.rol === 'Supervisor'">Supervisar</th>
-                           <th *ngIf="user.rol === 'Auditor'">Auditar</th>  
-                           <th *ngIf="user.rol === 'Auditor'">Reasignar</th>  
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let event of semana.events">
-                            <td>{{event.nombre_categoria}}</td>
-                            <td>{{event.actividad}}</td>
-                            <td>{{event.nombre_proveedor}}</td>
-                            <td *ngIf="!event.fecha_terminacion">N/A</td>
-                            <td *ngIf="event.fecha_terminacion">{{ event.fecha_terminacion }}</td>
-                            <td *ngIf="!event.duracion_horas">N/A</td>
-                            <td *ngIf="event.duracion_horas">{{event.duracion_horas}}</td>
-                            <td>{{event.nombre_empleado}}
-                              <button *ngIf="event.comentarios_encargado" (click)="showComment(modalComment, event.comentarios_encargado)">
-                                <i class="glyphicon glyphicon-comment"></i>
-                              </button>
-                            </td>
-                            <td>{{event.nombre_supervisor}}
-                              <button *ngIf="event.comentarios_supervisor" (click)="showComment(modalComment, event.comentarios_supervisor)">
-                                <i class="glyphicon glyphicon-comment"></i>
-                              </button>
-                            </td>
-                            <td>{{event.nombre_auditor}}
-                              <button *ngIf="event.comentarios_auditor" (click)="showComment(modalComment, event.comentarios_auditor)">
-                                <i class="glyphicon glyphicon-comment"></i>
-                              </button>
-                            </td>
-                            <!--<td>${{ event.cotizacion }}</td>-->
-                            <td *ngIf="user.rol === 'Encargado_Mantenimiento'">
-                              <button class="btn btn-ver btn-lg" (click)="addRequest(modalActividad, event)">
-                                <i class="glyphicon glyphicon-check"></i>
-                            </button>
-                            </td>
-                            <td *ngIf="user.rol === 'Supervisor'">
-                              <button class="btn btn-ver btn-lg" (click)="addRequest(modalActividad, event)">
-                                <i class="glyphicon glyphicon-check"></i>
-                            </button>
-                            </td>
-                            <td *ngIf="user.rol === 'Auditor'">
-                              <button class="btn btn-ver btn-lg" (click)="addRequest(modalActividad, event)">
-                                <i class="glyphicon glyphicon-check"></i>
-                            </button>
-                            </td>
-                            <td *ngIf="user.rol === 'Auditor'">
-                              <button class="btn btn-ver btn-lg" (click)="assignWeek(modalWeek, event)">
-                                <i class="glyphicon glyphicon-calendar"></i>
-                            </button>
-                            </td>
-                        </tr>
-                    </tbody>
-              </table>
-              </div>
-              </accordion-group>
-            </accordion>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <br><br>
+</div>
+<br><br>

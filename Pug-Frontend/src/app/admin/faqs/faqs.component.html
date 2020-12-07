@@ -1,0 +1,35 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Frequently Asked Questions</h4>
+                        <p class="category">Consulta las dudas más frecuentes sobre el uso del sistema.</p>
+                    </div>
+                    <accordion>
+                        <accordion-group heading="¿Cómo consulto mi nombre y rol en el sistema?">  
+                        <div class="content table-responsive table-full-width">
+                            <p>Ambos se encuentran en la parte superior derecha de la pantalla.</p>
+                        </div>
+                        </accordion-group>
+                        <accordion-group heading="¿Cómo cierro una sesión activa en la plataforma?">  
+                            <div class="content table-responsive table-full-width">
+                                <p>Presiona el botón “Cerrar sesión” en la parte superior derecha de la pantalla.</p>
+                            </div>
+                        </accordion-group>
+                        <div *ngIf="user.rol !== 'Supervisor'">
+                            <accordion-group heading="¿Cómo consulto las actividades de mantenimiento?">  
+                                <div class="content table-responsive table-full-width">
+                                    <p>a) Mantenimiento preventivo: Diríjase a la barra lateral izquierda y seleccione la opción “Mantenimiento Preventivo”.</p>
+                                    <p>b) Mantenimiento correctivo: Diríjase a la barra lateral izquierda y seleccione la opción “Mantenimiento Correctivo”.</p>
+                                </div>
+                            </accordion-group>
+                        </div>
+                    </accordion>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>

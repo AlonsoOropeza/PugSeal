@@ -1,0 +1,64 @@
+h6
+{
+    font-size: 20px;
+}
+.form-control-label
+{
+    font-size: 17px;
+}
+
+.modal-content
+{
+    background-color: #88888888;
+    border-radius: 27.5px;
+}
+
+.modal-title
+{
+    font-size: 16px;
+}
+.close
+{
+    font-size: 32px;
+}
+.form-control
+{
+    padding: 10px 10px;
+}
+
+.btn
+{
+    width: 47%;
+    border-radius: 4px;
+    margin-right: 8px;
+    margin-left: 8px;
+    padding: 13px 20px 12px;
+    font-size: 17px;
+    font-weight: bold;
+
+    color: #888888;
+    border-color: #888888;
+}
+.btn:hover
+{
+    background-color: #444444;
+    color: #F8F8F8;
+    border-color: #888888;
+}
+.btn-primary
+{
+    background-color: #000000;
+    color: #F8F8F8;
+    border-color: #000000;
+}
+.btn-primary:hover
+{
+    background-color: #F8F8F8;
+    color: #000000;
+    border-color: #000000;
+}
+
+.alert.alert-danger.ng-star-inserted
+{
+    border-radius: 5px;
+}

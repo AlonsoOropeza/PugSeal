@@ -116,7 +116,6 @@ export class MantenimientoCorrectivoComponent implements OnInit {
     } else {
       this.getNameById(this.user.id);
     }
-    console.log(this.user);
     if (this.edit) {
       if (mantenimiento && mantenimiento.finalizada && this.user.rol === 'encargadoMantenimiento' ) {
         this.edit = false;

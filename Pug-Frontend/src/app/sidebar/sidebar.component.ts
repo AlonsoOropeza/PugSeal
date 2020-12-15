@@ -12,6 +12,7 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
   { path: '/actividades', title: 'Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
+  { path: '/incidencias', title: 'Incidencias',  icon: 'glyphicon glyphicon-tasks', class: '' },
   { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
   { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'glyphicon glyphicon-wrench', class: '' },
   { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
@@ -20,12 +21,14 @@ export const ROUTES: RouteInfo[] = [
 export const SUPERVISORROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
   { path: '/actividades', title: 'Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
+  { path: '/incidencias', title: 'Incidencias',  icon: 'glyphicon glyphicon-tasks', class: '' },
   { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
   { path: '/faqs', title: 'FAQs',  icon: 'glyphicon glyphicon-question-sign', class: '' },
 ];
 export const AUDITORROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
   { path: '/actividades', title: 'Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
+  { path: '/incidencias', title: 'Incidencias',  icon: 'glyphicon glyphicon-tasks', class: '' },
   { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
   { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'glyphicon glyphicon-wrench', class: '' },
   { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
@@ -38,6 +41,7 @@ export const ADMINROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
   { path: '/presupuesto', title: 'Presupuesto anual',  icon: 'glyphicon glyphicon-usd', class: '' },
   { path: '/actividades', title: 'Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
+  { path: '/incidencias', title: 'Incidencias',  icon: 'glyphicon glyphicon-tasks', class: '' },
   { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
   { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'glyphicon glyphicon-wrench', class: '' },
   // { path: '/user', title: 'User Profile',  icon: 'pe-7s-user', class: '' },

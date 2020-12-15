@@ -104,12 +104,11 @@
         </div>
         <div class="col-12">
             <div class="form-group">
-                <label class="form-control-label" for="estado">Estado de solicitud </label>
+                <label class="form-control-label" for="estado">Prioridad de la tarea.</label>
                 <select class="form-control" id="estado" [(ngModel)]="mantenimiento.estado" name="estado"
                     disabled={{!edit}} #estado="ngModel">
-                    <option value="Alto">Alto</option>
-                    <option value="Medio">Medio</option>
-                    <option value="Bajo">Bajo</option>
+                    <option value="Alto">Urgente</option>
+                    <option value="Medio">Normal</option>
                 </select>
             </div>
         </div>

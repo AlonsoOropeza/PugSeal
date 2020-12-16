@@ -113,7 +113,7 @@ if os.getenv('GAE_INSTANCE'):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'HOST': '/cloudsql/intra-pugseal:us-central1:intra-pugseal',
+            'HOST': '/cloudsql/intra-pugseal:us-central1:intrapug',
             'NAME': 'pugsealapp',
             'USER': 'root',
             'PASSWORD': '1234',

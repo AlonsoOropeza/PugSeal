@@ -1,24 +1,5 @@
 <form #createForm="ngForm" class="modals">
     <div class="row">
-        <div class="col-12">
-            <div class="form-group">
-                <label class="form-control-label" for="actividad">Actividad <span class="text-danger">*</span></label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="actividad" required
-                    [(ngModel)]="mantenimiento.actividad"
-                    name="actividad"
-                    #actividad="ngModel"s
-                    disabled={{!edit}}
-                >
-            </div>
-            <div *ngIf="actividad.invalid && (actividad.dirty || actividad.touched)" class="alert alert-danger">
-                <div *ngIf="actividad.errors.required">
-                    El título de la actividad es obligatorio.
-                </div>
-            </div>
-        </div>
 
         <div class="col">
             <div class="form-group">

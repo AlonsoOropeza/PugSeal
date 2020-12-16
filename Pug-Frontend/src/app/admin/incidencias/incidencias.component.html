@@ -7,28 +7,22 @@
             <thead>
                 <tr>
                     <th>Actividad</th>
-                    <th>Fecha</th>
-                    <th>Gasto estimado</th>
                     <th>Semana</th>
+                    <th>Gasto estimado</th>
+                    <th>Proveedor</th>
                     <th>Vizualizar</th>
-                    <th>Aprobar</th>
                     <th>Finalizar</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let event of inconclusas" >
                       <td>{{event.descripcion_problema}}</td>
-                      <td>{{ event.fecha_solicitud }}</td>
-                      <td>${{ event.costo_trabajo }}</td>
                       <td>{{ event.semana }}</td>
+                      <td>${{ event.costo_trabajo }}</td>
+                      <td>{{ event.proveedor }}</td>
                       <td>
                         <button class="btn btn-ver btn-lg" (click)="addRequest(modalupdate, event, false)" >
                           <i class="glyphicon glyphicon-chevron-right"></i>
-                        </button>
-                      </td>
-                      <td>
-                        <button class="btn btn-aprobar btn-lg" (click)="addRequest(modalgrade, event, true)" >
-                          <i class="pe-7s-check"></i>
                         </button>
                       </td>
                       <td>
@@ -42,19 +36,56 @@
       </div>
       </accordion-group>
     </accordion>
-    
 
-    <accordion>
-      <accordion-group *ngFor="let semana of incidencias_semanas" heading="{{semana.titulo}} - {{semana.porcentaje}}" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
+    <accordion *ngIf="(this.user.rol != 'encargadoMantenimiento')">
+      <accordion-group  heading="No Supervisadas" >   <!-- NO SUPERVISADAS -->
         <div class="content table-responsive table-full-width">
           <table class="table table-hover table-striped row-border hover">
             <thead>
                 <tr>
                     <th>Actividad</th>
-                    <th>Estado</th>
-                    <th>Fecha</th>
+                    <th>Semana</th>
                     <th>Gasto estimado</th>
-                    <th>Calificacion</th>
+                    <th>Proveedor</th>
+                    <th>Vizualizar</th>
+                    <th>Aprobar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let event of noSupervisadas" >
+                      <td>{{event.descripcion_problema}}</td>
+                      <td>{{ event.semana }}</td>
+                      <td>${{ event.costo_trabajo }}</td>
+                      <td>{{ event.proveedor }}</td>
+                      <td>
+                        <button class="btn btn-ver btn-lg" (click)="addRequest(modalupdate, event, false)" >
+                          <i class="glyphicon glyphicon-chevron-right"></i>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="btn btn-aprobar btn-lg" (click)="addRequest(modalgrade, event, true)" >
+                          <i class="pe-7s-check"></i>
+                        </button>
+                      </td>
+                </tr>
+            </tbody>
+      </table>
+      </div>
+      </accordion-group>
+    </accordion>
+    
+
+    <accordion>
+      <accordion-group *ngFor="let semana of incidencias_semanas" heading="{{semana.titulo}} - {{semana.porcentaje}}  {{semana.incidencias_fin}} / {{semana.incidencias_tot}}" >   <!-- CONCATENAR NUMERO DE SEMANA A HEADING -->
+        <div class="content table-responsive table-full-width">
+          <table class="table table-hover table-striped row-border hover">
+            <thead>
+                <tr>
+                   <th>Actividad</th>
+                   <th>Finalizado</th>
+                    <th>Gasto estimado</th>
+                    <th>Proveedor</th>
+                    <th>Calificación</th>
                     <th>Vizualizar</th>
                     <th>Aprobar</th>
                     <th>Finalizar</th>
@@ -63,10 +94,10 @@
             <tbody>
                 <tr *ngFor="let event of semana.eventos.events">
                     <td>{{event.descripcion_problema}}</td>
-                    <td *ngIf="event.finalizada">Aprobado</td>
-                    <td *ngIf="!event.finalizada">No Aprobado</td>
-                    <td>{{ event.fecha_solicitud }}</td>
+                    <td *ngIf="event.finalizada">Sí</td>
+                    <td *ngIf="!event.finalizada">No</td>
                     <td>${{ event.costo_trabajo }}</td>
+                    <td>{{ event.proveedor }}</td>
                     <td>{{ (event.calif_calidad + event.calif_terminacion + event.calif_limpieza + event.calif_totalidad )/4}}</td>
                     <td>
                       <button class="btn btn-ver btn-lg" (click)="addRequest(modalupdate, event, false)" >
@@ -74,7 +105,7 @@
                       </button>
                     </td>
                     <td>
-                      <button class="btn btn-aprobar btn-lg" (click)="addRequest(modalgrade, event, false)" >
+                      <button class="btn btn-aprobar btn-lg" (click)="addRequest(modalgrade, event, true)" >
                         <i class="pe-7s-check"></i>
                       </button>
                     </td>

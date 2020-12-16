@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <button class="btn btn-default btn-block RegistrarBoton" (click)="addRequest(modaladd)">
-                                <p id="RegistrarTexto">Registrar solicitud de mantenimiento correctivo</p>
+                                <p id="RegistrarTexto">Registrar Mantt. Correctivo</p>
                             </button>
                         </div>
                         <div class="col-md-8"></div>
@@ -31,7 +31,8 @@
                                 <tr *ngFor="let mantenimiento of mantenimientos">
                                     <td>{{mantenimiento.descripcion_problema}}</td>
                                     <td>{{mantenimiento.fecha_solicitud}}</td>
-                                    <td>{{mantenimiento.finalizada}}</td>
+                                    <td *ngIf="mantenimiento.finalizada">Sí</td>
+                                    <td *ngIf="!mantenimiento.finalizada">No</td>
                                     <td>
                                         <button class="btn-ver  btn-block" (click)="addRequest(modalupdate, mantenimiento, false)">
                                             <i class="glyphicon glyphicon-chevron-right"></i>

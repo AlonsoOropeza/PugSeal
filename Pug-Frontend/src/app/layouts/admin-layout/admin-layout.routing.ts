@@ -20,6 +20,7 @@ import { MantenimientoCorrectivoComponent } from '../../admin/mantenimiento-corr
 import { ActividadesComponent } from 'app/admin/actividades/actividades.component';
 import { IncidenciasComponent } from 'app/admin/incidencias/incidencias.component';
 import { HotelesComponent } from 'app/admin/hoteles/hoteles.component';
+import { FaqsComponent } from 'app/admin/faqs/faqs.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',                component: HomeComponent                    },
@@ -43,4 +44,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'presupuesto',              component: PresupuestoComponent             },
     { path: 'incidencias',              component: IncidenciasComponent             },
     { path: 'hoteles',                  component: HotelesComponent                 },
+    { path: 'faqs',                     component: FaqsComponent                    },
 ]

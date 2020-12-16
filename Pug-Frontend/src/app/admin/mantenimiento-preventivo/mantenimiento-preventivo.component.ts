@@ -170,35 +170,34 @@ export class MantenimientoPreventivoComponent implements OnDestroy, OnInit {
         this.spinner.hideSpinner();
       this.modalComponent.hide();
     }
-
   }
 
   public async selectMonth(mes: string) {
     switch (mes) {
       case 'Enero':
-        return new Date(2021, 0, 15);
+        return new Date(2021, 0, 1);
       case 'Febrero':
-        return new Date(2021, 1, 15);
+        return new Date(2021, 1, 1);
       case 'Marzo':
-        return new Date(2021, 2, 15);
+        return new Date(2021, 2, 1);
       case 'Abril':
-        return new Date(2021, 3, 15);
+        return new Date(2021, 3, 1);
       case 'Mayo':
-        return new Date(2021, 4, 15);
+        return new Date(2021, 4, 1);
       case 'Junio':
-        return new Date(2021, 5, 15);
+        return new Date(2021, 5, 1);
       case 'Julio':
-        return new Date(2021, 6, 15);
+        return new Date(2021, 6, 1);
       case 'Agosto':
-        return new Date(2021, 7, 15);
+        return new Date(2021, 7, 1);
       case 'Septiembre':
-        return new Date(2021, 8, 15);
+        return new Date(2021, 8, 1);
       case 'Octubre':
-        return new Date(2021, 9, 15);
+        return new Date(2021, 9, 1);
       case 'Noviembre':
-        return new Date(2021, 10, 15);
+        return new Date(2021, 10, 1);
       case 'Diciembre':
-        return new Date(2021, 11, 15);
+        return new Date(2021, 11, 1);
       default:
         return new Date();
     }

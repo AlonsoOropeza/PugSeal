@@ -13,37 +13,45 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
   { path: '/actividades', title: 'Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
-    { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
-    { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
-    { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
+  { path: '/incidencias', title: 'Incidencias',  icon: 'glyphicon glyphicon-tasks', class: '' },
+  { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
+  { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'glyphicon glyphicon-wrench', class: '' },
+  { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
+  { path: '/faqs', title: 'FAQs',  icon: 'glyphicon glyphicon-question-sign', class: '' },
 ];
 export const SUPERVISORROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
   { path: '/actividades', title: 'Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
+  { path: '/incidencias', title: 'Incidencias',  icon: 'glyphicon glyphicon-tasks', class: '' },
   { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
+  { path: '/faqs', title: 'FAQs',  icon: 'glyphicon glyphicon-question-sign', class: '' },
 ];
 export const AUDITORROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
   { path: '/actividades', title: 'Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
+  { path: '/incidencias', title: 'Incidencias',  icon: 'glyphicon glyphicon-tasks', class: '' },
   { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
-  { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
+  { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'glyphicon glyphicon-wrench', class: '' },
   { path: '/calendario', title: 'Calendario de actividades',  icon: 'glyphicon glyphicon-calendar', class: '' },
-  { path: '/areas', title: 'Areas',  icon: 'glyphicon glyphicon-list-alt', class: '' },
-  { path: '/categorias', title: 'Categorias',  icon: 'glyphicon glyphicon-list-alt', class: '' },
-  { path: '/proveedores', title: 'Proveedores',  icon: 'glyphicon glyphicon-list-alt', class: '' },
+  { path: '/areas', title: 'Areas',  icon: 'glyphicon glyphicon-tower', class: '' },
+  { path: '/categorias', title: 'Categorias',  icon: 'glyphicon glyphicon-lamp', class: '' },
+  { path: '/proveedores', title: 'Proveedores',  icon: 'glyphicon glyphicon-briefcase', class: '' },
+  { path: '/faqs', title: 'FAQs',  icon: 'glyphicon glyphicon-question-sign', class: '' },
 ];
 export const ADMINROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard',  icon: 'glyphicon glyphicon-stats', class: '' },
   { path: '/presupuesto', title: 'Presupuesto anual',  icon: 'glyphicon glyphicon-usd', class: '' },
   { path: '/actividades', title: 'Actividades',  icon: 'glyphicon glyphicon-tasks', class: '' },
+  { path: '/incidencias', title: 'Incidencias',  icon: 'glyphicon glyphicon-tasks', class: '' },
   { path: '/mantenimiento-preventivo', title: 'Mantenimiento Preventivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
-  { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'glyphicon glyphicon-list-alt', class: '' },
+  { path: '/mantenimiento-correctivo', title: 'Mantenimiento Correctivo',  icon: 'glyphicon glyphicon-wrench', class: '' },
   // { path: '/user', title: 'User Profile',  icon: 'pe-7s-user', class: '' },
-  { path: '/areas', title: 'Areas',  icon: 'glyphicon glyphicon-list-alt', class: '' },
-  { path: '/categorias', title: 'Categorias',  icon: 'glyphicon glyphicon-list-alt', class: '' },
-  { path: '/proveedores', title: 'Proveedores',  icon: 'glyphicon glyphicon-list-alt', class: '' },
-  { path: '/requisiciones', title: 'Requisiciones',  icon: 'glyphicon glyphicon-list-alt', class: '' },
-  { path: '/hoteles', title: 'Hoteles',  icon: 'pe-7s-map-2', class: '' },
+  { path: '/areas', title: 'Áreas',  icon: 'glyphicon glyphicon-tower', class: '' },
+  { path: '/categorias', title: 'Categorías',  icon: 'glyphicon glyphicon-lamp', class: '' },
+  { path: '/proveedores', title: 'Proveedores',  icon: 'glyphicon glyphicon-briefcase', class: '' },
+  { path: '/requisiciones', title: 'Requisiciones',  icon: 'glyphicon glyphicon-book', class: '' },
+  { path: '/hoteles', title: 'Hoteles',  icon: 'glyphicon glyphicon-bed', class: '' },
+  { path: '/faqs', title: 'FAQs',  icon: 'glyphicon glyphicon-question-sign', class: '' },
 ];
 
 @Component({

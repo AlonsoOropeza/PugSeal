@@ -5,52 +5,52 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Mantenimiento Correctivo</h4>
+                        <h2 class="title"><strong>Mantenimiento correctivo</strong></h2>
+                        <br>
                         <p class="category">Aquí se encuentra el detalle sobre las solicitudes de mantenimiento correctivo.</p>
                     </div>
+                    <br>
                     <div class="row">
-                        <div class="col-md-9">
-
-                        </div>
-                        <div class="col-md-3">
-                            <button class="btn btn-default btn-block" (click)="addRequest(modaladd)">
-                                <p>Crear Solicitud</p>
+                        <div class="col-md-4">
+                            <button class="btn btn-default btn-block RegistrarBoton" (click)="addRequest(modaladd)">
+                                <p id="RegistrarTexto">Registrar Mantt. Correctivo</p>
                             </button>
                         </div>
+                        <div class="col-md-8"></div>
                     </div>
                     <div class="content table-responsive table-full-width">
                         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" 
                         class="table table-hover table-striped row-border hover">
-                                <thead>
-                                    <tr>
-                                        <th *ngFor="let titulo of titulos">{{ titulo }}</th>
-
-                                        <th *ngIf="canDelete">Eliminar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let mantenimiento of mantenimientos">
-                                        <td>{{mantenimiento.descripcion_problema}}</td>
-                                        <td>{{mantenimiento.fecha_solicitud}}</td>
-                                        <td>{{mantenimiento.finalizada}}</td>
-                                        <td>
-                                            <button class="btn-ver  btn-block" (click)="addRequest(modalupdate, mantenimiento, false)">
-                                                <i class="glyphicon glyphicon-chevron-right"></i>
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button class="btn-modificar  btn-block" (click)="addRequest(modalupdate, mantenimiento, true)">
-                                                <i class="glyphicon glyphicon-edit"></i>
-                                            </button>
-                                        </td>
-                                        <td *ngIf="canDelete" (click)="addRequest(modaldelete, mantenimiento)">
-                                            <button class="btn-eliminar  btn-block" >
-                                                <i class="glyphicon glyphicon-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                          </table>
+                            <thead>
+                                <tr>
+                                    <th *ngFor="let titulo of titulos">{{ titulo }}</th>
+                                    <th *ngIf="canDelete">Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let mantenimiento of mantenimientos">
+                                    <td>{{mantenimiento.descripcion_problema}}</td>
+                                    <td>{{mantenimiento.fecha_solicitud}}</td>
+                                    <td *ngIf="mantenimiento.finalizada">Sí</td>
+                                    <td *ngIf="!mantenimiento.finalizada">No</td>
+                                    <td>
+                                        <button class="btn-ver  btn-block" (click)="addRequest(modalupdate, mantenimiento, false)">
+                                            <i class="glyphicon glyphicon-chevron-right"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="btn-modificar  btn-block" (click)="addRequest(modalupdate, mantenimiento, true)">
+                                            <i class="glyphicon glyphicon-edit"></i>
+                                        </button>
+                                    </td>
+                                    <td *ngIf="canDelete" (click)="addRequest(modaldelete, mantenimiento)">
+                                        <button class="btn-eliminar  btn-block" >
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

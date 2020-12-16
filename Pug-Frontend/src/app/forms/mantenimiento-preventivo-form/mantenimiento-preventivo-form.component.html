@@ -1,5 +1,24 @@
 <form #createForm="ngForm" class="modals">
     <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-control-label" for="actividad">Actividad <span class="text-danger">*</span></label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="actividad" required
+                    [(ngModel)]="mantenimiento.actividad"
+                    name="actividad"
+                    #actividad="ngModel"s
+                    disabled={{!edit}}
+                >
+            </div>
+            <div *ngIf="actividad.invalid && (actividad.dirty || actividad.touched)" class="alert alert-danger">
+                <div *ngIf="actividad.errors.required">
+                    El título de la actividad es obligatorio.
+                </div>
+            </div>
+        </div>
 
         <div class="col">
             <div class="form-group">
@@ -16,7 +35,6 @@
                 </select>
             </div>
         </div>
-        
         <div *ngIf="categoria.invalid && (categoria.dirty || categoria.touched)" class="alert alert-danger">
             <div *ngIf="categoria.errors.required">
                 La categoría es obligatoria.
@@ -60,7 +78,6 @@
                 </select>
             </div>
         </div>
-
         <div *ngIf="proveedor.invalid && (proveedor.dirty || proveedor.touched)" class="alert alert-danger">
             <div *ngIf="proveedor.errors.required">
                 El proveedor es obligatorio.
@@ -81,9 +98,8 @@
                         #cotizacion="ngModel"
                         disabled={{!edit}}
                     >
-                    </div>
+                </div>
             </div>
-    
             <div *ngIf="cotizacion.invalid && (cotizacion.dirty || cotizacion.touched)" class="alert alert-danger">
                 <div *ngIf="cotizacion.errors.required">
                     La cotización es obligatoria.
@@ -102,9 +118,10 @@
                     name="frecuencia_anual"
                     #frecuencia_anual="ngModel"
                     disabled={{!edit}}
+                    min="1"
+                    max="12"
                 >
             </div>
-    
             <div *ngIf="frecuencia_anual.invalid && (frecuencia_anual.dirty || frecuencia_anual.touched)" class="alert alert-danger">
                 <div *ngIf="frecuencia_anual.errors.required">
                     La frecuencia anual es obligatoria.
@@ -177,11 +194,9 @@
     <button *ngIf="edit" class="btn btn-primary" type="submit" [disabled] = "createForm.invalid" (click)="continue(createForm)">
         Guardar
     </button>
-  
     <button *ngIf="edit" class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
         Cancelar
     </button>
-
     <button *ngIf="!edit" class="btn btn-link ml-auto" data-dismiss="modal" type="button" (click)="cancel()">
         Cerrar
     </button>

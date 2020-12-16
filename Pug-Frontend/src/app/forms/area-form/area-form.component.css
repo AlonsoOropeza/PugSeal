@@ -1,7 +1,9 @@
 .modal-content
 {
     border-radius: 27.5px;
+    background-color: #88888888;
 }
+
 h6
 {
     font-size: 20px;
@@ -9,11 +11,6 @@ h6
 .form-control-label
 {
     font-size: 17px;
-}
-
-.modal-content
-{
-    background-color: #88888888;
 }
 
 .modal-title
@@ -24,7 +21,8 @@ h6
 {
     font-size: 32px;
 }
-.row{
+.row
+{
     margin-right: 5px;
     margin-left: 5px;
 }
@@ -71,7 +69,7 @@ h6
     border-radius: 5px;
 }
 
-.modal-header
+input[type=checkbox]
 {
-
+    width: 30px;
 }

@@ -161,6 +161,7 @@ export class ActividadesComponent implements OnInit {
     this.spinner.hideSpinner();
   }
 
+  // Solicita el modal con base en el botón presionado en el sistema
   public addRequest(modal: TemplateRef<any>, mantenimiento: MantenimientoPreventivo) {
     this.mantenimiento = mantenimiento;
     this.modalComponent = this.modalService.show(modal, {backdrop : 'static', keyboard: false, class: 'modal-dialog-centered'});
@@ -339,6 +340,5 @@ export class ActividadesComponent implements OnInit {
         return 52;
     }
   }
-
 }
 

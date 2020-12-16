@@ -1,3 +1,4 @@
+  
 <form #createForm="ngForm" class="modals">
     <div class="row">
         <div class="col-12">
@@ -55,11 +56,7 @@
         </div>
     </div>
   
-    <button 
-    class="btn btn-primary" 
-    type="submit" 
-    [disabled] = "createForm.invalid"
-    (click)="continue(createForm)">
+    <button class="btn btn-primary" type="submit" [disabled] = "createForm.invalid" (click)="continue(createForm)">
         Guardar
     </button>
   

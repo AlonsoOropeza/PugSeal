@@ -37,7 +37,8 @@ export class IncidenciasComponent implements OnInit {
   public hoteles: Hotel[];
   public areas: Area[];
   public name: String;
-  public inconclusas: MantenimientoCorrectivo[];
+  public inconclusas: any[] = [];;
+  public noSupervisadas: any[] = [];;
 
   constructor(
     private modal: NgbModal,
@@ -68,24 +69,38 @@ export class IncidenciasComponent implements OnInit {
     this.events = [];
     this.spinner.showSpinner();
     this.solicitudes = await this.mantenimientoCorrectivoService.getMantenimientosCorrectivos();
+    this.proveedores = await this.proveedoresService.getProveedores();
     this.solicitudes.forEach(solicitud => {
       this.events = [
         ...this.events,
         {
           ...solicitud,
-          semana: moment(new Date(solicitud.fecha_solicitud)).week()
+          semana: moment(new Date(solicitud.fecha_solicitud)).week(),
+          proveedor: this.proveedores.find(x => x.id_proveedor === solicitud.id_proveedor).nombre_empresa,
         },
       ];
     });
     // INCONCLUSAS
     this.inconclusas = [];
+    this.noSupervisadas = [];
     this.solicitudes.forEach(solicitud => {
       if (!solicitud.finalizada) {
       this.inconclusas = [
         ...this.inconclusas,
         {
           ...solicitud,
-          semana: moment(new Date(solicitud.fecha_solicitud)).week()
+          semana: moment(new Date(solicitud.fecha_solicitud)).week(),
+          proveedor: this.proveedores.find(x => x.id_proveedor === solicitud.id_proveedor).nombre_empresa,
+        },
+      ];
+      
+    }else if (solicitud.finalizada && !solicitud.calif_calidad) { // NO SUPERVISADAS
+      this.noSupervisadas = [
+        ...this.noSupervisadas,
+        {
+          ...solicitud,
+          semana: moment(new Date(solicitud.fecha_solicitud)).week(),
+          proveedor: this.proveedores.find(x => x.id_proveedor === solicitud.id_proveedor).nombre_empresa,
         },
       ];
     }
@@ -106,7 +121,8 @@ export class IncidenciasComponent implements OnInit {
             ...events,
             {
               ...solicitud,
-              semana: moment(new Date(solicitud.fecha_solicitud)).week()
+              semana: moment(new Date(solicitud.fecha_solicitud)).week(),
+              proveedor: this.proveedores.find(x => x.id_proveedor === solicitud.id_proveedor).nombre_empresa,
             },
           ];
         }
@@ -114,7 +130,7 @@ export class IncidenciasComponent implements OnInit {
           porcentaje = (incidecnias_finalizadas / incidencias_totales) * 100;
           porcentaje = Math.round(porcentaje) + ' %';
         } else {
-          porcentaje = 'NA';
+          porcentaje = '';
         }
       });
       const element = 'Semana ' + index;
@@ -122,6 +138,8 @@ export class IncidenciasComponent implements OnInit {
         ...this.incidencias_semanas,
         {
           titulo: element,
+          incidencias_fin: incidecnias_finalizadas,
+          incidencias_tot: incidencias_totales,
           eventos: {
             events
           },
@@ -132,7 +150,6 @@ export class IncidenciasComponent implements OnInit {
     this.spinner.hideSpinner();
     this.categorias = await this.categoriasService.getCategorias();
     this.empleados = await this.empleadosService.getEmpleados();
-    this.proveedores = await this.proveedoresService.getProveedores();
     this.hoteles = await this.hotelesService.getHoteles();
     this.areas = await this.areaService.getAreas();
   }
@@ -147,7 +164,7 @@ export class IncidenciasComponent implements OnInit {
     this.edit = edit !== undefined ? edit : true;
     this.getNameById(mantenimiento.id_solicitante);
     if (this.edit) {
-      if (mantenimiento && mantenimiento.finalizada && this.user.rol === 'encargadoMantenimiento' ) {
+      if (mantenimiento && mantenimiento.finalizada && this.user.rol === 'encargadoMantenimiento' && mantenimiento.calif_calidad) {
         this.edit = false;
         this.notificationsService.showWarning('La solicitud ya ha sido aprobada, por lo que no puede modificarse.');
       } else {
@@ -165,6 +182,7 @@ export class IncidenciasComponent implements OnInit {
   public async getNameById(id: Number) {
     this.name = this.empleados.find(x => x.id === id).first_name;
   }
+
 
   public async update(form: NgForm) {
       this.spinner.showSpinner();

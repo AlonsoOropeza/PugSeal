@@ -1,0 +1,117 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h2 class="title"><strong>Frequently Asked Questions</strong></h2>
+                        <br>
+                        <p class="category">Consulta las dudas más frecuentes sobre el uso del sistema.</p>
+                    </div>
+                    <br>
+                    <accordion>
+                        <!-- GENERAL -->
+                        <accordion-group heading="¿Cómo consulto mi nombre y rol en el sistema?">  
+                        <div class="content table-responsive table-full-width">
+                            <p>Ambos se encuentran en la <strong>parte superior derecha de la pantalla</strong>.</p>
+                            <img src="assets/img/faqs/role.png">
+                        </div>
+                        </accordion-group>
+                        <accordion-group heading="¿Cómo cierro una sesión activa en la plataforma?">  
+                            <div class="content table-responsive table-full-width">
+                                <p>Presiona el botón “Cerrar sesión” en la <strong>parte superior derecha de la pantalla</strong>.</p>
+                                <img src="assets/img/faqs/role.png">
+                            </div>
+                        </accordion-group>
+                    
+                        <!-- SUPERVISOR -->
+                        <div *ngIf="user.rol === 'Supervisor'">
+                            <accordion-group heading="¿Cómo apruebo una actividad de mantenimiento?">  
+                                <div class="content table-responsive table-full-width">
+                                    <ol>
+                                        <li>Selecciona la opción "Actividades" en la <strong>barra lateral izquierda</strong>.</li>
+                                        <img src="assets/img/faqs/activities.png">
+                                        <br>
+                                        <li>Localiza la actividad con base en la semana que se asignó.</li>
+                                        <img src="assets/img/faqs/week.png">
+                                        <br>
+                                        <li>Presiona el botón "Supervisar".</li>
+                                        <img src="assets/img/faqs/approve.png">
+                                        <li>Rellena la información correspondiente  y presiona el botón "Guardar".
+                                            La información se actualizará en el registro de la actividad de mantenimiento.</li>
+                                        <!-- FALTA INSERTAR IMÁGENES DE ESTO. HASTA QUE EL CSS SE ARREGLE -->
+                                    </ol>
+                                </div>
+                            </accordion-group>
+                        </div>
+                        
+                        <!-- ENCARGADO DE MANTENIMIENTO -->
+                        <div *ngIf="user.rol === 'Encargado_Mantenimiento'">
+                            <accordion-group heading="Quiero registrar una actividad de mantenimiento, 
+                            pero el área, proveedor o categoría no se encuentra en la lista durante el registro, ¿qué hago?">  
+                                <div class="content table-responsive table-full-width">
+                                    <p>Contacta a un usuario con el rol de <strong>administrador</strong> o <strong>auditor</strong> para que registre el área, proveedor o categoría deseada</p>
+                                </div>
+                            </accordion-group>
+                        </div>
+
+                        <!-- AUDITOR -->
+                        <div *ngIf="user.rol === 'Auditor'">
+
+                        </div>
+
+                        <!-- ADMINISTRADOR -->
+                        <div *ngIf="user.rol === 'Admin'">
+                            <accordion-group heading="¿Cómo registro un área, proveedor o categoría para las actividades de mantenimiento?">  
+                                <div class="content table-responsive table-full-width">
+                                    <ol>
+                                        <li>Selecciona la opción correspondiente en la <strong>barra lateral izquierda</strong>.</li>
+                                        <img src="assets/img/faqs/crud.png">
+                                        <br>
+                                        <li>Presiona el botón "Registrar opción".</li>
+                                        <img src="assets/img/faqs/register.png">
+                                        <br>
+                                        <li>Rellena la información necesaria del elemento.</li>
+                                        <img src="assets/img/faqs/form.png">
+                                    </ol>
+                                </div>
+                            </accordion-group>
+                        </div>
+
+                        <!-- EXCEPTO SUPERVISOR -->
+                        <div *ngIf="user.rol !== 'Supervisor'">
+                            <accordion-group heading="¿Cómo consulto las actividades de mantenimiento?">  
+                                <div class="content table-responsive table-full-width">
+                                    <p>a) Mantenimiento preventivo: Seleccione la opción “Mantenimiento Preventivo” en la <strong>barra lateral izquierda</strong>.</p>
+                                    <p>b) Mantenimiento correctivo: Seleccione la opción “Mantenimiento Correctivo” en la <strong>barra lateral izquierda</strong>.</p>
+                                </div>
+                            </accordion-group>
+                            <accordion-group heading="¿Hay maneras de buscar con mayor rapidez la información en las tablas?">  
+                                <div class="content table-responsive table-full-width">
+                                    <p>Todas las tablas cuentan con diversas herramientas para facilitar la búsqueda de algún registro en específico.</p>
+                                    <ul>
+                                        <li><strong>Ordenamiento:</strong> Presionar el <strong>encabezado de una tabla</strong> ordenará 
+                                            las filas bajo ese criterio en orden alfabético.</li>
+                                        <img src="assets/img/faqs/sorting.png">
+                                        <br>
+                                        <li><strong>Barra de búsqueda:</strong> En la <strong>parte superior derecha de la tabla</strong> hay una 
+                                            barra de búsqueda en la que podrás escribir lo que deseas encontrar.</li>
+                                        <img src="assets/img/faqs/search.png">
+                                        <br>
+                                        <li><strong>Paginación:</strong> Para evitar una tabla muy larga en pantalla, las filas están repartidas por grupos o páginas. 
+                                            En la <strong>parte superior izquierda</strong> de la tabla puede elegir cuántas filas ver por una de estas, 
+                                            mientras que en la <strong>parte inferior derecha</strong> puedes navegar o saltar a una de ellas directamente.</li>
+                                        <img src="assets/img/faqs/rows.png">
+                                        <img src="assets/img/faqs/pagination.png">
+                                    </ul>
+                                </div>
+                            </accordion-group>
+                        </div>
+
+                    </accordion>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>

@@ -240,11 +240,12 @@ export class ActividadesComponent implements OnInit {
 
   public async setWeek() {
     this.spinner.showSpinner();
-
+    console.log('antes ' + this.mantenimiento.fecha_inicio, moment(this.mantenimiento.fecha_inicio).week());
     if (moment(this.mantenimiento.fecha_inicio).week() === this.nuevaSemana) {
       this.notificationsService.showWarning('No se detectaron cambios')
     } else {
       await this.setNewDate(moment(this.mantenimiento.fecha_inicio).week(), this.nuevaSemana);
+      console.log('despues ' + this.mantenimiento.fecha_inicio, moment(new Date(this.mantenimiento.fecha_inicio)).week());
       (await this.mantenimientoService.updateMantenimiento(this.mantenimiento)).subscribe(
         async () => {
           this.notificationsService.showNotification('Se ha actualizado correctamente el mantenimiento.', true),

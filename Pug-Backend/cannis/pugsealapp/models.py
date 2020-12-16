@@ -66,18 +66,18 @@ class Mantenimiento_Preventivo(models.Model):
     id_categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True)
     actividad = models.CharField(max_length=255)
     id_proveedor = models.ForeignKey(Proveedor, on_delete=models.SET_NULL, null=True)
-    cotizacion = models.FloatField(default=0)
+    #presupuesto = models.FloatField(default=0)
     frecuencia_anual = models.IntegerField(default=0)
     fecha_creacion = models.DateTimeField(default=timezone.now)
+    #mes_sugerido = models.CharField(max_length=255, default='No hay sugerencia')
 
     # Aprobacion
     id_auditor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="auditor", blank=True)
     aprobado = models.BooleanField(default=False)
-
-    #mmds de sandra
     fecha_inicio = models.DateField(null=True, blank=True)
 
     # finalizacion (encargado)
+    cotizacion = models.FloatField(default=0)
     id_empleado = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="empleado", blank=True)
     duracion_horas = models.FloatField(default=0, blank=True, null=True)
     fecha_terminacion = models.DateField(null=True, blank=True)

@@ -67,7 +67,7 @@ export class MantenimientoPreventivoComponent implements OnDestroy, OnInit {
 
   public async loadInfo() {
     this.spinner.showSpinner();
-    if (this.user.rol === 'Admin') {
+    if (this.user.rol === 'Admin' || this.user.rol === 'Auditor') {
       this.isAdmin = true;
     }
     this.canDelete = this.user.rol === 'Admin' || this.user.rol === 'Auditor' ? true : false;
@@ -88,6 +88,9 @@ export class MantenimientoPreventivoComponent implements OnDestroy, OnInit {
     if (form.value.frecuencia_anual < 1 || form.value.frecuencia_anual > 12) {
       this.notificationsService.showNotification('La frecuencia anual debe realizarse entre 1 a 12 veces al año', false);
       throw new Error('Error');
+    }
+    if (form.value.aprobado) {
+      this.mantenimiento.id_auditor = this.user.id;
     }
     this.mantenimiento.fecha_inicio = fecha ? fecha : this.mantenimiento.fecha_inicio;
     this.mantenimiento.fecha_inicio = this.mantenimiento.fecha_inicio ? this.mantenimiento.fecha_inicio : null;

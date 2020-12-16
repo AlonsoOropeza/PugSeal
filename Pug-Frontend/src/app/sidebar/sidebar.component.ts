@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Usuario } from 'app/models/models.model';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -62,7 +63,7 @@ export class SidebarComponent implements OnInit {
   public user: Usuario;
   allRoutes: any[];
 
-  constructor(private cookies: CookieService) { }
+  constructor(private cookies: CookieService, private router: Router) {}
 
   ngOnInit() {
     this.user = JSON.parse(this.getCookie('user'));
@@ -86,5 +87,11 @@ export class SidebarComponent implements OnInit {
   };
   getCookie(name: string) {
     return this.cookies.get(name);
+}
+
+public logOut() {
+  this.cookies.delete('user');
+  // window.location.reload();
+  this.router.navigateByUrl('')
 }
 }

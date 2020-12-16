@@ -8,8 +8,8 @@
         </a>
     </div>
     <ul class="nav responsive-nav">
-        <li *ngIf="isMobileMenu()">
-            <a>
+        <li *ngIf="isMobileMenu()" >
+            <a (click)="logOut()">
                 <p>Log out</p>
             </a>
         </li>
